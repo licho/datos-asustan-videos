@@ -101,3 +101,45 @@ def arrow(d, x0, y0, x1, y1, col=RED, w=14):
     d.line([(x0, y0), (x1, y1)], fill=col, width=w)
     a = math.atan2(y1 - y0, x1 - x0); L = w * 2.6
     d.polygon([(x1 + math.cos(a) * L * .5, y1 + math.sin(a) * L * .5), (x1 + math.cos(a + 2.5) * L, y1 + math.sin(a + 2.5) * L), (x1 + math.cos(a - 2.5) * L, y1 + math.sin(a - 2.5) * L)], fill=col)
+
+def ruler(d, x, y0, y1, marks, current=None, appear=1.0, w=60, col=(250, 210, 60)):
+    """Regla vertical de tamaños. marks=[(fracción 0=abajo..1=arriba, texto)]; current = índice resaltado."""
+    d.rounded_rectangle([x, y0, x + w, y1], 14, fill=col, outline=BLK, width=5)
+    for k in range(1, 20):
+        yy = y1 - (y1 - y0) * k / 20
+        d.line([(x + w - (26 if k % 5 == 0 else 14), yy), (x + w, yy)], fill=BLK, width=3)
+    for i, (f, txt) in enumerate(marks):
+        if i >= len(marks) * appear + .001: break
+        yy = y1 - (y1 - y0) * f; on = i == current
+        d.line([(x + w, yy), (x + w + 30, yy)], fill=RED if on else BLK, width=6 if on else 3)
+        d.text((x + w + 40, yy), txt, font=F(46 if on else 32), fill=RED if on else (60, 60, 60), anchor="lm", stroke_width=4, stroke_fill=WHITE)
+        if on: d.polygon([(x - 10, yy), (x - 40, yy - 20), (x - 40, yy + 20)], fill=RED, outline=BLK)
+
+def wanted(d, x, y, w, h, title="SE BUSCA", subtitle="", paper=(240, 225, 185)):
+    """Cartel de SE BUSCA. Devuelve la caja para dibujar al 'sospechoso'. (x, y) = esquina sup. izq."""
+    d.rectangle([x, y, x + w, y + h], fill=paper, outline=(120, 90, 50), width=8)
+    d.text((x + w / 2, y + 70), title, font=fit_font(d, title, w - 60, 80), fill=(110, 50, 30), anchor="mm")
+    box = (x + 40, y + 130, x + w - 40, y + h - (110 if subtitle else 40))
+    d.rectangle(box, fill=(250, 240, 215), outline=(120, 90, 50), width=4)
+    if subtitle: d.text((x + w / 2, y + h - 60), subtitle, font=fit_font(d, subtitle, w - 60, 46), fill=(110, 50, 30), anchor="mm")
+    return box
+
+def blob_map(d, cx, cy, r, seed=3, fill=(170, 175, 185), outline=BLK, label=None, size=40, bumps=7):
+    """Silueta irregular tipo mapa (ciudad, región). Área ≈ π·r²."""
+    import random; rnd = random.Random(seed); n = 48
+    amps = [(rnd.uniform(.05, .14), rnd.uniform(0, 6.28), k) for k in range(2, 2 + bumps // 2)]
+    pts = []
+    for i in range(n):
+        a = i / n * 2 * math.pi; rr = r * (1 + sum(A * math.sin(k * a + ph) for A, ph, k in amps))
+        pts.append((cx + math.cos(a) * rr, cy + math.sin(a) * rr))
+    d.polygon(pts, fill=fill, outline=outline, width=5)
+    if label: d.text((cx, cy), label, font=F(size), fill=BLK, anchor="mm", stroke_width=4, stroke_fill=WHITE)
+
+def cracks(d, box, seed=1, n=6, col=WHITE, width=4):
+    """Grietas de vidrio dentro de box (ventanas rotas)."""
+    import random; rnd = random.Random(seed); x0, y0, x1, y1 = box
+    for _ in range(n):
+        cx, cy = rnd.uniform(x0, x1), rnd.uniform(y0, y1)
+        for k in range(5):
+            a = rnd.uniform(0, 6.28); L = rnd.uniform(.3, .7) * min(x1 - x0, y1 - y0)
+            d.line([(cx, cy), (max(x0, min(x1, cx + math.cos(a) * L)), max(y0, min(y1, cy + math.sin(a) * L)))], fill=col, width=width)

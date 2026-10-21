@@ -115,6 +115,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `bed(d, x, y, s=1.0, dirty=0.0)` · reel12
 - `bed_v5(d, cx, cy, s, t, sleeping=True)` · reel5
 - `big_toilet(d, cx, base, s=1.0)` · reel7
+- `blob_map(d, cx, cy, r, seed=3, fill=(170, 175, 185), outline=BLK, label=None, size=40, bumps=7)` · lib.pantallas — Silueta irregular tipo mapa (ciudad, región). Área ≈ π·r².
 - `blood_bag(d, x, y, s, col=(190, 20, 40), empty=False)` · reel14
 - `boat(d, x, y, s=1.0, t=0.0, with_guy=True, mood='neutral', tilt=0.0)` · reel3
 - `book(d, cx, cy, s)` · reel3
@@ -149,6 +150,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `corn(d, x, y, s)` · reel4
 - `counter(d, x, y, s=1.0, w=700, col=(120, 90, 70), top=(210, 210, 215))` · lib.muebles — Mostrador / caja (alto ~380·s). Devuelve y de la superficie.
 - `covers(d, cx, cy, s, t, ls)` · reel5
+- `cracks(d, box, seed=1, n=6, col=WHITE, width=4)` · lib.pantallas — Grietas de vidrio dentro de box (ventanas rotas).
 - `credit_card(d, cx, cy, s, ang=0.0)` · reel24
 - `culprit_card(d, cx, cy, sc, label)` · reel2
 - `dehumidifier(d, cx, cy, s, t, ls)` · reel5
@@ -239,6 +241,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `radar(d, cx, cy, rings, t=0.0)` · lib.objetos — rings=[(radio, texto, color, activo)] de mayor a menor.
 - `rice_bowl(d, cx, ybot, s=1.0)` · reel26
 - `road(d, y0, y1, t=0.0, speed=0.0, col=(70, 70, 75))` · lib.exterior — Calle horizontal con líneas (speed>0 se mueven).
+- `ruler(d, x, y0, y1, marks, current=None, appear=1.0, w=60, col=(250, 210, 60))` · lib.pantallas — Regla vertical de tamaños. marks=[(fracción 0=abajo..1=arriba, texto)]; current = índice resaltado.
 - `salad(d, cx, ybot)` · reel26
 - `sandal(d, cx, cy, s, ang=0.0)` · reel27
 - `sandwich_pixel(d, x, y, big=2)` · oso
@@ -279,6 +282,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `vacuum(d, cx, cy, s, t, ls)` · reel5
 - `voyager(d, x, y, s=1.0)` · reel23
 - `wall_clock(d, x, y, r=70, t=0.0, hour=None, minute=None, spin=0.0)` · lib.muebles — Reloj de pared centrado en (x, y). spin>0 hace girar las manecillas (pasa el tiempo).
+- `wanted(d, x, y, w, h, title='SE BUSCA', subtitle='', paper=(240, 225, 185))` · lib.pantallas — Cartel de SE BUSCA. Devuelve la caja para dibujar al 'sospechoso'. (x, y) = esquina sup. izq.
 - `washer(d, cx, cy, s, t)` · reel5
 - `wave(d, t, k)` · reel25
 - `waves(d, t, y=SEA_Y, col=(60, 90, 140))` · reel3

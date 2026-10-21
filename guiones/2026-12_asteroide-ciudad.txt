@@ -1,0 +1,16 @@
+Video: ¿Qué tan grande tendría que ser un asteroide para destruir una ciudad?
+Fecha: diciembre 2026 (por definir; al menos 3 semanas después del video de asteroides del 11 nov)
+Código: specs/s29_asteroide_ciudad.py · Sin voz: sinvoz/2026-12_asteroide-ciudad_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4
+Producir final: python3 -m lib.produce specs/s29_asteroide_ciudad.py final audio/29-asteroide-ciudad.mp3
+
+[mischievously] ¿Qué tan grande tendría que ser una roca espacial para borrar tu ciudad del mapa? Vamos subiendo de tamaño. [confident] Del tamaño de un coche: cae más o menos una vez al año… y se quema en el cielo. Bonito espectáculo, cero daños. [serious] Veinte metros: Cheliábinsk, 2013. Explotó en el aire y rompió ventanas en toda la ciudad. [dramatically] Unos sesenta metros: Tunguska, Siberia, 1908. Derribó ochenta millones de árboles en más de dos mil kilómetros cuadrados. [whispers] Más que toda la Ciudad de México. Y no dejó cráter: explotó antes de tocar el suelo. [serious] A ese tamaño los astrónomos le llaman asesino de ciudades. [sarcastic] Y en 2024 encontraron uno: el 2024 YR4, de unos sesenta metros. Primero, que tal vez chocaba con la Tierra: descartado. Luego, que con la Luna: también descartado. Va a pasar a unos veintitrés mil kilómetros. [serious] Ciento cuarenta metros: ya no es una ciudad, es una región entera. Y todavía nos falta encontrar cerca de la mitad de los de ese tamaño. [dramatically] ¿Diez kilómetros? Ese ya lo conoces: cayó en Yucatán y se acabaron los dinosaurios. [mischievously] Resumen: veinte metros te rompen la ventana. Sesenta, la ciudad. Diez kilómetros… la especie. ¿A qué tamaño le tendrías miedo? Te leo en los comentarios.
+
+# palabras: 203  duración estimada: 83 s
+
+Fuentes:
+- NASA, Asteroid Fast Facts: un asteroide del tamaño de un coche entra a la atmósfera ~1 vez al año y se quema
+- EarthSky: Tunguska, roca de 50–80 m, ~2,150 km², ~80 millones de árboles
+- AAS Nova (may 2026) / ApJ Letters: JWST descarta impacto lunar de 2024 YR4 (~60 m), pasa a ~22,900 km de la Luna
+- ESA (vía análisis de NSTC 2023): cerca de la mitad de los asteroides de 140 m+ catalogados
+- CDMX ≈ 1,495 km² (INEGI)
