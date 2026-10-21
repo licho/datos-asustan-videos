@@ -59,3 +59,46 @@ def ghost(img, x, y, s=1.0, t=0.0, alpha=1.0, pixel=0, bob=True, **kw):
         a = layer.getchannel("A").point(lambda v: int(v * alpha)); layer.putalpha(a)
     img.paste(layer, (int(x - size / 2), int(y - size / 2)), layer)
     return ImageDraw.Draw(img)
+
+def mummy(d, x, y, s=1.0, t=0.0, arms="forward", mood="neutral", trail=0.0, hat=None):
+    """Momia de pie; y = pies. arms: forward | down | wave | up. mood: neutral | happy | scared. trail = venda suelta (0..1)."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    B, L = (235, 225, 195), (190, 175, 140)
+    d.ellipse([x - S(120), y - S(14), x + S(120), y + S(14)], fill=(70, 70, 75))
+    for sx in (-1, 1):                                              # piernas
+        d.rounded_rectangle([x + sx * S(12) - (S(62) if sx < 0 else 0), y - S(200), x + sx * S(12) + (S(62) if sx > 0 else 0), y], int(S(20)), fill=B, outline=BLK, width=W_(4))
+    def arm(hx, hy, sx):
+        d.line([(x + sx * S(95), y - S(370)), (hx, hy)], fill=BLK, width=W_(52), joint="curve"); d.line([(x + sx * S(95), y - S(370)), (hx, hy)], fill=B, width=W_(42), joint="curve")
+        for k in range(1, 4):
+            u = k / 4; px, py = x + sx * S(95) + (hx - x - sx * S(95)) * u, y - S(370) + (hy - y + S(370)) * u
+            d.line([(px - S(18), py - S(10)), (px + S(18), py + S(10))], fill=L, width=W_(4))
+    wy = math.sin(t * 9) * S(30)
+    poses = {"forward": ((x - S(40), y - S(420)), (x + S(250), y - S(380))), "down": ((x - S(140), y - S(200)), (x + S(140), y - S(200))),
+             "wave": ((x - S(140), y - S(200)), (x + S(210), y - S(560) + wy)), "up": ((x - S(190), y - S(560)), (x + S(190), y - S(560)))}
+    (lx, ly), (rx, ry) = poses.get(arms, poses["down"])
+    arm(lx, ly, -1)
+    d.rounded_rectangle([x - S(110), y - S(430), x + S(110), y - S(180)], int(S(50)), fill=B, outline=BLK, width=W_(5))
+    for k in range(7):                                              # vendas del torso
+        yy = y - S(410) + k * S(34)
+        d.line([(x - S(100), yy + S(14)), (x + S(100), yy - S(6))], fill=L, width=W_(5))
+    hy = y - S(520)
+    d.ellipse([x - S(95), hy - S(100), x + S(95), hy + S(95)], fill=B, outline=BLK, width=W_(5))
+    for k in range(5):
+        yy = hy - S(80) + k * S(36)
+        d.line([(x - S(85), yy), (x + S(85), yy + S(12))], fill=L, width=W_(5))
+    d.rectangle([x - S(70), hy - S(30), x + S(70), hy + S(10)], fill=(40, 30, 30))      # rendija de los ojos
+    er = S(14) if mood != "scared" else S(18)
+    for sx in (-1, 1):
+        d.ellipse([x + sx * S(32) - er, hy - S(10) - er, x + sx * S(32) + er, hy - S(10) + er], fill=(250, 230, 120) if mood != "scared" else WHITE)
+        if mood == "scared": d.ellipse([x + sx * S(32) - S(6), hy - S(16), x + sx * S(32) + S(6), hy - S(4)], fill=BLK)
+    if mood == "happy": d.arc([x - S(35), hy + S(25), x + S(35), hy + S(60)], 20, 160, fill=BLK, width=W_(5))
+    elif mood == "scared": d.ellipse([x - S(14), hy + S(30), x + S(14), hy + S(62)], fill=BLK)
+    arm(rx, ry, 1)
+    if trail > 0:
+        pts = [(x - S(60), y - S(260))]
+        for k in range(1, 8):
+            u = k / 7; pts.append((x - S(60) - u * S(420) * trail, y - S(260) + u * S(250) + math.sin(t * 4 + u * 6) * S(18)))
+        d.line(pts, fill=BLK, width=W_(26), joint="curve"); d.line(pts, fill=B, width=W_(18), joint="curve")
+    if hat == "nurse":
+        d.polygon([(x - S(80), hy - S(80)), (x + S(80), hy - S(80)), (x + S(60), hy - S(150)), (x - S(60), hy - S(150))], fill=WHITE, outline=BLK)
+        d.rectangle([x - S(8), hy - S(140), x + S(8), hy - S(95)], fill=RED); d.rectangle([x - S(22), hy - S(126), x + S(22), hy - S(110)], fill=RED)

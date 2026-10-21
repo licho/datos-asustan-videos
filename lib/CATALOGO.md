@@ -86,6 +86,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `mite(d, x, y, s=1.0, t=0.0, phase=0.0, mood='grin', shade=1.0, dizzy=False)` · reel5
 - `mold(d, cx, cy, r, k, t, seed=1)` · reel26
 - `mosquito(d, x, y, s=1.0, t=0.0, flip=False, female=False, mask=False, hat=False, mood='normal', fly=True)` · lib.animales — Mosquito (patrón rayado tipo Aedes). mood: normal | angry | happy. Centro en el tórax.
+- `mummy(d, x, y, s=1.0, t=0.0, arms='forward', mood='neutral', trail=0.0, hat=None)` · lib.criaturas — Momia de pie; y = pies. arms: forward | down | wave | up. mood: neutral | happy | scared. trail = venda suelta (0..1).
 - `person(d, cx, cy, s, col)` · reel2
 - `president(d, x, y, s, t)` · reel24
 - `roach(d, cx, cy, s, t, head=True, walk=True, wings=0.0, face='neutral', flip=False)` · reel27
@@ -185,6 +186,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `fungus(d, x, y, r, t, col, phase=0.0)` · reel12
 - `garlic(d, cx, cy, r)` · reel14
 - `germ_swarm(d, cx, cy, rx, ry, n, t, size=34, seed=5, bad=-1)` · reel16
+- `gift(d, x, y, s=1.0, col=(220, 60, 70), ribbon=(250, 210, 60), bandage=False)` · lib.objetos — Regalo envuelto; y = base. bandage=True: envuelto en vendas.
 - `glass(d, cx, ybot)` · reel27
 - `glass_overlay(d, box)` · reel
 - `ground_current(d, x, y, t, r=300, col=(255, 230, 80))` · lib.exterior — Corriente que se expande por el suelo desde (x, y).
@@ -253,11 +255,13 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `ranger_hat(d, x, y, s=1.0, col=(150, 110, 60))` · lib.objetos — Sombrero de guardabosques; (x, y) = centro de la cabeza (ponlo sobre guy: x, pies - 520·s).
 - `rec_frame(d, t, label='REC', box=(40, 470, 1040, 1330))` · lib.objetos — Marco de cámara grabando: esquinas + REC parpadeando + contador.
 - `rice_bowl(d, cx, ybot, s=1.0)` · reel26
+- `ring_light(d, x, y, r=170, on=True)` · lib.objetos
 - `road(d, y0, y1, t=0.0, speed=0.0, col=(70, 70, 75))` · lib.exterior — Calle horizontal con líneas (speed>0 se mueven).
 - `ruler(d, x, y0, y1, marks, current=None, appear=1.0, w=60, col=(250, 210, 60))` · lib.pantallas — Regla vertical de tamaños. marks=[(fracción 0=abajo..1=arriba, texto)]; current = índice resaltado.
 - `salad(d, cx, ybot)` · reel26
 - `sandal(d, cx, cy, s, ang=0.0)` · reel27
 - `sandwich_pixel(d, x, y, big=2)` · oso
+- `sarcophagus(d, x, y, s=1.0, col=(220, 170, 60))` · lib.objetos — Sarcófago de pie; y = base.
 - `scar(d, x, y, s)` · reel9
 - `shelf(d, x0, y0, x1, y1, rows=4, seed=1, items=True)` · lib.muebles — Anaquel con productos de colores (tienda, despensa).
 - `ship(d, x, y, s)` · reel13

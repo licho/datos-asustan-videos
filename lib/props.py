@@ -57,6 +57,7 @@ MAP = {
  "camera": "lib.objetos", "rec_frame": "lib.objetos",
  "item_px": "lib.pixel_mision", "evil_eyes_px": "lib.pixel_mision:evil_eyes",
  "snowflake": "lib.objetos",
- "bolt": "lib.exterior", "ground_current": "lib.exterior", "ranger_hat": "lib.objetos"
+ "bolt": "lib.exterior", "ground_current": "lib.exterior", "ranger_hat": "lib.objetos",
+ "sarcophagus": "lib.objetos", "gift": "lib.objetos", "ring_light": "lib.objetos"
 }
 __getattr__ = make(MAP, __name__)

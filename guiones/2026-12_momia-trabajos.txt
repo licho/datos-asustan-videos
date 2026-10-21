@@ -1,0 +1,12 @@
+Video: Guía laboral Ep. 5 — La momia busca trabajo
+Fecha: primera semana de diciembre 2026 (por definir)
+Código: specs/s34_momia.py · Sin voz: sinvoz/2026-12_momia-trabajos_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4
+Producir final: python3 -m lib.produce specs/s34_momia.py final audio/34-momia.mp3
+
+[mischievously] Guía laboral para monstruos, episodio cinco: la momia. [sarcastic] Su currículum: cinco mil años de experiencia… acostada. Referencias: un faraón. No contesta. [confident] Trabajo número uno: envolvedora de regalos en diciembre. Nadie envuelve más rápido. Practica en ella misma todos los días. [serious] Trabajo número dos: enfermera. Ya llega con las vendas puestas. [mischievously] Trabajo número tres: guía de museo. La única que puede decir “yo estuve ahí”… y la única a la que le cobran entrada para ver a sus parientes. [excited] Trabajo número cuatro: influencer de belleza. Su rutina: sal especial, setenta días de secado… y nunca, nunca se moja. [whispers] Dato real: momificar a alguien tardaba unos setenta días… y el cerebro se sacaba por la nariz con un gancho. [dramatically] El verdadero problema no es la maldición. Es que lleva cinco mil años trabajando… [sarcastic] …y la afore le dice que le faltan semanas cotizadas. ¿Qué otro monstruo quieres que busque trabajo? Te leo en los comentarios.
+
+# palabras: 153  duración estimada: 64 s
+
+Fuente:
+- National Geographic (infografía de momificación): ~70 días en total, casi 40 de secado en natrón; cerebro extraído por la nariz con un gancho

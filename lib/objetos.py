@@ -147,3 +147,31 @@ def ranger_hat(d, x, y, s=1.0, col=(150, 110, 60)):
     d.ellipse([x - S(170), y - S(30), x + S(170), y + S(30)], fill=col, outline=BLK, width=5)
     d.polygon([(x - S(90), y - S(10)), (x - S(70), y - S(120)), (x, y - S(150)), (x + S(70), y - S(120)), (x + S(90), y - S(10))], fill=col, outline=BLK)
     d.rectangle([x - S(88), y - S(40), x + S(88), y - S(15)], fill=dk(col, .7))
+
+def sarcophagus(d, x, y, s=1.0, col=(220, 170, 60)):
+    """Sarcófago de pie; y = base."""
+    S = lambda v: v * s
+    pts = [(x - S(90), y), (x - S(110), y - S(300)), (x - S(100), y - S(480)), (x, y - S(560)), (x + S(100), y - S(480)), (x + S(110), y - S(300)), (x + S(90), y)]
+    d.polygon(pts, fill=col, outline=BLK, width=5)
+    d.polygon([(x - S(80), y - S(470)), (x, y - S(545)), (x + S(80), y - S(470)), (x + S(85), y - S(380)), (x - S(85), y - S(380))], fill=(40, 70, 160), outline=BLK)
+    d.ellipse([x - S(45), y - S(500), x + S(45), y - S(400)], fill=(230, 190, 120), outline=BLK, width=3)
+    for sx in (-1, 1): d.ellipse([x + sx * S(18) - S(7), y - S(462), x + sx * S(18) + S(7), y - S(450)], fill=BLK)
+    for k in range(4): d.line([(x - S(80), y - S(330) + k * S(70)), (x + S(80), y - S(330) + k * S(70))], fill=dk(col, .7), width=4)
+    d.rectangle([x - S(15), y - S(400), x + S(15), y - S(360)], fill=(40, 70, 160))
+
+def gift(d, x, y, s=1.0, col=(220, 60, 70), ribbon=(250, 210, 60), bandage=False):
+    """Regalo envuelto; y = base. bandage=True: envuelto en vendas."""
+    S = lambda v: v * s
+    body = (235, 225, 195) if bandage else col
+    d.rectangle([x - S(80), y - S(130), x + S(80), y], fill=body, outline=BLK, width=4)
+    d.rectangle([x - S(90), y - S(160), x + S(90), y - S(125)], fill=body, outline=BLK, width=4)
+    if bandage:
+        for k in range(6): d.line([(x - S(80), y - S(150) + k * S(28)), (x + S(80), y - S(135) + k * S(28))], fill=(190, 175, 140), width=4)
+    else:
+        d.rectangle([x - S(14), y - S(160), x + S(14), y], fill=ribbon)
+    d.ellipse([x - S(50), y - S(195), x, y - S(155)], outline=ribbon if not bandage else (190, 175, 140), width=int(S(10)))
+    d.ellipse([x, y - S(195), x + S(50), y - S(155)], outline=ribbon if not bandage else (190, 175, 140), width=int(S(10)))
+
+def ring_light(d, x, y, r=170, on=True):
+    d.ellipse([x - r, y - r, x + r, y + r], outline=(255, 250, 220) if on else (150, 150, 150), width=int(r * .18))
+    d.ellipse([x - r * 1.1, y - r * 1.1, x + r * 1.1, y + r * 1.1], outline=BLK, width=4); d.ellipse([x - r * .8, y - r * .8, x + r * .8, y + r * .8], outline=BLK, width=4)
