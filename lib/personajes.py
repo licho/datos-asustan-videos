@@ -10,6 +10,8 @@ MAP = {
  # animales y bichos
  "wolf": "reel17", "dog": "reel17", "cat": "reel17", "cow": "reel25", "dino": "reel13", "roach": "reel27", "roach_head": "reel27",
  "fly": "reel12", "mite": "reel5", "germ": "reel2", "bacteria": "reel26", "listeria": "reel26", "mold": "reel26", "sponge": "reel16",
+ # nuevos (lib/animales.py)
+ "mosquito": "lib.animales", "shark": "lib.animales", "snake": "lib.animales", "lion": "lib.animales",
  # pixel art
  "hero_pixel": "mision002:hero", "bee": "mision003", "swarm": "mision003", "bear": "oso", "soul": "ofrenda",
 }

@@ -1,0 +1,14 @@
+Video: El animal más peligroso del mundo (mosquito)
+Fecha: viernes 20 de noviembre 2026, 10:00
+Código: specs/s28_mosquito.py · Sin voz: sinvoz/2026-11-20_mosquito_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4
+Producir final: python3 -m lib.produce specs/s28_mosquito.py final audio/28-mosquito.mp3
+
+[mischievously] ¿Cuál es el animal más peligroso del mundo? ¿El tiburón? ¿El león? ¿La serpiente? [dramatically] No. Es este. [serious] Solo por la malaria murieron unas seiscientas diez mil personas en 2024, según la OMS. Las serpientes matan entre ochenta y un mil y ciento treinta y ocho mil al año. ¿Los tiburones? Apenas un puñado. Y eso sin contar el dengue, el zika, el chikungunya y la fiebre amarilla. [mischievously] Solo pican las hembras: necesitan tu sangre para producir sus huevos. [sarcastic] O sea, técnicamente… eres su baby shower. [serious] Te encuentran por el dióxido de carbono que exhalas, desde decenas de metros. Luego te ven… y al final sienten tu calor. [whispers] Y no te pica con una aguja: su trompa tiene seis. Unas cortan, otras sujetan, una succiona… y otra te inyecta saliva para que tu sangre no se coagule. [sarcastic] No te pica. Te opera. [confident] Para defenderte, vacía el agua estancada: cubetas, llantas, macetas, que ahí ponen sus huevos. Y usa repelente y mosquitero. [mischievously] Y si a las tres de la mañana escuchas ese zumbido en tu oreja… no es un insecto. Es el depredador número uno del planeta. ¿Tú qué prefieres: un tiburón en la playa… o un mosquito en tu cuarto?
+
+# palabras: 199  duración estimada: 82 s
+
+Fuentes:
+- OMS, Informe Mundial de Malaria 2025 (282 millones de casos y 610,000 muertes en 2024)
+- Caltech (van Breugel, Dickinson et al. 2015): CO2 10–50 m, vista 5–15 m, calor <1 m
+- OMS: mordeduras de serpiente, 81,000–138,000 muertes al año

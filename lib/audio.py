@@ -53,6 +53,13 @@ class Mix:
         t0, t1 = self.M(a), self.M(b); n = int((t1 - t0) * SR); tt = np.arange(n) / SR
         f = f0 + 30 * np.sin(2 * np.pi * 7 * tt); s = np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * (.6 + .4 * np.sin(2 * np.pi * 3 * tt))
         self.add(t0, lp(s, .25), g, raw=True)
+    def whine(self, st, dur=1.5, g=0.07, f0=620):
+        """Zumbido de mosquito (agudo con vibrato), dur en segundos reales."""
+        n = int(dur * SR); tt = np.arange(n) / SR
+        f = f0 + 40 * np.sin(2 * np.pi * 9 * tt) + 25 * np.sin(2 * np.pi * 1.3 * tt)
+        ph = 2 * np.pi * np.cumsum(f) / SR
+        sig = (np.sin(ph) + .5 * np.sin(2 * ph) + .25 * np.sin(3 * ph)) * np.minimum(1, np.minimum(tt / .15, (dur - tt) / .3))
+        self.add(st, sig, g)
     def fx(self, name, st, **kw): getattr(self, name)(st, **kw)
     # -- música
     def music(self, style="bass", quiet=(), loud_from=None):

@@ -15,5 +15,7 @@ MAP = {
  "big_toilet": "reel7", "truck": "reel8", "pot": "reel8", "coffee_machine": "reel8", "ice_machine": "reel8", "phone_small": "reel9",
  "voyager": "reel23", "planet_earth": "reel23", "jupiter": "reel23", "sun": "reel23", "spin_earth": "reel25", "earth": "reel13",
  "ufo": "alien", "backpack": "alien", "heli": "mision002", "cactus": "mision002", "hive": "mision003", "mower": "mision003",
+ # nuevos (lib/objetos.py)
+"podium": "lib.objetos", "radar": "lib.objetos", "bucket": "lib.objetos", "tire": "lib.objetos", "flowerpot": "lib.objetos", "cake": "lib.objetos", "balloons": "lib.objetos", "spray": "lib.objetos", "net": "lib.objetos", "skull": "lib.objetos", "egg_raft": "lib.objetos",
 }
 __getattr__ = make(MAP, __name__)
