@@ -1,0 +1,13 @@
+Video: Zombies en el minisúper, parte 4 — Día 4: sin señal
+Fecha: viernes 27 de noviembre 2026, 10:00
+Código: specs/s35_zombies4.py · Sin voz: sinvoz/2026-11-27_zombies-parte4_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4
+Producir final: python3 -m lib.produce specs/s35_zombies4.py final audio/35-zombies4.mp3
+
+[dramatically] Día cuatro del apocalipsis zombi. Se fue la señal… y al celular le queda diez por ciento. [sarcastic] El empleado ya cobra la carga: cincuenta pesos el cinco por ciento. [serious] Regla uno: ahorra batería. Baja el brillo, modo avión y cierra las apps que no uses. Regla dos: cuando haya señal, manda mensaje, no llames. Los mensajes pasan más fácil cuando la red está saturada. [sarcastic] Y no, Don Toño, no es momento de subir historia. [serious] Regla tres: para pedir ayuda, todo de a tres. Tres silbidos, tres luces, tres fogatas. Es la señal internacional de auxilio. Y en la azotea, escribe SOS en letras gigantes. [mischievously] Don Toño lo escribió… con papel de baño. Y llovió. [dramatically] Pero esa noche se escucha un helicóptero. ¡Rescate! Todos corren a la azotea… menos uno. [sarcastic] El empleado: “Yo no me puedo ir. Mi turno termina a las siete.” ¿Tú te subes al helicóptero o te quedas con el hielo? Parte cinco… próximamente.
+
+# palabras: 156  duración estimada: 66 s
+
+Fuentes:
+- Be Ready Utah (beready.utah.gov): tres de cualquier cosa = señal internacional de auxilio; 3 silbidos; 3 fogatas en triángulo; SOS/HELP en letras grandes
+- Maryland Dept. of Emergency Management: mensajes en vez de llamadas (menos congestión); bajar brillo, modo avión, cerrar apps

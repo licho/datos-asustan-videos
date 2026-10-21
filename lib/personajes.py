@@ -17,6 +17,7 @@ MAP = {
  "roach_v12": "reel12:roach", "alien_pixel": "alien:alien", "hero_pixel_v1": "pixel:hero", "zombie_pixel": "pixel:zombie", "alux_laugh": "reel4:jiji", "thief": "reel4",
  "ghost": "lib.criaturas", "ghost_draw": "lib.criaturas",
  "crab": "lib.animales", "coral": "lib.animales",
- "mummy": "lib.criaturas"
+ "mummy": "lib.criaturas",
+ "don_tono": "lib.humanos"
 }
 __getattr__ = make(MAP, __name__)

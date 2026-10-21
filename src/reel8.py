@@ -99,7 +99,7 @@ def coffee_machine(d, x, y, s, t):
 
 def ice_machine(d, x, y, s, t, glow=1.0):
     S = lambda v: v * s
-    for k in range(8):
+    for k in range(8 if glow > 0 else 0):           # sin rayos de luz si glow=0
         a = -math.pi / 2 + (k - 3.5) * 0.12
         d.line([(x, y - S(900)), (x + math.cos(a) * S(1200), y - S(900) + math.sin(a + math.pi) * -S(1200))], fill=lc((10, 10, 14), (255, 250, 200), 0.25 * glow), width=int(S(30)))
     d.rounded_rectangle([x - S(200), y - S(380), x + S(200), y + S(200)], int(S(24)), fill=(230, 240, 250), outline=BLK, width=6)

@@ -71,6 +71,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `dino(d, x, y, s, t, sign=None)` · reel13
 - `doc(d, cx, cy, w, h, lines, t0, t, title=None)` · reel14
 - `dog(d, x, y, s, t, kind=0, bow=False)` · reel17
+- `don_tono(d, x, y, s=1.0, mood='neutral', arms='down', t=0.0)` · lib.humanos — Don Toño: señor de bigote y gorra (cliente eterno del minisúper).
 - `doppel(d, x, y, s, t, mood='smile', glow=1.0, point=False)` · reel9
 - `employee(d, x, y, s, t)` · reel8
 - `face(d, cx, cy, r, mood='happy')` · reel23
@@ -143,6 +144,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `cactus_pixel(d, x, y, s=1)` · mision002
 - `cake(d, x, y, s=1.0, t=0.0, text='')` · lib.objetos — Pastel con velas; y = base.
 - `camera(d, x, y, s=1.0, t=0.0, rec=True, tripod=True, facing=1)` · lib.objetos — Videocámara (opcional sobre tripié). (x, y) = centro de la cámara; facing=1 apunta a la derecha.
+- `campfire(d, x, y, s=1.0, t=0.0)` · lib.objetos — Fogata; y = suelo.
 - `can(d, x, y, s=1.0, col=(240, 200, 60))` · reel8
 - `car(d, x, y, s, col)` · reel25
 - `car_pixel(d, x, y, t)` · mision002
@@ -194,6 +196,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `heart_pixel(d, x, y, full=True)` · oso
 - `heater(d, x, y, s=1.0)` · reel8
 - `heli(d, x, y, t)` · mision002
+- `helicopter(d, x, y, s=1.0, t=0.0, flip=False, light=False, col=(200, 60, 50), beam_to=1300)` · lib.objetos — Helicóptero de rescate (cartoon). facing derecha salvo flip. (x, y) = centro de la cabina. beam_to = y donde termina el reflector.
 - `hive(d, x, y, t, shake=0.0)` · mision003
 - `house(d, x, y, s=1.0, wall=(240, 220, 180), roof=(190, 70, 50), lights=False, door_col=(140, 90, 50))` · lib.exterior — Casa de una planta con techo de dos aguas.
 - `house_pixel(d)` · mision003
@@ -304,6 +307,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `washer(d, cx, cy, s, t)` · reel5
 - `wave(d, t, k)` · reel25
 - `waves(d, t, y=SEA_Y, col=(60, 90, 140))` · reel3
+- `whistle(d, x, y, s=1.0, col=(240, 160, 40))` · lib.objetos
 - `window(d, x0, y0, x1, y1, kind='day', t=0.0, frame=(240, 240, 240))` · lib.muebles — Ventana en caja. kind: day | night (con luna) | blinds (persianas) | storm.
 - `window_frame(d, x, y, w, h, broken=0.0)` · reel13
 

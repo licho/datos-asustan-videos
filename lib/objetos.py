@@ -175,3 +175,37 @@ def gift(d, x, y, s=1.0, col=(220, 60, 70), ribbon=(250, 210, 60), bandage=False
 def ring_light(d, x, y, r=170, on=True):
     d.ellipse([x - r, y - r, x + r, y + r], outline=(255, 250, 220) if on else (150, 150, 150), width=int(r * .18))
     d.ellipse([x - r * 1.1, y - r * 1.1, x + r * 1.1, y + r * 1.1], outline=BLK, width=4); d.ellipse([x - r * .8, y - r * .8, x + r * .8, y + r * .8], outline=BLK, width=4)
+
+def helicopter(d, x, y, s=1.0, t=0.0, flip=False, light=False, col=(200, 60, 50), beam_to=1300):
+    """Helicóptero de rescate (cartoon). facing derecha salvo flip. (x, y) = centro de la cabina. beam_to = y donde termina el reflector."""
+    S = lambda v: v * s; f = -1 if flip else 1
+    if light:
+        sp = (beam_to - y) * .22
+        d.polygon([(x - S(40), y + S(80)), (x + S(40), y + S(80)), (x + sp, beam_to), (x - sp, beam_to)], fill=(255, 250, 200))
+    d.line([(x - f * S(100), y), (x - f * S(330), y - S(30))], fill=col, width=int(S(36)))
+    d.polygon([(x - f * S(320), y - S(30)), (x - f * S(360), y - S(110)), (x - f * S(300), y - S(40))], fill=col, outline=BLK)
+    ph = t * 40
+    d.ellipse([x - f * S(345) - S(30) * abs(math.cos(ph)), y - S(55), x - f * S(345) + S(30) * abs(math.cos(ph)), y - S(5)], outline=BLK, width=3)
+    d.ellipse([x - S(160), y - S(90), x + S(160), y + S(90)], fill=col, outline=BLK, width=6)
+    d.chord([x + f * S(20) - S(110) if f > 0 else x - S(130), y - S(75), x + S(130) if f > 0 else x - f * S(20) + S(110), y + S(30)], 180 if f > 0 else 180, 360, fill=(170, 220, 250), outline=BLK, width=4)
+    d.text((x - f * S(40), y + S(40)), "RESCATE", font=F(S(34)), fill=WHITE, anchor="mm")
+    for dx in (-80, 80): d.line([(x + S(dx), y + S(85)), (x + S(dx), y + S(125))], fill=BLK, width=int(S(8)))
+    d.line([(x - S(140), y + S(125)), (x + S(140), y + S(125))], fill=BLK, width=int(S(10)))
+    d.line([(x, y - S(90)), (x, y - S(125))], fill=BLK, width=int(S(12)))
+    L = S(380) * abs(math.cos(ph))
+    d.line([(x - L, y - S(128)), (x + L, y - S(128))], fill=(60, 60, 65), width=int(S(12)))
+
+def whistle(d, x, y, s=1.0, col=(240, 160, 40)):
+    S = lambda v: v * s
+    d.rounded_rectangle([x - S(110), y - S(40), x + S(40), y + S(40)], int(S(30)), fill=col, outline=BLK, width=5)
+    d.ellipse([x - S(10), y - S(70), x + S(110), y + S(50)], fill=col, outline=BLK, width=5)
+    d.ellipse([x + S(25), y - S(35), x + S(75), y + S(15)], fill=dk(col, .5))
+    d.arc([x - S(160), y - S(40), x - S(100), y + S(40)], 90, 270, fill=(120, 120, 130), width=int(S(8)))
+
+def campfire(d, x, y, s=1.0, t=0.0):
+    """Fogata; y = suelo."""
+    S = lambda v: v * s
+    for a in (-1, 1): d.line([(x - S(90) * a, y), (x + S(90) * a, y - S(40))], fill=(120, 80, 50), width=int(S(26)))
+    for k, (c, h) in enumerate((((240, 90, 30), 210), ((250, 180, 40), 150), ((255, 240, 150), 80))):
+        w = S(80 - k * 22); fl = math.sin(t * 12 + k) * S(8)
+        d.polygon([(x - w, y - S(20)), (x + fl, y - S(h)), (x + w, y - S(20))], fill=c)
