@@ -81,7 +81,7 @@ def ranking(c):
 
 DIS = [("DENGUE", (230, 80, 60)), ("ZIKA", (60, 140, 230)), ("CHIKUNGUNYA", (240, 150, 40)), ("FIEBRE AMARILLA", (200, 170, 20))]
 def diseases(c):
-    img, d = canvas(DARK); lt = c.lt
+    img, d = canvas(((165, 140, 190), (200, 160, 185))); lt = c.lt
     mosquito(d, 560, 640 + math.sin(c.t * 4) * 20, 1.0, c.t, mood="angry")
     for i, (txt, col) in enumerate(DIS):
         a = (lt - (.6 + i * c.dur * .17)) / .3
@@ -201,6 +201,8 @@ def night(c):
     d.rounded_rectangle([bx - 160, by - 150, bx + 320, by - 90], 20, fill=(70, 110, 190), outline=BLK, width=5)
     if not awake: d.text((hx + 120, hy - 120), "z z Z", font=F(54), fill=(200, 200, 240), anchor="mm")
     a = c.t * 2.2
+    mx_, my_ = hx + 60 + math.cos(a) * 230, hy - 260 + math.sin(a * 1.7) * 70
+    d.ellipse([mx_ - 150, my_ - 110, mx_ + 150, my_ + 110], fill=(85, 80, 120))     # halo de luz de luna
     mosquito(d, hx + 60 + math.cos(a) * 230, hy - 260 + math.sin(a * 1.7) * 70, .55, c.t, mood="angry", flip=math.sin(a) > 0)
     chip(d, "3:00 A.M.", CHIP1, bg=RED, appear=lt / .3)
     if f > .55: bigtext(d, "DEPREDADOR #1", 540, 680, 100, fill=RED); c.shake = 4 if f < .65 else 0

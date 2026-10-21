@@ -75,6 +75,7 @@ def hr(c):
 
 def tv(c):
     img, d = canvas(NROOM); lt = c.lt; f = lt / c.dur
+    d.ellipse([20, 620, 470, 1180], fill=(110, 95, 110))                        # luz de la lámpara del set
     camera(d, 240, 860, .8, c.t)
     d = ghost(img, 760, 880, .8, c.t, mood="happy", arms="wave", pixel=16 if f > .45 else 0)
     rec_frame(d, c.t)

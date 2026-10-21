@@ -79,10 +79,13 @@ def sun(d, x, y, r=90, t=0.0, rays=True):
     d.ellipse([x - r, y - r, x + r, y + r], fill=(255, 220, 70), outline=(240, 170, 40), width=max(3, r // 15))
 
 def moon(d, x, y, r=80, bg=(20, 25, 55), crescent=False):
+    if crescent:                                   # creciente real (sin "tapar" con el color del fondo)
+        from PIL import Image as _I, ImageDraw as _D
+        n = int(2 * r) + 2; m = _I.new("1", (n, n), 0); md = _D.Draw(m)
+        md.ellipse([0, 0, 2 * r, 2 * r], fill=1); md.ellipse([r * .55, -r * .05, r * 2.5, r * 1.9], fill=0)
+        d.bitmap((int(x - r), int(y - r)), m, fill=(245, 240, 200)); return
     d.ellipse([x - r, y - r, x + r, y + r], fill=(245, 240, 200))
-    if crescent: d.ellipse([x - r * .45, y - r * 1.05, x + r * 1.5, y + r * .9], fill=bg)
-    else:
-        for (dx, dy, rr) in ((-.3, -.2, .18), (.25, .2, .12), (.1, -.4, .1)): d.ellipse([x + dx * r - rr * r, y + dy * r - rr * r, x + dx * r + rr * r, y + dy * r + rr * r], fill=(225, 220, 180))
+    for (dx, dy, rr) in ((-.3, -.2, .18), (.25, .2, .12), (.1, -.4, .1)): d.ellipse([x + dx * r - rr * r, y + dy * r - rr * r, x + dx * r + rr * r, y + dy * r + rr * r], fill=(225, 220, 180))
 
 def clouds(d, x, y, s=1.0, col=WHITE, t=0.0, rain=False):
     """Nube (x, y = centro). rain=True dibuja lluvia."""

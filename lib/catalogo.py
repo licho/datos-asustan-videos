@@ -13,6 +13,7 @@ def path_of(mod):
 out = ["# Catálogo de la librería (`lib/`)\n",
        "Generado con `python3 -m lib.catalogo`. Para un video nuevo: copia un spec de `specs/`, cambia LINES/SCENES/SFX y usa `python3 -m lib.produce SPEC texto|preview|sinvoz|final VOZ.mp3`.\n",
        "Escenarios: `lib/escenarios.py` (piso, rango de pies y zona libre de cada fondo; guía visual en `lib/muestras/escenarios.png`). Revisión automática: `python3 -m lib.produce SPEC check` (también corre sola antes de cada render).\n",
+       "Contraste: toda pieza nueva lleva contorno; sobre fondos oscuros, contorno + relleno claro o un foco de luz detrás. El revisor mide la silueta real de cada pieza contra lo que tiene detrás y avisa si más del 30% de su orilla se confunde (GRAVE desde 50%).\n",
        "Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300 · subtítulos 1500 (no poner nada entre 1380 y 1640).\n"]
 for f in ["core", "audio"]:
     out.append(f"\n## lib.{f}\n")

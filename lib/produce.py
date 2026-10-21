@@ -27,6 +27,13 @@ def load(spec_path):
     for tag, spoken, cap in lines:
         st.append(t); t += align.nwords(spoken) / WPS + GAP
     m.NSTART = st; m.NEND = t + getattr(m, "END", 4.0)
+    import inspect
+    scenes = {fn for _, fn in m.SCENES}
+    for k, v in list(vars(m).items()):
+        if inspect.isfunction(v) and v not in scenes and not k.startswith("_"):
+            try: first = next(iter(inspect.signature(v).parameters), "")
+            except (TypeError, ValueError): continue
+            if first in ("d", "img", "dd"): setattr(m, k, check.element_wrap(v, k))
     return m
 
 def voice_text(m):
@@ -95,14 +102,22 @@ def run_check(m, per_scene=6):
     total = 0
     bounds = [m.NSTART[li] for li, _ in m.SCENES] + [m.NEND]
     for k, (li, fn) in enumerate(m.SCENES):
-        a, b = bounds[k], bounds[k + 1]; seen = {}; worst = {}
+        a, b = bounds[k], bounds[k + 1]; seen = {}; worst = {}; full = {}
         for j in range(per_scene):
             v = a + (b - a) * (j + .5) / per_scene
-            rec = check.Rec()
-            with check.recording(rec): render_frame(m, v, v, rec)
+            rec = check.Rec(); check.ACTIVE = rec
+            try:
+                with check.recording(rec): render_frame(m, v, v, rec)
+            finally: check.ACTIVE = None
+            for p, bb in check.contrast_issues(rec):
+                key = p.split(" se confunde")[0] if "' se confunde" in p else p      # una línea por pieza y escena
+                if key not in seen: seen[key] = v; worst[key] = 0; full[key] = p
+                pct = int(p.split("(")[1].split("%")[0]) if "% de su orilla" in p else 0
+                if pct > worst[key]: worst[key] = pct; full[key] = p
             for p, px in check.analyze(rec.items):
                 seen.setdefault(p, v); worst[p] = max(worst.get(p, 0), px)
         for p, v in seen.items():
+            if p in full: print(f"  [{fn.__name__} desde {v:.1f}s] {full[p]}"); total += 1; continue
             print(f"  [{fn.__name__} desde {v:.1f}s] {p}" + (f" (hasta {worst[p]} px)" if worst[p] else "")); total += 1
     print("Revisión automática:", "sin problemas ✔" if not total else f"{total} problema(s)")
     return total == 0

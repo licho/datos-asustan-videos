@@ -4,6 +4,8 @@ Generado con `python3 -m lib.catalogo`. Para un video nuevo: copia un spec de `s
 
 Escenarios: `lib/escenarios.py` (piso, rango de pies y zona libre de cada fondo; guía visual en `lib/muestras/escenarios.png`). Revisión automática: `python3 -m lib.produce SPEC check` (también corre sola antes de cada render).
 
+Contraste: toda pieza nueva lleva contorno; sobre fondos oscuros, contorno + relleno claro o un foco de luz detrás. El revisor mide la silueta real de cada pieza contra lo que tiene detrás y avisa si más del 30% de su orilla se confunde (GRAVE desde 50%).
+
 Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300 · subtítulos 1500 (no poner nada entre 1380 y 1640).
 
 

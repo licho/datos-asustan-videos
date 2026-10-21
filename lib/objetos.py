@@ -88,7 +88,7 @@ def spray(d, x, y, s=1.0, label="REPELENTE", t=0.0, mist=0.0):
         u = ((t * 1.5 + k / 12) % 1)
         px = x + S(40) + u * S(260); py = y - S(320) - u * S(40) + math.sin(k * 7) * u * S(70)
         r = S(6 + 14 * u)
-        d.ellipse([px - r, py - r, px + r, py + r], outline=(150, 200, 230), width=3)
+        d.ellipse([px - r, py - r, px + r, py + r], outline=(70, 130, 200), width=4)
 
 def net(d, box, col=(255, 255, 255), step=26):
     """Mosquitero: rejilla dentro de box=(x0,y0,x1,y1)."""
