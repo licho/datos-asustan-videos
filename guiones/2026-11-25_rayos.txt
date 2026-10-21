@@ -1,0 +1,15 @@
+Video: Un rayo es 5 veces más caliente que el Sol (y 5 mitos de tormenta)
+Fecha: miércoles 25 de noviembre 2026, 10:00
+Código: specs/s33_rayos.py · Sin voz: sinvoz/2026-11-25_rayos_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4
+Producir final: python3 -m lib.produce specs/s33_rayos.py final audio/33-rayos.mp3
+
+[dramatically] Un rayo calienta el aire a casi veintiocho mil grados. Cinco veces más caliente que la superficie del Sol. [mischievously] Y aun así, mucha gente sigue creyendo estos mitos. [sarcastic] Mito uno: “un rayo nunca cae dos veces en el mismo lugar”. Falso: a un rascacielos de Nueva York le caen unos veintitrés al año. Y un guardabosques recibió siete rayos en su vida. Récord mundial. [serious] Mito dos: “si no está lloviendo, estoy a salvo”. Falso: un rayo puede caer a más de quince kilómetros de la tormenta. Mito tres: “me cubro debajo de un árbol”. Es la segunda causa de víctimas por rayo. Mito cuatro: “si me agarra afuera, me acuesto en el suelo”. Error: la corriente corre por el piso. Muévete a un lugar techado. [warmly] Mito cinco: “si tocas a alguien a quien le cayó un rayo, te electrocutas”. Falso: el cuerpo no guarda electricidad. Ayúdalo y llama a emergencias. [confident] Bonus: el coche sí te protege… pero por el metal, no por las llantas. [whispers] Truco: cuenta los segundos entre el relámpago y el trueno. Cada tres segundos, un kilómetro. [serious] Y si escuchas el trueno, ya estás al alcance de un rayo: métete a un lugar cerrado. ¿Cuál de estos mitos te creías? Te leo en los comentarios.
+
+# palabras: 207  duración estimada: 84 s
+
+Fuentes:
+- NWS (weather.gov/safety/lightning-temperature): 50,000 °F, 5 veces la superficie del Sol
+- NWS (weather.gov/safety/lightning-myths): Empire State ~23 rayos/año; 10-15 millas de la tormenta; árbol 2a causa; acostarse aumenta riesgo; el cuerpo no guarda electricidad
+- NWS Melbourne (weather.gov/mlb/lightning_rules): llantas no protegen, sí la carrocería de metal; 'When thunder roars, go indoors' y 30 min después del último trueno
+- Roy Sullivan, 7 rayos 1942-1977, récord Guinness (casos reportados)

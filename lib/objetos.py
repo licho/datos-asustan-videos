@@ -140,3 +140,10 @@ def snowflake(d, x, y, r=50, col=(120, 190, 250), width=8):
         for u in (.55,):
             mx, my = x + math.cos(a) * r * u, y + math.sin(a) * r * u
             for da in (-.6, .6): d.line([(mx, my), (mx + math.cos(a + da) * r * .3, my + math.sin(a + da) * r * .3)], fill=col, width=width - 2)
+
+def ranger_hat(d, x, y, s=1.0, col=(150, 110, 60)):
+    """Sombrero de guardabosques; (x, y) = centro de la cabeza (ponlo sobre guy: x, pies - 520·s)."""
+    S = lambda v: v * s
+    d.ellipse([x - S(170), y - S(30), x + S(170), y + S(30)], fill=col, outline=BLK, width=5)
+    d.polygon([(x - S(90), y - S(10)), (x - S(70), y - S(120)), (x, y - S(150)), (x + S(70), y - S(120)), (x + S(90), y - S(10))], fill=col, outline=BLK)
+    d.rectangle([x - S(88), y - S(40), x + S(88), y - S(15)], fill=dk(col, .7))

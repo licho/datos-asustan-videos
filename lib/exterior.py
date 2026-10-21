@@ -117,3 +117,21 @@ def booth(d, x, y, s=1.0, label="SEGURIDAD", col=(200, 205, 210)):
     d.rectangle([x - S(150), y - S(500), x + S(150), y - S(460)], fill=dk(col, .8), outline=BLK, width=5)
     d.rectangle([x - S(95), y - S(420), x + S(95), y - S(280)], fill=(150, 200, 235), outline=BLK, width=5)
     d.text((x, y - S(200)), label, font=F(S(36)), fill=BLK, anchor="mm")
+
+def bolt(d, x0, y0, x1, y1, seed=1, width=14, col=(255, 245, 140), glow=True, branches=2):
+    """Rayo en zigzag de (x0,y0) a (x1,y1) con ramas y resplandor."""
+    rnd = random.Random(seed); n = 9; pts = [(x0, y0)]
+    for k in range(1, n):
+        u = k / n; pts.append((x0 + (x1 - x0) * u + rnd.uniform(-1, 1) * 60, y0 + (y1 - y0) * u))
+    pts.append((x1, y1))
+    if glow: d.line(pts, fill=(160, 170, 255), width=width * 3, joint="curve")
+    d.line(pts, fill=col, width=width, joint="curve"); d.line(pts, fill=WHITE, width=max(2, width // 3))
+    for b in range(branches):
+        i = rnd.randint(2, n - 3); bx, by = pts[i]; ex, ey = bx + rnd.uniform(-160, 160), by + rnd.uniform(80, 200)
+        d.line([(bx, by), ((bx + ex) / 2 + rnd.uniform(-30, 30), (by + ey) / 2), (ex, ey)], fill=col, width=max(3, width // 2))
+
+def ground_current(d, x, y, t, r=300, col=(255, 230, 80)):
+    """Corriente que se expande por el suelo desde (x, y)."""
+    for k in range(3):
+        rr = (t * 300 + k * r / 3) % r
+        d.arc([x - rr, y - rr * .18, x + rr, y + rr * .18], 0, 360, fill=col, width=5)

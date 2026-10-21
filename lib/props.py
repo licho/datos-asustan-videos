@@ -56,6 +56,7 @@ MAP = {
  "ruler": "lib.pantallas", "wanted": "lib.pantallas", "blob_map": "lib.pantallas", "cracks": "lib.pantallas",
  "camera": "lib.objetos", "rec_frame": "lib.objetos",
  "item_px": "lib.pixel_mision", "evil_eyes_px": "lib.pixel_mision:evil_eyes",
- "snowflake": "lib.objetos"
+ "snowflake": "lib.objetos",
+ "bolt": "lib.exterior", "ground_current": "lib.exterior", "ranger_hat": "lib.objetos"
 }
 __getattr__ = make(MAP, __name__)

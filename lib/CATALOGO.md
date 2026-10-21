@@ -124,6 +124,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `blob_map(d, cx, cy, r, seed=3, fill=(170, 175, 185), outline=BLK, label=None, size=40, bumps=7)` · lib.pantallas — Silueta irregular tipo mapa (ciudad, región). Área ≈ π·r².
 - `blood_bag(d, x, y, s, col=(190, 20, 40), empty=False)` · reel14
 - `boat(d, x, y, s=1.0, t=0.0, with_guy=True, mood='neutral', tilt=0.0)` · reel3
+- `bolt(d, x0, y0, x1, y1, seed=1, width=14, col=(255, 245, 140), glow=True, branches=2)` · lib.exterior — Rayo en zigzag de (x0,y0) a (x1,y1) con ramas y resplandor.
 - `book(d, cx, cy, s)` · reel3
 - `booth(d, x, y, s=1.0, label='SEGURIDAD', col=(200, 205, 210))` · lib.exterior — Caseta (vigilancia, cobro).
 - `bottle(d, x, y, s)` · reel2
@@ -186,6 +187,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `germ_swarm(d, cx, cy, rx, ry, n, t, size=34, seed=5, bad=-1)` · reel16
 - `glass(d, cx, ybot)` · reel27
 - `glass_overlay(d, box)` · reel
+- `ground_current(d, x, y, t, r=300, col=(255, 230, 80))` · lib.exterior — Corriente que se expande por el suelo desde (x, y).
 - `heart(d, x, y, r=40, col=RED)` · lib.pantallas
 - `heart_pixel(d, x, y, full=True)` · oso
 - `heater(d, x, y, s=1.0)` · reel8
@@ -248,6 +250,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `post(d, cx, cy, s, t)` · reel4
 - `pot(d, x, y, s, t)` · reel8
 - `radar(d, cx, cy, rings, t=0.0)` · lib.objetos — rings=[(radio, texto, color, activo)] de mayor a menor.
+- `ranger_hat(d, x, y, s=1.0, col=(150, 110, 60))` · lib.objetos — Sombrero de guardabosques; (x, y) = centro de la cabeza (ponlo sobre guy: x, pies - 520·s).
 - `rec_frame(d, t, label='REC', box=(40, 470, 1040, 1330))` · lib.objetos — Marco de cámara grabando: esquinas + REC parpadeando + contador.
 - `rice_bowl(d, cx, ybot, s=1.0)` · reel26
 - `road(d, y0, y1, t=0.0, speed=0.0, col=(70, 70, 75))` · lib.exterior — Calle horizontal con líneas (speed>0 se mueven).
