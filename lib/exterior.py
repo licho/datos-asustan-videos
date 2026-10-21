@@ -19,12 +19,16 @@ def building(d, x, y, w=220, h=600, col=(180, 150, 120), lit=0.0, seed=1, face=N
     """Edificio (x = centro). lit = fracción de ventanas encendidas (noche)."""
     rnd = random.Random(seed)
     d.rectangle([x - w / 2, y - h, x + w / 2, y], fill=col, outline=BLK, width=5)
-    cols = max(2, int(w // 60)); rows = max(2, int((h - 60) // 80))
+    # ventanas escaladas al tamaño del edificio: nunca se salen de la fachada
+    pad = max(8, min(w, h) * .08)
+    cols = max(1, int((w - pad) // 60)); rows = max(1, int((h - pad) // 80))
+    cw, rh = (w - 2 * pad) / cols, (h - 2 * pad) / rows
+    ww, wh = min(32, cw * .55), min(42, rh * .6)
     for r in range(rows):
         for c in range(cols):
-            wx = x - w / 2 + (c + .5) * w / cols; wy = y - h + 40 + r * 80
+            wx = x - w / 2 + pad + (c + .5) * cw; wy = y - h + pad + (r + .5) * rh
             on = rnd.random() < lit
-            d.rectangle([wx - 16, wy, wx + 16, wy + 42], fill=(255, 220, 110) if on else (150, 200, 230) if lit == 0 else (50, 60, 80), outline=BLK, width=2)
+            d.rectangle([wx - ww / 2, wy - wh / 2, wx + ww / 2, wy + wh / 2], fill=(255, 220, 110) if on else (150, 200, 230) if lit == 0 else (50, 60, 80), outline=BLK, width=2)
 
 def tree(d, x, y, s=1.0, kind="round", t=0.0, col=(70, 160, 80)):
     """Árbol. kind: round | pine | palm."""
