@@ -29,15 +29,17 @@ MN = "MISIÓN 004"
 def fin(c, img, **kw): return finish(c, img, MN, INV, **kw)
 
 def kitchen(d):
-    rect(d, 0, 16, LW, GROUND - 16, "lgray")
+    rect(d, 0, 16, LW, GROUND - 16, "purple")
     for y in range(20, GROUND - 40, 14):
-        for x in range((y // 14) % 2 * 7, LW, 14): rect(d, x, y, 13, 13, "white")
+        for x in range((y // 14) % 2 * 7, LW, 14): rect(d, x, y, 13, 13, "lav")
     rect(d, 0, GROUND, LW, LH - GROUND, "dgray")
     for x in range(0, LW, 16):
         for y in range(GROUND, 262, 8): rect(d, x + (y // 8) % 2 * 8, y, 8, 8, "lav")
 
 def fridge(d, t, x=112, angry=True):
-    rect(d, x, 120, 44, GROUND - 120, "white"); rect(d, x, 120, 44, 1, "dgray"); rect(d, x, 166, 44, 1, "dgray")
+    rect(d, x - 1, 119, 46, GROUND - 118, "black")                      # contorno
+    rect(d, x, 120, 44, GROUND - 120, "white"); rect(d, x + 38, 120, 6, GROUND - 120, "lgray")   # costado sombreado
+    rect(d, x, 166, 44, 1, "black")
     rect(d, x + 38, 134, 2, 22, "dgray"); rect(d, x + 38, 176, 2, 30, "dgray")
     if angry: evil_eyes(d, x + 20, 140, 12, t)
 
