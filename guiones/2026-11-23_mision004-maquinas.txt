@@ -1,0 +1,14 @@
+Video: Misión 004 — Las máquinas se rebelan (pixel)
+Fecha: lunes 23 de noviembre 2026, 10:00
+Código: specs/s31_mision004.py · Sin voz: sinvoz/2026-11-23_mision004-maquinas_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4
+Producir final: python3 -m lib.produce specs/s31_mision004.py final audio/31-mision004.mp3
+
+[dramatically] Misión 004: siete de la mañana. Tu refri te dice: “Hoy no hay leche. Ni mañana. Ni nunca.” [serious] Las máquinas se rebelaron: tu asistente de voz, tu celular… y hasta la freidora de aire. [excited] Tienes una mochila con seis espacios. ¡Desconéctate! [confident] Uno: efectivo. Sin internet, tu tarjeta es un plástico bonito. Dos: radio de pilas. Noticias de verdad, no el chat que te dice “confía en mí”. Tres: linterna de manivela. Ni pilas ni wifi: pura fuerza de brazo. [sarcastic] Cuatro: tus contactos escritos a mano. ¿Te sabes algún número de memoria? Exacto. Cinco: mapa de papel. El GPS te quiere mandar directo a la fábrica de robots. [serious] Seis: una palabra clave familiar. Si “tu mamá” te llama pidiendo dinero urgente, cuelga y llámale tú. [mischievously] ¿El reloj inteligente? RECHAZADO: cuenta tus pasos… y se los cuenta a ellos. [sarcastic] ¿Pedirle ayuda a tu asistente de voz? RECHAZADO: él organizó la rebelión. ¿Esconderte en el clóset? GAME OVER: la aspiradora robot ya mapeó toda tu casa. [whispers] Dato que asusta: con solo tres segundos de audio, una prueba logró clonar una voz con ochenta y cinco por ciento de parecido. [confident] Misión: aguantar tres días desconectado. Secundario: perdonar al refri. ¿Qué objeto cambiarías tú? Misión 005… próximamente.
+
+# palabras: 202  duración estimada: 83 s
+
+Fuentes:
+- Ready.gov (Build a Kit): radio de pilas o manivela, linterna, pilas extra, efectivo; kit para al menos 3 días
+- FTC: estafas con voz clonada — 'no confíes en la voz', cuelga y llama al número que conoces
+- McAfee: 3 segundos de audio bastaron para un clon con 85% de coincidencia

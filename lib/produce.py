@@ -52,12 +52,14 @@ def render_frame(m, v, t, rec=None):
     fn, s0, s1 = scene_at(m, v)
     c = Ctx(); c.v = v; c.t = t; c.lt = v - s0; c.dur = s1 - s0; c.shake = 0
     c.at = lambda i: m.NSTART[i] - s0          # inicio de la línea i relativo a la escena
+    c.line, c.cap, c.cap_lt = 0, "", 0.0         # línea actual (para escenas que dibujan su propio subtítulo, ej. pixel)
+    for i, (tag, spoken, cap) in enumerate(m.LINES):
+        e = m.NSTART[i + 1] if i + 1 < len(m.LINES) else m.NEND
+        if m.NSTART[i] <= v < e: c.line, c.cap, c.cap_lt = i, cap, v - m.NSTART[i]
     img = fn(c)
     d = ImageDraw.Draw(img)
     if rec: rec.tag = "caption"
-    for i, (tag, spoken, cap) in enumerate(m.LINES):
-        e = m.NSTART[i + 1] if i + 1 < len(m.LINES) else m.NEND
-        if m.NSTART[i] <= v < e and cap: rich_caption(d, cap, y=CAP_Y, appear=(v - m.NSTART[i]) / 0.25)
+    if getattr(m, "CAPTIONS", True) and c.cap: rich_caption(d, c.cap, y=CAP_Y, appear=c.cap_lt / 0.25)
     arr = np.asarray(img)
     if c.shake: arr = np.roll(arr, int(math.sin(t * 60) * c.shake), axis=1)
     return arr

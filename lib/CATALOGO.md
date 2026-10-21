@@ -166,6 +166,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `dust(d, cx, cy, s, t)` · reel2
 - `earth(d, cx, cy, r)` · reel13
 - `egg_raft(d, x, y, s=1.0, n=14)` · lib.objetos — Huevecillos (balsa de huevos) flotando.
+- `evil_eyes_px(d, x, y, w=10, t=0.0)` · lib.pixel_mision — Ojos rojos de máquina malvada (x, y = centro).
 - `extra_icon_pixel(d, kind, x, y, big=2)` · zombi11
 - `eye_icon(d, cx, cy, s)` · reel3
 - `fence(d, x0, x1, y, h=160, col=(240, 240, 235))` · lib.exterior
@@ -195,6 +196,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `icon_pixel(d, kind, x, y, big=2)` · alien
 - `inventory_pixel(d, t, upto)` · alien
 - `item_card(d, cx, cy, sc, label)` · reel8
+- `item_px(d, kind, x, y, big=2)` · lib.pixel_mision
 - `items_mision002(d, kind, x, y, big=2)` · mision002
 - `items_mision003(d, kind, x, y, big=2)` · mision003
 - `items_ofrenda(d, kind, x, y, big=2, t=0.0)` · ofrenda

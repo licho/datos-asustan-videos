@@ -25,6 +25,7 @@ def recording(rec):
         f = _orig[name]
         def g(self, xy, *a, **kw):
             try:
+                if getattr(self, "_image", None) is not None and self._image.size != (W, H): raise StopIteration   # lienzos chicos (pixel) no se revisan aquí
                 if name == "text":
                     txt = a[0] if a else kw.get("text", "")
                     bb = list(self.textbbox(xy, txt, font=kw.get("font"), anchor=kw.get("anchor"), stroke_width=kw.get("stroke_width", 0)))
