@@ -1,7 +1,7 @@
 """¿Qué pasaría si dejaras de dormir? (con café y humor negro)"""
 import math
 from lib.core import *
-from lib.personajes import guy, ghost, brain, rat, heart_face
+from lib.personajes import guy, ghost, brain, rat, heart_face, anchors, medal
 from lib.props import mug, hourglass, car, road, phone_chat, wall_clock, monitor, sofa
 from lib.fondos import night_room
 
@@ -79,8 +79,8 @@ def s_student(c):
     calendar(d, 300, 760, int(lerp(1, 11, ease(cl(f / .6)))), label="DÍAS", col=RED, sc=1.0)
     guy(d, 760, FEET, .72, mood="scared", t=c.t)
     if f > .6:
-        d.polygon([(700, 900), (770, 880), (760, 990), (735, 960), (710, 995)], fill=BLUE, outline=BLK)
-        d.ellipse([705, 840, 775, 910], fill=YEL, outline=BLK, width=4); d.text((740, 875), "1º", font=F(30), fill=BLK, anchor="mm")
+        a = anchors(760, FEET, .72)
+        medal(d, a["chest"][0], a["chest"][1], .9, neck=a["neck"])          # colgada del cuello, sobre el pecho
     chip(d, "11 DÍAS · FERIA DE CIENCIAS", CHIP1, bg=BLUE, appear=c.lt / .3)
     return img
 

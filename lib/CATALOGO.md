@@ -6,6 +6,8 @@ Escenarios: `lib/escenarios.py` (piso, rango de pies y zona libre de cada fondo;
 
 Contraste: toda pieza nueva lleva contorno; sobre fondos oscuros, contorno + relleno claro o un foco de luz detrás. `check-contraste` mide la silueta real de cada pieza contra lo que tiene detrás y avisa si más del 30% de su orilla se confunde (GRAVE desde 50%).
 
+Objetos en personajes: usa `anchors(x, pies, escala)` (lib.personajes) para cabeza, cuello, pecho y manos de cada pose; nunca coordenadas a ojo.
+
 Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300 · subtítulos 1500 (no poner nada entre 1380 y 1640).
 
 
@@ -57,6 +59,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `alien_pixel(d, x, y, big=2, t=0)` · alien
 - `alux(d, x, y, s=1.0, t=0.0, mood='grin', face=1, arm=None, shade=1.0)` · reel4 — Original cartoon alux: small Maya guardian in white clothes with embroidered border and red headband.
 - `alux_laugh(d, x, y, t, size=46)` · reel4
+- `anchors(x, y, s=1.0)` · lib.humanos — Puntos del cuerpo de 'guy' (y de don_tono) para poner objetos encima sin que floten.
 - `bacteria(d, x, y, s, t, kind='green', suitcase=False, shades=False)` · reel26
 - `bear(d, x, y, big=2, kind='brown', frame=0, mood='normal')` · oso
 - `bee(d, x, y, angry=False)` · mision003
@@ -86,6 +89,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `hero_pixel_v1(d, x, y, scared=False, frame=0, big=2)` · pixel
 - `lion(d, x, y, s=1.0, t=0.0, mood='neutral')` · lib.animales — León sentado de frente; y = piso.
 - `listeria(d, x, y, s, t)` · reel26
+- `medal(d, x, y, s=1.0, text='1º', ribbon=(40, 120, 220), neck=None)` · lib.humanos — Medalla colgada; (x, y) = centro de la medalla. neck=(x, y) dibuja el listón desde el cuello.
 - `mite(d, x, y, s=1.0, t=0.0, phase=0.0, mood='grin', shade=1.0, dizzy=False)` · reel5
 - `mold(d, cx, cy, r, k, t, seed=1)` · reel26
 - `mosquito(d, x, y, s=1.0, t=0.0, flip=False, female=False, mask=False, hat=False, mood='normal', fly=True)` · lib.animales — Mosquito (patrón rayado tipo Aedes). mood: normal | angry | happy. Centro en el tórax.

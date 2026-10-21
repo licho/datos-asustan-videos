@@ -14,6 +14,7 @@ out = ["# Catálogo de la librería (`lib/`)\n",
        "Generado con `python3 -m lib.catalogo`. Para un video nuevo: copia un spec de `specs/`, cambia LINES/SCENES/SFX y usa `python3 -m lib.produce SPEC texto|preview|sinvoz|final VOZ.mp3`.\n",
        "Escenarios: `lib/escenarios.py` (piso, rango de pies y zona libre de cada fondo; guía visual en `lib/muestras/escenarios.png`). Flujo: `hoja` (revisión visual en ~4 s) → `check` (~5 s; se recuerda si no cambió nada) → `sinvoz` (todos los núcleos, ~90 s). El contraste (`check-contraste`, ~50 s) solo si se pide; Luis revisa el contraste en el video final.\n",
        "Contraste: toda pieza nueva lleva contorno; sobre fondos oscuros, contorno + relleno claro o un foco de luz detrás. `check-contraste` mide la silueta real de cada pieza contra lo que tiene detrás y avisa si más del 30% de su orilla se confunde (GRAVE desde 50%).\n",
+       "Objetos en personajes: usa `anchors(x, pies, escala)` (lib.personajes) para cabeza, cuello, pecho y manos de cada pose; nunca coordenadas a ojo.\n",
        "Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300 · subtítulos 1500 (no poner nada entre 1380 y 1640).\n"]
 for f in ["core", "audio"]:
     out.append(f"\n## lib.{f}\n")
