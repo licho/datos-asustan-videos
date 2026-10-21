@@ -2,7 +2,7 @@
 
 Generado con `python3 -m lib.catalogo`. Para un video nuevo: copia un spec de `specs/`, cambia LINES/SCENES/SFX y usa `python3 -m lib.produce SPEC texto|preview|sinvoz|final VOZ.mp3`.
 
-Escenarios: `lib/escenarios.py` (piso, rango de pies y zona libre de cada fondo; guía visual en `lib/escenarios.png`). Revisión automática: `python3 -m lib.produce SPEC check` (también corre sola antes de cada render).
+Escenarios: `lib/escenarios.py` (piso, rango de pies y zona libre de cada fondo; guía visual en `lib/muestras/escenarios.png`). Revisión automática: `python3 -m lib.produce SPEC check` (también corre sola antes de cada render).
 
 Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300 · subtítulos 1500 (no poner nada entre 1380 y 1640).
 
@@ -20,6 +20,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `follow_btn(d, lt, y=1250, delay=1.5, text='SÍGUEME')` — Botón SÍGUEME que aparece con rebote.
 - `stamp(img, draw_fn, x, y, size=900, angle=0.0, flip=False, **kw)` — Dibuja cualquier personaje en una capa aparte y la pega rotada/volteada.
 - `shake_arr(arr, t, amp)`
+- `fit_font(d, text, maxw, size)` — Fuente del tamaño más grande (<= size) para que 'text' quepa en maxw px.
 
 ## lib.audio
 
@@ -51,7 +52,9 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 ## lib.personajes
 
 - `alien_cw(d, x, y, s=1.0, t=0.0, mood='blank', arms='down', blink=False, antenna=True)` · reel15
+- `alien_pixel(d, x, y, big=2, t=0)` · alien
 - `alux(d, x, y, s=1.0, t=0.0, mood='grin', face=1, arm=None, shade=1.0)` · reel4 — Original cartoon alux: small Maya guardian in white clothes with embroidered border and red headband.
+- `alux_laugh(d, x, y, t, size=46)` · reel4
 - `bacteria(d, x, y, s, t, kind='green', suitcase=False, shades=False)` · reel26
 - `bear(d, x, y, big=2, kind='brown', frame=0, mood='normal')` · oso
 - `bee(d, x, y, angry=False)` · mision003
@@ -71,6 +74,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `germ(d, x, y, r, kind, t=0.0, phase=0.0, shade=1.0)` · reel2
 - `guy(d, x, y, s=1.0, mood='neutral', arms='down', look=0.0, t=0.0, hoodie=(240, 120, 40))` · reel
 - `hero_pixel(d, x, y, scared=False, frame=0, big=2)` · mision002
+- `hero_pixel_v1(d, x, y, scared=False, frame=0, big=2)` · pixel
 - `lion(d, x, y, s=1.0, t=0.0, mood='neutral')` · lib.animales — León sentado de frente; y = piso.
 - `listeria(d, x, y, s, t)` · reel26
 - `mite(d, x, y, s=1.0, t=0.0, phase=0.0, mood='grin', shade=1.0, dizzy=False)` · reel5
@@ -80,6 +84,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `president(d, x, y, s, t)` · reel24
 - `roach(d, cx, cy, s, t, head=True, walk=True, wings=0.0, face='neutral', flip=False)` · reel27
 - `roach_head(d, x, y, s, t, blink=True)` · reel27
+- `roach_v12(d, x, y, s, t, ang=0.0, phase=0, eyes=True)` · reel12
 - `scientist(d, x, y, s, t, mood='neutral')` · reel24
 - `shark(d, x, y, s=1.0, t=0.0, flip=False, mood='neutral')` · lib.animales — Tiburón de lado. mood: neutral | cry | grin. Centro del cuerpo.
 - `sick_guy(d, x, y, s, t)` · reel26
@@ -90,107 +95,210 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `swarm(d, cx, cy, t, n=24, spread=14, angry=False, seed=7)` · mision003
 - `taquero(d, x, y, s, t, mood='neutral', arms='down')` · reel24
 - `tentacle(d, x0, y0, length, ang, t, w0, col, phase=0.0, curl=1.0)` · reel3
+- `thief(d, x, y, s, t)` · reel4
 - `vampire(d, x, y, s=1.0, t=0.0, mood='smug', outfit='cape', eyes_glow=0.0, arms='down', hat=None)` · reel14
 - `wolf(d, x, y, s=1.0, t=0.0, mood='smug', outfit='shirt', arms='down', hat=None, howl=False)` · reel17
 - `zomb(d, x, y, s=1.0, t=0.0, mood='blank', arms='out', outfit='office', hat=None, arm_off=False)` · reel18
 - `zombie(d, x, y, s=1.0, t=0.0, face=-1, shade=1.0, glow=False)` · reel
+- `zombie_pixel(d, x, y, frame=0, big=1)` · pixel
 
 ## lib.props
 
+- `air_can(d, x, y, s)` · reel2
+- `alarm_clock(d, x, y, s=1.0, t=0.0, ring=False, text='7:00')` · lib.muebles — Despertador; y = base.
+- `altar_items_pixel(d, v, t)` · ofrenda
+- `arrow(d, x0, y0, x1, y1, col=RED, w=14)` · lib.pantallas
 - `asteroid(d, cx, cy, r, t=0.0, face='angry', fire=0.0, ang=-2.4)` · reel13
 - `backpack(d, x, y, big=2, fill=0, closed=False)` · alien
 - `balloons(d, x, y, t=0.0, n=3, s=1.0, seed=4, cols=((230, 60, 80), (60, 140, 230), (250, 200, 40), (120, 200, 90)))` · lib.objetos — Racimo de globos atado en (x, y).
 - `banana(d, x, y, s, rot=0.0)` · reel12
 - `bed(d, x, y, s=1.0, dirty=0.0)` · reel12
+- `bed_v5(d, cx, cy, s, t, sleeping=True)` · reel5
 - `big_toilet(d, cx, base, s=1.0)` · reel7
 - `blood_bag(d, x, y, s, col=(190, 20, 40), empty=False)` · reel14
 - `boat(d, x, y, s=1.0, t=0.0, with_guy=True, mood='neutral', tilt=0.0)` · reel3
 - `book(d, cx, cy, s)` · reel3
+- `booth(d, x, y, s=1.0, label='SEGURIDAD', col=(200, 205, 210))` · lib.exterior — Caseta (vigilancia, cobro).
 - `bottle(d, x, y, s)` · reel2
+- `bottle_v8(d, x, y, s=1.0)` · reel8
+- `bridge(d, t, broken=0.0, fixed=False)` · reel4
+- `bubbles(d, t, x0, x1, ybot, n=25, seed=3)` · reel3
 - `bucket(d, x, y, s=1.0, water=True, larvae=0.0, t=0.0)` · lib.objetos — Cubeta; y = piso.
-- `building(d, x, y, w, h, col, rng, lit=False)` · reel25
+- `building(d, x, y, w=220, h=600, col=(180, 150, 120), lit=0.0, seed=1, face=None)` · lib.exterior — Edificio (x = centro). lit = fracción de ventanas encendidas (noche).
+- `building_v13(d, x, y, w, h, floors, col=(180, 150, 120), lit=True)` · reel13
+- `building_v25(d, x, y, w, h, col, rng, lit=False)` · reel25
 - `bus(d, x, y, s)` · reel13
-- `cactus(d, x, y, s=1)` · mision002
+- `bush(d, x, y, s=1.0, col=(80, 160, 80))` · lib.exterior
+- `bush_pixel(d, x, y, t, shake=0.0)` · mision003
+- `cactus(d, x, y, s=1.0, col=(70, 150, 80))` · lib.exterior — Cactus tipo saguaro (cartoon).
+- `cactus_pixel(d, x, y, s=1)` · mision002
 - `cake(d, x, y, s=1.0, t=0.0, text='')` · lib.objetos — Pastel con velas; y = base.
+- `can(d, x, y, s=1.0, col=(240, 200, 60))` · reel8
 - `car(d, x, y, s, col)` · reel25
+- `car_pixel(d, x, y, t)` · mision002
+- `car_pixel_v1(d, x, y, c='red')` · zombi11
 - `card(d, cx, cy, sc, label)` · reel
+- `casita(d, x, y, s)` · reel4
+- `chair(d, x, y, s=1.0, col=WOOD, facing=1, kind='silla')` · lib.muebles — Silla de lado. facing=1 respaldo a la izquierda. kind: silla | oficina.
+- `checklist(d, x, y, w, title, items, done=None, size=36, appear=1.0)` · lib.pantallas — Tarjeta con lista. (x, y) = esquina sup. izq. done = cuántos ya tienen palomita (None = todos).
 - `clock(d, cx, cy, r, t, ring=True)` · reel25
 - `cloud(d, cx, cy, t)` · reel26
+- `cloud_rain(d, x, y, s, t)` · reel4
+- `clouds(d, x, y, s=1.0, col=WHITE, t=0.0, rain=False)` · lib.exterior — Nube (x, y = centro). rain=True dibuja lluvia.
 - `coffee_machine(d, x, y, s, t)` · reel8
 - `corn(d, x, y, s)` · reel4
+- `counter(d, x, y, s=1.0, w=700, col=(120, 90, 70), top=(210, 210, 215))` · lib.muebles — Mostrador / caja (alto ~380·s). Devuelve y de la superficie.
+- `covers(d, cx, cy, s, t, ls)` · reel5
+- `credit_card(d, cx, cy, s, ang=0.0)` · reel24
+- `culprit_card(d, cx, cy, sc, label)` · reel2
+- `dehumidifier(d, cx, cy, s, t, ls)` · reel5
 - `desk(d, x0, x1, y=None)` · reel15
+- `dialog_pixel(d, s, t0, t, cps=26)` · oso
+- `dirty_hand(d, cx, cy, s)` · reel2
+- `dna(d, x, y, h, t, col1=(90, 160, 240), col2=(240, 120, 160))` · reel9
+- `document(d, x, y, w, h, title='CURRÍCULUM', lines=(), size=30, stamp=None)` · lib.pantallas — Hoja tipo documento (CV, contrato). stamp=('RECHAZADO', color) sello rotado encima (dibújalo con lib.core.stamp si quieres rotar).
+- `door(d, x0, y0, x1, y1, col=(150, 100, 60), opened=0.0, inside=(40, 40, 50), knob=True)` · lib.muebles — Puerta en caja; opened 0..1 (se abre hacia adentro mostrando 'inside').
+- `dust(d, cx, cy, s, t)` · reel2
 - `earth(d, cx, cy, r)` · reel13
 - `egg_raft(d, x, y, s=1.0, n=14)` · lib.objetos — Huevecillos (balsa de huevos) flotando.
+- `extra_icon_pixel(d, kind, x, y, big=2)` · zombi11
+- `eye_icon(d, cx, cy, s)` · reel3
+- `fence(d, x0, x1, y, h=160, col=(240, 240, 235))` · lib.exterior
+- `flicker(t)` · reel
+- `floor_lamp(d, x, y, s=1.0, on=True)` · lib.muebles — Lámpara de pie; y = piso.
 - `flowerpot(d, x, y, s=1.0, water=True)` · lib.objetos — Maceta con plato de agua; y = piso.
 - `freezer(d, x0, y1)` · reel
+- `fridge_alux(d, x, y, s, open_=0.0)` · reel4
+- `fridge_empty(d, x0, y0, w, h, open_=1.0)` · reel8
 - `fruit(d, cx, ybot, col, fuzz=0.0, t=0.0, seed=1)` · reel26
+- `fungus(d, x, y, r, t, col, phase=0.0)` · reel12
 - `garlic(d, cx, cy, r)` · reel14
+- `germ_swarm(d, cx, cy, rx, ry, n, t, size=34, seed=5, bad=-1)` · reel16
 - `glass(d, cx, ybot)` · reel27
+- `glass_overlay(d, box)` · reel
+- `heart(d, x, y, r=40, col=RED)` · lib.pantallas
+- `heart_pixel(d, x, y, full=True)` · oso
+- `heater(d, x, y, s=1.0)` · reel8
 - `heli(d, x, y, t)` · mision002
 - `hive(d, x, y, t, shake=0.0)` · mision003
+- `house(d, x, y, s=1.0, wall=(240, 220, 180), roof=(190, 70, 50), lights=False, door_col=(140, 90, 50))` · lib.exterior — Casa de una planta con techo de dos aguas.
+- `house_pixel(d)` · mision003
+- `ice(d, x, y, s=1.0)` · reel8
+- `ice_bags(d, x, y, s)` · reel19
 - `ice_machine(d, x, y, s, t, glow=1.0)` · reel8
 - `icon(d, kind, cx, cy, k, t=0.0)` · reel
+- `icon_pixel(d, kind, x, y, big=2)` · alien
+- `inventory_pixel(d, t, upto)` · alien
+- `item_card(d, cx, cy, sc, label)` · reel8
+- `items_mision002(d, kind, x, y, big=2)` · mision002
+- `items_mision003(d, kind, x, y, big=2)` · mision003
+- `items_ofrenda(d, kind, x, y, big=2, t=0.0)` · ofrenda
 - `jar(d, x, ybot, text='MOSTAZA')` · reel26
 - `jupiter(d, cx, cy, r, mood='neutral')` · reel23
+- `key_on_neck(d, x, y, s)` · reel19
+- `keyboard(d, cx, cy, w, dirt=0.0, seed=1, flipped=False, glow=None)` · reel2
 - `keys(d, x, y, s, ang=0.0)` · reel4
 - `land(d, flood=0.0)` · reel24
+- `laptop(d, x, y, s=1.0, screen=(40, 120, 220), back=False)` · lib.muebles — Laptop sobre una superficie en y. back=True la ves por detrás.
 - `lettuce(d, cx, ybot, melt=0.0)` · reel26
+- `light_switch(d, x, y, s=1.0, on=False)` · lib.muebles
+- `lives_score_pixel(t)` · oso
+- `loose_arm(d, x, y, s, rot=0.0, shirt=(225, 225, 215))` · reel18
 - `magnifier(img, cx, cy, R, t, n_germs)` · reel2
 - `meat(d, x, ybot)` · reel26
+- `microscope_circle(img, cx, cy, R, t, n)` · reel5
 - `microwave(d, x, y)` · reel26
 - `milk(d, x, ybot)` · reel26
+- `milk_v19(d, x, y, s, label='CADUCA HOY')` · reel19
+- `monitor(d, x0, y0, x1, y1, content='chart', t=0.0, trend=1.0, col=(80, 220, 120), stand=True)` · lib.pantallas — Monitor/pantalla. content: chart (gráfica; trend>0 sube) | wave (onda) | blank | text:<texto>.
+- `moon_disc(d, x, y, r=80, bg=(20, 25, 55), crescent=False)` · lib.exterior
 - `mower(d, x, y, hx, hy, t)` · mision003
 - `net(d, box, col=(255, 255, 255), step=26)` · lib.objetos — Mosquitero: rejilla dentro de box=(x0,y0,x1,y1).
 - `offering(d, x, y, s)` · reel4
+- `panel_catalogo_pixel(d, v, t)` · ofrenda
+- `pellet(d, x, y, s)` · reel5
+- `people_grid(d, x, y, n=10, cols=5, highlight=(), gap=95, size=1.0, col=(150, 155, 165), hcol=RED)` · lib.pantallas — Íconos de personas ('1 de cada 10'). (x, y) = centro de la cuadrícula.
 - `phone(d, cx, cy, s, glow=1.0)` · reel2
+- `phone_case(d, cx, cy, s, col=(240, 110, 120), lift=0.0)` · reel7
+- `phone_chat(d, x, y, w, h, title, msgs, shown=None, size=32)` · lib.pantallas — Celular con chat. msgs = [(lado 'l'|'r', texto, hora)]. shown = cuántos mensajes se ven.
 - `phone_small(d, x, y, s, glow=1.0, content=None)` · reel9
+- `picture(d, x0, y0, x1, y1, kind='landscape', frame=(120, 80, 50), label=None)` · lib.muebles — Cuadro colgado. kind: landscape | sea | portrait | blank. label = placa abajo (ej. EMPLEADO DEL MES).
 - `pie(d, cx, cy, r, frac, appear)` · reel12
+- `piggy_bank(d, x, y, s=1.0, coin=True, t=0.0)` · lib.muebles — Alcancía de cochinito; y = base.
 - `pillow(d, cx, cy, s)` · reel12
 - `pizza(d, cx, cy, s)` · reel2
 - `plane(d, x, y, s)` · reel25
 - `planet_earth(d, cx, cy, r, mood='happy')` · reel23
 - `podium(d, cx, base, w=250, heights=(330, 230, 160), cols=((240, 190, 40), (190, 195, 205), (205, 130, 60)), appear=1.0)` · lib.objetos — Podio 1-2-3 (1 al centro, 2 izq, 3 der). Devuelve [(x, y_top)] en orden 1,2,3.
+- `poop(d, cx, cy, s)` · reel7
+- `popup_pixel(d, s, y, c='yellow', bg='purple')` · oso
+- `port_zoom(img, cx, cy, R, t, clean=0.0, pick=None)` · reel7
 - `portal(d, cx, cy, r, t)` · reel24
+- `post(d, cx, cy, s, t)` · reel4
 - `pot(d, x, y, s, t)` · reel8
 - `radar(d, cx, cy, rings, t=0.0)` · lib.objetos — rings=[(radio, texto, color, activo)] de mayor a menor.
 - `rice_bowl(d, cx, ybot, s=1.0)` · reel26
+- `road(d, y0, y1, t=0.0, speed=0.0, col=(70, 70, 75))` · lib.exterior — Calle horizontal con líneas (speed>0 se mueven).
 - `salad(d, cx, ybot)` · reel26
 - `sandal(d, cx, cy, s, ang=0.0)` · reel27
+- `sandwich_pixel(d, x, y, big=2)` · oso
+- `scar(d, x, y, s)` · reel9
+- `shelf(d, x0, y0, x1, y1, rows=4, seed=1, items=True)` · lib.muebles — Anaquel con productos de colores (tienda, despensa).
 - `ship(d, x, y, s)` · reel13
 - `shoe(d, x, y, s)` · reel12
+- `sign_board(d, x, y, text, size=48, bg=(110, 70, 40), fg=WHITE, post=True, post_h=260)` · lib.pantallas — Letrero de madera con poste; (x, y) = base del poste (piso).
+- `skin_flake(d, x, y, s)` · reel5
 - `skull(d, x, y, r=30, col=WHITE)` · lib.objetos — Calavera tipo ícono.
+- `slot_pixel(d, x, y, kind=None, sel=False, cross=False, sz=30)` · alien
+- `sofa(d, cx, y, s=1.0)` · reel9
 - `spin_earth(img, cx, cy, r, ang, mood='happy')` · reel25
 - `spray(d, x, y, s=1.0, label='REPELENTE', t=0.0, mist=0.0)` · lib.objetos — Lata de spray; y = base.
+- `step_badge(d, n, cx=140, cy=470, sc=1.0)` · reel2
+- `store_lights(d, b)` · reel
+- `store_shelf(d, x0, x1, y0, y1, rng)` · reel
+- `street_lamp(d, x, y, s=1.0, on=True)` · lib.exterior — Poste de luz; y = piso.
 - `street_sign(d, x, y, text)` · reel24
 - `sun(d, cx, cy, r, t, mood='happy')` · reel23
-- `table(d, cx, y, s)` · reel13
+- `sun_pillow(d, t, ls)` · reel5
+- `sun_simple(d, x, y, r=90, t=0.0, rays=True)` · lib.exterior
+- `table(d, x, y, s=1.0, w=520, col=WOOD, cloth=None)` · lib.muebles — Mesa (alto ~330·s). cloth=color de mantel.
+- `table_v13(d, cx, y, s)` · reel13
 - `taco(d, x, y, s)` · reel24
 - `tank(d, x, y, s, t)` · reel24
 - `taper(d, x, y, w=360, h=170, lid=(60, 140, 220), food=(150, 80, 40), label=None)` · reel26
 - `thermo(d, x, y, s, frac, label='45 °C')` · reel19
+- `thought(d, x, y, w, h, tail_to=None, fill=WHITE)` · lib.pantallas — Nube de pensamiento (x, y = centro) con bolitas hacia tail_to. Devuelve caja interior.
 - `ticket(d, cx, cy, sc)` · reel19
 - `tire(d, x, y, s=1.0, water=True)` · lib.objetos — Llanta tirada; y = piso.
 - `toilet_seat(d, cx, cy, s=1.0, sparkle_t=None)` · reel2
+- `tree(d, x, y, s=1.0, kind='round', t=0.0, col=(70, 160, 80))` · lib.exterior — Árbol. kind: round | pine | palm.
+- `tree_pixel(d)` · mision003
 - `trompo(d, x, y, s, t, k_pastor=1.0, pineapple=True)` · reel24
 - `truck(d, x, y, s=1.0)` · reel8
 - `ufo(d, x, y, big=1, t=0, beam=False, beam_h=120)` · alien
 - `vacuum(d, cx, cy, s, t, ls)` · reel5
 - `voyager(d, x, y, s=1.0)` · reel23
+- `wall_clock(d, x, y, r=70, t=0.0, hour=None, minute=None, spin=0.0)` · lib.muebles — Reloj de pared centrado en (x, y). spin>0 hace girar las manecillas (pasa el tiempo).
 - `washer(d, cx, cy, s, t)` · reel5
 - `wave(d, t, k)` · reel25
+- `waves(d, t, y=SEA_Y, col=(60, 90, 140))` · reel3
+- `window(d, x0, y0, x1, y1, kind='day', t=0.0, frame=(240, 240, 240))` · lib.muebles — Ventana en caja. kind: day | night (con luna) | blinds (persianas) | storm.
 - `window_frame(d, x, y, w, h, broken=0.0)` · reel13
 
 ## lib.fondos
 
 - `altar_pixel(d)` · ofrenda
 - `city(snow=True, flash=0.0)` · reel13
+- `city_pixel(d, t, alarm=True)` · alien
 - `desert_pixel(d, t, noon=False)` · mision002
 - `desk_glow(img)` · reel2
 - `forest_pixel(d, t)` · oso
 - `garden_pixel(d, t)` · mision003
+- `ground_pixel(d)` · pixel
 - `kitchen()` · reel16
 - `make_bath()` · reel7
 - `make_coldroom_in()` · reel
+- `make_coldroom_out()` · reel
 - `make_field()` · reel23
 - `make_fridge(tint=(225, 238, 248))` · reel26
 - `make_jungle()` · reel4
@@ -199,6 +307,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `make_outside(w, h)` · reel
 - `make_room(dark=False)` · reel9
 - `make_sea()` · reel3
+- `make_site()` · reel4
 - `make_space()` · reel13
 - `make_store()` · reel
 - `make_street()` · reel9
@@ -207,8 +316,16 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `night_room(lamp=True)` · reel14
 - `office(night=False)` · reel15
 - `outside_day(w, h)` · reel8
+- `rlyeh_city(d, cx, base, s, t, col=(60, 75, 80))` · reel3
 - `room(mess=0.0, dark=0.0, seed=1)` · reel12
+- `room_ofrenda_pixel(d, t)` · ofrenda
+- `sky_pixel(d, t)` · pixel
 - `skyline(d, y, s=1.0, col=(50, 40, 80))` · reel24
 - `store_bg(t)` · reel14
+- `store_ceiling(d)` · reel
 - `store_day(t, zombies_at_door=True)` · reel8
+- `store_floor(d, top, base1, base2)` · reel
+- `store_pixel(d, t, light=True)` · pixel
+- `street_pixel(d, t, red=False)` · zombi11
+- `sun_desert(t)` · reel19
 - `town(d, lit, rng)` · reel25

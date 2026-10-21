@@ -108,3 +108,9 @@ def stamp(img, draw_fn, x, y, size=900, angle=0.0, flip=False, **kw):
 def shake_arr(arr, t, amp):
     import numpy as np
     return np.roll(arr, int(math.sin(t * 60) * amp), axis=1) if amp else arr
+
+
+def fit_font(d, text, maxw, size):
+    """Fuente del tamaño más grande (<= size) para que 'text' quepa en maxw px."""
+    while size > 10 and d.textlength(text, font=F(size)) > maxw: size -= 2
+    return F(size)
