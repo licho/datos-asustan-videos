@@ -18,6 +18,7 @@ MAP = {
  "ghost": "lib.criaturas", "ghost_draw": "lib.criaturas",
  "crab": "lib.animales", "coral": "lib.animales",
  "mummy": "lib.criaturas",
- "don_tono": "lib.humanos"
+ "don_tono": "lib.humanos",
+ "brain": "lib.criaturas", "rat": "lib.criaturas", "heart_face": "lib.criaturas"
 }
 __getattr__ = make(MAP, __name__)

@@ -102,3 +102,45 @@ def mummy(d, x, y, s=1.0, t=0.0, arms="forward", mood="neutral", trail=0.0, hat=
     if hat == "nurse":
         d.polygon([(x - S(80), hy - S(80)), (x + S(80), hy - S(80)), (x + S(60), hy - S(150)), (x - S(60), hy - S(150))], fill=WHITE, outline=BLK)
         d.rectangle([x - S(8), hy - S(140), x + S(8), hy - S(95)], fill=RED); d.rectangle([x - S(22), hy - S(126), x + S(22), hy - S(110)], fill=RED)
+
+def brain(d, x, y, s=1.0, t=0.0, mood="happy", eyes_open=True, broom=False):
+    """Cerebro con cara (x, y = centro)."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s)); P = (245, 160, 180)
+    d.ellipse([x - S(200), y - S(150), x + S(200), y + S(140)], fill=P, outline=BLK, width=W_(6))
+    d.line([(x, y - S(140)), (x, y + S(120))], fill=dk(P, .75), width=W_(6))
+    for k, (ax, ay) in enumerate(((-120, -70), (-60, -100), (60, -95), (120, -60), (-140, 20), (140, 30), (-70, 80), (70, 85))):
+        d.arc([x + S(ax) - S(40), y + S(ay) - S(25), x + S(ax) + S(40), y + S(ay) + S(25)], 200 if k % 2 else 20, 340 if k % 2 else 160, fill=dk(P, .75), width=W_(5))
+    for sx in (-1, 1):
+        ex = x + sx * S(65)
+        if eyes_open:
+            d.ellipse([ex - S(30), y - S(30), ex + S(30), y + S(30)], fill=WHITE, outline=BLK, width=W_(4)); d.ellipse([ex - S(12), y - S(12), ex + S(12), y + S(12)], fill=BLK)
+        else:
+            d.line([(ex - S(28), y), (ex + S(28), y)], fill=BLK, width=W_(6))
+    if mood == "happy": d.arc([x - S(45), y + S(30), x + S(45), y + S(90)], 20, 160, fill=BLK, width=W_(5))
+    else: d.arc([x - S(40), y + S(55), x + S(40), y + S(95)], 200, 340, fill=BLK, width=W_(5))
+    if broom:
+        bx = x + S(230); d.line([(bx, y - S(120)), (bx - S(40), y + S(200))], fill=(140, 95, 55), width=W_(14))
+        d.polygon([(bx - S(90), y + S(190)), (bx + S(10), y + S(190)), (bx + S(30), y + S(290)), (bx - S(110), y + S(290))], fill=(230, 190, 80), outline=BLK)
+
+def rat(d, x, y, s=1.0, t=0.0, flip=False):
+    """Rata de laboratorio de lado; y = piso."""
+    S = lambda v: v * s; f = -1 if flip else 1; W_ = lambda v: max(2, int(v * s)); G = (235, 235, 240)
+    pts = [(x - f * S(120), y - S(30))]
+    for k in range(1, 8): pts.append((x - f * S(120 + k * 25), y - S(30) + math.sin(t * 4 + k) * S(12) - k * S(4)))
+    d.line(pts, fill=(240, 170, 180), width=W_(8))
+    d.ellipse([x - S(130), y - S(110), x + S(90), y], fill=G, outline=BLK, width=W_(4))
+    hx = x + f * S(110)
+    d.ellipse([hx - S(60), y - S(120), hx + S(60), y - S(30)], fill=G, outline=BLK, width=W_(4))
+    d.ellipse([hx - f * S(20) - S(30), y - S(165), hx - f * S(20) + S(30), y - S(100)], fill=(250, 190, 200), outline=BLK, width=W_(3))
+    d.ellipse([hx + f * S(52) - S(9), y - S(85), hx + f * S(52) + S(9), y - S(67)], fill=(240, 120, 150))
+    d.ellipse([hx + f * S(10) - S(9), y - S(98), hx + f * S(10) + S(9), y - S(80)], fill=(200, 40, 60))
+    for dx in (-80, 40): d.ellipse([x + S(dx) - S(14), y - S(10), x + S(dx) + S(14), y + S(4)], fill=(240, 170, 180))
+
+def heart_face(d, x, y, s=1.0, t=0.0):
+    """Corazón con cara, latiendo rápido (x, y = centro)."""
+    S = lambda v: v * s * (1 + .08 * abs(math.sin(t * 14)))
+    d.ellipse([x - S(110), y - S(90), x, y + S(20)], fill=RED, outline=BLK, width=5); d.ellipse([x, y - S(90), x + S(110), y + S(20)], fill=RED, outline=BLK, width=5)
+    d.polygon([(x - S(106), y - S(20)), (x + S(106), y - S(20)), (x, y + S(120))], fill=RED, outline=BLK)
+    d.rectangle([x - S(100), y - S(40), x + S(100), y - S(10)], fill=RED)
+    for sx in (-1, 1): d.ellipse([x + sx * S(35) - S(16), y - S(40) - S(16), x + sx * S(35) + S(16), y - S(40) + S(16)], fill=WHITE, outline=BLK, width=3); d.ellipse([x + sx * S(35) - S(6), y - S(46), x + sx * S(35) + S(6), y - S(34)], fill=BLK)
+    d.ellipse([x - S(14), y + S(5), x + S(14), y + S(35)], fill=(80, 10, 20))

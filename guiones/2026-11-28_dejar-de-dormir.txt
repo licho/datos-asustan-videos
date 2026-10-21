@@ -1,0 +1,16 @@
+Video: ¿Qué pasaría si dejaras de dormir? (café + humor negro)
+Fecha: sábado 28 de noviembre 2026, 10:00
+Código: specs/s36_sueno.py · Sin voz: sinvoz/2026-11-28_dejar-de-dormir_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4
+Producir final: python3 -m lib.produce specs/s36_sueno.py final audio/36-sueno.mp3
+
+[mischievously] ¿Qué pasaría si dejaras de dormir? Spoiler: el café no te va a salvar. [sarcastic] Hora dieciocho: tus reflejos ya andan como si te hubieras tomado unas copas. “No pasa nada, otro café.” Hora veinticuatro: como pasado de copas. Y hay quien maneja así… con un café en la mano, como si fuera cinturón de seguridad. [whispers] Luego llegan los microsueños: tu cerebro se apaga unos segundos sin avisarte. Te deja en visto. [mischievously] Día dos: café número ocho. Arriba de cuatrocientos miligramos al día ya te pasaste. Y mil doscientos de golpe pueden darte convulsiones. [sarcastic] Día tres: algunas personas empiezan a alucinar. Si la sombra del rincón te saluda, no es un fantasma: es tu cerebro pidiendo cama. [dramatically] En los sesenta, un estudiante aguantó once días despierto. Su premio: no poder ni concentrarse. [whispers] Dato que asusta: a ratas sin nada de sueño por unas dos semanas les resultó mortal. Y no, no les faltaba café. [confident] Los adultos necesitan al menos siete horas. Y el café de las seis de la tarde: a las once, la mitad sigue en ti. [sarcastic] Así que ese “un capítulo más” a las tres de la mañana es básicamente un experimento científico. Y tú eres la rata. ¿Cuántos cafés llevas hoy? Te leo en los comentarios.
+
+# palabras: 208  duración estimada: 84 s
+
+Fuentes:
+- Maine DOT (datos NHTSA): 18 h despierto ≈ 0.05% BAC; 24 h ≈ 0.10%
+- Scientific American: Randy Gardner 264 h (~11 días), deterioro cognitivo, recuperación al dormir; ratas (Rechtschaffen) ~2 semanas de privación total = muerte
+- FDA: 400 mg/día para la mayoría de adultos; ~1,200 mg rápidos = efectos tóxicos como convulsiones
+- Sleep.com (NCBI NBK223808): vida media de la cafeína ~5 h
+- CDC: adultos 18-60, al menos 7 horas

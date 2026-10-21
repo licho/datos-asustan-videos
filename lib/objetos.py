@@ -209,3 +209,25 @@ def campfire(d, x, y, s=1.0, t=0.0):
     for k, (c, h) in enumerate((((240, 90, 30), 210), ((250, 180, 40), 150), ((255, 240, 150), 80))):
         w = S(80 - k * 22); fl = math.sin(t * 12 + k) * S(8)
         d.polygon([(x - w, y - S(20)), (x + fl, y - S(h)), (x + w, y - S(20))], fill=c)
+
+def mug(d, x, y, s=1.0, t=0.0, col=(240, 240, 235), level=1.0, steam=True, label=None):
+    """Taza de café; y = base. level 0..1 = cuánto café queda (se ve por arriba)."""
+    S = lambda v: v * s
+    d.ellipse([x + S(40), y - S(170), x + S(150), y - S(60)], outline=BLK, width=int(S(22))); d.ellipse([x + S(40), y - S(170), x + S(150), y - S(60)], outline=col, width=int(S(12)))
+    d.rounded_rectangle([x - S(100), y - S(220), x + S(100), y], int(S(30)), fill=col, outline=BLK, width=5)
+    d.ellipse([x - S(100), y - S(240), x + S(100), y - S(200)], fill=(110, 70, 40) if level > .05 else (220, 220, 215), outline=BLK, width=4)
+    if label: d.text((x, y - S(110)), label, font=F(S(50)), fill=(110, 70, 40), anchor="mm")
+    if steam and level > .05:
+        for k in range(3):
+            ph = t * 2 + k
+            d.arc([x - S(60) + k * S(45), y - S(340) + math.sin(ph) * S(10), x - S(20) + k * S(45), y - S(250)], 100, 260, fill=(170, 170, 190), width=int(S(8)))
+
+def hourglass(d, x, y, s=1.0, frac=.5, t=0.0):
+    """Reloj de arena (x, y = centro). frac = arena que ya cayó."""
+    S = lambda v: v * s
+    d.rectangle([x - S(90), y - S(170), x + S(90), y - S(150)], fill=(140, 95, 55), outline=BLK, width=3); d.rectangle([x - S(90), y + S(150), x + S(90), y + S(170)], fill=(140, 95, 55), outline=BLK, width=3)
+    d.polygon([(x - S(70), y - S(150)), (x + S(70), y - S(150)), (x + S(8), y), (x + S(70), y + S(150)), (x - S(70), y + S(150)), (x - S(8), y)], fill=(220, 235, 245), outline=BLK)
+    top = S(140) * (1 - frac); bot = S(140) * frac
+    d.polygon([(x - S(70) * top / S(140), y - top + S(2)), (x + S(70) * top / S(140), y - top + S(2)), (x, y)], fill=(230, 190, 100))
+    d.polygon([(x - S(70), y + S(150)), (x + S(70), y + S(150)), (x + S(70) - S(60) * (bot / S(140)), y + S(150) - bot), (x - S(70) + S(60) * (bot / S(140)), y + S(150) - bot)], fill=(230, 190, 100))
+    if 0 < frac < 1: d.line([(x, y), (x, y + S(150) - bot)], fill=(230, 190, 100), width=int(S(5)))

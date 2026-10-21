@@ -61,6 +61,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `bear(d, x, y, big=2, kind='brown', frame=0, mood='normal')` · oso
 - `bee(d, x, y, angry=False)` · mision003
 - `blob(d, cx, cy, r, t)` · reel15
+- `brain(d, x, y, s=1.0, t=0.0, mood='happy', eyes_open=True, broom=False)` · lib.criaturas — Cerebro con cara (x, y = centro).
 - `cat(d, x, y, s)` · reel17
 - `coral(d, x, y, s=1.0, t=0.0, kind='branch', col=(240, 120, 150), spawn=0.0)` · lib.animales — Coral; y = fondo marino. kind: branch | brain. spawn 0..1 suelta huevecillos.
 - `cow(d, x, y, s)` · reel25
@@ -80,6 +81,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `ghost(img, x, y, s=1.0, t=0.0, alpha=1.0, pixel=0, bob=True, **kw)` · lib.criaturas — Pega un fantasma con transparencia (alpha 0..1) y opcionalmente pixelado (pixel = tamaño de bloque).
 - `ghost_draw(d, x, y, s=1.0, t=0.0, mood='happy', tie=None, headset=False, col=(245, 248, 255), arms='down')` · lib.criaturas — Fantasma de sábana. (x, y) = centro del cuerpo. Alto ~420·s. mood: happy | scared | sad | smug.
 - `guy(d, x, y, s=1.0, mood='neutral', arms='down', look=0.0, t=0.0, hoodie=(240, 120, 40))` · reel
+- `heart_face(d, x, y, s=1.0, t=0.0)` · lib.criaturas — Corazón con cara, latiendo rápido (x, y = centro).
 - `hero_pixel(d, x, y, scared=False, frame=0, big=2)` · mision002
 - `hero_pixel_v1(d, x, y, scared=False, frame=0, big=2)` · pixel
 - `lion(d, x, y, s=1.0, t=0.0, mood='neutral')` · lib.animales — León sentado de frente; y = piso.
@@ -90,6 +92,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `mummy(d, x, y, s=1.0, t=0.0, arms='forward', mood='neutral', trail=0.0, hat=None)` · lib.criaturas — Momia de pie; y = pies. arms: forward | down | wave | up. mood: neutral | happy | scared. trail = venda suelta (0..1).
 - `person(d, cx, cy, s, col)` · reel2
 - `president(d, x, y, s, t)` · reel24
+- `rat(d, x, y, s=1.0, t=0.0, flip=False)` · lib.criaturas — Rata de laboratorio de lado; y = piso.
 - `roach(d, cx, cy, s, t, head=True, walk=True, wings=0.0, face='neutral', flip=False)` · reel27
 - `roach_head(d, x, y, s, t, blink=True)` · reel27
 - `roach_v12(d, x, y, s, t, ang=0.0, phase=0, eyes=True)` · reel12
@@ -198,6 +201,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `heli(d, x, y, t)` · mision002
 - `helicopter(d, x, y, s=1.0, t=0.0, flip=False, light=False, col=(200, 60, 50), beam_to=1300)` · lib.objetos — Helicóptero de rescate (cartoon). facing derecha salvo flip. (x, y) = centro de la cabina. beam_to = y donde termina el reflector.
 - `hive(d, x, y, t, shake=0.0)` · mision003
+- `hourglass(d, x, y, s=1.0, frac=0.5, t=0.0)` · lib.objetos — Reloj de arena (x, y = centro). frac = arena que ya cayó.
 - `house(d, x, y, s=1.0, wall=(240, 220, 180), roof=(190, 70, 50), lights=False, door_col=(140, 90, 50))` · lib.exterior — Casa de una planta con techo de dos aguas.
 - `house_pixel(d)` · mision003
 - `ice(d, x, y, s=1.0)` · reel8
@@ -231,6 +235,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `monitor(d, x0, y0, x1, y1, content='chart', t=0.0, trend=1.0, col=(80, 220, 120), stand=True)` · lib.pantallas — Monitor/pantalla. content: chart (gráfica; trend>0 sube) | wave (onda) | blank | text:<texto>.
 - `moon_disc(d, x, y, r=80, bg=(20, 25, 55), crescent=False)` · lib.exterior
 - `mower(d, x, y, hx, hy, t)` · mision003
+- `mug(d, x, y, s=1.0, t=0.0, col=(240, 240, 235), level=1.0, steam=True, label=None)` · lib.objetos — Taza de café; y = base. level 0..1 = cuánto café queda (se ve por arriba).
 - `net(d, box, col=(255, 255, 255), step=26)` · lib.objetos — Mosquitero: rejilla dentro de box=(x0,y0,x1,y1).
 - `offering(d, x, y, s)` · reel4
 - `panel_catalogo_pixel(d, v, t)` · ofrenda

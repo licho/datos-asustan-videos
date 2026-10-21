@@ -59,6 +59,7 @@ MAP = {
  "snowflake": "lib.objetos",
  "bolt": "lib.exterior", "ground_current": "lib.exterior", "ranger_hat": "lib.objetos",
  "sarcophagus": "lib.objetos", "gift": "lib.objetos", "ring_light": "lib.objetos",
- "helicopter": "lib.objetos", "whistle": "lib.objetos", "campfire": "lib.objetos"
+ "helicopter": "lib.objetos", "whistle": "lib.objetos", "campfire": "lib.objetos",
+ "mug": "lib.objetos", "hourglass": "lib.objetos"
 }
 __getattr__ = make(MAP, __name__)
