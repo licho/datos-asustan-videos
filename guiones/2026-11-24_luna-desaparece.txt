@@ -1,0 +1,14 @@
+Video: ¿Qué pasaría si la Luna desapareciera?
+Fecha: martes 24 de noviembre 2026, 10:00
+Código: specs/s32_luna.py · Sin voz: sinvoz/2026-11-24_luna-desaparece_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4
+Producir final: python3 -m lib.produce specs/s32_luna.py final audio/32-luna.mp3
+
+[mischievously] ¿Qué pasaría si mañana la Luna desapareciera? Spoiler: no explotaría nada… pero la extrañarías más de lo que crees. [serious] Primero, las noches: sin luna, serían mucho más oscuras. Solo estrellas. [sarcastic] Y tu foto de la luna con el celular… pues ya no. [serious] Las mareas quedarían en más o menos un tercio de lo que son hoy. El Sol también jala el mar, pero mucho menos. Muchos animales que viven al ritmo de la marea tendrían que adaptarse… o desaparecer. [whispers] Y los corales usan la luz de la luna como señal para su desove masivo. Sin ella… se quedan sin reloj. [dramatically] Pero lo más grave es la inclinación de la Tierra. Hoy la Luna la mantiene estable, en unos veintitrés grados y medio, y gracias a eso tenemos estaciones normales. Sin la Luna, en millones de años esa inclinación podría variar muchísimo: estaciones extremas… o casi sin estaciones. [confident] Dato extra: si la Luna nunca hubiera existido, algunos cálculos dicen que el día duraría de seis a doce horas. Más de mil días al año. [sarcastic] Imagínate cuántos lunes. Ah, y se acabarían los eclipses… y los hombres lobo se quedarían sin trabajo. ¿Qué extrañarías más de la Luna? Te leo en los comentarios.
+
+# palabras: 201  duración estimada: 82 s
+
+Fuentes:
+- Inside Science (AIP): sin Luna, mareas ~1/3; inclinación variaría; si nunca hubiera existido, día de 6-12 h (más de mil días al año)
+- Moonless Earth spin-axis dynamics (arXiv 1404.7505; Laskar 1993): variación caótica pero lenta, rango ~0-85°
+- Universidad de Queensland (2007): corales detectan la luz azul de la luna para el desove masivo

@@ -22,6 +22,8 @@ def face(d, cx, cy, r, mood="happy"):
         d.line([(cx - r * 0.2, cy + r * 0.35), (cx + r * 0.2, cy + r * 0.3)], fill=BLK, width=max(3, int(r * 0.06)))
     elif mood == "scared":
         d.ellipse([cx - r * 0.1, cy + r * 0.2, cx + r * 0.1, cy + r * 0.45], fill=(60, 10, 20), outline=BLK, width=max(2, int(r * 0.03)))
+    elif mood == "sad":
+        d.arc([cx - r * 0.25, cy + r * 0.28, cx + r * 0.25, cy + r * 0.6], 200, 340, fill=BLK, width=max(3, int(r * 0.06)))
     else:
         d.line([(cx - r * 0.18, cy + r * 0.32), (cx + r * 0.18, cy + r * 0.32)], fill=BLK, width=max(3, int(r * 0.05)))
 

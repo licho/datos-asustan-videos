@@ -53,8 +53,8 @@ def calendar(d, cx, cy, day, label="DÍA", col=(240, 150, 40), sc=0.7):
     S = lambda v: v * sc
     d.rounded_rectangle([cx - S(190), cy - S(170), cx + S(190), cy + S(170)], int(S(26)), fill=WHITE, outline=BLK, width=6)
     d.rounded_rectangle([cx - S(190), cy - S(170), cx + S(190), cy - S(70)], int(S(26)), fill=col, outline=BLK, width=6)
-    d.text((cx, cy - S(120)), label, font=F(S(52)), fill=WHITE, anchor="mm")
-    d.text((cx, cy + S(50)), str(day), font=F(S(150)), fill=BLK, anchor="mm")
+    d.text((cx, cy - S(120)), label, font=fit_font(d, label, S(340), int(S(52))), fill=WHITE, anchor="mm")
+    d.text((cx, cy + S(50)), str(day), font=fit_font(d, str(day), S(330), int(S(150))), fill=BLK, anchor="mm")   # se ajusta al ancho
 
 def gauge(d, cx, cy, r, val, vmax, label, fg=WHITE):
     d.pieslice([cx - r, cy - r, cx + r, cy + r], 180, 360, fill=(30, 30, 40), outline=WHITE, width=6)

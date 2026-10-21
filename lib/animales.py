@@ -142,3 +142,44 @@ def lion(d, x, y, s=1.0, t=0.0, mood="neutral"):
     d.ellipse([x - S(55), hy + S(10), x + S(55), hy + S(80)], fill=(245, 225, 180), outline=BLK, width=W_(3))
     d.polygon([(x - S(18), hy + S(14)), (x + S(18), hy + S(14)), (x, hy + S(34))], fill=(90, 50, 40))
     d.arc([x - S(30), hy + S(30), x, hy + S(60)], 0, 180, fill=BLK, width=W_(3)); d.arc([x, hy + S(30), x + S(30), hy + S(60)], 0, 180, fill=BLK, width=W_(3))
+
+def crab(d, x, y, s=1.0, t=0.0, mood="normal"):
+    """Cangrejo de frente; y = piso. mood: normal | confused."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s)); R = (225, 80, 60)
+    for side in (-1, 1):
+        for k in range(3):
+            bx = x + side * S(70 + k * 18); sw = math.sin(t * 8 + k) * S(6)
+            d.line([(bx, y - S(70)), (bx + side * S(55), y - S(95) + sw), (bx + side * S(75), y)], fill=dk(R, .75), width=W_(9), joint="curve")
+        cx = x + side * S(150); cy = y - S(170) + math.sin(t * 3 + side) * S(8)
+        d.line([(x + side * S(80), y - S(100)), (cx, cy + S(30))], fill=R, width=W_(16))
+        d.pieslice([cx - S(45), cy - S(40), cx + S(45), cy + S(40)], 20 if side > 0 else 200, 340 if side > 0 else 160, fill=R, outline=BLK, width=W_(4))
+    d.ellipse([x - S(110), y - S(150), x + S(110), y - S(40)], fill=R, outline=BLK, width=W_(5))
+    for side in (-1, 1):
+        ex = x + side * S(40)
+        d.line([(ex, y - S(140)), (ex, y - S(200))], fill=dk(R, .8), width=W_(8))
+        d.ellipse([ex - S(18), y - S(228), ex + S(18), y - S(192)], fill=WHITE, outline=BLK, width=W_(3))
+        off = S(6) * (side if mood == "confused" else 1)
+        d.ellipse([ex - S(7) + off, y - S(217), ex + S(7) + off, y - S(203)], fill=BLK)
+    if mood == "confused": d.arc([x - S(30), y - S(105), x + S(30), y - S(75)], 200, 340, fill=BLK, width=W_(4))
+    else: d.arc([x - S(35), y - S(120), x + S(35), y - S(80)], 20, 160, fill=BLK, width=W_(4))
+
+def coral(d, x, y, s=1.0, t=0.0, kind="branch", col=(240, 120, 150), spawn=0.0):
+    """Coral; y = fondo marino. kind: branch | brain. spawn 0..1 suelta huevecillos."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    if kind == "brain":
+        d.chord([x - S(120), y - S(150), x + S(120), y + S(40)], 180, 360, fill=col, outline=BLK, width=W_(4))
+        for k in range(4): d.arc([x - S(100) + k * S(20), y - S(130) + k * S(15), x + S(100) - k * S(20), y + S(20) - k * S(5)], 190, 350, fill=dk(col, .75), width=W_(4))
+    else:
+        def br(x0, y0, ang, L, depth):
+            x1, y1 = x0 + math.cos(ang) * L, y0 + math.sin(ang) * L + math.sin(t * 1.5 + depth) * S(2)
+            d.line([(x0, y0), (x1, y1)], fill=BLK, width=W_(30 - depth * 6)); d.line([(x0, y0), (x1, y1)], fill=col, width=W_(22 - depth * 6))
+            if depth < 2:
+                br(x1, y1, ang - .45, L * .75, depth + 1); br(x1, y1, ang + .45, L * .75, depth + 1)
+            else: d.ellipse([x1 - S(12), y1 - S(12), x1 + S(12), y1 + S(12)], fill=col, outline=BLK, width=W_(3))
+        br(x, y, -math.pi / 2, S(110), 0)
+    import random as _r
+    rnd = _r.Random(int(x))
+    for k in range(int(spawn * 18)):
+        ph = (t * .4 + k / 18) % 1
+        px = x + rnd.uniform(-S(90), S(90)) + math.sin(t + k) * S(10); py = y - S(150) - ph * S(500)
+        d.ellipse([px - S(7), py - S(7), px + S(7), py + S(7)], fill=(255, 210, 220), outline=dk(col, .7))

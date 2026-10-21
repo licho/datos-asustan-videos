@@ -62,7 +62,9 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `bee(d, x, y, angry=False)` · mision003
 - `blob(d, cx, cy, r, t)` · reel15
 - `cat(d, x, y, s)` · reel17
+- `coral(d, x, y, s=1.0, t=0.0, kind='branch', col=(240, 120, 150), spawn=0.0)` · lib.animales — Coral; y = fondo marino. kind: branch | brain. spawn 0..1 suelta huevecillos.
 - `cow(d, x, y, s)` · reel25
+- `crab(d, x, y, s=1.0, t=0.0, mood='normal')` · lib.animales — Cangrejo de frente; y = piso. mood: normal | confused.
 - `creature(d, cx, cy, r, t, mood='neutral', napkin=False)` · reel24
 - `crouch_guy(d, x, y, s, t)` · reel13
 - `cthulhu(d, x, y, s=1.0, t=0.0, eyes=1.0, wings=True, sleep=False, shade=1.0)` · reel3
@@ -261,6 +263,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `skin_flake(d, x, y, s)` · reel5
 - `skull(d, x, y, r=30, col=WHITE)` · lib.objetos — Calavera tipo ícono.
 - `slot_pixel(d, x, y, kind=None, sel=False, cross=False, sz=30)` · alien
+- `snowflake(d, x, y, r=50, col=(120, 190, 250), width=8)` · lib.objetos
 - `sofa(d, cx, y, s=1.0)` · reel9
 - `spin_earth(img, cx, cy, r, ang, mood='happy')` · reel25
 - `spray(d, x, y, s=1.0, label='REPELENTE', t=0.0, mist=0.0)` · lib.objetos — Lata de spray; y = base.

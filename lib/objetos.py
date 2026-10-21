@@ -131,3 +131,12 @@ def rec_frame(d, t, label="REC", box=(40, 470, 1040, 1330)):
     if int(t * 2) % 2 == 0: d.ellipse([x0 + 30, y0 + 30, x0 + 66, y0 + 66], fill=RED)
     d.text((x0 + 80, y0 + 48), label, font=F(44), fill=WHITE, anchor="lm")
     m, sec = divmod(int(t), 60); d.text((x1 - 30, y0 + 48), f"00:{m:02d}:{sec:02d}", font=F(40), fill=WHITE, anchor="rm")
+
+def snowflake(d, x, y, r=50, col=(120, 190, 250), width=8):
+    for k in range(6):
+        a = k * math.pi / 3
+        ex, ey = x + math.cos(a) * r, y + math.sin(a) * r
+        d.line([(x, y), (ex, ey)], fill=col, width=width)
+        for u in (.55,):
+            mx, my = x + math.cos(a) * r * u, y + math.sin(a) * r * u
+            for da in (-.6, .6): d.line([(mx, my), (mx + math.cos(a + da) * r * .3, my + math.sin(a + da) * r * .3)], fill=col, width=width - 2)
