@@ -109,3 +109,25 @@ def egg_raft(d, x, y, s=1.0, n=14):
     for k in range(n):
         px = x + (k % 7 - 3) * 16 * s; py = y + (k // 7) * 14 * s
         d.ellipse([px - 6 * s, py - 10 * s, px + 6 * s, py + 10 * s], fill=(70, 60, 50), outline=BLK)
+
+def camera(d, x, y, s=1.0, t=0.0, rec=True, tripod=True, facing=1):
+    """Videocámara (opcional sobre tripié). (x, y) = centro de la cámara; facing=1 apunta a la derecha."""
+    S = lambda v: v * s; f = facing
+    if tripod:
+        for dx in (-110, 0, 110): d.line([(x, y + S(60)), (x + S(dx), y + S(470))], fill=(60, 60, 65), width=int(S(12)))
+    d.rounded_rectangle([x - S(130), y - S(70), x + S(110), y + S(70)], int(S(20)), fill=(50, 50, 55), outline=BLK, width=5)
+    lx = x + f * S(110)
+    d.polygon([(lx, y - S(45)), (lx + f * S(90), y - S(70)), (lx + f * S(90), y + S(70)), (lx, y + S(45))], fill=(70, 70, 80), outline=BLK)
+    d.ellipse([lx + f * S(70) - S(14), y - S(60), lx + f * S(70) + S(14), y + S(60)], fill=(120, 160, 200), outline=BLK, width=3)
+    d.rectangle([x - S(100), y - S(110), x - S(20), y - S(70)], fill=(40, 40, 45), outline=BLK, width=3)
+    if rec and int(t * 2) % 2 == 0: d.ellipse([x - S(110), y - S(55), x - S(80), y - S(25)], fill=RED)
+
+def rec_frame(d, t, label="REC", box=(40, 470, 1040, 1330)):
+    """Marco de cámara grabando: esquinas + REC parpadeando + contador."""
+    from .core import F
+    x0, y0, x1, y1 = box; L = 70
+    for (cx, cy, sx, sy) in ((x0, y0, 1, 1), (x1, y0, -1, 1), (x0, y1, 1, -1), (x1, y1, -1, -1)):
+        d.line([(cx, cy), (cx + sx * L, cy)], fill=WHITE, width=8); d.line([(cx, cy), (cx, cy + sy * L)], fill=WHITE, width=8)
+    if int(t * 2) % 2 == 0: d.ellipse([x0 + 30, y0 + 30, x0 + 66, y0 + 66], fill=RED)
+    d.text((x0 + 80, y0 + 48), label, font=F(44), fill=WHITE, anchor="lm")
+    m, sec = divmod(int(t), 60); d.text((x1 - 30, y0 + 48), f"00:{m:02d}:{sec:02d}", font=F(40), fill=WHITE, anchor="rm")

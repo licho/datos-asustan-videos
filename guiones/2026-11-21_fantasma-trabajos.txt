@@ -1,0 +1,11 @@
+Video: Guía laboral Ep. 4 — El fantasma busca trabajo
+Fecha: sábado 21 de noviembre 2026, 10:00
+Código: specs/s30_fantasma.py · Sin voz: sinvoz/2026-11-21_fantasma-trabajos_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4
+Producir final: python3 -m lib.produce specs/s30_fantasma.py final audio/30-fantasma.mp3
+
+[mischievously] Guía laboral para monstruos, episodio cuatro: el fantasma. [sarcastic] Su currículum: ciento cincuenta años de experiencia… en la misma casa. Habilidades: atravesar paredes y aparecer a las tres de la mañana. [confident] Trabajo número uno: agente inmobiliario. Vende la casa embrujada como “con mucho carácter”… y con inquilino incluido. [serious] Trabajo número dos: soporte técnico. Cliente: “Se me prenden y se apagan las luces solas”. Él: “Sí… ese soy yo.” [mischievously] Trabajo número tres: Recursos Humanos. Te entrevista, te dice “nosotros te llamamos”… y desaparece. Literal. Es el rey del ghosting. [excited] Trabajo número cuatro: estrella de programas paranormales. Por fin le pagan por salir en cámara… pero siempre sale borroso. [dramatically] El verdadero problema no es que esté muerto. Atraviesa paredes, puertas y espejos… pero hay algo que no puede atravesar: [whispers] el SAT. Le llegó una auditoría por ciento cincuenta años sin declarar. ¿Qué otro monstruo quieres que busque trabajo? Te leo en los comentarios.
+
+# palabras: 150  duración estimada: 62 s
+
+Humor (sin datos que verificar).

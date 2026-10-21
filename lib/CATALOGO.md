@@ -72,6 +72,8 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `face(d, cx, cy, r, mood='happy')` · reel23
 - `fly(d, x, y, s, t, phase=0)` · reel12
 - `germ(d, x, y, r, kind, t=0.0, phase=0.0, shade=1.0)` · reel2
+- `ghost(img, x, y, s=1.0, t=0.0, alpha=1.0, pixel=0, bob=True, **kw)` · lib.criaturas — Pega un fantasma con transparencia (alpha 0..1) y opcionalmente pixelado (pixel = tamaño de bloque).
+- `ghost_draw(d, x, y, s=1.0, t=0.0, mood='happy', tie=None, headset=False, col=(245, 248, 255), arms='down')` · lib.criaturas — Fantasma de sábana. (x, y) = centro del cuerpo. Alto ~420·s. mood: happy | scared | sad | smug.
 - `guy(d, x, y, s=1.0, mood='neutral', arms='down', look=0.0, t=0.0, hoodie=(240, 120, 40))` · reel
 - `hero_pixel(d, x, y, scared=False, frame=0, big=2)` · mision002
 - `hero_pixel_v1(d, x, y, scared=False, frame=0, big=2)` · pixel
@@ -134,6 +136,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `cactus(d, x, y, s=1.0, col=(70, 150, 80))` · lib.exterior — Cactus tipo saguaro (cartoon).
 - `cactus_pixel(d, x, y, s=1)` · mision002
 - `cake(d, x, y, s=1.0, t=0.0, text='')` · lib.objetos — Pastel con velas; y = base.
+- `camera(d, x, y, s=1.0, t=0.0, rec=True, tripod=True, facing=1)` · lib.objetos — Videocámara (opcional sobre tripié). (x, y) = centro de la cámara; facing=1 apunta a la derecha.
 - `can(d, x, y, s=1.0, col=(240, 200, 60))` · reel8
 - `car(d, x, y, s, col)` · reel25
 - `car_pixel(d, x, y, t)` · mision002
@@ -239,6 +242,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `post(d, cx, cy, s, t)` · reel4
 - `pot(d, x, y, s, t)` · reel8
 - `radar(d, cx, cy, rings, t=0.0)` · lib.objetos — rings=[(radio, texto, color, activo)] de mayor a menor.
+- `rec_frame(d, t, label='REC', box=(40, 470, 1040, 1330))` · lib.objetos — Marco de cámara grabando: esquinas + REC parpadeando + contador.
 - `rice_bowl(d, cx, ybot, s=1.0)` · reel26
 - `road(d, y0, y1, t=0.0, speed=0.0, col=(70, 70, 75))` · lib.exterior — Calle horizontal con líneas (speed>0 se mueven).
 - `ruler(d, x, y0, y1, marks, current=None, appear=1.0, w=60, col=(250, 210, 60))` · lib.pantallas — Regla vertical de tamaños. marks=[(fracción 0=abajo..1=arriba, texto)]; current = índice resaltado.

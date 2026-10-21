@@ -54,11 +54,11 @@ def analyze(items, margin=18):
     scene = [(k, s, b) for tg, k, s, b in items if tg == "scene"]
     for k, s, b in scene:
         bw, bh = b[2] - b[0], b[3] - b[1]
-        if bw >= .9 * W or bh >= .6 * H: continue                 # fondo / bandas de piso
+        if k != "text" and (bw >= .9 * W or bh >= .6 * H): continue   # fondo / bandas de piso (los textos siempre se revisan)
         if capbox and _inter(b, capbox) > 0 and (k == "text" or bw * bh > 45 * 45):
             lvl = "leve (línea delgada)" if k in ("line", "arc") else "GRAVE"
             probs.append((f"invade subtítulos [{lvl}]: {k} {s!r}".replace(" ''", ""), int(b[3]) - int(capbox[1])))
-        if k == "text" and (b[0] < 0 or b[2] > W or b[1] < 0):
+        if k == "text" and (b[0] < 8 or b[2] > W - 8 or b[1] < 0):
             probs.append((f"texto cortado por el borde [GRAVE]: {s!r}", int(max(-b[0], b[2] - W, -b[1]))))
     texts = [(s, b) for k, s, b in scene if k == "text" and s.strip()]
     for i in range(len(texts)):

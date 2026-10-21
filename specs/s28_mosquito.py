@@ -176,7 +176,7 @@ def tips(c):
         if empty:
             for x in (200, 540, 870): check(d, x, 820, 1.2)
         else:
-            d.text((540, 640), "AGUA ESTANCADA = GUARDERÍA", font=F(58), fill=RED, anchor="mm", stroke_width=4, stroke_fill=WHITE)
+            d.text((540, 640), "AGUA ESTANCADA = GUARDERÍA", font=fit_font(d, "AGUA ESTANCADA = GUARDERÍA", 980, 58), fill=RED, anchor="mm", stroke_width=4, stroke_fill=WHITE)
     else:
         spray(d, 250, 1240, 1.1, t=c.t, mist=1)
         d.rectangle([560, 520, 980, 1060], fill=(60, 80, 120), outline=BLK, width=8)
