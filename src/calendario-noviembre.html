@@ -1,0 +1,402 @@
+<title>Noviembre en Datos que Asustan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: cabecera tipo cartel de función nocturna → tira de resumen → mes en rejilla (lun–dom) → fichas por fecha */
+:root {
+  --bg: #f3f2f6;
+  --surface: #ffffff;
+  --ink: #18161f;
+  --muted: #5f5a6e;
+  --line: #dcd9e4;
+  --accent: #b88a00;          /* amarillo de los subtítulos, oscurecido para fondo claro */
+  --accent-ink: #18161f;
+  --accent-fill: #ffd600;
+  --toon: #e2463c;            /* caricatura */
+  --toon-soft: #fde4e1;
+  --pixel: #2f7d6b;           /* pixel art */
+  --pixel-soft: #dcefe9;
+  --pending: #8a6ad0;
+  --pending-soft: #ece6fa;
+  --rest: #a9a4b6;
+  --f-display: "Bungee", "Arial Black", Impact, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #110f17; --surface: #1b1823; --ink: #efedf5; --muted: #a39db3; --line: #2e2a3a;
+    --accent: #ffd600; --accent-ink: #110f17; --accent-fill: #ffd600;
+    --toon: #ff6a5e; --toon-soft: #3a1d1c; --pixel: #4fc4a6; --pixel-soft: #13302a;
+    --pending: #b39bf2; --pending-soft: #2a2140; --rest: #5d5870; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #110f17; --surface: #1b1823; --ink: #efedf5; --muted: #a39db3; --line: #2e2a3a;
+  --accent: #ffd600; --accent-ink: #110f17; --accent-fill: #ffd600;
+  --toon: #ff6a5e; --toon-soft: #3a1d1c; --pixel: #4fc4a6; --pixel-soft: #13302a;
+  --pending: #b39bf2; --pending-soft: #2a2140; --rest: #5d5870; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+}
+.wrap { max-width: 1080px; margin: 0 auto; display: grid; gap: 32px; }
+header { display: grid; gap: 10px; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(30px, 6vw, 54px); line-height: 1.02; margin: 0; text-wrap: balance; }
+h1 span { background: var(--accent-fill); color: #18161f; padding: 0 .15em; }
+.lede { margin: 0; max-width: 62ch; color: var(--muted); }
+h2 { font-family: var(--f-display); font-weight: 400; font-size: 22px; margin: 0 0 12px; letter-spacing: .01em; }
+
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.stat { background: var(--surface); border: 1px solid var(--line); padding: 14px 16px; display: grid; gap: 2px; }
+.stat b { font-family: var(--f-mono); font-size: 28px; font-variant-numeric: tabular-nums; }
+.stat small { color: var(--muted); font-size: 13px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+.legend i { display: inline-block; width: 12px; height: 12px; margin-right: 6px; vertical-align: -1px; }
+.k-toon { background: var(--toon); } .k-pixel { background: var(--pixel); } .k-pend { background: var(--pending); } .k-rest { background: var(--rest); }
+
+.month { overflow-x: auto; }
+.grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; min-width: 0; }
+.dow { font-family: var(--f-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding: 0 4px 4px; }
+.day { min-height: 104px; background: var(--surface); border: 1px solid var(--line); padding: 8px; display: grid; align-content: start; gap: 4px; text-decoration: none; color: inherit; border-top-width: 4px; min-width: 0; }
+.day:hover, .day:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.day .n { font-family: var(--f-mono); font-weight: 700; font-size: 13px; font-variant-numeric: tabular-nums; }
+.day .t { font-size: 13px; line-height: 1.25; font-weight: 700; overflow-wrap: anywhere; }
+.day .s { font-size: 11px; color: var(--muted); }
+.day.toon { border-top-color: var(--toon); }
+.day.pixel { border-top-color: var(--pixel); }
+.day.pend { border-top-color: var(--pending); background: var(--pending-soft); border-style: dashed; border-top-style: solid; }
+.day.rest { border-top-color: var(--rest); background: transparent; color: var(--muted); }
+.day.todo { border-top-color: var(--pending); background: transparent; border-style: dashed; border-top-style: solid; color: var(--muted); }
+.day.blank { visibility: hidden; }
+
+.list { display: grid; gap: 14px; }
+.card { background: var(--surface); border: 1px solid var(--line); display: grid; grid-template-columns: 92px minmax(0, 1fr); scroll-margin-top: 16px; }
+.card:target { outline: 3px solid var(--accent); }
+.date { padding: 16px 12px; border-right: 1px solid var(--line); display: grid; align-content: start; gap: 2px; text-align: center; }
+.date .wd { font-family: var(--f-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.date .dn { font-family: var(--f-display); font-size: 34px; line-height: 1; }
+.date .hr { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.body { padding: 16px 18px; display: grid; gap: 10px; min-width: 0; }
+.body h3 { margin: 0; font-size: 19px; line-height: 1.25; text-wrap: balance; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-family: var(--f-mono); font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 3px 8px; border: 1px solid var(--line); color: var(--muted); }
+.chip.toon { background: var(--toon-soft); color: var(--toon); border-color: transparent; }
+.chip.pixel { background: var(--pixel-soft); color: var(--pixel); border-color: transparent; }
+.chip.pend { background: var(--pending-soft); color: var(--pending); border-color: transparent; }
+.body p { margin: 0; max-width: 70ch; }
+dl { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 14px; font-size: 14px; }
+dt { color: var(--muted); font-family: var(--f-mono); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; padding-top: 2px; }
+dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.card.pendcard { border-style: dashed; background: transparent; }
+.card.pendcard .dn { color: var(--pending); }
+
+.note { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); padding: 14px 16px; display: grid; gap: 6px; font-size: 15px; }
+.note p { margin: 0; }
+footer { color: var(--muted); font-size: 13px; }
+
+@media (max-width: 720px) {
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .day { min-height: 54px; padding: 5px; }
+  .day .t, .day .s { display: none; }
+  .card { grid-template-columns: 70px minmax(0, 1fr); }
+  .date .dn { font-size: 26px; }
+  dl { grid-template-columns: minmax(0, 1fr); }
+  dt { padding-top: 6px; }
+}
+@media (prefers-reduced-motion: no-preference) { .card:target { transition: outline-color .3s; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Datos que Asustan · Facebook Reels + YouTube Shorts</div>
+    <h1>Noviembre <span>2026</span></h1>
+    <p class="lede">Un video al día, de lunes a sábado, a las 10:00 (hora de Mérida). Los domingos no se publica. Cada video sale como una sola publicación en Metricool para las dos redes.</p>
+  </header>
+
+  <section class="stats" aria-label="Resumen">
+    <div class="stat"><b>15</b><small>videos ya programados</small></div>
+    <div class="stat"><b>0</b><small>huecos antes del 19</small></div>
+    <div class="stat"><b>10</b><small>por hacer el 19 de noviembre</small></div>
+    <div class="stat"><b>5</b><small>domingos libres</small></div>
+  </section>
+
+  <section aria-labelledby="h-mes">
+    <h2 id="h-mes">El mes de un vistazo</h2>
+    <div class="legend">
+      <span><i class="k-toon"></i>Caricatura</span>
+      <span><i class="k-pixel"></i>Pixel art</span>
+      <span><i class="k-pend"></i>Pendiente</span>
+      <span><i class="k-rest"></i>Domingo libre</span>
+    </div>
+    <div class="month">
+      <div class="grid">
+        <div class="dow">Lun</div><div class="dow">Mar</div><div class="dow">Mié</div><div class="dow">Jue</div><div class="dow">Vie</div><div class="dow">Sáb</div><div class="dow">Dom</div>
+
+        <div class="day blank"></div><div class="day blank"></div><div class="day blank"></div><div class="day blank"></div><div class="day blank"></div><div class="day blank"></div>
+        <div class="day rest"><span class="n">1</span><span class="s">Libre</span></div>
+
+        <a class="day pixel" href="#d2"><span class="n">2</span><span class="t">Ofrenda de Día de Muertos</span><span class="s">Pixel art</span></a>
+        <a class="day toon" href="#d3"><span class="n">3</span><span class="t">Tu celular</span><span class="s">Caricatura</span></a>
+        <a class="day toon" href="#d4"><span class="n">4</span><span class="t">Zombis parte 3</span><span class="s">Caricatura</span></a>
+        <a class="day pixel" href="#d5"><span class="n">5</span><span class="t">Misión 002: desierto</span><span class="s">Pixel art</span></a>
+        <a class="day toon" href="#d6"><span class="n">6</span><span class="t">Tu doble</span><span class="s">Caricatura</span></a>
+        <a class="day toon" href="#d7"><span class="n">7</span><span class="t">Guía laboral: hombre lobo</span><span class="s">Caricatura</span></a>
+        <div class="day rest"><span class="n">8</span><span class="s">Libre</span></div>
+
+        <a class="day toon" href="#d9"><span class="n">9</span><span class="t">Cuarto sucio por un año</span><span class="s">Caricatura</span></a>
+        <a class="day pixel" href="#d10"><span class="n">10</span><span class="t">Mochila para invasión alienígena</span><span class="s">Pixel art</span></a>
+        <a class="day toon" href="#d11"><span class="n">11</span><span class="t">Asteroide</span><span class="s">Caricatura</span></a>
+        <a class="day toon" href="#d12"><span class="n">12</span><span class="t">Criatura interdimensional y tacos</span><span class="s">Caricatura</span></a>
+        <a class="day toon" href="#d13"><span class="n">13</span><span class="t">Esponja de cocina</span><span class="s">Caricatura</span></a>
+        <a class="day toon" href="#d14"><span class="n">14</span><span class="t">Guía laboral: zombi</span><span class="s">Caricatura</span></a>
+        <div class="day rest"><span class="n">15</span><span class="s">Libre</span></div>
+
+        <a class="day pixel" href="#d16"><span class="n">16</span><span class="t">Misión 003: abejas</span><span class="s">Pixel art</span></a>
+        <a class="day toon" href="#d17"><span class="n">17</span><span class="t">La Tierra deja de girar</span><span class="s">Caricatura</span></a>
+        <a class="day toon" href="#d18"><span class="n">18</span><span class="t">¿Qué tan pequeño eres en el universo?</span><span class="s">Caricatura</span></a>
+        <a class="day todo" href="#d19"><span class="n">19</span><span class="s">Se hace el 19</span></a>
+        <a class="day todo" href="#d19"><span class="n">20</span><span class="s">Se hace el 19</span></a>
+        <a class="day todo" href="#d19"><span class="n">21</span><span class="s">Se hace el 19</span></a>
+        <div class="day rest"><span class="n">22</span><span class="s">Libre</span></div>
+
+        <a class="day todo" href="#d19"><span class="n">23</span><span class="s">Se hace el 19</span></a>
+        <a class="day todo" href="#d19"><span class="n">24</span><span class="s">Se hace el 19</span></a>
+        <a class="day todo" href="#d19"><span class="n">25</span><span class="s">Se hace el 19</span></a>
+        <a class="day todo" href="#d19"><span class="n">26</span><span class="s">Se hace el 19</span></a>
+        <a class="day todo" href="#d19"><span class="n">27</span><span class="s">Se hace el 19</span></a>
+        <a class="day todo" href="#d19"><span class="n">28</span><span class="s">Se hace el 19</span></a>
+        <div class="day rest"><span class="n">29</span><span class="s">Libre</span></div>
+
+        <a class="day todo" href="#d19"><span class="n">30</span><span class="s">Se hace el 19</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-det">
+    <h2 id="h-det">Video por video</h2>
+    <div class="list">
+
+      <article class="card" id="d2">
+        <div class="date"><span class="wd">Lun</span><span class="dn">2</span><span class="hr">10:00</span></div>
+        <div class="body">
+          <h3>Misión especial: Arma tu ofrenda de Día de Muertos</h3>
+          <div class="chips"><span class="chip pixel">Pixel art</span><span class="chip">62 s</span><span class="chip">Serie Misiones · especial</span></div>
+          <p>Un catálogo estilo videojuego para armar la ofrenda del abuelito. Cada objeto aceptado cae en su lugar y explica su misión; los chuscos se rechazan. Cierra con el alma llegando por el camino de pétalos.</p>
+          <dl>
+            <dt>Aceptados</dt><dd>Agua, velas, cempasúchil, sal, copal, papel picado, su foto, su comida favorita y pan de muerto</dd>
+            <dt>Rechazados</dt><dd>Bebida energética, GPS de verdad, ensalada y contraseña del WiFi</dd>
+            <dt>Pregunta</dt><dd>¿Qué le pondrías tú a la ofrenda de alguien que extrañas?</dd>
+            <dt>Fuentes</dt><dd>Significados tradicionales (material de la SEP, N+, Uno TV)</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="card" id="d3">
+        <div class="date"><span class="wd">Mar</span><span class="dn">3</span><span class="hr">10:00</span></div>
+        <div class="body">
+          <h3>Tu celular está más sucio de lo que crees</h3>
+          <div class="chips"><span class="chip toon">Caricatura</span><span class="chip">63 s</span><span class="chip">Parte 2 del teclado</span></div>
+          <p>Lo que vive en el celular, en la funda y en el puerto de carga, y cómo limpiarlo sin dañarlo.</p>
+          <dl>
+            <dt>Gancho</dt><dd>“¿Me estás viendo desde el baño?”</dd>
+            <dt>Fuentes</dt><dd>Guía de limpieza del fabricante y estudio de la London School of Hygiene &amp; Tropical Medicine</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="card" id="d4">
+        <div class="date"><span class="wd">Mié</span><span class="dn">4</span><span class="hr">10:00</span></div>
+        <div class="body">
+          <h3>Apocalipsis zombi, día 3: ¿quién controla la máquina de hielo?</h3>
+          <div class="chips"><span class="chip toon">Caricatura</span><span class="chip">88 s</span><span class="chip">Zombis en el minisúper · Parte 3</span></div>
+          <p>Pleno verano de Sonora: 100 zombis afuera, 2 humanos adentro y una sola máquina de hielo. Comedia oscura con el empleado del minisúper.</p>
+          <dl>
+            <dt>Dato útil</dt><dd>Sin luz, un refri cerrado mantiene la comida segura unas 4 horas; un congelador lleno, unas 48; medio vacío, unas 24</dd>
+            <dt>Fuente</dt><dd>FoodSafety.gov</dd>
+            <dt>Antes</dt><dd>Parte 2 sale el jueves 29 de octubre</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="card" id="d5">
+        <div class="date"><span class="wd">Jue</span><span class="dn">5</span><span class="hr">10:00</span></div>
+        <div class="body">
+          <h3>Misión 002: Perdido en el desierto</h3>
+          <div class="chips"><span class="chip pixel">Pixel art</span><span class="chip">72 s</span><span class="chip">Serie Misiones</span></div>
+          <p>Coche descompuesto, 45 °C y una mochila de 6 espacios. El helicóptero ve el coche, pero no al “cactus con ansiedad” que se alejó.</p>
+          <dl>
+            <dt>Mochila</dt><dd>Agua, sombrero, camisa de manga larga, espejo para señales, linterna y silbato</dd>
+            <dt>Rechazados</dt><dd>Tomar tu orina (mito de película) y caminar al mediodía buscando “un atajo”</dd>
+            <dt>Fuente</dt><dd>Phoenix Fire Department, Desert Survival</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="card" id="d6">
+        <div class="date"><span class="wd">Vie</span><span class="dn">6</span><span class="hr">10:00</span></div>
+        <div class="body">
+          <h3>Cómo sobrevivir si ves a alguien idéntico a ti</h3>
+          <div class="chips"><span class="chip toon">Caricatura</span><span class="chip">100 s</span></div>
+          <p>Manual de supervivencia en 3 reglas para cuando llegas a casa y ahí estás tú.</p>
+          <dl>
+            <dt>Dato real</dt><dd>En un estudio de 2022, 9 parejas de “dobles” sin parentesco compartían miles de variantes genéticas</dd>
+            <dt>Fuente</dt><dd>Cell Reports (2022)</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="card" id="d7">
+        <div class="date"><span class="wd">Sáb</span><span class="dn">7</span><span class="hr">10:00</span></div>
+        <div class="body">
+          <h3>¿De qué trabajaría un hombre lobo en 2026?</h3>
+          <div class="chips"><span class="chip toon">Caricatura</span><span class="chip">87 s</span><span class="chip">Guía laboral de los monstruos · Ep. 2</span></div>
+          <p>Guardia de seguridad, paseador de perros, repartidor de alitas (llegan solo los huesos) y creador de contenido. El verdadero problema: el depósito de la renta.</p>
+          <dl>
+            <dt>Antes</dt><dd>Ep. 1, el vampiro, sale el sábado 31 de octubre</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="card" id="d9">
+        <div class="date"><span class="wd">Lun</span><span class="dn">9</span><span class="hr">10:00</span></div>
+        <div class="body">
+          <h3>¿Qué pasa si no limpias tu cuarto en un año?</h3>
+          <div class="chips"><span class="chip toon">Caricatura</span><span class="chip">100 s</span><span class="chip">Limpieza</span></div>
+          <p>Línea de tiempo: día 3, moho; semana 2, moscas de la fruta; mes 1, buffet para ácaros; mes 6, visitas que corren cuando prendes la luz.</p>
+          <dl>
+            <dt>Dato real</dt><dd>Almohadas usadas con 4 a 16 especies de hongos cada una</dd>
+            <dt>Fuente</dt><dd>Universidad de Manchester</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="card" id="d10">
+        <div class="date"><span class="wd">Mar</span><span class="dn">10</span><span class="hr">10:00</span></div>
+        <div class="body">
+          <h3>Tu mochila para una invasión extraterrestre</h3>
+          <div class="chips"><span class="chip pixel">Pixel art</span><span class="chip">71 s</span><span class="chip">Antecesor de las Misiones</span></div>
+          <p>60 segundos para armar la mochila mientras el ovni barre la ciudad.</p>
+          <dl>
+            <dt>Mochila</dt><dd>Agua, comida, linterna, botiquín, radio, documentos, efectivo y cargador</dd>
+            <dt>Rechazado</dt><dd>El sombrero de aluminio y la colección de figuritas</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="card" id="d11">
+        <div class="date"><span class="wd">Mié</span><span class="dn">11</span><span class="hr">10:00</span></div>
+        <div class="body">
+          <h3>¿Qué pasa si un asteroide choca con la Tierra?</h3>
+          <div class="chips"><span class="chip toon">Caricatura</span><span class="chip">81 s</span></div>
+          <p>Qué pasaría y cómo sobrevivir. Regla de oro: si ves un destello gigante en el cielo, aléjate de las ventanas, agáchate y cúbrete.</p>
+          <dl>
+            <dt>Dato real</dt><dd>En 2013, una roca de unos 20 m explotó sobre Cheliábinsk, Rusia; más de 1,600 personas buscaron atención médica, casi todas por vidrios rotos</dd>
+            <dt>Fuente</dt><dd>NASA</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="card" id="d12">
+        <div class="date"><span class="wd">Jue</span><span class="dn">12</span><span class="hr">10:00</span></div>
+        <div class="body">
+          <h3>¿Qué pasaría si un ser interdimensional apareciera… con hambre?</h3>
+          <div class="chips"><span class="chip toon">Caricatura</span><span class="chip">74 s</span><span class="chip">Humor oscuro</span></div>
+          <p>Una entidad de 800 km aparece sobre la Tierra. Su primer mensaje: “Estoy hambriento”. Como apareció encima de la Narvarte, la humanidad le ofrece tacos. Todo va bien hasta que pregunta si aceptan tarjeta: “Solo efectivo, joven”. Y se enoja.</p>
+          <dl>
+            <dt>Dato real</dt><dd>El taco al pastor nació del shawarma que trajeron inmigrantes libaneses (tacos árabes en Puebla)</dd>
+            <dt>Lo inquietante</dt><dd>La teoría de cuerdas propone dimensiones extra y algunos físicos hablan de multiversos; nada está comprobado</dd>
+            <dt>Cierre</dt><dd>“Qué bendecidos somos de tener tacos en nuestro universo”</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="card" id="d13">
+        <div class="date"><span class="wd">Vie</span><span class="dn">13</span><span class="hr">10:00</span></div>
+        <div class="body">
+          <h3>Lo más asqueroso de tu cocina podría ser tu esponja</h3>
+          <div class="chips"><span class="chip toon">Caricatura</span><span class="chip">87 s</span><span class="chip">Limpieza</span></div>
+          <p>Restos de comida, grasa y humedad: un departamento amueblado para microorganismos. Enjuagarla rápido no es desinfectarla.</p>
+          <dl>
+            <dt>Consejo</dt><dd>Enjuágala, escúrrela, déjala secar y cámbiala seguido</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="card" id="d14">
+        <div class="date"><span class="wd">Sáb</span><span class="dn">14</span><span class="hr">10:00</span></div>
+        <div class="body">
+          <h3>¿De qué trabajaría un zombi en 2026?</h3>
+          <div class="chips"><span class="chip toon">Caricatura</span><span class="chip">75 s</span><span class="chip">Guía laboral de los monstruos · Ep. 3</span></div>
+          <p>Oficinista un lunes a las 8 a.m. (nadie notó que estaba muerto), atención a clientes con empatía perfecta (“mmmh”), extra de películas y reclutador que solo busca cerebros.</p>
+        </div>
+      </article>
+
+      <article class="card" id="d16">
+        <div class="date"><span class="wd">Lun</span><span class="dn">16</span><span class="hr">10:00</span></div>
+        <div class="body">
+          <h3>Misión 003: Ataque de abejas africanas</h3>
+          <div class="chips"><span class="chip pixel">Pixel art</span><span class="chip">78 s</span><span class="chip">Serie Misiones</span></div>
+          <p>Cortabas el pasto y alborotaste un panal. Corre en línea recta al coche, tápate la cara y no te detengas.</p>
+          <dl>
+            <dt>Mochila</dt><dd>Tenis, llaves del coche, sudadera con capucha, ropa clara, tarjeta vieja (para raspar aguijones) y celular</dd>
+            <dt>Rechazados</dt><dd>Tirarte a la alberca, manotear y esconderte en los arbustos</dd>
+            <dt>Dato</dt><dd>Te pueden perseguir casi 400 metros</dd>
+            <dt>Fuentes</dt><dd>Miami-Dade Fire Rescue y Texas A&amp;M AgriLife Extension</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="card" id="d17">
+        <div class="date"><span class="wd">Mar</span><span class="dn">17</span><span class="hr">10:00</span></div>
+        <div class="body">
+          <h3>¿Qué pasaría si la Tierra dejara de girar de repente?</h3>
+          <div class="chips"><span class="chip toon">Caricatura</span><span class="chip">68 s</span></div>
+          <p>Frenazo en seco: tú, los edificios, los autos y los océanos seguirían hacia el este a casi 1,700 km/h. No saldrías al espacio porque la gravedad sigue ahí; el problema es atravesar tu ciudad.</p>
+          <dl>
+            <dt>Datos</dt><dd>En el ecuador la Tierra gira a unos 1,670 km/h; sin rotación, un día duraría un año: seis meses de sol y seis de noche</dd>
+            <dt>Cierre</dt><dd>“Ese día tampoco llegarías a la oficina”</dd>
+            <dt>Fuentes</dt><dd>ScienceAlert y Universe Today</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="card" id="d18">
+        <div class="date"><span class="wd">Mié</span><span class="dn">18</span><span class="hr">10:00</span></div>
+        <div class="body">
+          <h3>¿Qué tan pequeño eres en el universo?</h3>
+          <div class="chips"><span class="chip toon">Caricatura</span><span class="chip">62 s</span><span class="chip">Fecha fija</span></div>
+          <p>Zoom out de la Tierra a las galaxias. Sale justo el día en que la Voyager 1 llega a un día luz de la Tierra, así que el dato es noticia ese mismo día.</p>
+          <dl>
+            <dt>Datos</dt><dd>En Júpiter caben más de 1,300 Tierras; en el Sol, 1.3 millones; Betelgeuse se tragaría hasta Marte; la estrella más cercana está a más de 4 años luz</dd>
+            <dt>Cierre</dt><dd>“Y tú preocupado porque te dejaron en visto”</dd>
+            <dt>Fuentes</dt><dd>NASA / JPL y Universe Today</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="card pendcard" id="d19">
+        <div class="date"><span class="wd">19–30</span><span class="dn">10</span><span class="hr">videos</span></div>
+        <div class="body">
+          <h3>Se producen el 19 de noviembre</h3>
+          <div class="chips"><span class="chip pend">Recordatorio programado</span></div>
+          <p>Ese día se renuevan los créditos de voz. Hay que hacer 10 videos para el 19, 20, 21, 23, 24, 25, 26, 27, 28 y 30. El 22 y el 29 son domingo.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <div class="note">
+    <p><b>Reglas del calendario.</b> Domingos libres. Las series van en orden: zombis parte 2 (29 oct) antes de la parte 3; vampiro (31 oct), hombre lobo y zombi en la guía laboral; Misión 001 (26 oct), 002 y 003.</p>
+    <p>Cada video se revisa antes de programarse.</p>
+  </div>
+
+  <footer>Actualizado el 21 de octubre de 2026. Horarios en hora de Mérida (UTC−6).</footer>
+</div>
