@@ -3,6 +3,9 @@
 Uso:
   python3 -m lib.produce SPEC.py texto              -> texto para ElevenLabs
   python3 -m lib.produce SPEC.py preview 1.5 8 20   -> hoja de cuadros (tiempos nominales)
+  python3 -m lib.produce SPEC.py hoja               -> hoja de revisión (1 cuadro cada 2 s) ANTES de generar el video (~3 s)
+  python3 -m lib.produce SPEC.py check              -> revisión rápida (subtítulos, bordes, textos)
+  python3 -m lib.produce SPEC.py check-contraste    -> revisión + contraste (lenta, solo si se pide)
   python3 -m lib.produce SPEC.py sinvoz             -> video sin voz (música + efectos)
   python3 -m lib.produce SPEC.py final VOZ.mp3      -> video final sincronizado con la voz
 Cada render genera también una hoja de verificación (1 cuadro cada 2 s)."""
@@ -82,14 +85,33 @@ def build_audio(m, out_wav, T_of_v, v_of_T, dur, voice=None):
         mx.whoosh(m.NSTART[li])
     mx.render(out_wav, voice)
 
-def encode(m, out_mp4, v_of_T, dur, wav):
-    tmp = out_mp4 + ".v.mp4"
+_JOB = {}
+
+def _render_part(args):
+    """Proceso hijo: dibuja un tramo de cuadros y lo codifica en su propio archivo."""
+    i0, i1, path, preset = args
+    m, v_of_T = _JOB["m"], _JOB["v_of_T"]
     p = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
-                          "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", tmp], stdin=subprocess.PIPE)
-    for i in range(int(dur * FPS)):
+                          "-c:v", "libx264", "-preset", preset, "-crf", "20", "-pix_fmt", "yuv420p", path], stdin=subprocess.PIPE)
+    for i in range(i0, i1):
         T = i / FPS
         p.stdin.write(render_frame(m, v_of_T(T), T).tobytes())
     p.stdin.close(); p.wait()
+    return path
+
+def encode(m, out_mp4, v_of_T, dur, wav, preset="medium"):
+    """Dibuja y codifica usando todos los núcleos (un tramo por núcleo) y luego une los tramos."""
+    import multiprocessing as mp
+    n = int(dur * FPS); k = max(1, min(os.cpu_count() or 1, 4))
+    _JOB.update(m=m, v_of_T=v_of_T)
+    cuts = [round(n * j / k) for j in range(k + 1)]
+    parts = [(cuts[j], cuts[j + 1], f"{out_mp4}.part{j}.mp4", preset) for j in range(k)]
+    with mp.get_context("fork").Pool(k) as pool: paths = pool.map(_render_part, parts)
+    lst = out_mp4 + ".list.txt"
+    open(lst, "w").write("".join(f"file '{os.path.abspath(p)}'\n" for p in paths))
+    tmp = out_mp4 + ".v.mp4"
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-f", "concat", "-safe", "0", "-i", lst, "-c", "copy", tmp], check=True)
+    for p in paths + [lst]: os.remove(p)
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", tmp, "-i", wav, "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-shortest", out_mp4], check=True)
     os.remove(tmp)
     sheet = out_mp4.replace(".mp4", "_tile.png")
@@ -97,15 +119,29 @@ def encode(m, out_mp4, v_of_T, dur, wav):
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", out_mp4, "-vf", f"fps=1/2,scale=180:320,tile={cols}x3", "-frames:v", "1", sheet])
     return sheet
 
-def run_check(m, per_scene=6):
-    """Revisa varios cuadros de cada escena. Devuelve True si no hay problemas."""
+def sheet_quick(m, path, step=2.0):
+    """Hoja de revisión ANTES de generar el video: un cuadro cada 'step' segundos (tiempo nominal), en segundos."""
+    ts = [x * step + step / 2 for x in range(int(m.NEND / step))]
+    cols = math.ceil(len(ts) / 3)
+    sh = Image.new("RGB", (180 * cols, 320 * 3))
+    for i, t in enumerate(ts): sh.paste(Image.fromarray(render_frame(m, t, t)).resize((180, 320)), ((i % cols) * 180, (i // cols) * 320))
+    sh.save(path); return path
+
+def _fingerprint(spec_path):
+    import hashlib, glob
+    h = hashlib.sha1(open(spec_path, "rb").read())
+    for f in sorted(glob.glob(os.path.join(os.path.dirname(os.path.abspath(__file__)), "*.py"))): h.update(open(f, "rb").read())
+    return h.hexdigest()
+
+def run_check(m, per_scene=6, contrast=False):
+    """Revisa varios cuadros de cada escena (contraste solo si se pide). Devuelve True si no hay problemas."""
     total = 0
     bounds = [m.NSTART[li] for li, _ in m.SCENES] + [m.NEND]
     for k, (li, fn) in enumerate(m.SCENES):
         a, b = bounds[k], bounds[k + 1]; seen = {}; worst = {}; full = {}
         for j in range(per_scene):
             v = a + (b - a) * (j + .5) / per_scene
-            rec = check.Rec(); check.ACTIVE = rec
+            rec = check.Rec(); check.ACTIVE = rec if contrast else None
             try:
                 with check.recording(rec): render_frame(m, v, v, rec)
             finally: check.ACTIVE = None
@@ -135,14 +171,22 @@ def main():
         sh = Image.new("RGB", (270 * min(6, len(ims)), 480 * ((len(ims) + 5) // 6)))
         for i, im in enumerate(ims): sh.paste(im, ((i % 6) * 270, (i // 6) * 480))
         p = os.path.join(outdir, f"{name}_preview.png"); sh.save(p); print(p); return
-    if cmd == "check":
-        run_check(m); return
+    if cmd == "hoja":
+        print(sheet_quick(m, os.path.join(outdir, f"{name}_hoja.png"))); return
+    stamp_f = os.path.join(outdir, f".revisado_{name}")
+    if cmd in ("check", "check-contraste"):
+        ok = run_check(m, contrast=cmd == "check-contraste")
+        if ok and cmd == "check": open(stamp_f, "w").write(_fingerprint(spec))
+        return
     voice = sys.argv[3] if cmd == "final" else None
-    run_check(m)
+    if not (os.path.exists(stamp_f) and open(stamp_f).read() == _fingerprint(spec)):
+        if run_check(m): open(stamp_f, "w").write(_fingerprint(spec))
+    else:
+        print("Revisión automática: ya revisado sin cambios desde entonces ✔")
     v_of_T, T_of_v, dur = make_warp(m, voice)
     wav = os.path.join(outdir, f"{name}.wav"); build_audio(m, wav, T_of_v, v_of_T, dur, voice)
     out = os.path.join(outdir, f"{name}{'_SINVOZ' if cmd == 'sinvoz' else ''}.mp4")
-    sheet = encode(m, out, v_of_T, dur, wav)
+    sheet = encode(m, out, v_of_T, dur, wav, preset="veryfast" if cmd == "sinvoz" else "medium")
     print(out); print(sheet); print(f"duración: {dur:.1f} s")
 
 if __name__ == "__main__":
