@@ -140,13 +140,13 @@ def needles(c):
     chip(d, "6 AGUJAS", CHIP1, bg=RED, appear=lt / .3)
     mosquito(d, 330, 600, 1.1, c.t, fly=False, mood="angry")
     tip = (330 + 200 * 1.1, 600 + 70 * 1.1)
-    d.rounded_rectangle([80, 820, 1000, 1330], 30, fill=WHITE, outline=BLK, width=6)
+    d.rounded_rectangle([80, 800, 1000, 1290], 30, fill=WHITE, outline=BLK, width=6)
     d.line([tip, (300, 860)], fill=(120, 120, 130), width=3); d.line([tip, (900, 860)], fill=(120, 120, 130), width=3)
     for i, (txt, col) in enumerate(NEEDLES):
         a = cl((lt - .4 - i * c.dur * .1) / .3)
         if a <= 0: continue
-        y = 890 + i * 72
-        d.line([(130, 1075), (130 + 420 * a, y)], fill=col, width=12)
+        y = 860 + i * 72
+        d.line([(130, 1045), (130 + 420 * a, y)], fill=col, width=12)
         d.polygon([(130 + 420 * a, y - 10), (130 + 420 * a + 30, y), (130 + 420 * a, y + 10)], fill=col)
         d.text((620, y), txt, font=F(46), fill=col, anchor="lm", stroke_width=3, stroke_fill=WHITE)
     return img

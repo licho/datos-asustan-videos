@@ -11,7 +11,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 from .core import W, H, rich_caption, CAP_Y
 from .audio import Mix
-from . import align
+from . import align, check
 
 FPS = 30; WPS = 2.75; GAP = 0.35
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
@@ -48,12 +48,13 @@ def scene_at(m, v):
         if v >= start: cur = (fn, start, (m.NSTART[m.SCENES[i + 1][0]] if i + 1 < len(m.SCENES) else m.NEND))
     return cur
 
-def render_frame(m, v, t):
+def render_frame(m, v, t, rec=None):
     fn, s0, s1 = scene_at(m, v)
     c = Ctx(); c.v = v; c.t = t; c.lt = v - s0; c.dur = s1 - s0; c.shake = 0
     c.at = lambda i: m.NSTART[i] - s0          # inicio de la línea i relativo a la escena
     img = fn(c)
     d = ImageDraw.Draw(img)
+    if rec: rec.tag = "caption"
     for i, (tag, spoken, cap) in enumerate(m.LINES):
         e = m.NSTART[i + 1] if i + 1 < len(m.LINES) else m.NEND
         if m.NSTART[i] <= v < e and cap: rich_caption(d, cap, y=CAP_Y, appear=(v - m.NSTART[i]) / 0.25)
@@ -87,6 +88,23 @@ def encode(m, out_mp4, v_of_T, dur, wav):
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", out_mp4, "-vf", f"fps=1/2,scale=180:320,tile={cols}x3", "-frames:v", "1", sheet])
     return sheet
 
+def run_check(m, per_scene=6):
+    """Revisa varios cuadros de cada escena. Devuelve True si no hay problemas."""
+    total = 0
+    bounds = [m.NSTART[li] for li, _ in m.SCENES] + [m.NEND]
+    for k, (li, fn) in enumerate(m.SCENES):
+        a, b = bounds[k], bounds[k + 1]; seen = {}; worst = {}
+        for j in range(per_scene):
+            v = a + (b - a) * (j + .5) / per_scene
+            rec = check.Rec()
+            with check.recording(rec): render_frame(m, v, v, rec)
+            for p, px in check.analyze(rec.items):
+                seen.setdefault(p, v); worst[p] = max(worst.get(p, 0), px)
+        for p, v in seen.items():
+            print(f"  [{fn.__name__} desde {v:.1f}s] {p}" + (f" (hasta {worst[p]} px)" if worst[p] else "")); total += 1
+    print("Revisión automática:", "sin problemas ✔" if not total else f"{total} problema(s)")
+    return total == 0
+
 def main():
     spec, cmd = sys.argv[1], sys.argv[2]
     m = load(spec)
@@ -100,7 +118,10 @@ def main():
         sh = Image.new("RGB", (270 * min(6, len(ims)), 480 * ((len(ims) + 5) // 6)))
         for i, im in enumerate(ims): sh.paste(im, ((i % 6) * 270, (i // 6) * 480))
         p = os.path.join(outdir, f"{name}_preview.png"); sh.save(p); print(p); return
+    if cmd == "check":
+        run_check(m); return
     voice = sys.argv[3] if cmd == "final" else None
+    run_check(m)
     v_of_T, T_of_v, dur = make_warp(m, voice)
     wav = os.path.join(outdir, f"{name}.wav"); build_audio(m, wav, T_of_v, v_of_T, dur, voice)
     out = os.path.join(outdir, f"{name}{'_SINVOZ' if cmd == 'sinvoz' else ''}.mp4")
