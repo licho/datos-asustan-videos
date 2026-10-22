@@ -367,3 +367,39 @@ def templo(d, x, y, s=1.0, col=(200, 185, 160), twin=True, tiers=4):
         d.rectangle([cx - tw2 / 2, top - S(80), cx + tw2 / 2, top], fill=(235, 225, 205), outline=BLK, width=W_(4))
         d.rectangle([cx - S(14), top - S(50), cx + S(14), top], fill=(40, 30, 30))
         d.rectangle([cx - tw2 / 2 - S(6), top - S(115), cx + tw2 / 2 + S(6), top - S(80)], fill=rc, outline=BLK, width=W_(4))
+
+def curtain(d, x0, y0, x1, y1, open_=0.0, col=(170, 30, 45)):
+    """Telón de teatro. open_ 0..1 = qué tan abierto. Dibuja el escenario de fondo, las cortinas y la cenefa."""
+    d.rectangle([x0, y0, x1, y1], fill=(40, 30, 35))
+    d.rectangle([x0, y1 - 40, x1, y1], fill=(120, 80, 50), outline=BLK, width=4)
+    half = (x1 - x0) / 2; cw = half * (1 - .78 * open_)
+    for side in (-1, 1):
+        a = x0 if side < 0 else x1 - cw; b = a + cw
+        d.rectangle([a, y0, b, y1 - 40], fill=col, outline=BLK, width=4)
+        for k in range(1, 5): xx = a + cw * k / 5; d.line([(xx, y0 + 60), (xx + side * 8, y1 - 40)], fill=dk(col, .75), width=5)
+    d.rectangle([x0, y0, x1, y0 + 70], fill=dk(col, .85), outline=BLK, width=4)
+    for k in range(9): xx = x0 + (x1 - x0) * (k + .5) / 9; d.chord([xx - 40, y0 + 40, xx + 40, y0 + 100], 0, 180, fill=dk(col, .85), outline=BLK)
+
+def ball_chain(d, x, y, bx, by, r=45):
+    """Grillete en el tobillo (x, y) con cadena hasta una bola de preso en (bx, by)."""
+    n = 7
+    for k in range(n):
+        u = (k + .5) / n; cx = x + (bx - x) * u; cy = y + (by - y) * u + math.sin(u * math.pi) * 18
+        d.ellipse([cx - 13, cy - 8, cx + 13, cy + 8], outline=(70, 70, 80), width=5)
+    d.ellipse([x - 22, y - 14, x + 22, y + 14], outline=(60, 60, 70), width=7)
+    d.ellipse([bx - r, by - r, bx + r, by + r], fill=(45, 45, 52), outline=BLK, width=4)
+    d.ellipse([bx - r * .55, by - r * .6, bx - r * .1, by - r * .2], fill=(95, 95, 105))
+
+def cardboard_box(d, x, y, s=1.0, label="OBJETOS PERSONALES", items=True):
+    """Caja de cartón de 'despedido' con cosas asomando. y = base."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    if items:
+        d.rectangle([x - S(80), y - S(250), x - S(30), y - S(150)], fill=(90, 160, 90), outline=BLK, width=W_(3))
+        d.line([(x - S(55), y - S(250)), (x - S(55), y - S(300))], fill=(60, 120, 60), width=W_(6))
+        d.ellipse([x - S(80), y - S(330), x - S(30), y - S(290)], fill=(90, 170, 80), outline=BLK, width=W_(3))
+        d.rectangle([x + S(10), y - S(230), x + S(90), y - S(150)], fill=(240, 240, 235), outline=BLK, width=W_(3))
+        d.line([(x + S(90), y - S(210)), (x + S(110), y - S(195)), (x + S(90), y - S(175))], fill=BLK, width=W_(4))
+    d.polygon([(x - S(150), y - S(170)), (x + S(150), y - S(170)), (x + S(135), y), (x - S(135), y)], fill=(200, 160, 110), outline=BLK)
+    d.line([(x - S(150), y - S(170)), (x + S(150), y - S(170)), (x + S(135), y), (x - S(135), y), (x - S(150), y - S(170))], fill=BLK, width=W_(5))
+    d.polygon([(x - S(150), y - S(170)), (x - S(190), y - S(230)), (x - S(40), y - S(230)), (x - S(20), y - S(170))], fill=(185, 145, 95), outline=BLK)
+    if label: d.text((x, y - S(85)), label, font=F(int(S(19))), fill=(90, 60, 30), anchor="mm")

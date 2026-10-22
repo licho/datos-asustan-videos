@@ -1,0 +1,14 @@
+Video: Señales de que tu compañero de trabajo es un robot
+Fecha: jueves 3 de diciembre 2026, 10:00
+Código: specs/s40_robot.py · Sin voz: sinvoz/2026-12-03_robot-companero_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4, una sola toma
+Producir final: python3 -m lib.produce specs/s40_robot.py final audio/40-robot.mp3
+
+[mischievously] ¿Tu compañero de trabajo es un robot? Revisa estas señales… antes de que él te revise a ti. [serious] Señal uno: contesta correos a las tres de la mañana… con ortografía perfecta. Nadie normal pone acentos a esa hora. [sarcastic] Señal dos: nunca va al baño, nunca come y nunca se queja del aire acondicionado. Eso es un electrodoméstico. [mischievously] Señal tres: su foto de perfil es un círculo gris. Y en cada videollamada… “se le traba la cámara”. [confident] Señal cuatro: a todo contesta “¡Con gusto!”. ¿Un reporte? “¡Con gusto!”. ¿Sin aguinaldo este año? “¡Con gusto!”. [mischievously] Señal cinco: cuando sale a comer dice “Volveré”… y vuelve. Exactamente a las dos en punto. Ningún humano regresa a tiempo de comer. [excited] Señal seis: cuando la página le pregunta “¿Eres un robot?”… se tarda en contestar. Y elige mal los semáforos a propósito. [whispers] Dato real: la palabra “robot” se inventó en mil novecientos veinte, para una obra de teatro checa. Viene de “robota”, que significa trabajo forzado. [dramatically] O sea… desde el primer día, “robot” significó “el que trabaja a la fuerza”. [sarcastic] Y la mala noticia no es que sea un robot. Es que lo contrataron para hacer el trabajo de tres personas… y una de ellas eras tú. [sarcastic] ¿Qué otra señal agregarías? Te leo en los comentarios… y si no tienes trabajo mañana: hasta la vista, baby.
+
+# palabras: 221  duración estimada: 89 s
+
+Fuentes:
+- Britannica, "R.U.R." (Karel Čapek, publicada 1920, estrenada 1921): "robot" viene del checo "robota", trabajo forzado
+- Science Friday, "The origin of the word robot": la sugirió Josef Čapek
+Nota: las frases "Volveré" y "Hasta la vista, baby" se usan sin nombrar la película ni dibujar al personaje (regla sin marcas).

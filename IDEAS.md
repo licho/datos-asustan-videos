@@ -25,11 +25,12 @@ Octubre–noviembre 2026: zombie en el minisúper · teclado sucio · aluxes · 
 - Momia busca trabajo (guía laboral Ep. 5) — sin voz listo
 - Ejércitos más grandes de la historia — sin voz listo
 - Llorona busca trabajo (guía laboral Ep. 6) — sin voz listo
+- Señales de que tu compañero es un robot — sin voz listo (jue 3 dic)
 
 ## Ideas pendientes
 
 ### Señales de que…
-- [ ] **¿Tu compañero es un robot?** Contesta correos a las 3 a.m., nunca va al baño, sin foto de perfil, dice "con gusto" a todo. Remate: no es robot, es el que reemplazó a medio departamento con IA. *(recomendada: continúa al alien y al tema IA)*
+- [x] ~~**¿Tu compañero es un robot?**~~ → hecho (sin voz), 3 de diciembre. Contesta correos a las 3 a.m., nunca va al baño, sin foto de perfil, dice "con gusto" a todo. Remate: no es robot, es el que reemplazó a medio departamento con IA. *(recomendada: continúa al alien y al tema IA)*
 - [ ] **¿Tu roomie es un fantasma?** Nunca lo ves, la comida desaparece, puertas que se cierran solas, no paga renta. Remate: sí es fantasma… y el contrato está a tu nombre.
 - [ ] **¿Tu vecino es hombre lobo?** Fiestas en luna llena, pelos en el elevador, le ladra al repartidor, pide la carne cruda. Remate: tiene tres perros en un depa de 40 m².
 - [ ] **¿Tu vecino es nahual?** *(idea de Luis)* Misma estructura que el hombre lobo, reusando vecino, edificio y escenas, pero con lo propio del nahual: se transforma en animal (perro negro, guajolote, coyote), aparecen animales raros en la azotea de noche, nunca está cuando los ves y conoce cosas que no debería. Dato real de la tradición mesoamericana con fuente. **Publicar separado del hombre lobo, con al menos 2–3 semanas entre uno y otro.**

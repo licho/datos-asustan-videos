@@ -105,3 +105,37 @@ def scribe(d, x, y, s=1.0, t=0.0, mood="neutral", arms="down"):
             a = math.radians(200 + k * 18) if sx < 0 else math.radians(340 - k * 18)
             lx, ly = hx + math.cos(a) * S(108), hy - S(20) + math.sin(a) * S(100)
             d.ellipse([lx - S(20), ly - S(11), lx + S(20), ly + S(11)], fill=(90, 160, 70), outline=BLK, width=W_(2))
+
+def robo_cw(d, x, y, s=1.0, t=0.0, mood="smile", arms="down", shades=False, oil=False):
+    """Compañero sospechoso de ser robot: peinado de raya perfecta, camisa, corbata y sonrisa cuadrada que no parpadea. y = pies.
+    mood: smile (sonrisa de dientes) | blank | wink. shades: lentes oscuros genéricos. oil: gotas de aceite (nervios)."""
+    from .core import WHITE
+    guy(d, x, y, s, mood="neutral", arms=arms, t=0.0, hoodie=(120, 135, 160))
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s)); hx, hy = x, y - S(505)
+    by = y - S(400)
+    d.polygon([(x - S(45), by), (x, by + S(55)), (x + S(45), by)], fill=WHITE, outline=BLK)
+    d.polygon([(x - S(14), by + S(8)), (x + S(14), by + S(8)), (x + S(20), by + S(150)), (x, by + S(175)), (x - S(20), by + S(150))], fill=(200, 50, 60), outline=BLK)
+    d.chord([hx - S(106), hy - S(114), hx + S(106), hy + S(72)], 180, 360, fill=(40, 40, 48))
+    d.polygon([(hx - S(106), hy - S(25)), (hx - S(106), hy - S(70)), (hx - S(30), hy - S(110)), (hx - S(40), hy - S(55))], fill=(40, 40, 48))
+    d.line([(hx - S(30), hy - S(108)), (hx - S(42), hy - S(55))], fill=(200, 200, 210), width=W_(4))
+    SK = (241, 194, 150)
+    d.rectangle([hx - S(70), hy - S(20), hx + S(70), hy + S(95)], fill=SK)
+    if shades:
+        for sx in (-1, 1): d.rounded_rectangle([hx + sx * S(40) - S(36), hy - S(14), hx + sx * S(40) + S(36), hy + S(28)], int(S(8)), fill=(25, 25, 30), outline=BLK, width=W_(3))
+        d.line([(hx - S(6), hy), (hx + S(6), hy)], fill=BLK, width=W_(5))
+    else:
+        for sx in (-1, 1):
+            ex, ey = hx + sx * S(38), hy + S(5)
+            if mood == "wink" and sx > 0: d.line([(ex - S(20), ey), (ex + S(20), ey)], fill=BLK, width=W_(7)); continue
+            d.ellipse([ex - S(26), ey - S(26), ex + S(26), ey + S(26)], fill=WHITE, outline=BLK, width=W_(4))
+            d.ellipse([ex - S(10), ey - S(10), ex + S(10), ey + S(10)], fill=BLK)
+    my = hy + S(55)
+    if mood in ("smile", "wink"):
+        d.rectangle([hx - S(40), my - S(10), hx + S(40), my + S(16)], fill=WHITE, outline=BLK, width=W_(4))
+        for k in range(1, 4): d.line([(hx - S(40) + k * S(20), my - S(10)), (hx - S(40) + k * S(20), my + S(16))], fill=BLK, width=W_(2))
+    else: d.line([(hx - S(30), my), (hx + S(30), my)], fill=BLK, width=W_(6))
+    if oil:
+        for k, dx in enumerate((-105, 100)):
+            yy = hy - S(20) + S((t * 70 + k * 30) % 60)
+            d.polygon([(hx + S(dx), yy - S(22)), (hx + S(dx) - S(11), yy), (hx + S(dx) + S(11), yy)], fill=(40, 40, 45))
+            d.ellipse([hx + S(dx) - S(11), yy - S(10), hx + S(dx) + S(11), yy + S(12)], fill=(40, 40, 45))

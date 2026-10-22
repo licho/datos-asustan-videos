@@ -138,6 +138,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `roach(d, cx, cy, s, t, head=True, walk=True, wings=0.0, face='neutral', flip=False)` · reel27
 - `roach_head(d, x, y, s, t, blink=True)` · reel27
 - `roach_v12(d, x, y, s, t, ang=0.0, phase=0, eyes=True)` · reel12
+- `robo_cw(d, x, y, s=1.0, t=0.0, mood='smile', arms='down', shades=False, oil=False)` · lib.humanos — Compañero sospechoso de ser robot: peinado de raya perfecta, camisa, corbata y sonrisa cuadrada que no parpadea. y = pies.
 - `scientist(d, x, y, s, t, mood='neutral')` · reel24
 - `scribe(d, x, y, s=1.0, t=0.0, mood='neutral', arms='down')` · lib.humanos — Escriba/historiador griego: toga blanca con banda y corona de laurel. y = pies.
 - `shark(d, x, y, s=1.0, t=0.0, flip=False, mood='neutral')` · lib.animales — Tiburón de lado. mood: neutral | cry | grin. Centro del cuerpo.
@@ -167,6 +168,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `arrow(d, x0, y0, x1, y1, col=RED, w=14)` · reels_engine.pantallas
 - `asteroid(d, cx, cy, r, t=0.0, face='angry', fire=0.0, ang=-2.4)` · reel13
 - `backpack(d, x, y, big=2, fill=0, closed=False)` · alien
+- `ball_chain(d, x, y, bx, by, r=45)` · lib.objetos — Grillete en el tobillo (x, y) con cadena hasta una bola de preso en (bx, by).
 - `balloons(d, x, y, t=0.0, n=3, s=1.0, seed=4, cols=((230, 60, 80), (60, 140, 230), (250, 200, 40), (120, 200, 90)))` · lib.objetos — Racimo de globos atado en (x, y).
 - `banana(d, x, y, s, rot=0.0)` · reel12
 - `bar_chart(d, x0, y0, x1, items, vmax=None, frac=1.0, size=40, gap=30, bar_h=70, fmt=None)` · reels_engine.pantallas — Barras horizontales: items=[(etiqueta, valor, color)]. frac (0..1) anima el crecimiento. Devuelve y final.
@@ -197,10 +199,12 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `campfire(d, x, y, s=1.0, t=0.0)` · lib.objetos — Fogata; y = suelo.
 - `can(d, x, y, s=1.0, col=(240, 200, 60))` · reel8
 - `candle(d, x, y, s=1.0, t=0.0, col=(250, 245, 225))` · lib.objetos — Vela encendida; y = base.
+- `captcha(d, x, y, w, t=0.0, picked=(), grid=True, checked=False, size=34)` · lib.pantallas — Prueba genérica de 'No soy un robot' (sin logos). (x, y) = esquina sup. izq. picked = casillas (0..8) marcadas.
 - `car(d, x, y, s, col)` · reel25
 - `car_pixel(d, x, y, t)` · mision002
 - `car_pixel_v1(d, x, y, c='red')` · zombi11
 - `card(d, cx, cy, sc, label)` · reel
+- `cardboard_box(d, x, y, s=1.0, label='OBJETOS PERSONALES', items=True)` · lib.objetos — Caja de cartón de 'despedido' con cosas asomando. y = base.
 - `casita(d, x, y, s)` · reel4
 - `chair(d, x, y, s=1.0, col=WOOD, facing=1, kind='silla')` · reels_engine.muebles — Silla de lado. facing=1 respaldo a la izquierda. kind: silla | oficina.
 - `checklist(d, x, y, w, title, items, done=None, size=36, appear=1.0)` · reels_engine.pantallas — Tarjeta con lista. (x, y) = esquina sup. izq. done = cuántos ya tienen palomita (None = todos).
@@ -217,6 +221,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `cracks(d, box, seed=1, n=6, col=WHITE, width=4)` · reels_engine.pantallas — Grietas de vidrio dentro de box (ventanas rotas).
 - `credit_card(d, cx, cy, s, ang=0.0)` · reel24
 - `culprit_card(d, cx, cy, sc, label)` · reel2
+- `curtain(d, x0, y0, x1, y1, open_=0.0, col=(170, 30, 45))` · lib.objetos — Telón de teatro. open_ 0..1 = qué tan abierto. Dibuja el escenario de fondo, las cortinas y la cenefa.
 - `dehumidifier(d, cx, cy, s, t, ls)` · reel5
 - `desk(d, x0, x1, y=None)` · reel15
 - `dialog_pixel(d, s, t0, t, cps=26)` · oso
@@ -408,6 +413,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `night(moon_on=True)` · reel17
 - `night_room(lamp=True)` · reel14
 - `office(night=False)` · reel15
+- `oficina(night=False)` · lib.fondos_canal — Oficina: pared con ventana (sin invadir letreros), piso y zoclo. Piso en y=1290.
 - `outside_day(w, h)` · reel8
 - `radial_bg(stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))), cx=540, cy=670, rx=760, ry=1250)` · reels_engine.motion — Fondo con degradado radial (centro iluminado, orillas oscuras). stops=((posición 0..1, color), ...). Cacheado.
 - `rlyeh_city(d, cx, base, s, t, col=(60, 75, 80))` · reel3
