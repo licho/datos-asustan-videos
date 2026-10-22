@@ -1,6 +1,7 @@
 """Cleopatra vivió más cerca de la Luna que de las pirámides (datos de tiempo)."""
 import math
 from lib.core import *
+from lib.core import say
 from lib.motion import tw, yoyo, layer, glow, shake, back_out, elastic_out, cubic_out, bounce_out, radial_bg, space_bg
 from lib.personajes import guy, cleopatra, mammoth, stego, trex, anchors
 from lib.props import pyramid, rocket, nopal, building, document, picture, phone_small
@@ -61,7 +62,7 @@ def s_old(c):
     cleopatra(d, 780, 1200, .7, c.t, mood="bored", arms="point")
     if lt > .6:
         sc = tw(lt, .6, .4, 0, 1, back_out)
-        if sc > .3: bubble(d, 640, 560, "Qué viejita…", size=int(54 * sc), tail=(740, 740), maxw=460)
+        if sc > .3: say(d, "Qué viejita…", mouth=(780, 1200 - 495 * .7), head=90 * .7, size=int(54 * sc), side=-1)
     return img
 
 def s_family(c):
@@ -72,7 +73,7 @@ def s_family(c):
     d.rectangle([380, 880, 700, 960], fill=(30, 90, 170), outline=BLK, width=4); d.text((540, 920), "MACEDONIA", font=F(40), fill=WHITE, anchor="mm")
     if lt > c.dur * .6:
         cleopatra(d, 540, 1290, .45, c.t, mood="happy")
-        bubble(d, 820, 1040, "¡Ya hablo egipcio!", size=42, tail=(620, 1100), maxw=380)
+        say(d, "¡Ya hablo egipcio!", mouth=(540, 1290 - 495 * .45), head=90 * .45, size=42, maxw=380, side=1)
     chip(d, "¿EGIPCIA?", CHIP1, bg=BLUE, appear=lt / .3)
     return img
 
@@ -141,7 +142,7 @@ def s_future(c):
     a = anchors(820, 1270, .6); hx, hy = a["hand_r_up"]
     d.rounded_rectangle([hx - 40, hy - 130, hx + 40, hy + 8], 14, fill=(40, 40, 45), outline=BLK, width=4); d.rectangle([hx - 30, hy - 118, hx + 30, hy - 8], fill=(120, 190, 250))
     d.ellipse([hx - 16, hy - 16, hx + 16, hy + 16], fill=SKIN, outline=BLK, width=2)
-    if lt > .5: bubble(d, 380, 640, "¿¿Y eso??", size=int(54 * tw(lt, .5, .4, .4, 1, back_out)), tail=(440, 1000), maxw=420)
+    if lt > .5: say(d, "¿¿Y eso??", mouth=(300 + .7 * 300, 1260 - .7 * 120), head=.7 * 70, size=int(54 * tw(lt, .5, .4, .4, 1, back_out)))
     chip(d, "EL FUTURO", CHIP1, bg=BLUE, appear=lt / .3)
     return img
 

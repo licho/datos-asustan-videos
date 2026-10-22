@@ -1,7 +1,7 @@
 """Animales nuevos dibujados directo en lib (cartoon). Todos miran a la derecha salvo flip=True.
 (x, y) = centro del cuerpo; para animales en el piso, y = piso."""
 import math
-from .core import BLK, WHITE, RED, YEL, dk, lc
+from .core import BLK, WHITE, RED, YEL, dk, lc, F
 
 def _P(x, y, s, flip):
     fx = -1 if flip else 1
@@ -215,7 +215,7 @@ def stego(d, x, y, s=1.0, t=0.0, mood="normal", flip=False):
     d.ellipse([hx - S(55), y - S(170), hx + S(55), y - S(90)], fill=G, outline=BLK, width=W_(4))
     d.ellipse([hx + f * S(10) - S(13), y - S(150), hx + f * S(10) + S(13), y - S(124)], fill=WHITE, outline=BLK, width=2)
     d.ellipse([hx + f * S(14) - S(6), y - S(144), hx + f * S(14) + S(6), y - S(132)], fill=BLK)
-    if mood == "confused": d.text((hx, y - S(240)), "?", font=None, fill=BLK)
+    if mood == "confused": d.text((hx, y - S(250)), "?", font=F(int(S(90))), fill=BLK, anchor="mm", stroke_width=W_(5), stroke_fill=WHITE)
 
 def trex(d, x, y, s=1.0, t=0.0, flip=False, roar=False):
     """Tiranosaurio; y = piso."""

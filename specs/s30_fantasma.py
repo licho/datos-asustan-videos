@@ -1,6 +1,7 @@
 """Guía laboral Ep. 4: el fantasma busca trabajo."""
 import math
 from lib.core import *
+from lib.core import say
 from lib.personajes import guy, ghost
 from lib.props import table, laptop, floor_lamp, house, sign_board, document, phone_chat, camera, rec_frame, monitor, door, clouds, moon_disc
 from lib.fondos import office, night_room
@@ -46,7 +47,7 @@ def realtor(c):
     sign_board(d, 900, 1290, "SE VENDE", size=40, bg=(200, 40, 50), post_h=160)
     d = ghost(img, 170, 980, .5, c.t, mood="happy", tie=TIE, arms="wave")
     chip(d, "TRABAJO #1: AGENTE INMOBILIARIO", CHIP1, bg=BLUE, size=46, appear=lt / .3)
-    if f > .25: bubble(d, 420, 470, "¡Con mucho carácter!" if f < .62 else "¡Inquilino incluido!", size=46, tail=(220, 800), maxw=560)
+    if f > .25: say(d, "¡Con mucho carácter!" if f < .62 else "¡Inquilino incluido!", mouth=(170, 980 - 10 * .5), head=140 * .5, size=46)
     return img
 
 def support(c):
@@ -57,7 +58,7 @@ def support(c):
     top = table(d, 330, 1300, .7, w=480); laptop(d, 330, top, .7)
     chip(d, "TRABAJO #2: SOPORTE TÉCNICO", CHIP1, bg=ORANGE, size=48, appear=lt / .3)
     if f > .15: bubble(d, 600, 480, "CLIENTE: “Las luces se prenden y apagan solas”", size=40, maxw=820, fill=(230, 240, 255))
-    if f > .55: bubble(d, 560, 640, "Sí… ese soy yo.", size=50, tail=(400, 720), maxw=500)
+    if f > .55: say(d, "Sí… ese soy yo.", mouth=(330, 900 - 10 * .75), head=140 * .75, size=50)
     return img
 
 def hr(c):
@@ -67,7 +68,7 @@ def hr(c):
     table(d, 420, 1300, .7, w=520)
     guy(d, 820, 1290, .62, mood="happy" if f < .55 else "scared", t=c.t)
     chip(d, "TRABAJO #3: RECURSOS HUMANOS", CHIP1, bg=GREEN, size=48, appear=lt / .3)
-    if .2 < f < .55: bubble(d, 380, 530, "Nosotros te llamamos.", size=46, tail=(320, 690), maxw=520)
+    if .2 < f < .55: say(d, "Nosotros te llamamos.", mouth=(300, 900 - 10 * .7), head=140 * .7, size=46)
     if f > .7:
         phone_chat(d, 110, 460, 420, 470, "Recursos Humanos", [("r", "¿Hubo noticias?", "visto")], size=32)
         bigtext(d, "GHOSTING", 320, 1000, 80, fill=RED)

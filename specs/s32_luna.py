@@ -1,6 +1,7 @@
 """¿Qué pasaría si la Luna desapareciera?"""
 import math, random
 from lib.core import *
+from lib.core import say
 from lib.personajes import guy, crab, coral, wolf
 from lib.props import planet_earth, moon_disc, sun_simple, snowflake, phone_small, waves, document, building
 from lib.fondos import make_space
@@ -78,7 +79,7 @@ def crabs(c):
     d.rectangle([0, 1000, W, 1380], fill=(235, 210, 150)); d.rectangle([0, 960, W, 1000], fill=(60, 130, 200))
     for x in (250, 820): d.ellipse([x - 120, 1180, x + 120, 1230], fill=(200, 180, 130))
     crab(d, 540, 1250, 1.0, c.t, mood="confused")
-    bubble(d, 760, 640, "¿Y la marea?", size=50, tail=(600, 980), maxw=440)
+    say(d, "¿Y la marea?", mouth=(540, 1250 - 150), head=120, size=50)
     chip(d, "A ADAPTARSE", CHIP1, bg=ORANGE, appear=c.lt / .3)
     return img
 

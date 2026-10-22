@@ -10,6 +10,8 @@ Objetos en personajes: usa `anchors(x, pies, escala)` (lib.personajes) para cabe
 
 Animación estándar (lib.motion): entradas con `tw(t, t0, dur, a, b, back_out|elastic_out)`, flotar con `yoyo`, aplastar/estirar/girar/desvanecer con `layer`, susto con `shake`, brillo con `glow`, volumen con `sphere_shade`. Subtítulos palabra por palabra y viñeta salen solos (CAPTION_STYLE='static' / VIGNETTE=0 para desactivar).
 
+Diálogos: usa `say(d, texto, mouth, head)` (lib.core): el globo se acomoda solo arriba o a un lado de quien habla, sin tapar su cabeza y con punta corta. Para guy/don_tono: a=anchors(x, pies, s); say(d, texto, a['mouth'], a['head_r']).
+
 Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300 · subtítulos 1500 (no poner nada entre 1380 y 1640).
 
 
@@ -17,7 +19,8 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 
 - `grad(top, bot)` — Fondo degradado (cacheado). Devuelve copia lista para dibujar.
 - `canvas(bg)` — bg puede ser Image (se copia) o tupla de 2 colores (degradado).
-- `bubble(d, x, y, text, size=52, tail=None, maxw=760, fill=WHITE, fg=BLK)` — Globo de diálogo centrado en (x,y). tail=(x,y) punta hacia quien habla (arriba o abajo).
+- `bubble(d, x, y, text, size=52, tail=None, maxw=760, fill=WHITE, fg=BLK, max_tail=None)` — Globo de diálogo centrado en (x,y). tail=(x,y) = boca de quien habla.
+- `say(d, text, mouth, head=110, size=52, maxw=520, fill=WHITE, fg=BLK, side=None)` — Globo que se acomoda SOLO junto a quien habla, sin tapar su cabeza.
 - `calendar(d, cx, cy, day, label='DÍA', col=(240, 150, 40), sc=0.7)`
 - `gauge(d, cx, cy, r, val, vmax, label, fg=WHITE)`
 - `confetti(d, t, n=60, seed=7)`

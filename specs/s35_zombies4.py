@@ -1,6 +1,7 @@
 """Zombies en el minisúper, parte 4: día 4, sin señal."""
 import math
 from lib.core import *
+from lib.core import say
 from lib.personajes import guy, employee, zombie, don_tono
 from lib.props import key_on_neck, ice_machine, counter, phone_chat, wall_clock, clouds, helicopter, whistle, campfire, sign_board
 from lib.fondos import store_day, make_store
@@ -82,7 +83,7 @@ def s_story(c):
     hx, hy = 360 + 185 * .75, FEET - 560 * .75                      # mano derecha: sostiene el celular (selfie)
     d.rounded_rectangle([hx - 45, hy - 150, hx + 45, hy + 10], 14, fill=(40, 40, 45), outline=BLK, width=4); d.rectangle([hx - 35, hy - 138, hx + 35, hy - 8], fill=(120, 190, 250))
     d.ellipse([hx - 18, hy - 18, hx + 18, hy + 18], fill=SKIN, outline=BLK, width=2)
-    bubble(d, 720, 520, "Día 4 en el apocalipsis #zombis", size=42, tail=(600, 700), maxw=560)
+    say(d, "Día 4 en el apocalipsis #zombis", mouth=(360, FEET - 470 * .75), head=125 * .75, size=42)
     guy(d, 860, FEET, .62, mood="scared", t=c.t)
     chip(d, "DON TOÑO…", CHIP1, bg=GRAY, appear=c.lt / .3)
     return img
@@ -146,7 +147,7 @@ def s_shift(c):
     img, d = canvas(STORE)
     wall_clock(d, 860, 560, 90, hour=3, minute=0)
     employee(d, 420, FEET - 120, .9, c.t); key_on_neck(d, 420, FEET - 120, .9); counter(d, 420, FEET, .9, w=640)
-    bubble(d, 560, 470, "Mi turno termina a las 7.", size=48, tail=(470, 700), maxw=600)
+    say(d, "Mi turno termina a las 7.", mouth=(420, FEET - 120 - 470 * .9), head=125 * .9, size=48)
     chip(d, "MENOS UNO", CHIP1, bg=PURPLE, appear=c.lt / .3)
     return img
 

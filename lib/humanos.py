@@ -16,7 +16,7 @@ def anchors(x, y, s=1.0):
     Uso: a = anchors(540, 1290, .7); medal(d, *a['chest'], ...)"""
     S = lambda v: v * s
     return {
-        "head": (x, y - S(520)), "head_top": (x, y - S(640)), "eyes": (x, y - S(530)), "mouth": (x, y - S(470)),
+        "head": (x, y - S(520)), "head_r": S(125), "head_top": (x, y - S(640)), "eyes": (x, y - S(530)), "mouth": (x, y - S(470)),
         "neck": (x, y - S(415)), "chest": (x - S(30), y - S(320)), "belly": (x, y - S(230)), "feet": (x, y),
         "hand_r_down": (x + S(135), y - S(205)), "hand_l_down": (x - S(135), y - S(205)),
         "hand_r_up": (x + S(185), y - S(560)), "hand_l_up": (x - S(185), y - S(560)),

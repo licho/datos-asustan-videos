@@ -1,6 +1,7 @@
 """El animal más peligroso del mundo: el mosquito."""
 import math
 from lib.core import *
+from lib.core import say
 from lib.personajes import guy, mosquito, shark, snake, lion
 from lib.props import bed, podium, radar, bucket, tire, flowerpot, cake, balloons, spray, net, skull, egg_raft
 from lib.fondos import night_room
@@ -155,7 +156,7 @@ def surgeon(c):
     img, d = canvas(((200, 235, 230), (160, 210, 205))); lt = c.lt
     d.line([(540, 360), (540, 430)], fill=BLK, width=10); d.ellipse([400, 420, 680, 510], fill=(250, 250, 220), outline=BLK, width=6)
     mosquito(d, 470, 820, 1.3, c.t, mask=True, mood="angry")
-    bubble(d, 830, 610, "Bisturí.", size=56, tail=(650, 740), maxw=320)
+    say(d, "Bisturí.", mouth=(470 + 105 * 1.3, 820 + 5), head=45 * 1.3, size=56)
     pts = []
     for k in range(60):
         x = 120 + k * 14; ph = (k - c.t * 30) % 25
