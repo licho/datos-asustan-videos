@@ -73,7 +73,7 @@ def s_family(c):
     d.rectangle([380, 880, 700, 960], fill=(30, 90, 170), outline=BLK, width=4); d.text((540, 920), "MACEDONIA", font=F(40), fill=WHITE, anchor="mm")
     if lt > c.dur * .6:
         cleopatra(d, 540, 1290, .45, c.t, mood="happy")
-        say(d, "¡Ya hablo egipcio!", mouth=(540, 1290 - 495 * .45), head=90 * .45, size=42, maxw=380, side=1)
+        say(d, "¡Ya hablo egipcio!", mouth=(540, 1290 - 495 * .45), head=90 * .45, size=42, maxw=380, side=1, avoid=[(380, 880, 700, 960)])
     chip(d, "¿EGIPCIA?", CHIP1, bg=BLUE, appear=lt / .3)
     return img
 
@@ -137,12 +137,12 @@ def s_ruler(c):
 def s_future(c):
     img = radial_bg(((0, (250, 220, 170)), (1, (200, 140, 90))), cy=800); d = ImageDraw.Draw(img); lt = c.lt
     d.rectangle([0, 1250, W, 1380], fill=(170, 130, 80))
-    stego(d, 300, 1260 + shake(lt, 1.0, .5, 8) * 0, .7, c.t, mood="confused")
+    stego(d, 300, 1260, .7, c.t)
     guy(d, 820, 1270, .6, mood="happy", arms="up", t=c.t)
     a = anchors(820, 1270, .6); hx, hy = a["hand_r_up"]
     d.rounded_rectangle([hx - 40, hy - 130, hx + 40, hy + 8], 14, fill=(40, 40, 45), outline=BLK, width=4); d.rectangle([hx - 30, hy - 118, hx + 30, hy - 8], fill=(120, 190, 250))
     d.ellipse([hx - 16, hy - 16, hx + 16, hy + 16], fill=SKIN, outline=BLK, width=2)
-    if lt > .5: say(d, "¿¿Y eso??", mouth=(300 + .7 * 300, 1260 - .7 * 120), head=.7 * 70, size=int(54 * tw(lt, .5, .4, .4, 1, back_out)))
+    if lt > .5: say(d, "¿¿Y eso??", mouth=(484, 1168), head=.7 * 70, size=int(54 * tw(lt, .5, .4, .4, 1, back_out)), avoid=[a["box"]])
     chip(d, "EL FUTURO", CHIP1, bg=BLUE, appear=lt / .3)
     return img
 

@@ -19,8 +19,9 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 
 - `grad(top, bot)` — Fondo degradado (cacheado). Devuelve copia lista para dibujar.
 - `canvas(bg)` — bg puede ser Image (se copia) o tupla de 2 colores (degradado).
-- `bubble(d, x, y, text, size=52, tail=None, maxw=760, fill=WHITE, fg=BLK, max_tail=None)` — Globo de diálogo centrado en (x,y). tail=(x,y) = boca de quien habla.
-- `say(d, text, mouth, head=110, size=52, maxw=520, fill=WHITE, fg=BLK, side=None)` — Globo que se acomoda SOLO junto a quien habla, sin tapar su cabeza.
+- `bubble(d, x, y, text, size=52, tail=None, maxw=760, fill=WHITE, fg=BLK, max_tail=None, shadow=True)` — Globo de diálogo centrado en (x,y): esquinas muy redondas, contorno grueso, sombra suave y punta curva tipo cómic.
+- `say(d, text, mouth, head=110, size=52, maxw=520, fill=WHITE, fg=BLK, side=None, avoid=())` — Globo que se acomoda SOLO junto a quien habla.
+- `say_reset()` — Llamar al inicio de cada cuadro (produce lo hace solo) para que los globos se eviten entre sí.
 - `calendar(d, cx, cy, day, label='DÍA', col=(240, 150, 40), sc=0.7)`
 - `gauge(d, cx, cy, r, val, vmax, label, fg=WHITE)`
 - `confetti(d, t, n=60, seed=7)`
@@ -30,6 +31,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `stamp(img, draw_fn, x, y, size=900, angle=0.0, flip=False, **kw)` — Dibuja cualquier personaje en una capa aparte y la pega rotada/volteada.
 - `shake_arr(arr, t, amp)`
 - `fit_font(d, text, maxw, size)` — Fuente del tamaño más grande (<= size) para que 'text' quepa en maxw px.
+- `over(a, b)`
 
 ## lib.motion
 

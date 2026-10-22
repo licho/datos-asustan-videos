@@ -95,7 +95,7 @@ def females(c):
     chip(d, "SOLO LAS HEMBRAS", CHIP1, bg=(220, 70, 140), appear=lt / .3)
     mosquito(d, 400, 740 + math.sin(c.t * 4) * 15, 1.1, c.t, female=True, mood="happy")
     mosquito(d, 900, 1030, .45, c.t, fly=True)
-    bubble(d, 870, 860, "Yo solo tomo néctar", size=38, tail=(900, 985), maxw=330)
+    say(d, "Yo solo tomo néctar", mouth=(900, 1010), head=45, size=38, maxw=330, avoid=[(250, 560, 560, 920)])
     if lt > c.dur * .5:
         d.rectangle([0, 1180, W, 1340], fill=WATER); d.line([(0, 1180), (W, 1180)], fill=(80, 140, 190), width=6)
         egg_raft(d, 330, 1195, 2.2)
