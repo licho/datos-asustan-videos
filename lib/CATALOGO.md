@@ -17,20 +17,20 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 
 ## lib.core
 
-- `grad(top, bot)` — Fondo degradado (cacheado). Devuelve copia lista para dibujar.
-- `canvas(bg)` — bg puede ser Image (se copia) o tupla de 2 colores (degradado).
-- `bubble(d, x, y, text, size=52, tail=None, maxw=760, fill=WHITE, fg=BLK, max_tail=None, shadow=True)` — Globo de diálogo centrado en (x,y): esquinas muy redondas, contorno grueso, sombra suave y punta curva tipo cómic.
-- `say(d, text, mouth, head=110, size=52, maxw=520, fill=WHITE, fg=BLK, side=None, avoid=())` — Globo que se acomoda SOLO junto a quien habla.
-- `say_reset()` — Llamar al inicio de cada cuadro (produce lo hace solo) para que los globos se eviten entre sí.
+- `grad(top, bot)` — Gradient background (cached). Returns a copy ready to draw on.
+- `canvas(bg)` — bg can be an Image (copied) or a tuple of 2 colors (gradient).
+- `bubble(d, x, y, text, size=52, tail=None, maxw=760, fill=WHITE, fg=BLK, max_tail=None, shadow=True)` — Speech bubble centered at (x,y): very round corners, thick outline, soft shadow and a curved comic-style tail.
+- `say(d, text, mouth, head=110, size=52, maxw=520, fill=WHITE, fg=BLK, side=None, avoid=())` — Bubble that places ITSELF next to the speaker.
+- `say_reset()` — Call at the start of each frame (produce does it) so bubbles avoid each other.
 - `calendar(d, cx, cy, day, label='DÍA', col=(240, 150, 40), sc=0.7)`
 - `gauge(d, cx, cy, r, val, vmax, label, fg=WHITE)`
 - `confetti(d, t, n=60, seed=7)`
 - `speedlines(d, t, n=26, col=WHITE, y0=250, y1=1350, seed=2)`
 - `sparkles(d, t, n=24, box=(80, 300, 1000, 1250), col=YEL, seed=3)`
-- `follow_btn(d, lt, y=1250, delay=1.5, text=_cfg.follow_text)` — Botón SÍGUEME que aparece con rebote.
-- `stamp(img, draw_fn, x, y, size=900, angle=0.0, flip=False, **kw)` — Dibuja cualquier personaje en una capa aparte y la pega rotada/volteada.
+- `follow_btn(d, lt, y=1250, delay=1.5, text=_cfg.follow_text)` — Follow button (Channel.follow_text) that pops in with a bounce.
+- `stamp(img, draw_fn, x, y, size=900, angle=0.0, flip=False, **kw)` — Draws any character on a separate layer and pastes it rotated/flipped.
 - `shake_arr(arr, t, amp)`
-- `fit_font(d, text, maxw, size)` — Fuente del tamaño más grande (<= size) para que 'text' quepa en maxw px.
+- `fit_font(d, text, maxw, size)` — Largest font (<= size) so that 'text' fits in maxw px.
 - `over(a, b)`
 
 ## lib.motion
@@ -45,16 +45,16 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `back_in(u, s=1.70158)`
 - `elastic_out(u, amp=1.0, period=0.35)`
 - `bounce_out(u)`
-- `tw(t, t0, dur, a, b, ease=cubic_out)` — Valor que va de a a b entre t0 y t0+dur con la curva 'ease' (antes: a, después: b).
-- `yoyo(t, t0, period, a, b, ease=sine_in_out)` — Va y viene entre a y b (flotar, respirar). Determinista: depende solo de t.
+- `tw(t, t0, dur, a, b, ease=cubic_out)` — Value that goes from a to b between t0 and t0+dur with the 'ease' curve (before: a, after: b).
+- `yoyo(t, t0, period, a, b, ease=sine_in_out)` — Goes back and forth between a and b (float, breathe). Deterministic: depends only on t.
 - `shake(t, t0, dur, amp=10, freq=40)`
-- `layer(img, draw_fn, x, y, size=600, sx=1.0, sy=1.0, rot=0.0, alpha=1.0, **kw)` — Dibuja draw_fn(d, cx, cy, **kw) en una capa y la pega centrada en (x, y) con escala (sx, sy), giro y transparencia.
-- `glow(img, x, y, r, col=(255, 250, 210), alpha=0.5)` — Resplandor suave (radial) centrado en (x, y).
-- `caption_words(d, text, lt, y=CAP_Y, size=_cfg.caption_size, maxw=960, stagger=0.12, dur=0.3)` — Como rich_caption, pero cada palabra salta con 'back_out' una tras otra. *resaltado* en amarillo.
-- `radial_bg(stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))), cx=540, cy=670, rx=760, ry=1250)` — Fondo con degradado radial (centro iluminado, orillas oscuras). stops=((posición 0..1, color), ...). Cacheado.
-- `vignette(img, strength=0.55)` — Oscurece suavemente las orillas (da profundidad a cualquier fondo).
-- `space_bg(t=0.0, n=170, seed=7, stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))))` — Espacio con degradado radial y estrellas que titilan (distinto brillo y tamaño).
-- `sphere_shade(img, cx, cy, r, light=0.35, dark=0.28)` — Luz y sombra de esfera sobre algo redondo ya dibujado (planetas, luna, pelotas): le da volumen.
+- `layer(img, draw_fn, x, y, size=600, sx=1.0, sy=1.0, rot=0.0, alpha=1.0, **kw)` — Draws draw_fn(d, cx, cy, **kw) on a layer and pastes it centered at (x, y) with scale (sx, sy), rotation and opacity.
+- `glow(img, x, y, r, col=(255, 250, 210), alpha=0.5)` — Soft (radial) glow centered at (x, y).
+- `caption_words(d, text, lt, y=CAP_Y, size=_cfg.caption_size, maxw=960, stagger=0.12, dur=0.3)` — Like rich_caption, but each word pops in with 'back_out' one after another. *highlighted* words in yellow.
+- `radial_bg(stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))), cx=540, cy=670, rx=760, ry=1250)` — Radial gradient background (lit center, dark edges). stops=((position 0..1, color), ...). Cached.
+- `vignette(img, strength=0.55)` — Softly darkens the edges (gives depth to any background).
+- `space_bg(t=0.0, n=170, seed=7, stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))))` — Space with a radial gradient and twinkling stars (varied brightness and size).
+- `sphere_shade(img, cx, cy, r, light=0.35, dark=0.28)` — Sphere light and shadow over something round already drawn (planets, moon, balls): gives it volume.
 
 ## lib.audio
 
@@ -77,9 +77,9 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `skid(self, st, g=0.5)`
 - `alarm(self, st, n=10, g=0.07)`
 - `buzz(self, a, b, g=0.06, f0=220)`
-- `whine(self, st, dur=1.5, g=0.07, f0=620)` — Zumbido de mosquito (agudo con vibrato), dur en segundos reales.
+- `whine(self, st, dur=1.5, g=0.07, f0=620)` — Mosquito whine (high pitch with vibrato), dur in real seconds.
 - `fx(self, name, st, **kw)`
-- `music(self, style='bass', quiet=(), loud_from=None)` — style: bass | chiptune | pad | waltz. quiet=[(v0,v1)] silencios; loud_from=v sube volumen al final.
+- `music(self, style='bass', quiet=(), loud_from=None)` — style: bass | chiptune | pad | waltz. quiet=[(v0,v1)] silences; loud_from=v raises the volume at the end.
 - `render(self, out_wav, voice_path=None)`
 - `lp(x, a)`
 
@@ -89,7 +89,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `alien_pixel(d, x, y, big=2, t=0)` · alien
 - `alux(d, x, y, s=1.0, t=0.0, mood='grin', face=1, arm=None, shade=1.0)` · reel4 — Original cartoon alux: small Maya guardian in white clothes with embroidered border and red headband.
 - `alux_laugh(d, x, y, t, size=46)` · reel4
-- `anchors(x, y, s=1.0)` · reels_engine.humanos — Puntos del cuerpo de 'guy' (y de don_tono) para poner objetos encima sin que floten.
+- `anchors(x, y, s=1.0)` · reels_engine.humans — Body points of 'guy' to place objects on him without them floating.
 - `ant_column(d, path, t, s=0.4, gap=95, speed=180, helmet=False)` · lib.animales — Columna de hormigas marchando sobre una línea path=[(x,y),...] (pies en la línea). Avanzan con el tiempo.
 - `army_ant(d, x, y, s=1.0, t=0.0, flip=False, helmet=False)` · lib.animales — Hormiga guerrera (café rojizo, mandíbulas grandes) de lado; y = piso, mira a la derecha. Largo ≈ 230·s. helmet=True: casquito verde.
 - `bacteria(d, x, y, s, t, kind='green', suitcase=False, shades=False)` · reel26
@@ -97,6 +97,8 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `bee(d, x, y, angry=False)` · mision003
 - `blob(d, cx, cy, r, t)` · reel15
 - `brain(d, x, y, s=1.0, t=0.0, mood='happy', eyes_open=True, broom=False)` · lib.criaturas — Cerebro con cara (x, y = centro).
+- `buddy(img, x, y, s=1.0, pose='standing', arms='down', mood='happy', hair='none', look=0.0, t=0.0, skin=WHITE, shirt=WHITE, hair_color=HAIR, dress=None, extras=None, seed=7)` · reels_engine.cartoon.humans — Cartoon buddy with ink outline. pose: standing|sitting; arms: down|up|hips|wave|point|think|behind (or (left, right));
+- `buddy_anchors(x, y, s=1.0, pose='standing', arms='down', t=0.0)` · reels_engine.cartoon.humans — Body points of buddy (head, mouth, hands, chest…) to place bubbles and objects on it.
 - `cat(d, x, y, s)` · reel17
 - `cleopatra(d, x, y, s=1.0, t=0.0, mood='neutral', arms='down')` · lib.humanos — Cleopatra (caricatura): fleco negro, diadema dorada, collar ancho y vestido blanco. y = pies. mood: neutral | bored | happy.
 - `coral(d, x, y, s=1.0, t=0.0, kind='branch', col=(240, 120, 150), spawn=0.0)` · lib.animales — Coral; y = fondo marino. kind: branch | brain. spawn 0..1 suelta huevecillos.
@@ -109,6 +111,23 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `doc(d, cx, cy, w, h, lines, t0, t, title=None)` · reel14
 - `dog(d, x, y, s, t, kind=0, bow=False)` · reel17
 - `don_tono(d, x, y, s=1.0, mood='neutral', arms='down', t=0.0)` · lib.humanos — Don Toño: señor de bigote y gorra (cliente eterno del minisúper).
+- `doodle(img, x, y, s=1.0, outfit='hoodie', mood='happy', arms=('down', 'down'), look=0.0, color=RED, tie=INK, legs=True, shadow=True, dress=None, hat=None, extras=None, seed=1)` · reels_engine.sketch.humans — Sketch-style character. outfit: hoodie, tie (white shirt + tie) or tshirt; 'color' = hoodie/t-shirt color.
+- `doodle_anchors(x, y, s=1.0, arms=('down', 'down'), look=0.0)` · reels_engine.sketch.humans — Body points of doodle (head, mouth, hands…) to place bubbles and objects on it.
+- `doodle_aztec(img, x, y, s=1.0, mood='angry', arms=('show', 'up'), look=0.0, weapon='macuahuitl', shield=True, ang=None, color=None, seed=1)` · reels_engine.sketch.history — doodle as an Aztec warrior: feather headdress, quilted cotton armor, jade necklace; weapon macuahuitl/spear/None,
+- `doodle_baseball_player(img, x, y, s=1.0, mood='smug', arms=('down', 'up'), look=0.0, color=NAVY, cap=None, team='', bat=True, mitt=False, ang=None, seed=1)` · reels_engine.sketch.sports — doodle as a baseball player: cap, buttoned jersey, knickers, socks; bat=True swings a bat, mitt=True on the left hand.
+- `doodle_basketball_player(img, x, y, s=1.0, mood='smug', arms=('hip', 'offer'), look=0.0, color=ORANGE, number=23, held='basketball', ball=False, seed=1)` · reels_engine.sketch.sports — doodle as a basketball player: tank top with number, long shorts, sneakers; held = basketball/None.
+- `doodle_boxer(img, x, y, s=1.0, mood='angry', arms=('show', 'show'), look=0.0, color=RED, seed=1)` · reels_engine.sketch.sports — doodle as a boxer: bare chest, boxing shorts with a white waistband, big gloves; color = gloves and shorts.
+- `doodle_greek(img, x, y, s=1.0, mood='smile', arms=('down', 'offer'), look=0.0, weapon='scroll', ang=None, seed=1)` · reels_engine.sketch.history — doodle as an ancient Greek/Roman citizen: toga, laurel wreath; weapon scroll/torch/spear/None.
+- `doodle_knight(img, x, y, s=1.0, mood='angry', arms=('show', 'up'), look=0.0, weapon='sword', shield=True, ang=None, seed=1)` · reels_engine.sketch.history — doodle as a medieval knight: nasal helmet, chainmail, white surcoat with a red cross, sword and shield.
+- `doodle_marks(img, head, r, kind='excited', seed=1)` · reels_engine.sketch.humans — Little extras around a head: excited ticks, '?', '!' or a sweat drop. head = a["head"], r = a["head_r"].
+- `doodle_maya(img, x, y, s=1.0, mood='smile', arms=('hip', 'offer'), look=0.0, weapon='cacao', shield=False, ang=None, color=None, seed=1)` · reels_engine.sketch.history — doodle as a Maya noble: tall headdress with quetzal plumes, jade collar and cuffs, patterned loincloth;
+- `doodle_pharaoh(img, x, y, s=1.0, mood='smug', arms=('hip', 'down'), look=0.0, weapon=None, ang=None, seed=1)` · reels_engine.sketch.history — doodle as a pharaoh: striped nemes headdress, gold collar and kilt.
+- `doodle_referee(img, x, y, s=1.0, mood='angry', arms=('hip', 'up'), look=0.0, card='yellow', seed=1)` · reels_engine.sketch.sports — doodle as a referee: black-and-white striped shirt, whistle, black shorts; card = yellow/red/None in the raised hand.
+- `doodle_roman(img, x, y, s=1.0, mood='angry', arms=('show', 'up'), look=0.0, weapon='gladius', shield=True, ang=None, color=None, seed=1)` · reels_engine.sketch.history — doodle as a Roman legionary: plumed helmet, segmented armor, red tunic; weapon gladius/sword/spear/None, scutum.
+- `doodle_runner(img, x, y, s=1.0, mood='happy', arms=('up', 'up'), look=0.0, color=GREEN, number=7, band=None, seed=1)` · reels_engine.sketch.sports — doodle as a runner: tank top with a race bib, short shorts, headband, sneakers.
+- `doodle_soccer_player(img, x, y, s=1.0, mood='happy', arms=('down', 'up'), look=0.0, color=BLUE, number=10, shorts=None, ball=False, held=None, seed=1)` · reels_engine.sketch.sports — doodle as a soccer player: team shirt with number, shorts, long socks, boots; ball=True puts a ball at the feet,
+- `doodle_tennis_player(img, x, y, s=1.0, mood='happy', arms=('down', 'up'), look=0.0, color=GREEN, racket=RED, ang=None, headband=True, ball=False, seed=1)` · reels_engine.sketch.sports — doodle as a tennis player: polo shirt, white shorts, headband and racket; ball=True drops a ball at the feet.
+- `doodle_viking(img, x, y, s=1.0, mood='happy', arms=('show', 'up'), look=0.0, weapon='axe', shield=True, ang=None, color=None, seed=1)` · reels_engine.sketch.history — doodle as a viking: horned helmet, red beard, fur collar, tunic; weapon axe/sword/spear/None, round shield.
 - `doppel(d, x, y, s, t, mood='smile', glow=1.0, point=False)` · reel9
 - `elf(d, x, y, s=1.0, t=0.0, mood='happy', arms='down', col=(60, 150, 80), hat=None, sweater=False, flip=False)` · lib.criaturas — Duende navideño (caricatura): gorro puntiagudo con cascabel, orejas puntiagudas, túnica con cinturón,
 - `employee(d, x, y, s, t)` · reel8
@@ -118,7 +137,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `germ(d, x, y, r, kind, t=0.0, phase=0.0, shade=1.0)` · reel2
 - `ghost(img, x, y, s=1.0, t=0.0, alpha=1.0, pixel=0, bob=True, **kw)` · lib.criaturas — Pega un fantasma con transparencia (alpha 0..1) y opcionalmente pixelado (pixel = tamaño de bloque).
 - `ghost_draw(d, x, y, s=1.0, t=0.0, mood='happy', tie=None, headset=False, col=(245, 248, 255), arms='down')` · lib.criaturas — Fantasma de sábana. (x, y) = centro del cuerpo. Alto ~420·s. mood: happy | scared | sad | smug.
-- `guy(d, x, y, s=1.0, mood='neutral', arms='down', look=0.0, t=0.0, hoodie=(240, 120, 40))` · reels_engine.humanos
+- `guy(d, x, y, s=1.0, mood='neutral', arms='down', look=0.0, t=0.0, hoodie=(240, 120, 40))` · reels_engine.humans
 - `heart_face(d, x, y, s=1.0, t=0.0)` · lib.criaturas — Corazón con cara, latiendo rápido (x, y = centro).
 - `hero_pixel(d, x, y, scared=False, frame=0, big=2)` · mision002
 - `hero_pixel_v1(d, x, y, scared=False, frame=0, big=2)` · pixel
@@ -126,7 +145,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `listeria(d, x, y, s, t)` · reel26
 - `llorona(d, x, y, s=1.0, t=0.0, mood='wail', arms='down')` · lib.criaturas — La Llorona (caricatura, no gore): vestido blanco largo que flota, velo, cabello negro largo y lágrimas.
 - `mammoth(d, x, y, s=1.0, t=0.0, flip=False)` · lib.animales — Mamut lanudo de lado; y = piso.
-- `medal(d, x, y, s=1.0, text='1º', ribbon=(40, 120, 220), neck=None)` · reels_engine.humanos — Medalla colgada; (x, y) = centro de la medalla. neck=(x, y) dibuja el listón desde el cuello.
+- `medal(d, x, y, s=1.0, text='1º', ribbon=(40, 120, 220), neck=None)` · reels_engine.humans — Hanging medal; (x, y) = center of the medal. neck=(x, y) draws the ribbon from the neck.
 - `mite(d, x, y, s=1.0, t=0.0, phase=0.0, mood='grin', shade=1.0, dizzy=False)` · reel5
 - `mold(d, cx, cy, r, k, t, seed=1)` · reel26
 - `mosquito(d, x, y, s=1.0, t=0.0, flip=False, female=False, mask=False, hat=False, mood='normal', fly=True)` · lib.animales — Mosquito (patrón rayado tipo Aedes). mood: normal | angry | happy. Centro en el tórax.
@@ -164,74 +183,105 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 ## lib.props
 
 - `air_can(d, x, y, s)` · reel2
-- `alarm_clock(d, x, y, s=1.0, t=0.0, ring=False, text='7:00')` · reels_engine.muebles — Despertador; y = base.
+- `alarm_clock(d, x, y, s=1.0, t=0.0, ring=False, text='7:00')` · reels_engine.furniture — Alarm clock; y = base.
 - `altar_items_pixel(d, v, t)` · ofrenda
-- `arrow(d, x0, y0, x1, y1, col=RED, w=14)` · reels_engine.pantallas
+- `amphora(img, cx, base, h=220, color=CLAY, seed=1, shadow=False)` · reels_engine.sketch.history — Greek/Roman amphora (clay jar with two handles and a black band).
+- `arrow(d, x0, y0, x1, y1, col=RED, w=14)` · reels_engine.screens
 - `asteroid(d, cx, cy, r, t=0.0, face='angry', fire=0.0, ang=-2.4)` · reel13
+- `atm(img, cx, base, h=420, cash=True, seed=1, shadow=False)` · reels_engine.sketch.finance — Cash machine (ATM) with screen and keypad; cash=True shows bills coming out of the slot.
+- `axe(img, gx, gy, L=280, ang=0.0, seed=1)` · reels_engine.sketch.history — Viking axe gripped at (gx, gy).
 - `backpack(d, x, y, big=2, fill=0, closed=False)` · alien
+- `balance_scale(img, cx, base, h=360, tilt=0.0, seed=1, shadow=False)` · reels_engine.sketch.finance — Balance scale; tilt > 0 lowers the right pan (-1…1). Returns the centers of the (left, right) pans.
+- `ball_and_chain(img, cx, base, r=70, to=None, label='DEBT', seed=1, shadow=False)` · reels_engine.sketch.finance — Heavy iron ball with a chain (debt); to = (x, y) where the chain ends, e.g. a doodle's foot.
 - `ball_chain(d, x, y, bx, by, r=45)` · lib.objetos — Grillete en el tobillo (x, y) con cadena hasta una bola de preso en (bx, by).
+- `balloon(img, cx, cy, r=110, label='%', color=RED, string=True, seed=1)` · reels_engine.sketch.finance — Balloon with a label (inflation, a bubble); string=True hangs a string below.
 - `balloons(d, x, y, t=0.0, n=3, s=1.0, seed=4, cols=((230, 60, 80), (60, 140, 230), (250, 200, 40), (120, 200, 90)))` · lib.objetos — Racimo de globos atado en (x, y).
 - `banana(d, x, y, s, rot=0.0)` · reel12
-- `bar_chart(d, x0, y0, x1, items, vmax=None, frac=1.0, size=40, gap=30, bar_h=70, fmt=None)` · reels_engine.pantallas — Barras horizontales: items=[(etiqueta, valor, color)]. frac (0..1) anima el crecimiento. Devuelve y final.
+- `bank(img, cx, base, w=460, label='BANK', seed=1, shadow=False)` · reels_engine.sketch.finance — Bank building with columns and a '$' on the pediment; label = text on the frieze.
+- `bar_chart(d, x0, y0, x1, items, vmax=None, frac=1.0, size=40, gap=30, bar_h=70, fmt=None)` · reels_engine.screens — Horizontal bars: items=[(label, value, color)]. frac (0..1) animates the growth. Returns the final y.
+- `baseball(img, cx, cy, r=40, ang=0.0, seed=1)` · reels_engine.sketch.sports — White baseball with red stitches.
+- `baseball_bat(img, gx, gy, L=320, ang=0.0, seed=1)` · reels_engine.sketch.sports — Wooden baseball bat held at (gx, gy); ang = tilt from straight up.
+- `basketball(img, cx, cy, r=60, ang=0.0, seed=1)` · reels_engine.sketch.sports — Orange basketball with black lines.
+- `basketball_hoop(img, cx, base, h=640, seed=1, shadow=False)` · reels_engine.sketch.sports — Basketball hoop on a pole: backboard, orange rim, net. Returns the rim center.
 - `bed(d, x, y, s=1.0, dirty=0.0)` · reel12
 - `bed_v5(d, cx, cy, s, t, sleeping=True)` · reel5
+- `bicycle(img, cx, base, w=320, color=GREEN, seed=1, shadow=False)` · reels_engine.sketch.everyday — Bicycle seen from the side, facing right.
 - `big_toilet(d, cx, base, s=1.0)` · reel7
-- `blob_map(d, cx, cy, r, seed=3, fill=(170, 175, 185), outline=BLK, label=None, size=40, bumps=7)` · reels_engine.pantallas — Silueta irregular tipo mapa (ciudad, región). Área ≈ π·r².
+- `bill(img, cx, cy, w=150, ang=0.0, label=None, seed=1)` · reels_engine.sketch.props — Banknote centered on (cx, cy), 'w' px wide, turned 'ang' radians; label = text in the middle ("$10").
+- `blob_map(d, cx, cy, r, seed=3, fill=(170, 175, 185), outline=BLK, label=None, size=40, bumps=7)` · reels_engine.screens — Irregular map-like outline (city, region). Area ≈ π·r².
+- `block_arrow(img, cx, cy, size=120, up=True, color=None, seed=1)` · reels_engine.sketch.props — Fat block arrow, up (green by default) or down (red by default).
 - `blood_bag(d, x, y, s, col=(190, 20, 40), empty=False)` · reel14
 - `boat(d, x, y, s=1.0, t=0.0, with_guy=True, mood='neutral', tilt=0.0)` · reel3
-- `bolt(d, x0, y0, x1, y1, seed=1, width=14, col=(255, 245, 140), glow=True, branches=2)` · reels_engine.exterior — Rayo en zigzag de (x0,y0) a (x1,y1) con ramas y resplandor.
+- `bolt(d, x0, y0, x1, y1, seed=1, width=14, col=(255, 245, 140), glow=True, branches=2)` · reels_engine.exterior — Zigzag lightning bolt from (x0,y0) to (x1,y1) with branches and glow.
 - `book(d, cx, cy, s)` · reel3
 - `bookshelf_crooked(d, x, y, s=1.0, lean=8)` · lib.objetos — Librero recién armado y chueco. y = base.
-- `booth(d, x, y, s=1.0, label='SEGURIDAD', col=(200, 205, 210))` · reels_engine.exterior — Caseta (vigilancia, cobro).
+- `booth(d, x, y, s=1.0, label='SEGURIDAD', col=(200, 205, 210))` · reels_engine.exterior — Booth (security, toll).
 - `bottle(d, x, y, s)` · reel2
 - `bottle_v8(d, x, y, s=1.0)` · reel8
 - `box_lid(d, x, y, s=1.0, col=(220, 60, 70), ribbon=(250, 210, 60), ang=0.0)` · lib.objetos — Tapa de regalo con moño (x, y = centro de la tapa).
+- `boxing_glove(img, cx, cy, r=60, color=RED, ang=0.0, seed=1)` · reels_engine.sketch.sports — Boxing glove with a white cuff; ang = which way the cuff points (0 = down).
 - `bridge(d, t, broken=0.0, fixed=False)` · reel4
 - `bubbles(d, t, x0, x1, ybot, n=25, seed=3)` · reel3
 - `bucket(d, x, y, s=1.0, water=True, larvae=0.0, t=0.0)` · lib.objetos — Cubeta; y = piso.
-- `building(d, x, y, w=220, h=600, col=(180, 150, 120), lit=0.0, seed=1, face=None)` · reels_engine.exterior — Edificio (x = centro). lit = fracción de ventanas encendidas (noche).
+- `building(d, x, y, w=220, h=600, col=(180, 150, 120), lit=0.0, seed=1, face=None)` · reels_engine.exterior — Building (x = center). lit = fraction of windows lit (night).
 - `building_v13(d, x, y, w, h, floors, col=(180, 150, 120), lit=True)` · reel13
 - `building_v25(d, x, y, w, h, col, rng, lit=False)` · reel25
+- `burger(img, cx, base, w=200, seed=1, shadow=False)` · reels_engine.sketch.everyday — Burger: buns with sesame, lettuce, cheese and meat.
 - `bus(d, x, y, s)` · reel13
 - `bush(d, x, y, s=1.0, col=(80, 160, 80))` · reels_engine.exterior
 - `bush_pixel(d, x, y, t, shake=0.0)` · mision003
-- `cactus(d, x, y, s=1.0, col=(70, 150, 80))` · reels_engine.exterior — Cactus tipo saguaro (cartoon).
+- `cacao_pod(img, cx, cy, h=150, ang=0.0, seed=1)` · reels_engine.sketch.history — Cacao pod (chocolate fruit); ang = tilt in radians.
+- `cactus(d, x, y, s=1.0, col=(70, 150, 80))` · reels_engine.exterior — Saguaro-style cactus (cartoon).
 - `cactus_pixel(d, x, y, s=1)` · mision002
 - `cake(d, x, y, s=1.0, t=0.0, text='')` · lib.objetos — Pastel con velas; y = base.
+- `calculator(img, cx, cy, h=260, display='1,250', ang=0.0, seed=1)` · reels_engine.sketch.finance — Pocket calculator with a display; ang = tilt.
 - `camera(d, x, y, s=1.0, t=0.0, rec=True, tripod=True, facing=1)` · lib.objetos — Videocámara (opcional sobre tripié). (x, y) = centro de la cámara; facing=1 apunta a la derecha.
 - `campfire(d, x, y, s=1.0, t=0.0)` · lib.objetos — Fogata; y = suelo.
 - `can(d, x, y, s=1.0, col=(240, 200, 60))` · reel8
 - `candle(d, x, y, s=1.0, t=0.0, col=(250, 245, 225))` · lib.objetos — Vela encendida; y = base.
+- `candle_chart(img, x, y, w=600, h=360, candles=None, trend=1.0, n=10, seed=1)` · reels_engine.sketch.finance — Stock-market candlestick chart; (x, y) = bottom left corner. candles = [(open, close, high, low)…] or
 - `captcha(d, x, y, w, t=0.0, picked=(), grid=True, checked=False, size=34)` · lib.pantallas — Prueba genérica de 'No soy un robot' (sin logos). (x, y) = esquina sup. izq. picked = casillas (0..8) marcadas.
 - `car(d, x, y, s, col)` · reel25
 - `car_pixel(d, x, y, t)` · mision002
 - `car_pixel_v1(d, x, y, c='red')` · zombi11
 - `card(d, cx, cy, sc, label)` · reel
 - `cardboard_box(d, x, y, s=1.0, label='OBJETOS PERSONALES', items=True)` · lib.objetos — Caja de cartón de 'despedido' con cosas asomando. y = base.
+- `cash_register(img, cx, base, w=300, display='$25.00', open=True, seed=1, shadow=False)` · reels_engine.sketch.finance — Shop cash register with a display; open=True slides the drawer out with money.
 - `casita(d, x, y, s)` · reel4
-- `chair(d, x, y, s=1.0, col=WOOD, facing=1, kind='silla')` · reels_engine.muebles — Silla de lado. facing=1 respaldo a la izquierda. kind: silla | oficina.
-- `checklist(d, x, y, w, title, items, done=None, size=36, appear=1.0)` · reels_engine.pantallas — Tarjeta con lista. (x, y) = esquina sup. izq. done = cuántos ya tienen palomita (None = todos).
+- `castle(img, cx, base, w=440, flag=RED, seed=1, shadow=False)` · reels_engine.sketch.history — Stone castle: wall with battlements, two towers with pointed roofs, gate and a flag.
+- `chair(d, x, y, s=1.0, col=WOOD, facing=1, kind='chair')` · reels_engine.furniture — Chair seen from the side. facing=1 backrest on the left. kind: chair | office (old names: silla | oficina).
+- `checklist(d, x, y, w, title, items, done=None, size=36, appear=1.0)` · reels_engine.screens — Card with a list. (x, y) = top-left corner. done = how many are already checked (None = all).
+- `chimalli(img, cx, cy, r=100, color=TURQ, seed=1)` · reels_engine.sketch.history — Aztec round shield with a step-fret band and a fringe of feathers.
 - `clock(d, cx, cy, r, t, ring=True)` · reel25
 - `cloud(d, cx, cy, t)` · reel26
 - `cloud_rain(d, x, y, s, t)` · reel4
-- `clouds(d, x, y, s=1.0, col=WHITE, t=0.0, rain=False)` · reels_engine.exterior — Nube (x, y = centro). rain=True dibuja lluvia.
+- `clouds(d, x, y, s=1.0, col=WHITE, t=0.0, rain=False)` · reels_engine.exterior — Cloud (x, y = center). rain=True draws rain.
 - `codex(d, x0, y0, x1, y1, unroll=1.0, seed=2)` · lib.pantallas — Códice tipo biombo (páginas dobladas con glifos de colores). unroll 0..1 = cuánto se ha abierto.
+- `coffee_cup(img, cx, base, h=170, sleeve=WOOD, steam=True, seed=1, shadow=False)` · reels_engine.sketch.everyday — Coffee to go: paper cup with lid, cardboard sleeve and optional steam.
 - `coffee_machine(d, x, y, s, t)` · reel8
 - `coffin(d, x, y, s=1.0, col=(120, 75, 45), open_=False)` · lib.objetos — Ataúd de madera de lado (velorio). y = piso (sobre su base).
+- `coin(img, cx, cy, r=50, label='$', seed=1)` · reels_engine.sketch.everyday — Gold coin with a symbol in the middle.
+- `colosseum(img, cx, base, w=560, seed=1, shadow=False)` · reels_engine.sketch.history — Roman Colosseum seen from the front: three tiers of arches, the right end in ruins.
+- `cone(img, cx, base, h=160, color=ORANGE, seed=1, shadow=False)` · reels_engine.sketch.sports — Training cone with white stripes.
+- `contract(img, cx, cy, h=300, title='CONTRACT', signed=True, stamp=None, ang=0.0, seed=1)` · reels_engine.sketch.finance — Paper document with text lines and a signature (loan, contract, tax form); stamp = text in a red stamp.
 - `corn(d, x, y, s)` · reel4
-- `counter(d, x, y, s=1.0, w=700, col=(120, 90, 70), top=(210, 210, 215))` · reels_engine.muebles — Mostrador / caja (alto ~380·s). Devuelve y de la superficie.
+- `counter(d, x, y, s=1.0, w=700, col=(120, 90, 70), top=(210, 210, 215))` · reels_engine.furniture — Counter / checkout (~380·s tall). Returns the y of the surface.
 - `covers(d, cx, cy, s, t, ls)` · reel5
-- `cracks(d, box, seed=1, n=6, col=WHITE, width=4)` · reels_engine.pantallas — Grietas de vidrio dentro de box (ventanas rotas).
+- `cracks(d, box, seed=1, n=6, col=WHITE, width=4)` · reels_engine.screens — Glass cracks inside box (broken windows).
 - `credit_card(d, cx, cy, s, ang=0.0)` · reel24
+- `crown(img, cx, cy, w=160, seed=1)` · reels_engine.sketch.history — Gold crown with five points and gems; (cx, cy) = center of the band.
 - `culprit_card(d, cx, cy, sc, label)` · reel2
 - `curtain(d, x0, y0, x1, y1, open_=0.0, col=(170, 30, 45))` · lib.objetos — Telón de teatro. open_ 0..1 = qué tan abierto. Dibuja el escenario de fondo, las cortinas y la cenefa.
+- `curve_arrow(img, pts, w=10, color=GREEN, seed=1)` · reels_engine.sketch.props — Hand-drawn curved arrow through the points, with the head at the last one.
+- `dashed_line(img, x, y0, y1, dash=22, gap=16, color=(150, 150, 155), seed=1)` · reels_engine.sketch.props — Vertical dashed divider from y0 to y1 (split screens).
 - `dehumidifier(d, cx, cy, s, t, ls)` · reel5
 - `desk(d, x0, x1, y=None)` · reel15
 - `dialog_pixel(d, s, t0, t, cps=26)` · oso
 - `dirty_hand(d, cx, cy, s)` · reel2
 - `dna(d, x, y, h, t, col1=(90, 160, 240), col2=(240, 120, 160))` · reel9
-- `document(d, x, y, w, h, title='CURRÍCULUM', lines=(), size=30, stamp=None)` · reels_engine.pantallas — Hoja tipo documento (CV, contrato). stamp=('RECHAZADO', color) sello rotado encima (dibújalo con lib.core.stamp si quieres rotar).
-- `door(d, x0, y0, x1, y1, col=(150, 100, 60), opened=0.0, inside=(40, 40, 50), knob=True)` · reels_engine.muebles — Puerta en caja; opened 0..1 (se abre hacia adentro mostrando 'inside').
+- `document(d, x, y, w, h, title='CURRÍCULUM', lines=(), size=30, stamp=None)` · reels_engine.screens — Document sheet (resume, contract). stamp=('REJECTED', color) draws a stamp on top (use core.stamp to rotate it).
+- `door(d, x0, y0, x1, y1, col=(150, 100, 60), opened=0.0, inside=(40, 40, 50), knob=True)` · reels_engine.furniture — Door in a box; opened 0..1 (opens inward showing 'inside').
+- `dumbbell(img, cx, cy, w=240, color=DARK, seed=1)` · reels_engine.sketch.sports — Gym dumbbell lying sideways.
 - `dust(d, cx, cy, s, t)` · reel2
 - `earth(d, cx, cy, r)` · reel13
 - `egg_raft(d, x, y, s=1.0, n=14)` · lib.objetos — Huevecillos (balsa de huevos) flotando.
@@ -239,29 +289,38 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `extra_icon_pixel(d, kind, x, y, big=2)` · zombi11
 - `eye_icon(d, cx, cy, s)` · reel3
 - `fence(d, x0, x1, y, h=160, col=(240, 240, 235))` · reels_engine.exterior
+- `finish_flag(img, cx, base, h=420, wave=0.0, seed=1, shadow=False)` · reels_engine.sketch.sports — Checkered finish flag on a pole; wave = 0…1 phase of the flutter (animate with t).
 - `flicker(t)` · reel
-- `floor_lamp(d, x, y, s=1.0, on=True)` · reels_engine.muebles — Lámpara de pie; y = piso.
+- `floor_lamp(d, x, y, s=1.0, on=True)` · reels_engine.furniture — Floor lamp; y = floor.
 - `flowerpot(d, x, y, s=1.0, water=True)` · lib.objetos — Maceta con plato de agua; y = piso.
+- `football(img, cx, cy, r=50, ang=-0.4, seed=1)` · reels_engine.sketch.sports — American football (leather, white laces); ang = tilt.
 - `freezer(d, x0, y1)` · reel
 - `fridge_alux(d, x, y, s, open_=0.0)` · reel4
 - `fridge_empty(d, x0, y0, w, h, open_=1.0)` · reel8
 - `fruit(d, cx, ybot, col, fuzz=0.0, t=0.0, seed=1)` · reel26
 - `fungus(d, x, y, r, t, col, phase=0.0)` · reel12
 - `garlic(d, cx, cy, r)` · reel14
+- `gauge(img, cx, cy, r=150, value=0.7, label=None, seed=1)` · reels_engine.sketch.finance — Half-circle meter from red to green with a needle (credit score, risk); value = 0…1.
 - `germ_swarm(d, cx, cy, rx, ry, n, t, size=34, seed=5, bad=-1)` · reel16
 - `gift(d, x, y, s=1.0, col=(220, 60, 70), ribbon=(250, 210, 60), bandage=False)` · lib.objetos — Regalo envuelto; y = base. bandage=True: envuelto en vendas.
+- `gift_box(img, cx, base, w=180, color=RED, ribbon=YELLOW, seed=1, shadow=False)` · reels_engine.sketch.everyday — Wrapped present with a ribbon and a bow.
 - `glass(d, cx, ybot)` · reel27
 - `glass_overlay(d, box)` · reel
-- `ground_current(d, x, y, t, r=300, col=(255, 230, 80))` · reels_engine.exterior — Corriente que se expande por el suelo desde (x, y).
-- `heart(d, x, y, r=40, col=RED)` · reels_engine.pantallas
+- `goal_thermometer(img, cx, base, h=480, fill=0.6, label=None, color=RED, seed=1, shadow=False)` · reels_engine.sketch.finance — Savings goal thermometer with tick marks; fill = 0…1; label = text above (the goal).
+- `gold_bars(img, cx, base, w=110, rows=(3, 2, 1), seed=1, shadow=False)` · reels_engine.sketch.finance — Stack of gold bars (pyramid); w = width of one bar, rows = bars per row, bottom first.
+- `greek_column(img, cx, base, h=420, broken=False, seed=1, shadow=False)` · reels_engine.sketch.history — Greek column (marble, fluted); broken = ruin with a cracked top.
+- `ground_current(d, x, y, t, r=300, col=(255, 230, 80))` · reels_engine.exterior — Electric current spreading over the ground from (x, y).
+- `hatched_chart(img, x, base, values, bar_w=70, gap=14, color=GREEN, hatch=GREEN_D, seed=1)` · reels_engine.sketch.props — Bar chart with marker hatching; bars start at x and stand on y=base; values = bar heights in px.
+- `heart(d, x, y, r=40, col=RED)` · reels_engine.screens
 - `heart_pixel(d, x, y, full=True)` · oso
 - `heater(d, x, y, s=1.0)` · reel8
+- `heater_shield(img, cx, cy, h=220, color=WHITE, cross=RED, seed=1)` · reels_engine.sketch.history — Knight's shield with a cross.
 - `heli(d, x, y, t)` · mision002
 - `helicopter(d, x, y, s=1.0, t=0.0, flip=False, light=False, col=(200, 60, 50), beam_to=1300)` · lib.objetos — Helicóptero de rescate (cartoon). facing derecha salvo flip. (x, y) = centro de la cabina. beam_to = y donde termina el reflector.
 - `helmet(d, x, y, s=1.0, col=(80, 100, 60))` · lib.objetos — Casco militar grande suelto. (x, y) = centro de la orilla de abajo.
 - `hive(d, x, y, t, shake=0.0)` · mision003
 - `hourglass(d, x, y, s=1.0, frac=0.5, t=0.0)` · lib.objetos — Reloj de arena (x, y = centro). frac = arena que ya cayó.
-- `house(d, x, y, s=1.0, wall=(240, 220, 180), roof=(190, 70, 50), lights=False, door_col=(140, 90, 50))` · reels_engine.exterior — Casa de una planta con techo de dos aguas.
+- `house(d, x, y, s=1.0, wall=(240, 220, 180), roof=(190, 70, 50), lights=False, door_col=(140, 90, 50))` · reels_engine.exterior — One-story house with a gabled roof.
 - `house_pixel(d)` · mision003
 - `ice(d, x, y, s=1.0)` · reel8
 - `ice_bags(d, x, y, s)` · reel19
@@ -275,16 +334,23 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `items_mision003(d, kind, x, y, big=2)` · mision003
 - `items_ofrenda(d, kind, x, y, big=2, t=0.0)` · ofrenda
 - `jar(d, x, ybot, text='MOSTAZA')` · reel26
+- `jersey(img, cx, cy, w=220, color=BLUE, number=10, name=None, seed=1)` · reels_engine.sketch.sports — Team shirt seen from the back, with number (and name).
 - `jupiter(d, cx, cy, r, mood='neutral')` · reel23
+- `kettlebell(img, cx, base, h=180, color=DARK, seed=1, shadow=False)` · reels_engine.sketch.sports — Kettlebell standing on the floor.
 - `key_on_neck(d, x, y, s)` · reel19
 - `keyboard(d, cx, cy, w, dirt=0.0, seed=1, flipped=False, glow=None)` · reel2
 - `keys(d, x, y, s, ang=0.0)` · reel4
 - `land(d, flood=0.0)` · reel24
-- `laptop(d, x, y, s=1.0, screen=(40, 120, 220), back=False)` · reels_engine.muebles — Laptop sobre una superficie en y. back=True la ves por detrás.
+- `laptop(d, x, y, s=1.0, screen=(40, 120, 220), back=False)` · reels_engine.furniture — Laptop on a surface at y. back=True shows it from behind.
+- `laurel_wreath(img, cx, cy, r=80, seed=1)` · reels_engine.sketch.history — Laurel wreath (victory, emperors); (cx, cy) = center of the head it would crown.
 - `lettuce(d, cx, ybot, melt=0.0)` · reel26
-- `light_switch(d, x, y, s=1.0, on=False)` · reels_engine.muebles
+- `light_bulb(img, cx, cy, h=200, on=True, seed=1)` · reels_engine.sketch.everyday — Light bulb (an idea!); on = yellow glass with rays.
+- `light_switch(d, x, y, s=1.0, on=False)` · reels_engine.furniture
+- `line_chart(img, x, y, w=600, h=360, values=(3, 4, 3.5, 6, 5.5, 8), color=MONEY, area=True, dots=True, seed=1)` · reels_engine.sketch.finance — Line chart with axes; (x, y) = bottom left corner (origin). The line goes up or down with 'values'.
 - `lives_score_pixel(t)` · oso
+- `longship(img, cx, base, w=560, sail=RED, seed=1)` · reels_engine.sketch.history — Viking longship on the water: dragon prow, shields along the side, striped square sail. base = waterline.
 - `loose_arm(d, x, y, s, rot=0.0, shirt=(225, 225, 215))` · reel18
+- `macuahuitl(img, gx, gy, L=300, ang=0.0, seed=1)` · reels_engine.sketch.history — Aztec wooden sword edged with obsidian blades, gripped at (gx, gy).
 - `magnifier(img, cx, cy, R, t, n_germs)` · reel2
 - `meat(d, x, ybot)` · reel26
 - `microphone(d, x, y, s=1.0)` · lib.criaturas — Micrófono de mano; (x, y) = donde se agarra.
@@ -292,27 +358,40 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `microwave(d, x, y)` · reel26
 - `milk(d, x, ybot)` · reel26
 - `milk_v19(d, x, y, s, label='CADUCA HOY')` · reel19
-- `monitor(d, x0, y0, x1, y1, content='chart', t=0.0, trend=1.0, col=(80, 220, 120), stand=True)` · reels_engine.pantallas — Monitor/pantalla. content: chart (gráfica; trend>0 sube) | wave (onda) | blank | text:<texto>.
+- `money_bag(img, cx, base, h=240, label='$', seed=1, shadow=False)` · reels_engine.sketch.finance — Tied money sack with a '$' on it.
+- `money_jar(img, cx, base, w=200, h=280, fill=0.8, label=None, seed=1, shadow=False)` · reels_engine.sketch.props — Glass jar sitting on y=base, filled with bills up to 'fill' (0…1); label = text on a white tag.
+- `money_pile(img, cx, base, w=100, rows=(4, 3, 2, 1), seed=1)` · reels_engine.sketch.props — Pyramid of money stacks centered on cx, sitting on y=base. rows = stacks per row, bottom first.
+- `money_stack(img, x, y, w=120, seed=1)` · reels_engine.sketch.props — Banded stack of bills seen from the front and above; (x, y) = front top left corner.
+- `money_text(img, text, cx, cy, size=170, color=MONEY, edge=MONEY_D, seed=1)` · reels_engine.sketch.props — Big amount in bold green letters, slightly warped ("$3,650"). Centered on (cx, cy).
+- `money_tree(img, cx, base, h=420, seed=1, shadow=False)` · reels_engine.sketch.finance — Tree whose leaves are banknotes (growth, passive income).
+- `monitor(d, x0, y0, x1, y1, content='chart', t=0.0, trend=1.0, col=(80, 220, 120), stand=True)` · reels_engine.screens — Monitor/screen. content: chart (trend>0 goes up) | wave | blank | text:<text>.
 - `moon_disc(d, x, y, r=80, bg=(20, 25, 55), crescent=False)` · reels_engine.exterior
+- `motorbike(img, cx, base, w=360, color=RED, seed=1, shadow=False)` · reels_engine.sketch.everyday — Motorbike seen from the side, facing right.
 - `mower(d, x, y, hx, hy, t)` · mision003
 - `mug(d, x, y, s=1.0, t=0.0, col=(240, 240, 235), level=1.0, steam=True, label=None)` · lib.objetos — Taza de café; y = base. level 0..1 = cuánto café queda (se ve por arriba).
 - `net(d, box, col=(255, 255, 255), step=26)` · lib.objetos — Mosquitero: rejilla dentro de box=(x0,y0,x1,y1).
 - `nopal(d, x, y, s=1.0)` · lib.objetos — Nopal sobre una roca (como en el escudo). y = base de la roca.
+- `obelisk(img, cx, base, h=420, seed=1, shadow=False)` · reels_engine.sketch.history — Egyptian obelisk with a few carved signs.
 - `offering(d, x, y, s)` · reel4
+- `olmec_head(img, cx, base, h=280, seed=1, shadow=False)` · reels_engine.sketch.history — Colossal Olmec stone head: helmet, wide nose and full lips.
 - `open_box(d, x, y, s=1.0, col=(220, 60, 70), ribbon=(250, 210, 60), front=True)` · lib.objetos — Caja de regalo abierta (sin tapa). y = base. Llama con front=False antes del personaje (fondo de la caja)
 - `outhouse(d, x, y, s=1.0, door=0.0, label='WC')` · lib.objetos — Letrina de madera con luna en la puerta. y = piso. door 0..1 = abierta.
+- `padlock(img, cx, cy, h=200, locked=True, color=GOLD, seed=1)` · reels_engine.sketch.finance — Padlock (security, locked savings); locked=False lifts the shackle.
 - `panel_catalogo_pixel(d, v, t)` · ofrenda
 - `pellet(d, x, y, s)` · reel5
-- `people_grid(d, x, y, n=10, cols=5, highlight=(), gap=95, size=1.0, col=(150, 155, 165), hcol=RED)` · reels_engine.pantallas — Íconos de personas ('1 de cada 10'). (x, y) = centro de la cuadrícula.
+- `people_grid(d, x, y, n=10, cols=5, highlight=(), gap=95, size=1.0, col=(150, 155, 165), hcol=RED)` · reels_engine.screens — People icons ('1 in 10'). (x, y) = center of the grid.
+- `percent_badge(img, cx, cy, r=80, text='%', color=RED, seed=1)` · reels_engine.sketch.finance — Starburst badge with a percent sign (interest, discounts, inflation).
 - `phone(d, cx, cy, s, glow=1.0)` · reel2
 - `phone_case(d, cx, cy, s, col=(240, 110, 120), lift=0.0)` · reel7
-- `phone_chat(d, x, y, w, h, title, msgs, shown=None, size=32)` · reels_engine.pantallas — Celular con chat. msgs = [(lado 'l'|'r', texto, hora)]. shown = cuántos mensajes se ven.
+- `phone_chat(d, x, y, w, h, title, msgs, shown=None, size=32)` · reels_engine.screens — Phone with a chat. msgs = [(side 'l'|'r', text, time)]. shown = how many messages are visible.
 - `phone_small(d, x, y, s, glow=1.0, content=None)` · reel9
-- `picture(d, x0, y0, x1, y1, kind='landscape', frame=(120, 80, 50), label=None)` · reels_engine.muebles — Cuadro colgado. kind: landscape | sea | portrait | blank. label = placa abajo (ej. EMPLEADO DEL MES).
+- `picture(d, x0, y0, x1, y1, kind='landscape', frame=(120, 80, 50), label=None)` · reels_engine.furniture — Hanging picture. kind: landscape | sea | portrait | blank. label = plaque at the bottom (e.g. EMPLOYEE OF THE MONTH).
 - `pie(d, cx, cy, r, frac, appear)` · reel12
-- `piggy_bank(d, x, y, s=1.0, coin=True, t=0.0)` · reels_engine.muebles — Alcancía de cochinito; y = base.
+- `pie_chart(img, cx, cy, r=160, parts=(0.5, 0.3, 0.2), colors=None, labels=None, seed=1)` · reels_engine.sketch.finance — Pie chart (budget split); parts are fractions or amounts; labels = text on each slice ("50%").
+- `piggy_bank(d, x, y, s=1.0, coin=True, t=0.0)` · reels_engine.furniture — Piggy bank; y = base.
 - `pillow(d, cx, cy, s)` · reel12
 - `pizza(d, cx, cy, s)` · reel2
+- `pizza_slice(img, cx, cy, h=200, ang=0.0, seed=1)` · reels_engine.sketch.everyday — Pizza slice pointing down, with crust and pepperoni; ang = turn in radians.
 - `plane(d, x, y, s)` · reel25
 - `planet_earth(d, cx, cy, r, mood='happy', look=(0.0, 0.0), eye=1.0, shade=True)` · reel23
 - `podium(d, cx, base, w=250, heights=(330, 230, 160), cols=((240, 190, 40), (190, 195, 205), (205, 130, 60)), appear=1.0)` · lib.objetos — Podio 1-2-3 (1 al centro, 2 izq, 3 der). Devuelve [(x, y_top)] en orden 1,2,3.
@@ -322,71 +401,108 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `portal(d, cx, cy, r, t)` · reel24
 - `post(d, cx, cy, s, t)` · reel4
 - `pot(d, x, y, s, t)` · reel8
+- `price_tag(img, cx, cy, w=200, text='$9.99', color=YELLOW, ang=-0.2, seed=1)` · reels_engine.sketch.finance — Price tag with a hole and string; ang = tilt.
 - `pyramid(d, x, y, s=1.0, built=1.0, col=(225, 190, 120))` · lib.objetos — Pirámide; y = base. built 0..1 = qué tanto está construida (de abajo hacia arriba).
 - `radar(d, cx, cy, rings, t=0.0)` · lib.objetos — rings=[(radio, texto, color, activo)] de mayor a menor.
 - `ranger_hat(d, x, y, s=1.0, col=(150, 110, 60))` · lib.objetos — Sombrero de guardabosques; (x, y) = centro de la cabeza (ponlo sobre guy: x, pies - 520·s).
 - `rec_frame(d, t, label='REC', box=(40, 470, 1040, 1330))` · lib.objetos — Marco de cámara grabando: esquinas + REC parpadeando + contador.
+- `receipt(img, cx, cy, h=260, lines=5, total=None, seed=1)` · reels_engine.sketch.everyday — Shop receipt with a torn zigzag bottom; total = text at the end ("$25").
 - `rice_bowl(d, cx, ybot, s=1.0)` · reel26
 - `ring_light(d, x, y, r=170, on=True)` · lib.objetos
-- `road(d, y0, y1, t=0.0, speed=0.0, col=(70, 70, 75))` · reels_engine.exterior — Calle horizontal con líneas (speed>0 se mueven).
+- `road(d, y0, y1, t=0.0, speed=0.0, col=(70, 70, 75))` · reels_engine.exterior — Horizontal road with lane lines (speed>0 makes them move).
 - `rocket(d, x, y, s=1.0, t=0.0, flame=True)` · lib.objetos — Cohete; (x, y) = base.
-- `ruler(d, x, y0, y1, marks, current=None, appear=1.0, w=60, col=(250, 210, 60))` · reels_engine.pantallas — Regla vertical de tamaños. marks=[(fracción 0=abajo..1=arriba, texto)]; current = índice resaltado.
+- `round_shield(img, cx, cy, r=110, color=CRIMSON, color2=CREAM, seed=1)` · reels_engine.sketch.history — Viking round shield, painted in quarters, with an iron boss.
+- `ruler(d, x, y0, y1, marks, current=None, appear=1.0, w=60, col=(250, 210, 60))` · reels_engine.screens — Vertical size ruler. marks=[(fraction 0=bottom..1=top, text)]; current = highlighted index.
+- `safe(img, cx, base, h=300, open=False, seed=1, shadow=False)` · reels_engine.sketch.finance — Steel safe with a dial and handle; open=True shows the door swung open and money inside.
 - `salad(d, cx, ybot)` · reel26
+- `salary_envelope(img, cx, cy, w=240, label='$', bills=True, seed=1)` · reels_engine.sketch.finance — Paper envelope (salary, savings) with bills peeking out of the top.
 - `sandal(d, cx, cy, s, ang=0.0)` · reel27
 - `sandwich_pixel(d, x, y, big=2)` · oso
 - `sarcophagus(d, x, y, s=1.0, col=(220, 170, 60))` · lib.objetos — Sarcófago de pie; y = base.
 - `sausages(d, x0, y0, x1, y1, n=5)` · lib.objetos — Cadena de salchichas de (x0,y0) a (x1,y1).
 - `scar(d, x, y, s)` · reel9
+- `school_desk(img, x, y, w=400, depth=46, color=WOOD, legs=170, seed=1)` · reels_engine.sketch.props — School desk seen from the front; (x, y) = front left corner of the top. color = top (WOOD, WHITE…).
+- `scoreboard(img, cx, cy, w=420, home='2', away='1', labels=('HOME', 'AWAY'), seed=1)` · reels_engine.sketch.sports — Scoreboard with two scores and their labels.
 - `screw(d, x, y, s=1.0, ang=20)` · lib.objetos
 - `scroll(d, x, y, w, h, title='', lines=(), size=34, fine=None)` · lib.objetos — Pergamino largo con rollos arriba y abajo. (x, y) = esquina sup. izq. fine = letra chiquita al pie.
-- `shelf(d, x0, y0, x1, y1, rows=4, seed=1, items=True)` · reels_engine.muebles — Anaquel con productos de colores (tienda, despensa).
+- `scutum(img, cx, cy, h=280, color=CRIMSON, seed=1)` · reels_engine.sketch.history — Roman legionary shield (tall rectangle with gold wings).
+- `shelf(d, x0, y0, x1, y1, rows=4, seed=1, items=True)` · reels_engine.furniture — Shelf with colorful products (store, pantry).
 - `ship(d, x, y, s)` · reel13
 - `shoe(d, x, y, s)` · reel12
+- `shopping_bag(img, cx, base, h=200, color=PAPER_BAG, seed=1, shadow=False)` · reels_engine.sketch.everyday — Paper shopping bag with handles.
 - `shopping_cart(d, x, y, s=1.0, flip=False, items=True)` · lib.objetos — Carrito del súper; y = piso, empuja hacia la derecha (flip = izquierda). Agarradera en (x - 150s·f, y - 260s).
-- `sign_board(d, x, y, text, size=48, bg=(110, 70, 40), fg=WHITE, post=True, post_h=260)` · reels_engine.pantallas — Letrero de madera con poste; (x, y) = base del poste (piso).
+- `sign_board(d, x, y, text, size=48, bg=(110, 70, 40), fg=WHITE, post=True, post_h=260)` · reels_engine.screens — Wooden sign with a post; (x, y) = base of the post (floor).
+- `skateboard(img, cx, base, w=320, color=RED, seed=1, shadow=False)` · reels_engine.sketch.sports — Skateboard seen from the side.
+- `sketch_building(img, cx, base, w=240, h=520, color=(205, 210, 220), seed=1, shadow=False)` · reels_engine.sketch.everyday — Office/apartment building with a grid of windows and a door.
+- `sketch_house(img, cx, base, w=360, wall=WALL, roof=BRICK, seed=1, shadow=False)` · reels_engine.sketch.everyday — Little house with pitched roof, chimney, door and two windows.
+- `sketch_laptop(img, cx, base, w=320, screen=GLASS, seed=1)` · reels_engine.sketch.everyday — Open laptop seen from the front, sitting on y=base.
+- `sketch_piggy_bank(img, cx, base, w=240, color=PINK, seed=1, shadow=False)` · reels_engine.sketch.everyday — Piggy bank facing right, with a coin slot.
+- `sketch_tree(img, cx, base, h=420, leaves=LEAF, seed=1, shadow=False)` · reels_engine.sketch.everyday — Round tree: brown trunk and a bumpy hatched top.
 - `skin_flake(d, x, y, s)` · reel5
 - `skull(d, x, y, r=30, col=WHITE)` · lib.objetos — Calavera tipo ícono.
 - `slot_pixel(d, x, y, kind=None, sel=False, cross=False, sz=30)` · alien
+- `sneaker(img, cx, base, w=220, color=RED, seed=1, shadow=False)` · reels_engine.sketch.sports — Running shoe seen from the side, toe on the right.
 - `snowflake(d, x, y, r=50, col=(120, 190, 250), width=8)` · lib.objetos
+- `soccer_ball(img, cx, cy, r=60, ang=0.0, seed=1)` · reels_engine.sketch.sports — Soccer ball with black pentagons.
+- `soccer_goal(img, cx, base, w=520, seed=1, shadow=False)` · reels_engine.sketch.sports — Soccer goal with net, seen from the front.
 - `sofa(d, cx, y, s=1.0)` · reel9
+- `spear(img, gx, gy, L=520, ang=0.0, seed=1)` · reels_engine.sketch.history — Spear gripped at (gx, gy), L = total length.
 - `spin_earth(img, cx, cy, r, ang, mood='happy')` · reel25
+- `sport_ball(img, cx, cy, r=60, kind='soccer', ang=0.0, seed=1)` · reels_engine.sketch.sports — Sports ball: kind = soccer, basketball, tennis, baseball, volleyball or football (American); ang = spin.
+- `sport_medal(img, cx, cy, r=60, place=1, ribbon=(RED, BLUE), seed=1)` · reels_engine.sketch.sports — Medal on a V ribbon: place 1 gold, 2 silver, 3 bronze; (cx, cy) = center of the disc.
 - `spray(d, x, y, s=1.0, label='REPELENTE', t=0.0, mist=0.0)` · lib.objetos — Lata de spray; y = base.
+- `stela(img, cx, base, h=380, seed=1, shadow=False)` · reels_engine.sketch.history — Maya stela: tall carved stone with a column of glyph blocks.
 - `step_badge(d, n, cx=140, cy=470, sc=1.0)` · reel2
+- `step_pyramid(img, cx, base, w=480, tiers=5, color=MESO, seed=1, shadow=False)` · reels_engine.sketch.history — Mesoamerican stepped pyramid (Chichén Itzá, Teotihuacan) with a central stairway and a temple on top.
+- `stool(img, cx, y, w=120, seed=1)` · reels_engine.sketch.props — Three-legged wooden stool; (cx, y) = center of the seat.
+- `stopwatch(img, cx, cy, r=90, seconds=15, seed=1)` · reels_engine.sketch.sports — Stopwatch; 'seconds' places the hand.
 - `store_lights(d, b)` · reel
 - `store_shelf(d, x0, x1, y0, y1, rng)` · reel
-- `street_lamp(d, x, y, s=1.0, on=True)` · reels_engine.exterior — Poste de luz; y = piso.
+- `street_lamp(d, x, y, s=1.0, on=True)` · reels_engine.exterior — Street lamp; y = floor.
 - `street_sign(d, x, y, text)` · reel24
 - `sun(d, cx, cy, r, t, mood='happy')` · reel23
 - `sun_pillow(d, t, ls)` · reel5
 - `sun_simple(d, x, y, r=90, t=0.0, rays=True)` · reels_engine.exterior
-- `table(d, x, y, s=1.0, w=520, col=WOOD, cloth=None)` · reels_engine.muebles — Mesa (alto ~330·s). cloth=color de mantel.
+- `sun_stone(img, cx, cy, r=170, seed=1)` · reels_engine.sketch.history — Aztec Sun Stone (calendar stone): central face, ring of day signs and sun rays.
+- `sword(img, gx, gy, L=300, ang=0.0, kind='long', seed=1)` · reels_engine.sketch.history — Sword gripped at (gx, gy): kind 'long' (knight/viking) or 'gladius' (short, Roman).
+- `table(d, x, y, s=1.0, w=520, col=WOOD, cloth=None)` · reels_engine.furniture — Table (~330·s tall). cloth = tablecloth color.
 - `table_v13(d, cx, y, s)` · reel13
 - `taco(d, x, y, s)` · reel24
 - `tank(d, x, y, s, t)` · reel24
 - `taper(d, x, y, w=360, h=170, lid=(60, 140, 220), food=(150, 80, 40), label=None)` · reel26
+- `temple(img, cx, base, w=520, seed=1, shadow=False)` · reels_engine.sketch.history — Greek temple: steps, six columns and a triangular pediment.
 - `templo(d, x, y, s=1.0, col=(200, 185, 160), twin=True, tiers=4)` · lib.objetos — Pirámide mesoamericana escalonada (tipo Templo Mayor): cuerpos escalonados, escalinata al frente y templo(s) arriba.
+- `tennis_ball(img, cx, cy, r=36, ang=0.0, seed=1)` · reels_engine.sketch.sports — Yellow-green tennis ball.
+- `tennis_racket(img, gx, gy, L=300, ang=0.0, color=RED, seed=1)` · reels_engine.sketch.sports — Tennis racket held at (gx, gy); ang = tilt from straight up.
 - `thermo(d, x, y, s, frac, label='45 °C')` · reel19
-- `thought(d, x, y, w, h, tail_to=None, fill=WHITE)` · reels_engine.pantallas — Nube de pensamiento (x, y = centro) con bolitas hacia tail_to. Devuelve caja interior.
+- `thought(d, x, y, w, h, tail_to=None, fill=WHITE)` · reels_engine.screens — Thought cloud (x, y = center) with little bubbles toward tail_to. Returns the inner box.
 - `ticket(d, cx, cy, sc)` · reel19
 - `time_clock(d, x, y, s=1.0, card_text='ENTRADA: 1509', full=1.0)` · lib.objetos — Reloj checador de pared con tarjeta. (x, y) = centro del aparato. full = qué tan llena está la tarjeta.
 - `tire(d, x, y, s=1.0, water=True)` · lib.objetos — Llanta tirada; y = piso.
 - `toilet_seat(d, cx, cy, s=1.0, sparkle_t=None)` · reel2
+- `torch(img, gx, gy, h=220, t=0.0, seed=1)` · reels_engine.sketch.history — Burning torch held at (gx, gy); pass t (seconds) to make the flame flicker.
 - `tortillas(d, x, y, s=1.0)` · lib.objetos — Paquete de tortillas envuelto en papel (de la tortillería). (x, y) = centro.
-- `tree(d, x, y, s=1.0, kind='round', t=0.0, col=(70, 160, 80))` · reels_engine.exterior — Árbol. kind: round | pine | palm.
+- `tree(d, x, y, s=1.0, kind='round', t=0.0, col=(70, 160, 80))` · reels_engine.exterior — Tree. kind: round | pine | palm.
 - `tree_pixel(d)` · mision003
 - `trompo(d, x, y, s, t, k_pastor=1.0, pineapple=True)` · reel24
+- `trophy(img, cx, base, h=260, color=GOLD, label=None, seed=1, shadow=False)` · reels_engine.sketch.sports — Trophy cup with two handles on a base; label = text on the plate.
 - `truck(d, x, y, s=1.0)` · reel8
+- `tv(img, cx, base, w=320, screen=GLASS, seed=1)` · reels_engine.sketch.everyday — Flat TV on a small stand, sitting on y=base.
 - `ufo(d, x, y, big=1, t=0, beam=False, beam_h=120)` · alien
+- `umbrella(img, cx, cy, w=320, color=RED, seed=1)` · reels_engine.sketch.finance — Open umbrella (protection, emergency fund); (cx, cy) = tip of the canopy.
 - `vacuum(d, cx, cy, s, t, ls)` · reel5
+- `volleyball(img, cx, cy, r=60, ang=0.0, seed=1)` · reels_engine.sketch.sports — Volleyball with yellow and blue panels.
 - `voyager(d, x, y, s=1.0)` · reel23
-- `wall_clock(d, x, y, r=70, t=0.0, hour=None, minute=None, spin=0.0)` · reels_engine.muebles — Reloj de pared centrado en (x, y). spin>0 hace girar las manecillas (pasa el tiempo).
-- `wanted(d, x, y, w, h, title='SE BUSCA', subtitle='', paper=(240, 225, 185))` · reels_engine.pantallas — Cartel de SE BUSCA. Devuelve la caja para dibujar al 'sospechoso'. (x, y) = esquina sup. izq.
+- `wall_calendar(img, x, y, w=150, color=BLUE, label=None, seed=1)` · reels_engine.sketch.props — Calendar with rings; (x, y) = top left corner. label = big text instead of the grid of days ("1 YEAR").
+- `wall_clock(d, x, y, r=70, t=0.0, hour=None, minute=None, spin=0.0)` · reels_engine.furniture — Wall clock centered at (x, y). spin>0 turns the hands (time passing).
+- `wallet(img, cx, cy, w=110, seed=1)` · reels_engine.sketch.props — Open brown wallet centered on (cx, cy).
+- `wanted(d, x, y, w, h, title='SE BUSCA', subtitle='', paper=(240, 225, 185))` · reels_engine.screens — WANTED poster. Returns the box to draw the 'suspect' in. (x, y) = top-left corner.
 - `washer(d, cx, cy, s, t)` · reel5
 - `wave(d, t, k)` · reel25
 - `waves(d, t, y=SEA_Y, col=(60, 90, 140))` · reel3
 - `whistle(d, x, y, s=1.0, col=(240, 160, 40))` · lib.objetos
 - `white_flag(d, x, y, s=1.0, t=0.0, h=380)` · lib.objetos — Bandera blanca ondeando (rendición). (x, y) = base del palo.
-- `window(d, x0, y0, x1, y1, kind='day', t=0.0, frame=(240, 240, 240))` · reels_engine.muebles — Ventana en caja. kind: day | night (con luna) | blinds (persianas) | storm.
+- `window(d, x0, y0, x1, y1, kind='day', t=0.0, frame=(240, 240, 240))` · reels_engine.furniture — Window in a box. kind: day | night (with moon) | blinds | storm.
 - `window_frame(d, x, y, w, h, broken=0.0)` · reel13
 
 ## lib.fondos
@@ -412,7 +528,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `make_room(dark=False)` · reel9
 - `make_sea()` · reel3
 - `make_site()` · reel4
-- `make_space(t=0.0, n=170, seed=7, stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))))` · reels_engine.motion — Espacio con degradado radial y estrellas que titilan (distinto brillo y tamaño).
+- `make_space(t=0.0, n=170, seed=7, stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))))` · reels_engine.motion — Space with a radial gradient and twinkling stars (varied brightness and size).
 - `make_space_v1()` · reel13
 - `make_store()` · reel
 - `make_street()` · reel9
@@ -422,7 +538,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `office(night=False)` · reel15
 - `oficina(night=False)` · lib.fondos_canal — Oficina: pared con ventana (sin invadir letreros), piso y zoclo. Piso en y=1290.
 - `outside_day(w, h)` · reel8
-- `radial_bg(stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))), cx=540, cy=670, rx=760, ry=1250)` · reels_engine.motion — Fondo con degradado radial (centro iluminado, orillas oscuras). stops=((posición 0..1, color), ...). Cacheado.
+- `radial_bg(stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))), cx=540, cy=670, rx=760, ry=1250)` · reels_engine.motion — Radial gradient background (lit center, dark edges). stops=((position 0..1, color), ...). Cached.
 - `rlyeh_city(d, cx, base, s, t, col=(60, 75, 80))` · reel3
 - `room(mess=0.0, dark=0.0, seed=1)` · reel12
 - `room_ofrenda_pixel(d, t)` · ofrenda

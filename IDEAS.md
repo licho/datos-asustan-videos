@@ -27,7 +27,7 @@ Octubre–noviembre 2026: zombie en el minisúper · teclado sucio · aluxes · 
 - Llorona busca trabajo (guía laboral Ep. 6) — sin voz listo
 - Señales de que tu compañero es un robot — sin voz listo (jue 3 dic)
 - Guía laboral Ep. 7: el duende de Santa (despedido) — sin voz listo (mar 15 dic)
-- Misión navideña: ayudar a Santa a entregar los juguetes — guion pendiente (jue 17 dic; incluye el dato de cuántas casas/velocidad)
+- Misión 006: ayudar a Santa a entregar los juguetes — sin voz listo (jue 17 dic)
 
 ## Ideas pendientes
 

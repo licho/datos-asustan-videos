@@ -1,0 +1,15 @@
+Video: Misión 006 — Ayudar a Santa a entregar los juguetes (pixel, navideña)
+Fecha: jueves 17 de diciembre 2026, 10:00
+Código: specs/s42_mision006.py · Sin voz: sinvoz/2026-12-17_mision006-santa_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4, una sola toma
+Producir final: python3 -m lib.produce specs/s42_mision006.py final audio/42-mision006.mp3
+
+[dramatically] Misión 006: veinticuatro de diciembre, once de la noche. Santa tiene gripa… y te eligió a ti para repartir los regalos. [excited] Tienes un costal con seis espacios. ¡Al trineo! [confident] Uno: la lista, revisada dos veces. No quieres dejarle carbón al niño equivocado… otra vez. Dos: zanahorias para los renos. Es la gasolina del trineo, y no aceptan tarjeta. Tres: calcetines térmicos. El trineo no tiene techo, ni calefacción, ni dignidad. [sarcastic] Cuatro: pantuflas. Si despiertas al perro de la casa, se acaba la misión. Cinco: una llave maestra. La mitad de las casas ya no tiene chimenea. [serious] Seis: un mapa de husos horarios. Empiezas donde la Navidad llega primero: la Isla de Navidad, en el Pacífico. [mischievously] ¿El GPS del celular? RECHAZADO: te manda por la autopista en plena Nochebuena. [sarcastic] ¿Aceptar la leche y galletas de cada casa? RECHAZADO: en la casa quinientos ya vas en coma de azúcar. ¿Sentarte a probar los tamales de la tía? GAME OVER: te quedas dormido en el sillón… y te envuelven de regalo. [whispers] Dato que asusta: en el mundo hay unos dos mil trescientos millones de niños. Aunque fueran tres por casa, y tuvieras un día completo, serían casi nueve mil casas… por segundo. [confident] Misión: entregar todo antes del amanecer. Secundario: no despertar a la abuela. ¿Qué meterías tú al costal? Misión 007… próximamente.
+
+# words: 219  estimated duration: 89 s
+
+Fuentes:
+- UNICEF, Estado Mundial de la Infancia 2024: unos 2,300 millones de niños en el mundo
+- Cálculo propio: 2,300 millones / 3 por casa ≈ 767 millones de casas / 86,400 s ≈ 8,900 casas por segundo
+- Kiritimati (Isla de Navidad, Kiribati) está en UTC+14: de los primeros lugares donde empieza cada día
+Cámara: px_film (lib/pixel_mision.py) con path/pan/zoom_in del motor (paneo inicial, acercamiento al costal, alejamiento en el dato).
