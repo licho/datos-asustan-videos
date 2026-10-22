@@ -43,7 +43,7 @@ MAP = {
  "road": "lib.exterior:road",
  "booth": "lib.exterior:booth",
  "checklist": "lib.pantallas:checklist",
- "bar_chart": "lib.pantallas:bar_chart", "outhouse": "lib.objetos", "white_flag": "lib.objetos", "helmet": "lib.objetos", "tortillas": "lib.objetos",
+ "bar_chart": "lib.pantallas:bar_chart", "outhouse": "lib.objetos", "white_flag": "lib.objetos", "helmet": "lib.objetos", "tortillas": "lib.objetos", "coffin": "lib.objetos", "candle": "lib.objetos", "shopping_cart": "lib.objetos", "time_clock": "lib.objetos", "microphone": "lib.criaturas", "codex": "lib.pantallas:codex",
  "document": "lib.pantallas:document",
  "phone_chat": "lib.pantallas:phone_chat",
  "monitor": "lib.pantallas:monitor",

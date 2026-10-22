@@ -298,3 +298,49 @@ def tortillas(d, x, y, s=1.0):
     d.ellipse([x - S(80), y - S(30), x + S(80), y + S(40)], fill=(235, 215, 160), outline=BLK, width=W_(4))
     d.polygon([(x - S(85), y), (x - S(60), y - S(60)), (x + S(60), y - S(60)), (x + S(85), y), (x + S(70), y + S(35)), (x - S(70), y + S(35))], fill=(240, 240, 235), outline=BLK)
     d.text((x, y - S(10)), "1 KG", font=F(int(S(32))), fill=(200, 60, 50), anchor="mm")
+
+def coffin(d, x, y, s=1.0, col=(120, 75, 45), open_=False):
+    """Ataúd de madera de lado (velorio). y = piso (sobre su base)."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    d.rectangle([x - S(230), y - S(80), x + S(230), y], fill=(70, 60, 60), outline=BLK, width=W_(4))
+    pts = [(x - S(260), y - S(150)), (x - S(200), y - S(250)), (x + S(260), y - S(250)), (x + S(280), y - S(150)), (x + S(260), y - S(80)), (x - S(200), y - S(80))]
+    d.polygon(pts, fill=col, outline=BLK); d.line(pts + [pts[0]], fill=BLK, width=W_(5))
+    d.line([(x - S(230), y - S(160)), (x + S(270), y - S(160))], fill=dk(col, .7), width=W_(5))
+    for hx in (-120, 60, 200): d.rounded_rectangle([x + S(hx) - S(25), y - S(125), x + S(hx) + S(25), y - S(105)], int(S(6)), fill=(220, 190, 80), outline=BLK, width=W_(2))
+
+def candle(d, x, y, s=1.0, t=0.0, col=(250, 245, 225)):
+    """Vela encendida; y = base."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    d.rectangle([x - S(18), y - S(120), x + S(18), y], fill=col, outline=BLK, width=W_(3))
+    fl = S(6) * math.sin(t * 12)
+    d.polygon([(x - S(14), y - S(130)), (x + fl, y - S(185)), (x + S(14), y - S(130))], fill=(255, 190, 40), outline=(220, 120, 20))
+    d.ellipse([x - S(14), y - S(150), x + S(14), y - S(118)], fill=(255, 190, 40))
+
+def shopping_cart(d, x, y, s=1.0, flip=False, items=True):
+    """Carrito del súper; y = piso, empuja hacia la derecha (flip = izquierda). Agarradera en (x - 150s·f, y - 260s)."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s)); f = -1 if flip else 1
+    basket = [(x - f * S(120), y - S(250)), (x + f * S(140), y - S(250)), (x + f * S(110), y - S(90)), (x - f * S(100), y - S(90))]
+    if items:
+        for k, c in enumerate(((230, 80, 70), (80, 160, 230), (250, 200, 50))):
+            bx = x - f * S(70) + f * k * S(65); d.rectangle([bx - S(28), y - S(300) + k * S(15), bx + S(28), y - S(200)], fill=c, outline=BLK, width=W_(3))
+    d.polygon(basket, fill=(200, 205, 215)); 
+    for k in range(1, 5): d.line([(x - f * S(120) + f * k * S(52), y - S(250)), (x - f * S(100) + f * k * S(42), y - S(90))], fill=(130, 135, 145), width=W_(4))
+    d.line(basket + [basket[0]], fill=BLK, width=W_(7))
+    d.line([(x - f * S(120), y - S(250)), (x - f * S(160), y - S(270))], fill=BLK, width=W_(9))
+    d.line([(x - f * S(100), y - S(90)), (x - f * S(90), y - S(40)), (x + f * S(110), y - S(40))], fill=BLK, width=W_(7))
+    for wx in (-80, 90): d.ellipse([x + f * S(wx) - S(22), y - S(44), x + f * S(wx) + S(22), y], fill=(50, 50, 55), outline=BLK, width=W_(3))
+
+def time_clock(d, x, y, s=1.0, card_text="ENTRADA: 1509", full=1.0):
+    """Reloj checador de pared con tarjeta. (x, y) = centro del aparato. full = qué tan llena está la tarjeta."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    d.rounded_rectangle([x - S(150), y - S(200), x + S(150), y + S(180)], int(S(20)), fill=(200, 200, 210), outline=BLK, width=W_(6))
+    d.ellipse([x - S(100), y - S(170), x + S(100), y + S(30)], fill=WHITE, outline=BLK, width=W_(5))
+    for k in range(12):
+        a = k / 12 * 6.283; d.line([(x + math.sin(a) * S(80), y - S(70) - math.cos(a) * S(80)), (x + math.sin(a) * S(90), y - S(70) - math.cos(a) * S(90))], fill=BLK, width=W_(4))
+    d.line([(x, y - S(70)), (x + S(45), y - S(70))], fill=BLK, width=W_(7)); d.line([(x, y - S(70)), (x, y - S(140))], fill=BLK, width=W_(5))
+    d.rectangle([x - S(90), y + S(70), x + S(90), y + S(95)], fill=(40, 40, 45))
+    cx0, cy0 = x - S(70), y + S(80)
+    d.rectangle([cx0, cy0, cx0 + S(140), cy0 + S(300)], fill=(250, 240, 200), outline=BLK, width=W_(4))
+    d.text((cx0 + S(70), cy0 + S(30)), card_text, font=F(int(S(20))), fill=BLK, anchor="mm")
+    n = int(12 * full)
+    for k in range(n): d.line([(cx0 + S(15), cy0 + S(60) + k * S(19)), (cx0 + S(125), cy0 + S(60) + k * S(19))], fill=(200, 60, 60) if k % 3 == 2 else (60, 60, 160), width=W_(4))

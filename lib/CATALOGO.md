@@ -123,6 +123,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `hero_pixel_v1(d, x, y, scared=False, frame=0, big=2)` · pixel
 - `lion(d, x, y, s=1.0, t=0.0, mood='neutral')` · lib.animales — León sentado de frente; y = piso.
 - `listeria(d, x, y, s, t)` · reel26
+- `llorona(d, x, y, s=1.0, t=0.0, mood='wail', arms='down')` · lib.criaturas — La Llorona (caricatura, no gore): vestido blanco largo que flota, velo, cabello negro largo y lágrimas.
 - `mammoth(d, x, y, s=1.0, t=0.0, flip=False)` · lib.animales — Mamut lanudo de lado; y = piso.
 - `medal(d, x, y, s=1.0, text='1º', ribbon=(40, 120, 220), neck=None)` · lib.humanos — Medalla colgada; (x, y) = centro de la medalla. neck=(x, y) dibuja el listón desde el cuello.
 - `mite(d, x, y, s=1.0, t=0.0, phase=0.0, mood='grin', shade=1.0, dizzy=False)` · reel5
@@ -195,6 +196,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `camera(d, x, y, s=1.0, t=0.0, rec=True, tripod=True, facing=1)` · lib.objetos — Videocámara (opcional sobre tripié). (x, y) = centro de la cámara; facing=1 apunta a la derecha.
 - `campfire(d, x, y, s=1.0, t=0.0)` · lib.objetos — Fogata; y = suelo.
 - `can(d, x, y, s=1.0, col=(240, 200, 60))` · reel8
+- `candle(d, x, y, s=1.0, t=0.0, col=(250, 245, 225))` · lib.objetos — Vela encendida; y = base.
 - `car(d, x, y, s, col)` · reel25
 - `car_pixel(d, x, y, t)` · mision002
 - `car_pixel_v1(d, x, y, c='red')` · zombi11
@@ -206,7 +208,9 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `cloud(d, cx, cy, t)` · reel26
 - `cloud_rain(d, x, y, s, t)` · reel4
 - `clouds(d, x, y, s=1.0, col=WHITE, t=0.0, rain=False)` · lib.exterior — Nube (x, y = centro). rain=True dibuja lluvia.
+- `codex(d, x0, y0, x1, y1, unroll=1.0, seed=2)` · lib.pantallas — Códice tipo biombo (páginas dobladas con glifos de colores). unroll 0..1 = cuánto se ha abierto.
 - `coffee_machine(d, x, y, s, t)` · reel8
+- `coffin(d, x, y, s=1.0, col=(120, 75, 45), open_=False)` · lib.objetos — Ataúd de madera de lado (velorio). y = piso (sobre su base).
 - `corn(d, x, y, s)` · reel4
 - `counter(d, x, y, s=1.0, w=700, col=(120, 90, 70), top=(210, 210, 215))` · lib.muebles — Mostrador / caja (alto ~380·s). Devuelve y de la superficie.
 - `covers(d, cx, cy, s, t, ls)` · reel5
@@ -275,6 +279,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `loose_arm(d, x, y, s, rot=0.0, shirt=(225, 225, 215))` · reel18
 - `magnifier(img, cx, cy, R, t, n_germs)` · reel2
 - `meat(d, x, ybot)` · reel26
+- `microphone(d, x, y, s=1.0)` · lib.criaturas — Micrófono de mano; (x, y) = donde se agarra.
 - `microscope_circle(img, cx, cy, R, t, n)` · reel5
 - `microwave(d, x, y)` · reel26
 - `milk(d, x, ybot)` · reel26
@@ -325,6 +330,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `shelf(d, x0, y0, x1, y1, rows=4, seed=1, items=True)` · lib.muebles — Anaquel con productos de colores (tienda, despensa).
 - `ship(d, x, y, s)` · reel13
 - `shoe(d, x, y, s)` · reel12
+- `shopping_cart(d, x, y, s=1.0, flip=False, items=True)` · lib.objetos — Carrito del súper; y = piso, empuja hacia la derecha (flip = izquierda). Agarradera en (x - 150s·f, y - 260s).
 - `sign_board(d, x, y, text, size=48, bg=(110, 70, 40), fg=WHITE, post=True, post_h=260)` · lib.pantallas — Letrero de madera con poste; (x, y) = base del poste (piso).
 - `skin_flake(d, x, y, s)` · reel5
 - `skull(d, x, y, r=30, col=WHITE)` · lib.objetos — Calavera tipo ícono.
@@ -349,6 +355,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `thermo(d, x, y, s, frac, label='45 °C')` · reel19
 - `thought(d, x, y, w, h, tail_to=None, fill=WHITE)` · lib.pantallas — Nube de pensamiento (x, y = centro) con bolitas hacia tail_to. Devuelve caja interior.
 - `ticket(d, cx, cy, sc)` · reel19
+- `time_clock(d, x, y, s=1.0, card_text='ENTRADA: 1509', full=1.0)` · lib.objetos — Reloj checador de pared con tarjeta. (x, y) = centro del aparato. full = qué tan llena está la tarjeta.
 - `tire(d, x, y, s=1.0, water=True)` · lib.objetos — Llanta tirada; y = piso.
 - `toilet_seat(d, cx, cy, s=1.0, sparkle_t=None)` · reel2
 - `tortillas(d, x, y, s=1.0)` · lib.objetos — Paquete de tortillas envuelto en papel (de la tortillería). (x, y) = centro.

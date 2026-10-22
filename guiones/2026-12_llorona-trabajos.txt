@@ -1,0 +1,14 @@
+Video: Guía laboral Ep. 6 — La Llorona busca trabajo
+Fecha: diciembre 2026 (por definir)
+Código: specs/s39_llorona.py · Sin voz: sinvoz/2026-12_llorona-trabajos_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4
+Producir final: python3 -m lib.produce specs/s39_llorona.py final audio/39-llorona.mp3
+
+[mischievously] Guía laboral para monstruos, episodio seis: la Llorona. [sarcastic] Su currículum: más de quinientos años de experiencia… en turno nocturno. Habilidades: llorar a todo pulmón y aparecer cerca del agua. [confident] Trabajo número uno: despertador humano. Grita “¡Ay, mis hijos!” a las tres de la mañana. Nadie se queda dormido… ni vuelve a dormir nunca. [serious] Trabajo número dos: plañidera profesional. La contratan para llorar en los velorios… y es tan buena que los dolientes le piden que le baje. [mischievously] Trabajo número tres: voceadora del súper. “¡Aaay, mis hijos!… Su mamá los espera en la caja tres.” [excited] Trabajo número cuatro: influencer de sonidos para dormir. Tiene un millón de seguidores… y ninguno ha logrado dormir. [whispers] Dato real: un códice del siglo dieciséis cuenta que, unos diez años antes de que llegaran los españoles, en Tenochtitlan se oía de noche a una mujer llorando: “Hijitos míos, ya tenemos que irnos lejos.” [dramatically] El verdadero problema no es que asuste. Es que la ley dice que el turno nocturno es de siete horas como máximo… [sarcastic] …y ella lleva quinientos años sin checar salida. ¿Qué otro monstruo quieres que busque trabajo? Te leo en los comentarios.
+
+# palabras: 189  duración estimada: 77 s
+
+Fuentes:
+- Library of Congress (Folklife): Códice Florentino, libro XII — mujer llorando en Tenochtitlan en 1509
+- México Desconocido: sexto presagio (Sahagún), "hijitos míos, ya tenemos que irnos lejos"
+- Ley Federal del Trabajo, art. 61: jornada nocturna máxima de 7 horas

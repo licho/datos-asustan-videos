@@ -159,3 +159,62 @@ def rat_skeleton(d, x, y, s=1.0):
     d.ellipse([x + S(60), y - S(115), x + S(160), y - S(45)], fill=B, outline=BLK, width=W_(4))
     d.ellipse([x + S(100), y - S(100), x + S(125), y - S(78)], fill=BLK)
     d.polygon([(x + S(150), y - S(95)), (x + S(195), y - S(70)), (x + S(150), y - S(60))], fill=B, outline=BLK)
+
+def llorona(d, x, y, s=1.0, t=0.0, mood="wail", arms="down"):
+    """La Llorona (caricatura, no gore): vestido blanco largo que flota, velo, cabello negro largo y lágrimas.
+    y = orilla del vestido (flota sola, sin pies). mood: wail (llora con boca abierta) | happy | neutral | sad.
+    arms: down | up (lamento) | mic (sostiene micrófono, mano en x+170s, y-420s) | point.
+    Boca en (x, y - 545·s), radio de cabeza ≈ 95·s (para say)."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    DR, SH, HAIR, SK = (245, 247, 252), (205, 215, 235), (25, 22, 35), (225, 232, 240)
+    y = y + math.sin(t * 2.2) * S(10)
+    hy = y - S(560)
+    VE = (232, 238, 250)
+    veil = [(x - S(95), hy - S(95)), (x + S(95), hy - S(95)), (x + S(140), y - S(330) + math.sin(t * 3) * S(8)), (x - S(140), y - S(330) - math.sin(t * 3) * S(8))]
+    d.polygon(veil, fill=VE, outline=BLK); d.line(veil + [veil[0]], fill=BLK, width=W_(4))
+    hem = []
+    for k in range(13):
+        u = k / 12; hx_ = x - S(170) + u * S(340); hy_ = y + math.sin(t * 4 + u * 9) * S(14) - (S(18) if k % 2 else 0)
+        hem.append((hx_, hy_))
+    d.polygon([(x - S(70), y - S(440)), (x + S(70), y - S(440))] + hem[::-1], fill=DR)
+    d.line([(x - S(70), y - S(440))] + hem + [(x + S(70), y - S(440))], fill=BLK, width=W_(5))
+    for k in range(4): d.line([(x - S(40) + k * S(27), y - S(380)), (x - S(80) + k * S(55), y - S(20))], fill=SH, width=W_(5))
+    for sx in (-1, 1):
+        d.polygon([(x + sx * S(60), hy - S(70)), (x + sx * S(100), hy - S(40)), (x + sx * S(95), y - S(380)), (x + sx * S(55), y - S(410))], fill=HAIR)
+    def arm(hx, hy2, sx):
+        sh = (x + sx * S(65), y - S(420))
+        d.line([sh, (hx, hy2)], fill=BLK, width=W_(44)); d.line([sh, (hx, hy2)], fill=DR, width=W_(36))
+        d.ellipse([hx - S(20), hy2 - S(20), hx + S(20), hy2 + S(20)], fill=SK, outline=BLK, width=W_(3))
+    if arms == "up": arm(x - S(150), hy - S(40), -1); arm(x + S(150), hy - S(40), 1)
+    elif arms == "mic":
+        arm(x - S(120), y - S(230), -1); arm(x + S(140), y - S(470), 1); microphone(d, x + S(140), y - S(470), s * .9)
+    elif arms == "point": arm(x - S(120), y - S(230), -1); arm(x + S(230), y - S(470), 1)
+    else: arm(x - S(120), y - S(230), -1); arm(x + S(120), y - S(230), 1)
+    d.ellipse([x - S(78), hy - S(90), x + S(78), hy + S(85)], fill=SK, outline=BLK, width=W_(4))
+    d.chord([x - S(88), hy - S(105), x + S(88), hy + S(5)], 180, 360, fill=HAIR)
+    d.polygon([(x - S(88), hy - S(50)), (x - S(40), hy - S(55)), (x - S(78), hy + S(60))], fill=HAIR)
+    d.polygon([(x + S(88), hy - S(50)), (x + S(40), hy - S(55)), (x + S(78), hy + S(60))], fill=HAIR)
+    d.arc([x - S(98), hy - S(112), x + S(98), hy + S(20)], 190, 350, fill=VE, width=W_(16)); d.arc([x - S(106), hy - S(120), x + S(106), hy + S(28)], 190, 350, fill=BLK, width=W_(4))
+    for sx in (-1, 1):
+        ex, ey = x + sx * S(30), hy + S(5)
+        if mood in ("wail", "sad"):
+            d.arc([ex - S(18), ey - S(12), ex + S(18), ey + S(14)], 200, 340, fill=BLK, width=W_(6))
+            d.line([(ex - sx * S(18), ey - S(28)), (ex + sx * S(16), ey - S(20))], fill=HAIR, width=W_(6))
+            ty = (t * 160 + (sx + 1) * 20) % S(110)
+            d.line([(ex, ey + S(10)), (ex + sx * S(4), ey + S(10) + ty)], fill=(110, 180, 255), width=W_(9))
+            d.ellipse([ex + sx * S(4) - S(9), ey + S(4) + ty, ex + sx * S(4) + S(9), ey + S(22) + ty], fill=(110, 180, 255))
+        else:
+            d.ellipse([ex - S(15), ey - S(14), ex + S(15), ey + S(14)], fill=WHITE, outline=BLK, width=W_(3)); d.ellipse([ex - S(7), ey - S(7), ex + S(7), ey + S(7)], fill=BLK)
+    mx, my = x, y - S(510)
+    if mood == "wail":
+        o = S(22) + math.sin(t * 7) * S(5); d.ellipse([mx - S(18), my - o, mx + S(18), my + o], fill=(60, 20, 40), outline=BLK, width=W_(3))
+    elif mood == "happy": d.arc([mx - S(28), my - S(22), mx + S(28), my + S(14)], 20, 160, fill=BLK, width=W_(6))
+    elif mood == "sad": d.arc([mx - S(24), my - S(4), mx + S(24), my + S(26)], 200, 340, fill=BLK, width=W_(6))
+    else: d.line([(mx - S(18), my), (mx + S(18), my)], fill=BLK, width=W_(5))
+
+def microphone(d, x, y, s=1.0):
+    """Micrófono de mano; (x, y) = donde se agarra."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    d.line([(x, y + S(20)), (x - S(10), y - S(60))], fill=BLK, width=W_(22)); d.line([(x, y + S(20)), (x - S(10), y - S(60))], fill=(60, 60, 70), width=W_(14))
+    d.ellipse([x - S(42), y - S(110), x + S(22), y - S(46)], fill=(170, 175, 185), outline=BLK, width=W_(4))
+    for k in range(3): d.line([(x - S(36), y - S(95) + k * S(14)), (x + S(14), y - S(95) + k * S(14))], fill=(120, 125, 135), width=W_(3))
