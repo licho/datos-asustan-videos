@@ -344,3 +344,26 @@ def time_clock(d, x, y, s=1.0, card_text="ENTRADA: 1509", full=1.0):
     d.text((cx0 + S(70), cy0 + S(30)), card_text, font=F(int(S(20))), fill=BLK, anchor="mm")
     n = int(12 * full)
     for k in range(n): d.line([(cx0 + S(15), cy0 + S(60) + k * S(19)), (cx0 + S(125), cy0 + S(60) + k * S(19))], fill=(200, 60, 60) if k % 3 == 2 else (60, 60, 160), width=W_(4))
+
+def templo(d, x, y, s=1.0, col=(200, 185, 160), twin=True, tiers=4):
+    """Pirámide mesoamericana escalonada (tipo Templo Mayor): cuerpos escalonados, escalinata al frente y templo(s) arriba.
+    y = piso. twin=True: dos templos (Tláloc azul y Huitzilopochtli rojo); False: uno."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s)); DK = dk(col, .8)
+    w0, th = 420, 70
+    for k in range(tiers):
+        w = w0 - k * 70; yb = y - k * th
+        pts = [(x - S(w / 2), yb), (x + S(w / 2), yb), (x + S(w / 2 - 18), yb - S(th)), (x - S(w / 2 - 18), yb - S(th))]
+        d.polygon(pts, fill=col if k % 2 == 0 else dk(col, .93)); d.line(pts + [pts[0]], fill=BLK, width=W_(4))
+        d.line([(x - S(w / 2 - 6), yb - S(th * .3)), (x + S(w / 2 - 6), yb - S(th * .3))], fill=DK, width=W_(3))
+    top = y - tiers * th; tw_ = w0 - tiers * 70
+    sw = 80 if twin else 60
+    for xs in ((-1, 1) if twin else (0,)):
+        cx = x + xs * S(tw_ / 4 + 6)
+        d.polygon([(cx - S(sw / 2), y), (cx + S(sw / 2), y), (cx + S(sw / 2 - 12), top), (cx - S(sw / 2 - 12), top)], fill=lc(col, (255, 255, 255), .25), outline=BLK)
+        for k in range(1, tiers * 3): yy = y - k * S(th / 3); d.line([(cx - S(sw / 2 - 6), yy), (cx + S(sw / 2 - 6), yy)], fill=DK, width=W_(2))
+    temples = (((-1), (60, 110, 190)), (1, (190, 60, 50))) if twin else ((0, (190, 60, 50)),)
+    for xs, rc in temples:
+        cx = x + xs * S(tw_ / 4 + 6); tw2 = S(tw_ / 2 - 14) if twin else S(tw_ - 30)
+        d.rectangle([cx - tw2 / 2, top - S(80), cx + tw2 / 2, top], fill=(235, 225, 205), outline=BLK, width=W_(4))
+        d.rectangle([cx - S(14), top - S(50), cx + S(14), top], fill=(40, 30, 30))
+        d.rectangle([cx - tw2 / 2 - S(6), top - S(115), cx + tw2 / 2 + S(6), top - S(80)], fill=rc, outline=BLK, width=W_(4))

@@ -4,7 +4,7 @@ from lib.core import *
 from lib.core import say
 from lib.motion import tw, yoyo, layer, glow, shake, back_out, cubic_out, radial_bg
 from lib.personajes import guy, llorona, anchors
-from lib.props import document, alarm_clock, bed, coffin, candle, shopping_cart, time_clock, codex, pyramid, sign_board, moon_disc
+from lib.props import document, alarm_clock, bed, coffin, candle, shopping_cart, time_clock, codex, pyramid, sign_board, moon_disc, templo
 from lib.fondos import make_store, office
 
 NAME = "2026-12_llorona-trabajos"
@@ -129,7 +129,7 @@ def influencer(c):
 def fact(c):
     img, d = river_night(c, y=1100, moon=(940, 900)); lt = c.lt; f = lt / c.dur
     codex(d, 90, 470, 990, 760, unroll=tw(lt, .2, 1.6, 0, 1, cubic_out))
-    for i, (x, s) in enumerate(((180, .45), (330, .3), (960, .35))): pyramid(d, x, 1085, s, col=(150, 140, 160))
+    templo(d, 220, 1085, .75, col=(150, 140, 160)); templo(d, 950, 1085, .45, col=(140, 130, 150), twin=False)
     d = layer(img, lambda dd, cx, cy: llorona(dd, cx, cy + 260, .5, c.t, mood="wail", arms="up"), 640, 1250 - 260, 700, alpha=tw(lt, 1.5, 1.5, 0, .75))
     if f > .55: chip(d, "CÓDICE FLORENTINO · 1509", 830, bg=GRAY, size=44, appear=(f - .55) * c.dur / .3)
     chip(d, "DATO REAL", CHIP1, bg=GREEN, appear=lt / .3)

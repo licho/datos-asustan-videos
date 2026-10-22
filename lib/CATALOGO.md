@@ -352,6 +352,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `taco(d, x, y, s)` · reel24
 - `tank(d, x, y, s, t)` · reel24
 - `taper(d, x, y, w=360, h=170, lid=(60, 140, 220), food=(150, 80, 40), label=None)` · reel26
+- `templo(d, x, y, s=1.0, col=(200, 185, 160), twin=True, tiers=4)` · lib.objetos — Pirámide mesoamericana escalonada (tipo Templo Mayor): cuerpos escalonados, escalinata al frente y templo(s) arriba.
 - `thermo(d, x, y, s, frac, label='45 °C')` · reel19
 - `thought(d, x, y, w, h, tail_to=None, fill=WHITE)` · lib.pantallas — Nube de pensamiento (x, y = centro) con bolitas hacia tail_to. Devuelve caja interior.
 - `ticket(d, cx, cy, sc)` · reel19
