@@ -1,5 +1,7 @@
 # Encargo: separar el motor de video en su propio repositorio
 
+> **Hecho (octubre 2026):** el motor quedó en `licho/reels-engine` (v0.1.0). Este documento se conserva como historia.
+
 Para la sesión que hará la separación. Luis (dueño) quiere un **motor compartido** para varios canales de reels (Datos que Asustan, un canal de pixel art y uno nuevo, probablemente de finanzas personales). Este repo (`licho/datos-asustan-videos`) seguirá siendo el canal **Datos que Asustan**; otra sesión sigue produciendo videos aquí mientras tú separas el motor.
 
 Habla con Luis **en español y con explicaciones sencillas**. Antes de crear el repo nuevo, confirma con él el nombre (propuesta: `licho/motor-reels`) y si será público o privado.
