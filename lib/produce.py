@@ -66,6 +66,8 @@ def render_frame(m, v, t, rec=None):
     for i, (tag, spoken, cap) in enumerate(m.LINES):
         e = m.NSTART[i + 1] if i + 1 < len(m.LINES) else m.NEND
         if m.NSTART[i] <= v < e: c.line, c.cap, c.cap_lt = i, cap, v - m.NSTART[i]
+    from .core import say_reset
+    say_reset()
     img = fn(c)
     d = ImageDraw.Draw(img)
     if rec: rec.tag = "caption"

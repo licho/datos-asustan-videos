@@ -37,57 +37,87 @@ def _bubble_layout(d, text, size, maxw):
         if d.textlength(test, font=f) > maxw and cur: lines.append(cur); cur = w
         else: cur = test
     lines.append(cur)
-    lw = max(d.textlength(l, font=f) for l in lines); lh = size * 1.2
-    return f, lines, lh, lw + size * 1.2, lh * len(lines) + size * 0.8
+    lw = max(d.textlength(l, font=f) for l in lines); lh = size * 1.18
+    return f, lines, lh, lw + size * 1.5, lh * len(lines) + size * 1.0
 
-def bubble(d, x, y, text, size=52, tail=None, maxw=760, fill=WHITE, fg=BLK, max_tail=None):
-    """Globo de diálogo centrado en (x,y). tail=(x,y) = boca de quien habla.
-    La punta es corta y ancha (máx. ~2.2× el tamaño de letra): si quien habla está lejos, apunta hacia él sin estirarse.
-    Mejor usa say(), que acomoda el globo solo junto a quien habla."""
+def _qbez(p0, p1, p2, n=10):
+    return [((1 - u) ** 2 * p0[0] + 2 * (1 - u) * u * p1[0] + u * u * p2[0], (1 - u) ** 2 * p0[1] + 2 * (1 - u) * u * p1[1] + u * u * p2[1]) for u in [k / n for k in range(n + 1)]]
+
+def bubble(d, x, y, text, size=52, tail=None, maxw=760, fill=WHITE, fg=BLK, max_tail=None, shadow=True):
+    """Globo de diálogo centrado en (x,y): esquinas muy redondas, contorno grueso, sombra suave y punta curva tipo cómic.
+    tail=(x,y) = hacia dónde apunta. La punta nunca se estira de más (máx. max_tail). Para colocarlo solo, usa say()."""
     f, lines, lh, bw, bh = _bubble_layout(d, text, size, maxw)
     x0, y0, x1, y1 = x - bw / 2, y - bh / 2, x + bw / 2, y + bh / 2
-    r = int(size * 0.6); ow = max(4, int(size * .1))
-    tri = None
+    r = int(min(bh / 2, size * .9)); ow = max(5, int(size * .12))
+    tail_poly = None
     if tail:
         tx, ty = tail
-        if ty > y1 or ty < y0:                                   # punta arriba o abajo
-            ex = min(max(tx, x0 + r + 30), x1 - r - 30); ey = y1 - 2 if ty > y1 else y0 + 2
-        else:                                                    # punta de lado
-            ey = min(max(ty, y0 + r + 20), y1 - r - 20); ex = x1 - 2 if tx > x1 else x0 + 2
+        if ty > y1 or ty < y0:
+            ex = min(max(tx, x0 + r * .8 + size * .3), x1 - r * .8 - size * .3); ey = y1 - ow if ty > y1 else y0 + ow
+        else:
+            ey = min(max(ty, y0 + bh * .3), y1 - bh * .3); ex = x1 - ow if tx > x1 else x0 + ow
         dx, dy = tx - ex, ty - ey; L = math.hypot(dx, dy) or 1
-        mt = max_tail or size * 2.2; Lc = min(L, mt)
-        tipx, tipy = ex + dx / L * Lc, ey + dy / L * Lc
-        hw = min(size * .55, max(size * .35, Lc * .35))         # base ancha y proporcional
-        px, py = -dy / L, dx / L                                  # perpendicular
-        if abs(dy) >= abs(dx) or (ty > y1 or ty < y0): b1, b2 = (ex - hw, ey), (ex + hw, ey)
-        else: b1, b2 = (ex, ey - hw), (ex, ey + hw)
-        bend = Lc * .18                                           # punta ligeramente curva (estilo cómic)
-        mid1 = ((b1[0] + tipx) / 2 + px * bend, (b1[1] + tipy) / 2 + py * bend)
-        tri = [b1, mid1, (tipx, tipy), b2]
-        d.polygon(tri, fill=fill, outline=BLK, width=ow)
+        Lc = min(L, max_tail or size * 2.0); tip = (ex + dx / L * Lc, ey + dy / L * Lc)
+        hw = size * .42; vertical = ty > y1 or ty < y0
+        b1, b2 = ((ex - hw, ey), (ex + hw, ey)) if vertical else ((ex, ey - hw), (ex, ey + hw))
+        nx, ny = -dy / L, dx / L; bend = Lc * .25                    # curva hacia un lado (como trazo a mano)
+        c1 = ((b1[0] + tip[0]) / 2 + nx * bend, (b1[1] + tip[1]) / 2 + ny * bend)
+        c2 = ((b2[0] + tip[0]) / 2 + nx * bend * .6, (b2[1] + tip[1]) / 2 + ny * bend * .6)
+        tail_poly = _qbez(b1, c1, tip) + _qbez(tip, c2, b2)[1:]
+    img = getattr(d, "_image", None)
+    if shadow and img is not None and img.mode == "RGB":           # sombra suave desplazada
+        from PIL import Image as _I, ImageDraw as _D
+        sh = _I.new("RGBA", img.size, (0, 0, 0, 0)); sd = _D.Draw(sh); off = size * .16
+        sd.rounded_rectangle([x0 + off, y0 + off, x1 + off, y1 + off], r, fill=(0, 0, 0, 70))
+        if tail_poly: sd.polygon([(px + off, py + off) for px, py in tail_poly], fill=(0, 0, 0, 70))
+        img.paste(sh, (0, 0), sh); d = _D.Draw(img)
+    if tail_poly:
+        d.polygon(tail_poly, fill=fill); d.line(tail_poly, fill=BLK, width=ow, joint="curve")
     d.rounded_rectangle([x0, y0, x1, y1], r, fill=fill, outline=BLK, width=ow)
-    if tri:                                                       # tapa la costura entre globo y punta
-        cx_, cy_ = (tri[0][0] + tri[3][0]) / 2, (tri[0][1] + tri[3][1]) / 2
-        shrink = lambda p: (cx_ + (p[0] - cx_) * .78, cy_ + (p[1] - cy_) * .78)
-        d.polygon([shrink(tri[0]), shrink(tri[1]), (cx_ + (tri[2][0] - cx_) * .5, cy_ + (tri[2][1] - cy_) * .5), shrink(tri[3])], fill=fill)
+    if tail_poly:                                                   # tapa la costura: la punta y el globo son una sola pieza
+        cx_, cy_ = (tail_poly[0][0] + tail_poly[-1][0]) / 2, (tail_poly[0][1] + tail_poly[-1][1]) / 2
+        k = .72; d.polygon([(cx_ + (px - cx_) * k, cy_ + (py - cy_) * k) for px, py in tail_poly], fill=fill)
     for i, l in enumerate(lines):
-        d.text((x, y0 + size * 0.4 + lh * i + lh / 2), l, font=f, fill=fg, anchor="mm")
+        d.text((x, y0 + size * .5 + lh * i + lh / 2), l, font=f, fill=fg, anchor="mm")
     return (x0, y0, x1, y1)
 
-def say(d, text, mouth, head=110, size=52, maxw=520, fill=WHITE, fg=BLK, side=None):
-    """Globo que se acomoda SOLO junto a quien habla, sin tapar su cabeza.
-    mouth = (x, y) de la boca; head = radio aproximado de la cabeza en px (guy: anchors(...)['head_r']).
-    Va arriba y hacia el centro de la pantalla; si no cabe, de lado. La punta llega al costado de la cara.
-    Nunca sale de la pantalla ni baja a los subtítulos. Devuelve la caja del globo."""
+def say(d, text, mouth, head=110, size=52, maxw=520, fill=WHITE, fg=BLK, side=None, avoid=()):
+    """Globo que se acomoda SOLO junto a quien habla.
+    mouth = (x, y) de la boca; head = radio de la cabeza (px); avoid = cajas (x0,y0,x1,y1) a no tapar (otros personajes, letreros).
+    Prueba varias posiciones (arriba al centro, arriba a cada lado, a los lados, más arriba) y elige la que:
+    no tape la cabeza ni lo de 'avoid', quede dentro de la pantalla (entre letreros y subtítulos) y tenga la punta más corta."""
     _, _, _, bw, bh = _bubble_layout(d, text, size, maxw)
     mx, my = mouth; toward = side or (1 if mx < W / 2 else -1)
-    tip = (mx + toward * head * .8, my - head * .15)
-    bx = mx + toward * (head * .7 + bw * .3); by = my - head * 1.8 - bh / 2          # por encima de la coronilla (y gorra)
-    if side or by - bh / 2 < 380:                                   # no cabe arriba: de lado
-        bx = mx + toward * (head + 50 + bw / 2); by = my - head * .5
-    bx = min(max(bx, bw / 2 + 30), W - bw / 2 - 30)
-    by = min(max(by, 380 + bh / 2), 1330 - bh / 2)
-    return bubble(d, bx, by, text, size, tail=tip, maxw=maxw, fill=fill, fg=fg, max_tail=max(size * 1.4, head * 1.1))
+    head_box = (mx - head * 1.15, my - head * 1.9, mx + head * 1.15, my + head * .5)
+    top_lim, bot_lim = 380 + bh / 2, 1330 - bh / 2
+    cands = []
+    for lift in (0, 80, 170, 260):
+        above = my - head * 1.9 - bh / 2 - 20 - lift
+        for sx, bias in ((toward, 0), (0, 15), (-toward, 30)):
+            cands.append((mx + sx * (head * .6 + bw * .32), above, bias + lift * .25))
+    for sd, bias in ((toward, 40), (-toward, 70)):
+        cands.append((mx + sd * (head * 1.15 + 40 + bw / 2), my - head * .9, bias))
+    if side: cands = [c for c in cands if (c[0] - mx) * side > 0] or cands
+    def over(a, b): return max(0, min(a[2], b[2]) - max(a[0], b[0])) * max(0, min(a[3], b[3]) - max(a[1], b[1]))
+    best = None
+    for bx, by, bias in cands:
+        cx = min(max(bx, bw / 2 + 30), W - bw / 2 - 30); cy = min(max(by, top_lim), bot_lim)
+        box = (cx - bw / 2, cy - bh / 2, cx + bw / 2, cy + bh / 2)
+        tipx = mx + (1 if cx > mx else -1) * head * .8
+        ex = min(max(tipx, box[0] + 40), box[2] - 40); ey = box[3] if cy < my else box[1]
+        tail_len = math.hypot(tipx - ex, my - ey)
+        score = bias + tail_len * .6 + abs(cx - bx) * .5 + abs(cy - by) * .8 + over(box, head_box) * 1.0 + sum(over(box, a) for a in avoid) * 1.0 + sum(over(box, a) for a in _SAID) * 1.0
+        if best is None or score < best[0]: best = (score, cx, cy)
+    _, cx, cy = best
+    tip = (mx + (1 if cx > mx else -1) * head * .8, my - head * .2)
+    box = bubble(d, cx, cy, text, size, tail=tip, maxw=maxw, fill=fill, fg=fg, max_tail=head * 2.6 + 60)
+    _SAID.append(box)
+    return box
+
+_SAID = []                                                       # globos ya dibujados en el cuadro actual
+def say_reset():
+    """Llamar al inicio de cada cuadro (produce lo hace solo) para que los globos se eviten entre sí."""
+    _SAID.clear()
 
 def calendar(d, cx, cy, day, label="DÍA", col=(240, 150, 40), sc=0.7):
     S = lambda v: v * sc
