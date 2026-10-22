@@ -152,16 +152,40 @@ def sleigh_px(d, x, y, t, sack=0, reindeer=2, rider=True):
     if sack: d.ellipse([x + 2, y - 8 - min(sack, 6), x + 16, y + 6], fill=P["brown"]); rect(d, x + 7, y - 9 - min(sack, 6), 4, 2, "yellow")
     if rider: hero(d, x + 18, y - 14, frame=0, big=1)
 
-def santa_bed_px(d, x, y, t):
-    """Santa enfermo en cama (gripa): (x, y) = esquina inf. izq. de la cama."""
-    rect(d, x, y - 10, 60, 10, "brown"); rect(d, x, y - 22, 6, 22, "brown")
-    rect(d, x + 6, y - 16, 54, 7, "red"); rect(d, x + 6, y - 16, 54, 1, "white")
-    rect(d, x + 7, y - 22, 12, 7, "white")
-    rect(d, x + 9, y - 28, 10, 8, "peach"); rect(d, x + 9, y - 22, 10, 5, "white")
-    rect(d, x + 8, y - 31, 12, 4, "red"); rect(d, x + 20, y - 33, 3, 3, "white")
-    rect(d, x + 18, y - 25, 3, 2, "red")
-    rect(d, x + 20, y - 24, 8, 1, "white"); rect(d, x + 27, y - 25, 2, 3, "red")
-    if int(t * 2) % 2: text(d, x + 36, y - 40, "ACHÚ!", "white", FONTM)
+def santa_bed_px(d, x, y, t, sneeze=True):
+    """Santa enfermo en cama (gripa): gorro con pompón, barba grande, nariz roja, termómetro y bolsa de hielo.
+    (x, y) = esquina inf. izq. de la cama; mide ~96x60 px lógicos."""
+    # cama
+    rect(d, x, y - 14, 96, 14, "brown"); rect(d, x, y - 14, 96, 1, "black")
+    rect(d, x, y - 40, 8, 40, "brown"); rect(d, x + 1, y - 40, 6, 2, "orange")
+    rect(d, x + 90, y - 26, 6, 26, "brown")
+    # almohada
+    rect(d, x + 6, y - 46, 30, 20, "white"); rect(d, x + 6, y - 46, 30, 1, "lgray"); rect(d, x + 6, y - 27, 30, 1, "lgray")
+    # cara (recostada sobre la almohada)
+    hx, hy = x + 20, y - 46
+    rect(d, hx - 8, hy, 18, 14, "peach")
+    rect(d, hx - 4, hy + 4, 2, 2, "black"); rect(d, hx + 4, hy + 4, 2, 2, "black")             # ojos cansados
+    rect(d, hx - 5, hy + 7, 3, 1, "lav"); rect(d, hx + 3, hy + 7, 3, 1, "lav")               # ojeras
+    rect(d, hx - 1, hy + 7, 4, 3, "red"); rect(d, hx, hy + 7, 1, 1, "pink")                  # nariz roja
+    d.polygon([(hx - 10, hy + 9), (hx + 12, hy + 9), (hx + 9, hy + 22), (hx + 1, hy + 26), (hx - 7, hy + 22)], fill=P["white"])
+    rect(d, hx - 4, hy + 10, 10, 2, "white"); rect(d, hx - 3, hy + 12, 8, 1, "lgray")           # bigote
+    d.polygon([(hx - 10, hy + 1), (hx + 12, hy + 1), (hx + 2, hy - 12), (hx - 12, hy - 6)], fill=P["red"])
+    rect(d, hx - 11, hy - 1, 24, 4, "white"); d.ellipse([hx - 18, hy - 10, hx - 11, hy - 3], fill=P["white"])
+    # cobija con orilla blanca (tapa la barba hasta el pecho)
+    d.ellipse([x + 28, y - 36, x + 82, y - 10], fill=P["red"])
+    rect(d, x + 18, y - 26, 72, 12, "red"); rect(d, x + 18, y - 28, 72, 4, "white")
+    for k in range(4): rect(d, x + 40 + k * 12, y - 20, 4, 4, "purple")
+    rect(d, x + 84, y - 34, 6, 6, "black"); rect(d, x + 85, y - 33, 4, 4, "dgray")              # botas asomando
+    # bolsa de hielo y termómetro en la boca
+    d.ellipse([hx - 2, hy - 9, hx + 12, hy - 2], fill=P["blue"]); rect(d, hx + 3, hy - 10, 4, 2, "lgray")
+    rect(d, hx + 6, hy + 11, 16, 2, "lgray"); rect(d, hx + 20, hy + 10, 3, 4, "red")
+    # buró con pañuelos
+    rect(d, x + 100, y - 22, 20, 22, "brown"); rect(d, x + 100, y - 22, 20, 1, "black")
+    rect(d, x + 103, y - 30, 14, 8, "blue"); rect(d, x + 107, y - 34, 6, 4, "white")
+    for k in range(3): d.ellipse([x + 60 + k * 9, y + 2, x + 66 + k * 9, y + 7], fill=P["white"])            # pañuelos en el piso
+    if sneeze and int(t * 1.5) % 3 == 2:
+        text(d, x + 52, y - 72, "¡ACHÚ!", "white", FONTM)
+        for k in range(4): rect(d, hx + 14 + k * 4, hy + 6 - (k % 2) * 3, 2, 2, "lgray")
 
 def cookie_milk_px(d, x, y, big=2):
     R = lambda a, b, w, h, c: rect(d, x + a * big, y + b * big, w * big, h * big, c)
