@@ -59,6 +59,7 @@ Antes de empezar lee: `IDEAS.md` (temas hechos y pendientes) y `lib/CATALOGO.md`
 
 ## Voz (ElevenLabs)
 - Voz **Erick – Cinematic Storyteller** `nFcvfxkh4Fldtkn096yh`, modelo `eleven_v4`. El texto exacto lo da `texto` (con las etiquetas entre corchetes).
+- **Generar con `generations_count=1`** (el conector hace 2 tomas por defecto y cobra el doble). Costo: 1 crédito por carácter (~1,100 por video). Usar `estimate_only` si hay duda.
 - Créditos: plan Starter, se renueva el **día 19** de cada mes. Si no hay créditos, se hacen versiones sin voz y la voz se agrega después.
 - Para bajar el audio al repo: crear `pedidos/NN-nombre.url` con el enlace temporal del mp3 y hacer push; la acción `.github/workflows/bajar-audio.yml` lo descarga a `audio/NN-nombre.mp3`.
 
