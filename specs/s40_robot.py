@@ -44,11 +44,11 @@ def tag(img, text, x, y, k, rot=-10, bg=RED, size=56):
 # ------------------------------------------------------------------ escenas
 def hook(c):
     img, d = canvas(OFF); lt = c.lt
-    desk2(d, 40, 520); desk2(d, 560, 1040)
     guy(d, 270, 1290, .78, mood="scared" if lt > 1.2 else "neutral", look=1, t=c.t)
-    laptop(d, 380, DESK_Y, .7, back=True)
-    robo_cw(d, 800, 1290, .78, c.t, mood="smile", arms="push")
-    laptop(d, 900, DESK_Y, .7, back=True)
+    robo_cw(d, 800, 1290, .78, c.t, mood="smile", arms="down")
+    desk2(d, 40, 520); desk2(d, 560, 1040)
+    laptop(d, 430, DESK_Y, .6, back=False)
+    laptop(d, 650, DESK_Y, .6, back=False)
     if lt > 2.2:
         a = anchors(800, 1290, .78); say(d, "¿Todo bien, compañero?", a["mouth"], head=a["head_r"], size=42, maxw=380, avoid=[anchors(270, 1290, .78)["box"]])
     chip(d, "¿ES UN ROBOT?", CHIP1, bg=RED, appear=lt / .3)
@@ -81,8 +81,11 @@ def videocall(c):
         cx0 = x0 + 20 + (k % 2) * (cw + 20); cy0 = y0 + 20 + (k // 2) * (ch + 20)
         d.rounded_rectangle([cx0, cy0, cx0 + cw, cy0 + ch], 14, fill=(70, 75, 90))
         if k < 3:
-            d.rectangle([cx0, cy0, cx0 + cw, cy0 + ch], fill=(85, 92, 110))
-            guy(d, cx0 + cw / 2, cy0 + ch + 230 * .45, .45, mood="neutral", t=c.t + k, hoodie=hoods[k])
+            from PIL import Image as _I, ImageDraw as _D
+            tile = _I.new("RGB", (int(cw), int(ch)), (85, 92, 110)); td = _D.Draw(tile)
+            guy(td, cw / 2, ch + 230 * .45, .45, mood="neutral", t=c.t + k, hoodie=hoods[k])
+            mask = _I.new("L", tile.size, 0); _D.Draw(mask).rounded_rectangle([0, 0, tile.size[0] - 1, tile.size[1] - 1], 14, fill=255)
+            img.paste(tile, (int(cx0), int(cy0)), mask); d = ImageDraw.Draw(img)
         else:
             d.ellipse([cx0 + cw / 2 - 70, cy0 + ch / 2 - 90, cx0 + cw / 2 + 70, cy0 + ch / 2 + 50], fill=(150, 150, 160), outline=BLK, width=4)
             dots = "." * (1 + int(c.t * 3) % 3)
