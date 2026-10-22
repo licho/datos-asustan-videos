@@ -1,4 +1,4 @@
 pillow
 numpy
 scipy
-reels-engine[audio] @ git+https://github.com/licho/reels-engine@v0.1.0
+reels-engine[audio] @ git+https://github.com/licho/reels-engine@v0.11.0

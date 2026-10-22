@@ -37,6 +37,8 @@ Los specs siguen importando de `lib.core`, `lib.motion`, `lib.personajes`, `lib.
 - **Lo propio del canal** (colores, zonas, carpeta de salida `/tmp/dqa_out`, encabezado del catálogo) está en `lib/canal.py`.
 - **Piezas nuevas de este canal** van aquí (`lib/*.py` + su `MAP`). Si una pieza sirve a cualquier canal, puede subirse al motor en una versión nueva.
 - **Subir de versión el motor:** cambia la etiqueta (`@vX.Y.Z`) en `requirements.txt`, `pip install -r requirements.txt`, corre `preview` y `check` de los specs recientes y revisa que se vean igual; luego commit.
+- **Cámara (motor ≥ v0.4):** `from reels_engine.camera import Shot, film, path, pan, zoom_in, zoom_out, ken_burns, whip, handheld, impact`. Dibuja la escena más grande que la pantalla ("mundo") y fílmala con `film(img, mundo, shot)`; `view.to_screen(p)` y `view.scale` para que globos y letreros sigan a la cámara. Ejemplo completo: `channel_template/specs/s03_camera.py` del motor.
+- `draft` hace un video de revisión rápido (15 cuadros/s, mitad de tamaño). Los comandos en español (`hoja`, `sinvoz`, `texto`) siguen funcionando.
 - Para cambiar el motor mismo, trabaja en `licho/reels-engine` (ver su `README.md`) y publica una etiqueta nueva; nunca apuntes a `main` del motor.
 
 ## Flujo para un video nuevo
