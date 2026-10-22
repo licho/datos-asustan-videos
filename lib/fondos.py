@@ -1,8 +1,10 @@
-"""Fondos completos (imagen 1080x1920). Se cargan bajo demanda desde src/."""
+"""Fondos completos (imagen 1080x1920). Se cargan bajo demanda.
+make_space y radial_bg vienen del motor; aquí se agregan los del canal."""
 from ._lazy import make
-MAP = {
+from reels_engine.registry import FONDOS
+MAP = {**FONDOS,
  "make_store": "reel", "make_outside": "reel", "make_coldroom_in": "reel", "store_day": "reel8", "outside_day": "reel8",
- "room": "reel12", "make_space": "lib.motion:space_bg", "make_space_v1": "reel13:make_space", "radial_bg": "lib.motion", "city": "reel13", "night_room": "reel14", "store_bg": "reel14", "office": "reel15",
+ "room": "reel12", "make_space_v1": "reel13:make_space", "city": "reel13", "night_room": "reel14", "store_bg": "reel14", "office": "reel15",
  "kitchen": "reel16", "moon": "reel17", "night": "reel17", "make_sea": "reel3", "make_jungle": "reel4", "make_bath": "reel7",
  "make_street": "reel9", "make_room": "reel9", "skyline": "reel24", "town": "reel25", "make_fridge": "reel26",
  "make_kitchen": "reel27", "make_milky": "reel23", "make_field": "reel23", "desk_glow": "reel2",

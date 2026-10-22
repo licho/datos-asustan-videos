@@ -19,7 +19,7 @@ Antes de empezar lee: `IDEAS.md` (temas hechos y pendientes) y `lib/CATALOGO.md`
 | Ruta | Qué es |
 |---|---|
 | `specs/sNN_nombre.py` | Un video = un spec (guion por líneas + escenas). Copia uno parecido para empezar. |
-| `lib/` | Motor y librería: `produce.py` (comandos), `core.py` (zonas, textos, globos), `motion.py` (animación), `check.py` (revisión automática), catálogos `personajes.py` / `props.py` / `fondos.py`. |
+| `lib/` | Capa del canal sobre el motor: `canal.py` (configuración del canal), catálogos `personajes.py` / `props.py` / `fondos.py` y piezas propias (`humanos.py`, `animales.py`, `criaturas.py`, `objetos.py`, `pantallas.py`, `pixel_mision.py`, `escenarios.py`). `core`, `motion`, `produce`, `check`, `audio`, `align` son capas delgadas que apuntan al motor. |
 | `lib/CATALOGO.md` | Lista generada de todas las piezas con su firma. Regenerar con `python3 -m lib.catalogo` cada vez que agregues piezas. |
 | `lib/muestras/` | Imágenes de muestra de piezas y escenarios. |
 | `src/` | Reels antiguos (código heredado; sus piezas se reusan vía los catálogos). |
@@ -29,11 +29,21 @@ Antes de empezar lee: `IDEAS.md` (temas hechos y pendientes) y `lib/CATALOGO.md`
 | `videos/` | Videos finales que se suben a Metricool. |
 | `IDEAS.md` | Temas hechos, en producción e ideas pendientes. |
 
+## Motor (repo aparte)
+El motor vive en **`licho/reels-engine`** (público) y se instala como dependencia con versión fija en `requirements.txt`
+(`pip install -r requirements.txt`). Trae lo genérico: comandos de producción, animación, subtítulos, globos, revisión,
+audio y las piezas neutras (`guy`, `anchors`, `medal`, muebles, exteriores, documentos, chat, gráficas, `people_grid`, monitor…).
+Los specs siguen importando de `lib.core`, `lib.motion`, `lib.personajes`, `lib.props` y `lib.fondos` como siempre.
+- **Lo propio del canal** (colores, zonas, carpeta de salida `/tmp/dqa_out`, encabezado del catálogo) está en `lib/canal.py`.
+- **Piezas nuevas de este canal** van aquí (`lib/*.py` + su `MAP`). Si una pieza sirve a cualquier canal, puede subirse al motor en una versión nueva.
+- **Subir de versión el motor:** cambia la etiqueta (`@vX.Y.Z`) en `requirements.txt`, `pip install -r requirements.txt`, corre `preview` y `check` de los specs recientes y revisa que se vean igual; luego commit.
+- Para cambiar el motor mismo, trabaja en `licho/reels-engine` (ver su `README.md`) y publica una etiqueta nueva; nunca apuntes a `main` del motor.
+
 ## Flujo para un video nuevo
 1. **Tema** de `IDEAS.md` (o el que pida Luis). Investiga datos y fuentes.
 2. **Guion** en la respuesta: líneas con escena propuesta, chip (letrero) y fuentes. Espera "me late".
 3. **Spec**: copia `specs/` más parecido → `specs/sNN_tema.py`. Define `NAME`, `LINES`, escenas, `SCENES`, `SFX`, `MUSIC`.
-4. **Piezas nuevas** van a la librería (`lib/humanos.py`, `lib/animales.py`, `lib/criaturas.py`, `lib/objetos.py`, `lib/pantallas.py`, …), se registran en `lib/personajes.py` o `lib/props.py` (diccionario `MAP`) y se regenera el catálogo. Toda pieza lleva contorno negro.
+4. **Piezas nuevas** del canal van a la librería (`lib/humanos.py`, `lib/animales.py`, `lib/criaturas.py`, `lib/objetos.py`, `lib/pantallas.py`, …), se registran en `lib/personajes.py` o `lib/props.py` (diccionario `MAP`) y se regenera el catálogo. Toda pieza lleva contorno negro.
 5. Comandos (desde la raíz del repo):
    ```
    python3 -m lib.produce specs/sNN.py texto        # texto para la voz + palabras + duración estimada

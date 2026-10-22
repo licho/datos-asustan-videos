@@ -27,7 +27,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `confetti(d, t, n=60, seed=7)`
 - `speedlines(d, t, n=26, col=WHITE, y0=250, y1=1350, seed=2)`
 - `sparkles(d, t, n=24, box=(80, 300, 1000, 1250), col=YEL, seed=3)`
-- `follow_btn(d, lt, y=1250, delay=1.5, text='SÍGUEME')` — Botón SÍGUEME que aparece con rebote.
+- `follow_btn(d, lt, y=1250, delay=1.5, text=_cfg.follow_text)` — Botón SÍGUEME que aparece con rebote.
 - `stamp(img, draw_fn, x, y, size=900, angle=0.0, flip=False, **kw)` — Dibuja cualquier personaje en una capa aparte y la pega rotada/volteada.
 - `shake_arr(arr, t, amp)`
 - `fit_font(d, text, maxw, size)` — Fuente del tamaño más grande (<= size) para que 'text' quepa en maxw px.
@@ -50,7 +50,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `shake(t, t0, dur, amp=10, freq=40)`
 - `layer(img, draw_fn, x, y, size=600, sx=1.0, sy=1.0, rot=0.0, alpha=1.0, **kw)` — Dibuja draw_fn(d, cx, cy, **kw) en una capa y la pega centrada en (x, y) con escala (sx, sy), giro y transparencia.
 - `glow(img, x, y, r, col=(255, 250, 210), alpha=0.5)` — Resplandor suave (radial) centrado en (x, y).
-- `caption_words(d, text, lt, y=CAP_Y, size=70, maxw=960, stagger=0.12, dur=0.3)` — Como rich_caption, pero cada palabra salta con 'back_out' una tras otra. *resaltado* en amarillo.
+- `caption_words(d, text, lt, y=CAP_Y, size=_cfg.caption_size, maxw=960, stagger=0.12, dur=0.3)` — Como rich_caption, pero cada palabra salta con 'back_out' una tras otra. *resaltado* en amarillo.
 - `radial_bg(stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))), cx=540, cy=670, rx=760, ry=1250)` — Fondo con degradado radial (centro iluminado, orillas oscuras). stops=((posición 0..1, color), ...). Cacheado.
 - `vignette(img, strength=0.55)` — Oscurece suavemente las orillas (da profundidad a cualquier fondo).
 - `space_bg(t=0.0, n=170, seed=7, stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))))` — Espacio con degradado radial y estrellas que titilan (distinto brillo y tamaño).
@@ -89,7 +89,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `alien_pixel(d, x, y, big=2, t=0)` · alien
 - `alux(d, x, y, s=1.0, t=0.0, mood='grin', face=1, arm=None, shade=1.0)` · reel4 — Original cartoon alux: small Maya guardian in white clothes with embroidered border and red headband.
 - `alux_laugh(d, x, y, t, size=46)` · reel4
-- `anchors(x, y, s=1.0)` · lib.humanos — Puntos del cuerpo de 'guy' (y de don_tono) para poner objetos encima sin que floten.
+- `anchors(x, y, s=1.0)` · reels_engine.humanos — Puntos del cuerpo de 'guy' (y de don_tono) para poner objetos encima sin que floten.
 - `ant_column(d, path, t, s=0.4, gap=95, speed=180, helmet=False)` · lib.animales — Columna de hormigas marchando sobre una línea path=[(x,y),...] (pies en la línea). Avanzan con el tiempo.
 - `army_ant(d, x, y, s=1.0, t=0.0, flip=False, helmet=False)` · lib.animales — Hormiga guerrera (café rojizo, mandíbulas grandes) de lado; y = piso, mira a la derecha. Largo ≈ 230·s. helmet=True: casquito verde.
 - `bacteria(d, x, y, s, t, kind='green', suitcase=False, shades=False)` · reel26
@@ -117,7 +117,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `germ(d, x, y, r, kind, t=0.0, phase=0.0, shade=1.0)` · reel2
 - `ghost(img, x, y, s=1.0, t=0.0, alpha=1.0, pixel=0, bob=True, **kw)` · lib.criaturas — Pega un fantasma con transparencia (alpha 0..1) y opcionalmente pixelado (pixel = tamaño de bloque).
 - `ghost_draw(d, x, y, s=1.0, t=0.0, mood='happy', tie=None, headset=False, col=(245, 248, 255), arms='down')` · lib.criaturas — Fantasma de sábana. (x, y) = centro del cuerpo. Alto ~420·s. mood: happy | scared | sad | smug.
-- `guy(d, x, y, s=1.0, mood='neutral', arms='down', look=0.0, t=0.0, hoodie=(240, 120, 40))` · reel
+- `guy(d, x, y, s=1.0, mood='neutral', arms='down', look=0.0, t=0.0, hoodie=(240, 120, 40))` · reels_engine.humanos
 - `heart_face(d, x, y, s=1.0, t=0.0)` · lib.criaturas — Corazón con cara, latiendo rápido (x, y = centro).
 - `hero_pixel(d, x, y, scared=False, frame=0, big=2)` · mision002
 - `hero_pixel_v1(d, x, y, scared=False, frame=0, big=2)` · pixel
@@ -125,7 +125,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `listeria(d, x, y, s, t)` · reel26
 - `llorona(d, x, y, s=1.0, t=0.0, mood='wail', arms='down')` · lib.criaturas — La Llorona (caricatura, no gore): vestido blanco largo que flota, velo, cabello negro largo y lágrimas.
 - `mammoth(d, x, y, s=1.0, t=0.0, flip=False)` · lib.animales — Mamut lanudo de lado; y = piso.
-- `medal(d, x, y, s=1.0, text='1º', ribbon=(40, 120, 220), neck=None)` · lib.humanos — Medalla colgada; (x, y) = centro de la medalla. neck=(x, y) dibuja el listón desde el cuello.
+- `medal(d, x, y, s=1.0, text='1º', ribbon=(40, 120, 220), neck=None)` · reels_engine.humanos — Medalla colgada; (x, y) = centro de la medalla. neck=(x, y) dibuja el listón desde el cuello.
 - `mite(d, x, y, s=1.0, t=0.0, phase=0.0, mood='grin', shade=1.0, dizzy=False)` · reel5
 - `mold(d, cx, cy, r, k, t, seed=1)` · reel26
 - `mosquito(d, x, y, s=1.0, t=0.0, flip=False, female=False, mask=False, hat=False, mood='normal', fly=True)` · lib.animales — Mosquito (patrón rayado tipo Aedes). mood: normal | angry | happy. Centro en el tórax.
@@ -162,35 +162,35 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 ## lib.props
 
 - `air_can(d, x, y, s)` · reel2
-- `alarm_clock(d, x, y, s=1.0, t=0.0, ring=False, text='7:00')` · lib.muebles — Despertador; y = base.
+- `alarm_clock(d, x, y, s=1.0, t=0.0, ring=False, text='7:00')` · reels_engine.muebles — Despertador; y = base.
 - `altar_items_pixel(d, v, t)` · ofrenda
-- `arrow(d, x0, y0, x1, y1, col=RED, w=14)` · lib.pantallas
+- `arrow(d, x0, y0, x1, y1, col=RED, w=14)` · reels_engine.pantallas
 - `asteroid(d, cx, cy, r, t=0.0, face='angry', fire=0.0, ang=-2.4)` · reel13
 - `backpack(d, x, y, big=2, fill=0, closed=False)` · alien
 - `balloons(d, x, y, t=0.0, n=3, s=1.0, seed=4, cols=((230, 60, 80), (60, 140, 230), (250, 200, 40), (120, 200, 90)))` · lib.objetos — Racimo de globos atado en (x, y).
 - `banana(d, x, y, s, rot=0.0)` · reel12
-- `bar_chart(d, x0, y0, x1, items, vmax=None, frac=1.0, size=40, gap=30, bar_h=70, fmt=None)` · lib.pantallas — Barras horizontales: items=[(etiqueta, valor, color)]. frac (0..1) anima el crecimiento. Devuelve y final.
+- `bar_chart(d, x0, y0, x1, items, vmax=None, frac=1.0, size=40, gap=30, bar_h=70, fmt=None)` · reels_engine.pantallas — Barras horizontales: items=[(etiqueta, valor, color)]. frac (0..1) anima el crecimiento. Devuelve y final.
 - `bed(d, x, y, s=1.0, dirty=0.0)` · reel12
 - `bed_v5(d, cx, cy, s, t, sleeping=True)` · reel5
 - `big_toilet(d, cx, base, s=1.0)` · reel7
-- `blob_map(d, cx, cy, r, seed=3, fill=(170, 175, 185), outline=BLK, label=None, size=40, bumps=7)` · lib.pantallas — Silueta irregular tipo mapa (ciudad, región). Área ≈ π·r².
+- `blob_map(d, cx, cy, r, seed=3, fill=(170, 175, 185), outline=BLK, label=None, size=40, bumps=7)` · reels_engine.pantallas — Silueta irregular tipo mapa (ciudad, región). Área ≈ π·r².
 - `blood_bag(d, x, y, s, col=(190, 20, 40), empty=False)` · reel14
 - `boat(d, x, y, s=1.0, t=0.0, with_guy=True, mood='neutral', tilt=0.0)` · reel3
-- `bolt(d, x0, y0, x1, y1, seed=1, width=14, col=(255, 245, 140), glow=True, branches=2)` · lib.exterior — Rayo en zigzag de (x0,y0) a (x1,y1) con ramas y resplandor.
+- `bolt(d, x0, y0, x1, y1, seed=1, width=14, col=(255, 245, 140), glow=True, branches=2)` · reels_engine.exterior — Rayo en zigzag de (x0,y0) a (x1,y1) con ramas y resplandor.
 - `book(d, cx, cy, s)` · reel3
-- `booth(d, x, y, s=1.0, label='SEGURIDAD', col=(200, 205, 210))` · lib.exterior — Caseta (vigilancia, cobro).
+- `booth(d, x, y, s=1.0, label='SEGURIDAD', col=(200, 205, 210))` · reels_engine.exterior — Caseta (vigilancia, cobro).
 - `bottle(d, x, y, s)` · reel2
 - `bottle_v8(d, x, y, s=1.0)` · reel8
 - `bridge(d, t, broken=0.0, fixed=False)` · reel4
 - `bubbles(d, t, x0, x1, ybot, n=25, seed=3)` · reel3
 - `bucket(d, x, y, s=1.0, water=True, larvae=0.0, t=0.0)` · lib.objetos — Cubeta; y = piso.
-- `building(d, x, y, w=220, h=600, col=(180, 150, 120), lit=0.0, seed=1, face=None)` · lib.exterior — Edificio (x = centro). lit = fracción de ventanas encendidas (noche).
+- `building(d, x, y, w=220, h=600, col=(180, 150, 120), lit=0.0, seed=1, face=None)` · reels_engine.exterior — Edificio (x = centro). lit = fracción de ventanas encendidas (noche).
 - `building_v13(d, x, y, w, h, floors, col=(180, 150, 120), lit=True)` · reel13
 - `building_v25(d, x, y, w, h, col, rng, lit=False)` · reel25
 - `bus(d, x, y, s)` · reel13
-- `bush(d, x, y, s=1.0, col=(80, 160, 80))` · lib.exterior
+- `bush(d, x, y, s=1.0, col=(80, 160, 80))` · reels_engine.exterior
 - `bush_pixel(d, x, y, t, shake=0.0)` · mision003
-- `cactus(d, x, y, s=1.0, col=(70, 150, 80))` · lib.exterior — Cactus tipo saguaro (cartoon).
+- `cactus(d, x, y, s=1.0, col=(70, 150, 80))` · reels_engine.exterior — Cactus tipo saguaro (cartoon).
 - `cactus_pixel(d, x, y, s=1)` · mision002
 - `cake(d, x, y, s=1.0, t=0.0, text='')` · lib.objetos — Pastel con velas; y = base.
 - `camera(d, x, y, s=1.0, t=0.0, rec=True, tripod=True, facing=1)` · lib.objetos — Videocámara (opcional sobre tripié). (x, y) = centro de la cámara; facing=1 apunta a la derecha.
@@ -202,19 +202,19 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `car_pixel_v1(d, x, y, c='red')` · zombi11
 - `card(d, cx, cy, sc, label)` · reel
 - `casita(d, x, y, s)` · reel4
-- `chair(d, x, y, s=1.0, col=WOOD, facing=1, kind='silla')` · lib.muebles — Silla de lado. facing=1 respaldo a la izquierda. kind: silla | oficina.
-- `checklist(d, x, y, w, title, items, done=None, size=36, appear=1.0)` · lib.pantallas — Tarjeta con lista. (x, y) = esquina sup. izq. done = cuántos ya tienen palomita (None = todos).
+- `chair(d, x, y, s=1.0, col=WOOD, facing=1, kind='silla')` · reels_engine.muebles — Silla de lado. facing=1 respaldo a la izquierda. kind: silla | oficina.
+- `checklist(d, x, y, w, title, items, done=None, size=36, appear=1.0)` · reels_engine.pantallas — Tarjeta con lista. (x, y) = esquina sup. izq. done = cuántos ya tienen palomita (None = todos).
 - `clock(d, cx, cy, r, t, ring=True)` · reel25
 - `cloud(d, cx, cy, t)` · reel26
 - `cloud_rain(d, x, y, s, t)` · reel4
-- `clouds(d, x, y, s=1.0, col=WHITE, t=0.0, rain=False)` · lib.exterior — Nube (x, y = centro). rain=True dibuja lluvia.
+- `clouds(d, x, y, s=1.0, col=WHITE, t=0.0, rain=False)` · reels_engine.exterior — Nube (x, y = centro). rain=True dibuja lluvia.
 - `codex(d, x0, y0, x1, y1, unroll=1.0, seed=2)` · lib.pantallas — Códice tipo biombo (páginas dobladas con glifos de colores). unroll 0..1 = cuánto se ha abierto.
 - `coffee_machine(d, x, y, s, t)` · reel8
 - `coffin(d, x, y, s=1.0, col=(120, 75, 45), open_=False)` · lib.objetos — Ataúd de madera de lado (velorio). y = piso (sobre su base).
 - `corn(d, x, y, s)` · reel4
-- `counter(d, x, y, s=1.0, w=700, col=(120, 90, 70), top=(210, 210, 215))` · lib.muebles — Mostrador / caja (alto ~380·s). Devuelve y de la superficie.
+- `counter(d, x, y, s=1.0, w=700, col=(120, 90, 70), top=(210, 210, 215))` · reels_engine.muebles — Mostrador / caja (alto ~380·s). Devuelve y de la superficie.
 - `covers(d, cx, cy, s, t, ls)` · reel5
-- `cracks(d, box, seed=1, n=6, col=WHITE, width=4)` · lib.pantallas — Grietas de vidrio dentro de box (ventanas rotas).
+- `cracks(d, box, seed=1, n=6, col=WHITE, width=4)` · reels_engine.pantallas — Grietas de vidrio dentro de box (ventanas rotas).
 - `credit_card(d, cx, cy, s, ang=0.0)` · reel24
 - `culprit_card(d, cx, cy, sc, label)` · reel2
 - `dehumidifier(d, cx, cy, s, t, ls)` · reel5
@@ -222,17 +222,17 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `dialog_pixel(d, s, t0, t, cps=26)` · oso
 - `dirty_hand(d, cx, cy, s)` · reel2
 - `dna(d, x, y, h, t, col1=(90, 160, 240), col2=(240, 120, 160))` · reel9
-- `document(d, x, y, w, h, title='CURRÍCULUM', lines=(), size=30, stamp=None)` · lib.pantallas — Hoja tipo documento (CV, contrato). stamp=('RECHAZADO', color) sello rotado encima (dibújalo con lib.core.stamp si quieres rotar).
-- `door(d, x0, y0, x1, y1, col=(150, 100, 60), opened=0.0, inside=(40, 40, 50), knob=True)` · lib.muebles — Puerta en caja; opened 0..1 (se abre hacia adentro mostrando 'inside').
+- `document(d, x, y, w, h, title='CURRÍCULUM', lines=(), size=30, stamp=None)` · reels_engine.pantallas — Hoja tipo documento (CV, contrato). stamp=('RECHAZADO', color) sello rotado encima (dibújalo con lib.core.stamp si quieres rotar).
+- `door(d, x0, y0, x1, y1, col=(150, 100, 60), opened=0.0, inside=(40, 40, 50), knob=True)` · reels_engine.muebles — Puerta en caja; opened 0..1 (se abre hacia adentro mostrando 'inside').
 - `dust(d, cx, cy, s, t)` · reel2
 - `earth(d, cx, cy, r)` · reel13
 - `egg_raft(d, x, y, s=1.0, n=14)` · lib.objetos — Huevecillos (balsa de huevos) flotando.
 - `evil_eyes_px(d, x, y, w=10, t=0.0)` · lib.pixel_mision — Ojos rojos de máquina malvada (x, y = centro).
 - `extra_icon_pixel(d, kind, x, y, big=2)` · zombi11
 - `eye_icon(d, cx, cy, s)` · reel3
-- `fence(d, x0, x1, y, h=160, col=(240, 240, 235))` · lib.exterior
+- `fence(d, x0, x1, y, h=160, col=(240, 240, 235))` · reels_engine.exterior
 - `flicker(t)` · reel
-- `floor_lamp(d, x, y, s=1.0, on=True)` · lib.muebles — Lámpara de pie; y = piso.
+- `floor_lamp(d, x, y, s=1.0, on=True)` · reels_engine.muebles — Lámpara de pie; y = piso.
 - `flowerpot(d, x, y, s=1.0, water=True)` · lib.objetos — Maceta con plato de agua; y = piso.
 - `freezer(d, x0, y1)` · reel
 - `fridge_alux(d, x, y, s, open_=0.0)` · reel4
@@ -244,8 +244,8 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `gift(d, x, y, s=1.0, col=(220, 60, 70), ribbon=(250, 210, 60), bandage=False)` · lib.objetos — Regalo envuelto; y = base. bandage=True: envuelto en vendas.
 - `glass(d, cx, ybot)` · reel27
 - `glass_overlay(d, box)` · reel
-- `ground_current(d, x, y, t, r=300, col=(255, 230, 80))` · lib.exterior — Corriente que se expande por el suelo desde (x, y).
-- `heart(d, x, y, r=40, col=RED)` · lib.pantallas
+- `ground_current(d, x, y, t, r=300, col=(255, 230, 80))` · reels_engine.exterior — Corriente que se expande por el suelo desde (x, y).
+- `heart(d, x, y, r=40, col=RED)` · reels_engine.pantallas
 - `heart_pixel(d, x, y, full=True)` · oso
 - `heater(d, x, y, s=1.0)` · reel8
 - `heli(d, x, y, t)` · mision002
@@ -253,7 +253,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `helmet(d, x, y, s=1.0, col=(80, 100, 60))` · lib.objetos — Casco militar grande suelto. (x, y) = centro de la orilla de abajo.
 - `hive(d, x, y, t, shake=0.0)` · mision003
 - `hourglass(d, x, y, s=1.0, frac=0.5, t=0.0)` · lib.objetos — Reloj de arena (x, y = centro). frac = arena que ya cayó.
-- `house(d, x, y, s=1.0, wall=(240, 220, 180), roof=(190, 70, 50), lights=False, door_col=(140, 90, 50))` · lib.exterior — Casa de una planta con techo de dos aguas.
+- `house(d, x, y, s=1.0, wall=(240, 220, 180), roof=(190, 70, 50), lights=False, door_col=(140, 90, 50))` · reels_engine.exterior — Casa de una planta con techo de dos aguas.
 - `house_pixel(d)` · mision003
 - `ice(d, x, y, s=1.0)` · reel8
 - `ice_bags(d, x, y, s)` · reel19
@@ -272,9 +272,9 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `keyboard(d, cx, cy, w, dirt=0.0, seed=1, flipped=False, glow=None)` · reel2
 - `keys(d, x, y, s, ang=0.0)` · reel4
 - `land(d, flood=0.0)` · reel24
-- `laptop(d, x, y, s=1.0, screen=(40, 120, 220), back=False)` · lib.muebles — Laptop sobre una superficie en y. back=True la ves por detrás.
+- `laptop(d, x, y, s=1.0, screen=(40, 120, 220), back=False)` · reels_engine.muebles — Laptop sobre una superficie en y. back=True la ves por detrás.
 - `lettuce(d, cx, ybot, melt=0.0)` · reel26
-- `light_switch(d, x, y, s=1.0, on=False)` · lib.muebles
+- `light_switch(d, x, y, s=1.0, on=False)` · reels_engine.muebles
 - `lives_score_pixel(t)` · oso
 - `loose_arm(d, x, y, s, rot=0.0, shirt=(225, 225, 215))` · reel18
 - `magnifier(img, cx, cy, R, t, n_germs)` · reel2
@@ -284,8 +284,8 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `microwave(d, x, y)` · reel26
 - `milk(d, x, ybot)` · reel26
 - `milk_v19(d, x, y, s, label='CADUCA HOY')` · reel19
-- `monitor(d, x0, y0, x1, y1, content='chart', t=0.0, trend=1.0, col=(80, 220, 120), stand=True)` · lib.pantallas — Monitor/pantalla. content: chart (gráfica; trend>0 sube) | wave (onda) | blank | text:<texto>.
-- `moon_disc(d, x, y, r=80, bg=(20, 25, 55), crescent=False)` · lib.exterior
+- `monitor(d, x0, y0, x1, y1, content='chart', t=0.0, trend=1.0, col=(80, 220, 120), stand=True)` · reels_engine.pantallas — Monitor/pantalla. content: chart (gráfica; trend>0 sube) | wave (onda) | blank | text:<texto>.
+- `moon_disc(d, x, y, r=80, bg=(20, 25, 55), crescent=False)` · reels_engine.exterior
 - `mower(d, x, y, hx, hy, t)` · mision003
 - `mug(d, x, y, s=1.0, t=0.0, col=(240, 240, 235), level=1.0, steam=True, label=None)` · lib.objetos — Taza de café; y = base. level 0..1 = cuánto café queda (se ve por arriba).
 - `net(d, box, col=(255, 255, 255), step=26)` · lib.objetos — Mosquitero: rejilla dentro de box=(x0,y0,x1,y1).
@@ -294,14 +294,14 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `outhouse(d, x, y, s=1.0, door=0.0, label='WC')` · lib.objetos — Letrina de madera con luna en la puerta. y = piso. door 0..1 = abierta.
 - `panel_catalogo_pixel(d, v, t)` · ofrenda
 - `pellet(d, x, y, s)` · reel5
-- `people_grid(d, x, y, n=10, cols=5, highlight=(), gap=95, size=1.0, col=(150, 155, 165), hcol=RED)` · lib.pantallas — Íconos de personas ('1 de cada 10'). (x, y) = centro de la cuadrícula.
+- `people_grid(d, x, y, n=10, cols=5, highlight=(), gap=95, size=1.0, col=(150, 155, 165), hcol=RED)` · reels_engine.pantallas — Íconos de personas ('1 de cada 10'). (x, y) = centro de la cuadrícula.
 - `phone(d, cx, cy, s, glow=1.0)` · reel2
 - `phone_case(d, cx, cy, s, col=(240, 110, 120), lift=0.0)` · reel7
-- `phone_chat(d, x, y, w, h, title, msgs, shown=None, size=32)` · lib.pantallas — Celular con chat. msgs = [(lado 'l'|'r', texto, hora)]. shown = cuántos mensajes se ven.
+- `phone_chat(d, x, y, w, h, title, msgs, shown=None, size=32)` · reels_engine.pantallas — Celular con chat. msgs = [(lado 'l'|'r', texto, hora)]. shown = cuántos mensajes se ven.
 - `phone_small(d, x, y, s, glow=1.0, content=None)` · reel9
-- `picture(d, x0, y0, x1, y1, kind='landscape', frame=(120, 80, 50), label=None)` · lib.muebles — Cuadro colgado. kind: landscape | sea | portrait | blank. label = placa abajo (ej. EMPLEADO DEL MES).
+- `picture(d, x0, y0, x1, y1, kind='landscape', frame=(120, 80, 50), label=None)` · reels_engine.muebles — Cuadro colgado. kind: landscape | sea | portrait | blank. label = placa abajo (ej. EMPLEADO DEL MES).
 - `pie(d, cx, cy, r, frac, appear)` · reel12
-- `piggy_bank(d, x, y, s=1.0, coin=True, t=0.0)` · lib.muebles — Alcancía de cochinito; y = base.
+- `piggy_bank(d, x, y, s=1.0, coin=True, t=0.0)` · reels_engine.muebles — Alcancía de cochinito; y = base.
 - `pillow(d, cx, cy, s)` · reel12
 - `pizza(d, cx, cy, s)` · reel2
 - `plane(d, x, y, s)` · reel25
@@ -319,19 +319,19 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `rec_frame(d, t, label='REC', box=(40, 470, 1040, 1330))` · lib.objetos — Marco de cámara grabando: esquinas + REC parpadeando + contador.
 - `rice_bowl(d, cx, ybot, s=1.0)` · reel26
 - `ring_light(d, x, y, r=170, on=True)` · lib.objetos
-- `road(d, y0, y1, t=0.0, speed=0.0, col=(70, 70, 75))` · lib.exterior — Calle horizontal con líneas (speed>0 se mueven).
+- `road(d, y0, y1, t=0.0, speed=0.0, col=(70, 70, 75))` · reels_engine.exterior — Calle horizontal con líneas (speed>0 se mueven).
 - `rocket(d, x, y, s=1.0, t=0.0, flame=True)` · lib.objetos — Cohete; (x, y) = base.
-- `ruler(d, x, y0, y1, marks, current=None, appear=1.0, w=60, col=(250, 210, 60))` · lib.pantallas — Regla vertical de tamaños. marks=[(fracción 0=abajo..1=arriba, texto)]; current = índice resaltado.
+- `ruler(d, x, y0, y1, marks, current=None, appear=1.0, w=60, col=(250, 210, 60))` · reels_engine.pantallas — Regla vertical de tamaños. marks=[(fracción 0=abajo..1=arriba, texto)]; current = índice resaltado.
 - `salad(d, cx, ybot)` · reel26
 - `sandal(d, cx, cy, s, ang=0.0)` · reel27
 - `sandwich_pixel(d, x, y, big=2)` · oso
 - `sarcophagus(d, x, y, s=1.0, col=(220, 170, 60))` · lib.objetos — Sarcófago de pie; y = base.
 - `scar(d, x, y, s)` · reel9
-- `shelf(d, x0, y0, x1, y1, rows=4, seed=1, items=True)` · lib.muebles — Anaquel con productos de colores (tienda, despensa).
+- `shelf(d, x0, y0, x1, y1, rows=4, seed=1, items=True)` · reels_engine.muebles — Anaquel con productos de colores (tienda, despensa).
 - `ship(d, x, y, s)` · reel13
 - `shoe(d, x, y, s)` · reel12
 - `shopping_cart(d, x, y, s=1.0, flip=False, items=True)` · lib.objetos — Carrito del súper; y = piso, empuja hacia la derecha (flip = izquierda). Agarradera en (x - 150s·f, y - 260s).
-- `sign_board(d, x, y, text, size=48, bg=(110, 70, 40), fg=WHITE, post=True, post_h=260)` · lib.pantallas — Letrero de madera con poste; (x, y) = base del poste (piso).
+- `sign_board(d, x, y, text, size=48, bg=(110, 70, 40), fg=WHITE, post=True, post_h=260)` · reels_engine.pantallas — Letrero de madera con poste; (x, y) = base del poste (piso).
 - `skin_flake(d, x, y, s)` · reel5
 - `skull(d, x, y, r=30, col=WHITE)` · lib.objetos — Calavera tipo ícono.
 - `slot_pixel(d, x, y, kind=None, sel=False, cross=False, sz=30)` · alien
@@ -342,39 +342,39 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `step_badge(d, n, cx=140, cy=470, sc=1.0)` · reel2
 - `store_lights(d, b)` · reel
 - `store_shelf(d, x0, x1, y0, y1, rng)` · reel
-- `street_lamp(d, x, y, s=1.0, on=True)` · lib.exterior — Poste de luz; y = piso.
+- `street_lamp(d, x, y, s=1.0, on=True)` · reels_engine.exterior — Poste de luz; y = piso.
 - `street_sign(d, x, y, text)` · reel24
 - `sun(d, cx, cy, r, t, mood='happy')` · reel23
 - `sun_pillow(d, t, ls)` · reel5
-- `sun_simple(d, x, y, r=90, t=0.0, rays=True)` · lib.exterior
-- `table(d, x, y, s=1.0, w=520, col=WOOD, cloth=None)` · lib.muebles — Mesa (alto ~330·s). cloth=color de mantel.
+- `sun_simple(d, x, y, r=90, t=0.0, rays=True)` · reels_engine.exterior
+- `table(d, x, y, s=1.0, w=520, col=WOOD, cloth=None)` · reels_engine.muebles — Mesa (alto ~330·s). cloth=color de mantel.
 - `table_v13(d, cx, y, s)` · reel13
 - `taco(d, x, y, s)` · reel24
 - `tank(d, x, y, s, t)` · reel24
 - `taper(d, x, y, w=360, h=170, lid=(60, 140, 220), food=(150, 80, 40), label=None)` · reel26
 - `templo(d, x, y, s=1.0, col=(200, 185, 160), twin=True, tiers=4)` · lib.objetos — Pirámide mesoamericana escalonada (tipo Templo Mayor): cuerpos escalonados, escalinata al frente y templo(s) arriba.
 - `thermo(d, x, y, s, frac, label='45 °C')` · reel19
-- `thought(d, x, y, w, h, tail_to=None, fill=WHITE)` · lib.pantallas — Nube de pensamiento (x, y = centro) con bolitas hacia tail_to. Devuelve caja interior.
+- `thought(d, x, y, w, h, tail_to=None, fill=WHITE)` · reels_engine.pantallas — Nube de pensamiento (x, y = centro) con bolitas hacia tail_to. Devuelve caja interior.
 - `ticket(d, cx, cy, sc)` · reel19
 - `time_clock(d, x, y, s=1.0, card_text='ENTRADA: 1509', full=1.0)` · lib.objetos — Reloj checador de pared con tarjeta. (x, y) = centro del aparato. full = qué tan llena está la tarjeta.
 - `tire(d, x, y, s=1.0, water=True)` · lib.objetos — Llanta tirada; y = piso.
 - `toilet_seat(d, cx, cy, s=1.0, sparkle_t=None)` · reel2
 - `tortillas(d, x, y, s=1.0)` · lib.objetos — Paquete de tortillas envuelto en papel (de la tortillería). (x, y) = centro.
-- `tree(d, x, y, s=1.0, kind='round', t=0.0, col=(70, 160, 80))` · lib.exterior — Árbol. kind: round | pine | palm.
+- `tree(d, x, y, s=1.0, kind='round', t=0.0, col=(70, 160, 80))` · reels_engine.exterior — Árbol. kind: round | pine | palm.
 - `tree_pixel(d)` · mision003
 - `trompo(d, x, y, s, t, k_pastor=1.0, pineapple=True)` · reel24
 - `truck(d, x, y, s=1.0)` · reel8
 - `ufo(d, x, y, big=1, t=0, beam=False, beam_h=120)` · alien
 - `vacuum(d, cx, cy, s, t, ls)` · reel5
 - `voyager(d, x, y, s=1.0)` · reel23
-- `wall_clock(d, x, y, r=70, t=0.0, hour=None, minute=None, spin=0.0)` · lib.muebles — Reloj de pared centrado en (x, y). spin>0 hace girar las manecillas (pasa el tiempo).
-- `wanted(d, x, y, w, h, title='SE BUSCA', subtitle='', paper=(240, 225, 185))` · lib.pantallas — Cartel de SE BUSCA. Devuelve la caja para dibujar al 'sospechoso'. (x, y) = esquina sup. izq.
+- `wall_clock(d, x, y, r=70, t=0.0, hour=None, minute=None, spin=0.0)` · reels_engine.muebles — Reloj de pared centrado en (x, y). spin>0 hace girar las manecillas (pasa el tiempo).
+- `wanted(d, x, y, w, h, title='SE BUSCA', subtitle='', paper=(240, 225, 185))` · reels_engine.pantallas — Cartel de SE BUSCA. Devuelve la caja para dibujar al 'sospechoso'. (x, y) = esquina sup. izq.
 - `washer(d, cx, cy, s, t)` · reel5
 - `wave(d, t, k)` · reel25
 - `waves(d, t, y=SEA_Y, col=(60, 90, 140))` · reel3
 - `whistle(d, x, y, s=1.0, col=(240, 160, 40))` · lib.objetos
 - `white_flag(d, x, y, s=1.0, t=0.0, h=380)` · lib.objetos — Bandera blanca ondeando (rendición). (x, y) = base del palo.
-- `window(d, x0, y0, x1, y1, kind='day', t=0.0, frame=(240, 240, 240))` · lib.muebles — Ventana en caja. kind: day | night (con luna) | blinds (persianas) | storm.
+- `window(d, x0, y0, x1, y1, kind='day', t=0.0, frame=(240, 240, 240))` · reels_engine.muebles — Ventana en caja. kind: day | night (con luna) | blinds (persianas) | storm.
 - `window_frame(d, x, y, w, h, broken=0.0)` · reel13
 
 ## lib.fondos
@@ -400,7 +400,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `make_room(dark=False)` · reel9
 - `make_sea()` · reel3
 - `make_site()` · reel4
-- `make_space(t=0.0, n=170, seed=7, stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))))` · lib.motion — Espacio con degradado radial y estrellas que titilan (distinto brillo y tamaño).
+- `make_space(t=0.0, n=170, seed=7, stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))))` · reels_engine.motion — Espacio con degradado radial y estrellas que titilan (distinto brillo y tamaño).
 - `make_space_v1()` · reel13
 - `make_store()` · reel
 - `make_street()` · reel9
@@ -409,7 +409,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `night_room(lamp=True)` · reel14
 - `office(night=False)` · reel15
 - `outside_day(w, h)` · reel8
-- `radial_bg(stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))), cx=540, cy=670, rx=760, ry=1250)` · lib.motion — Fondo con degradado radial (centro iluminado, orillas oscuras). stops=((posición 0..1, color), ...). Cacheado.
+- `radial_bg(stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))), cx=540, cy=670, rx=760, ry=1250)` · reels_engine.motion — Fondo con degradado radial (centro iluminado, orillas oscuras). stops=((posición 0..1, color), ...). Cacheado.
 - `rlyeh_city(d, cx, base, s, t, col=(60, 75, 80))` · reel3
 - `room(mess=0.0, dark=0.0, seed=1)` · reel12
 - `room_ofrenda_pixel(d, t)` · ofrenda

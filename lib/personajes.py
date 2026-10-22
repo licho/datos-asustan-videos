@@ -1,8 +1,10 @@
-"""Personajes y criaturas reutilizables (cartoon salvo indicación). Se cargan bajo demanda desde src/."""
+"""Personajes y criaturas reutilizables (cartoon salvo indicación). Se cargan bajo demanda.
+Los comunes (guy, anchors, medal) vienen del motor; aquí se agregan los del canal."""
 from ._lazy import make
-MAP = {
+from reels_engine.registry import PERSONAJES
+MAP = {**PERSONAJES,
  # humanos
- "guy": "reel", "zombie": "reel", "employee": "reel8", "taquero": "reel24", "president": "reel24", "scientist": "reel24",
+ "zombie": "reel", "employee": "reel8", "taquero": "reel24", "president": "reel24", "scientist": "reel24",
  "stamp_guy": "reel25", "sick_guy": "reel26", "crouch_guy": "reel13", "person": "reel2", "doc": "reel14", "face": "reel23",
  # monstruos y criaturas
  "creature": "reel24", "vampire": "reel14", "alien_cw": "reel15", "zomb": "reel18", "doppel": "reel9", "cthulhu": "reel3",
@@ -20,7 +22,7 @@ MAP = {
  "mummy": "lib.criaturas",
  "don_tono": "lib.humanos",
  "brain": "lib.criaturas", "rat": "lib.criaturas", "heart_face": "lib.criaturas",
- "anchors": "lib.humanos", "medal": "lib.humanos",
+
  "mammoth": "lib.animales", "stego": "lib.animales", "trex": "lib.animales", "cleopatra": "lib.humanos",
  "soldier": "lib.humanos", "napoleon": "lib.humanos", "scribe": "lib.humanos", "emu": "lib.animales", "army_ant": "lib.animales", "ant_column": "lib.animales", "rat_skeleton": "lib.criaturas", "llorona": "lib.criaturas"
 }
