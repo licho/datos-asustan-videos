@@ -152,4 +152,4 @@ def s_end(c):
 SCENES = [(0, s_intro), (1, s_sack), (2, s_inv), (8, s_gps), (9, s_cookies), (10, s_tamales), (11, s_houses), (12, s_win), (13, s_end)]
 SFX = [(0, .2, "jingle", {}), (0, 3.0, "whoosh", {}), (1, .3, "whoosh", {}), (1, 1.6, "ding", {})] + [(i, .1, "ding", {}) for i in range(2, 8)] + \
       [(8, 1.3, "buzzer", {}), (9, 2.5, "buzzer", {}), (10, 2.6, "sadtrom", {}), (11, 0, "sting", {}), (12, 0, "jingle", {}), (13, 1.0, "jingle", {})]
-MUSIC = ("chiptune", [(11, 12)], 12)
+MUSIC = ("navidad", [(11, 12)], 12)

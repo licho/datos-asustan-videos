@@ -196,4 +196,4 @@ SCENES = [(0, hook), (1, who), (2, gear), (3, step1), (4, step2), (5, step3), (6
 SFX = [(0, 1.6, "sting", {}), (1, .2, "whoosh", {}), (2, .5, "pop", {}), (2, 1.3, "pop", {}), (2, 2.1, "pop", {}), (2, 2.9, "thud", {}),
        (3, 1.5, "ding", {}), (4, 2.0, "thud", {}), (5, 2.5, "pop", {}), (6, 2.5, "boing", {}), (7, 1.2, "whoosh", {}), (7, 2.8, "buzzer", {}),
        (8, .3, "rumble", {}), (9, 2.0, "jingle", {})]
-MUSIC = ("waltz", [(8, 9)], 9)
+MUSIC = ("navidad_oscura", [(8, 9)], 9)

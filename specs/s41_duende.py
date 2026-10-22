@@ -158,4 +158,4 @@ def ending(c):
 SCENES = [(0, intro), (1, cv), (2, fired), (3, courier), (4, furniture), (5, hr), (6, iceland), (7, problem), (8, sweater), (9, ending)]
 SFX = [(0, .4, "boing", {}), (0, 1.0, "jingle", {}), (1, 3.0, "thud", {}), (2, 1.2, "pop", {}), (2, 3.5, "boing", {}), (3, .8, "ding", {}),
        (4, 2.5, "pop", {}), (4, 3.6, "buzzer", {}), (5, 2.0, "pop", {}), (6, .3, "whoosh", {}), (7, 0, "sting", {}), (8, .3, "sadtrom", {}), (9, 2.0, "jingle", {})]
-MUSIC = ("waltz", [(6, 7)], 9)
+MUSIC = ("navidad", [(6, 7)], 9)

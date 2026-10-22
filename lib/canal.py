@@ -11,6 +11,16 @@ CANAL = Channel(
     outdir="/tmp/dqa_out",
     code_dirs=("lib",),
     contrast_skip=("popup", "dialog_px", "hud_px", "finish", "canvas_px"),   # piezas pixel art: no se revisan por contraste
+    # Música extra del canal. Melodías de dominio público (Jingle Bells, J. Pierpont, 1857). Cada paso = media negra;
+    # mel se toca una octava arriba (frecuencia × 2).
+    music_styles={
+        "navidad": dict(bpm=92, wave="sq",
+                        bass=[98, 0, 73.4, 0, 98, 0, 73.4, 0],
+                        mel=[246.9, 246.9, 246.9, 0, 246.9, 246.9, 246.9, 0, 246.9, 293.7, 196, 220, 246.9, 0, 0, 0]),
+        "navidad_oscura": dict(bpm=70, wave="saw",
+                        bass=[49, 0, 49, 0, 73.4, 0, 46.2, 0],
+                        mel=[233.1, 233.1, 233.1, 0, 233.1, 233.1, 233.1, 0, 233.1, 277.2, 196, 207.7, 233.1, 0, 0, 0]),
+    },
     catalog_out="lib/CATALOGO.md",
     catalog_api=(("lib.core", "reels_engine.core"), ("lib.motion", "reels_engine.motion"), ("lib.audio", "reels_engine.audio")),
     catalog_maps=("lib.personajes", "lib.props", "lib.fondos"),
