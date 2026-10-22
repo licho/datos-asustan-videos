@@ -282,3 +282,95 @@ def elf(d, x, y, s=1.0, t=0.0, mood="happy", arms="down", col=(60, 150, 80), hat
     elif mood == "scared": d.ellipse([hx - S(12), my - S(6), hx + S(12), my + S(18)], fill=(80, 20, 30), outline=BLK, width=W_(3))
     elif mood == "sad": d.arc([hx - S(22), my, hx + S(22), my + S(24)], 200, 340, fill=BLK, width=W_(5))
     else: d.line([(hx - S(18), my + S(4)), (hx + S(14), my + S(8))], fill=BLK, width=W_(5))
+
+def krampus(d, x, y, s=1.0, t=0.0, mood="grin", arms="down", sack=False, rods=True, mask=False, flip=False, torch=False):
+    """Krampus (caricatura, no gore): peludo café oscuro, cuernos curvos, lengua roja larga, un pie humano y una pezuña.
+    y = pies; alto ≈ 720·s. mood: grin | tired | suspicious | stop (frenado/sorprendido). arms: down | up | hold (taza al frente) | stop.
+    sack=True: costal al hombro que se mueve solo. rods: manojo de varas en la mano. mask=True: máscara de madera (desfile)."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s)); f = -1 if flip else 1
+    FUR, FUR2, SKN = (70, 45, 35), (95, 62, 45), (120, 40, 45)
+    d.ellipse([x - S(140), y - S(16), x + S(140), y + S(16)], fill=(50, 50, 55))
+    # piernas: izquierda pezuña, derecha pie humano descalzo
+    d.polygon([(x - S(90), y - S(260)), (x - S(25), y - S(260)), (x - S(35), y - S(40)), (x - S(85), y - S(40))], fill=FUR, outline=BLK)
+    d.polygon([(x - S(95), y - S(45)), (x - S(30), y - S(45)), (x - S(22), y), (x - S(102), y)], fill=(40, 30, 28), outline=BLK)
+    d.line([(x - S(62), y - S(40)), (x - S(62), y)], fill=BLK, width=W_(4))
+    d.polygon([(x + S(25), y - S(260)), (x + S(90), y - S(260)), (x + S(80), y - S(55)), (x + S(35), y - S(55))], fill=FUR, outline=BLK)
+    d.rounded_rectangle([x + S(30), y - S(60), x + S(115), y], int(S(18)), fill=(240, 194, 160), outline=BLK, width=W_(3))
+    for k in range(4): d.ellipse([x + S(85) + k * S(8), y - S(20) - k * S(2), x + S(97) + k * S(8), y - S(8) - k * S(2)], fill=(240, 194, 160), outline=BLK, width=W_(2))
+    # costal (atrás)
+    if sack:
+        wob = math.sin(t * 7) * S(10)
+        d.ellipse([x - f * S(250) - S(110) + wob, y - S(600), x - f * S(250) + S(110) + wob, y - S(330)], fill=(150, 120, 80), outline=BLK, width=W_(5))
+        d.line([(x - f * S(250) + wob, y - S(600)), (x - f * S(80), y - S(560))], fill=(110, 85, 55), width=W_(14))
+    # cuerpo peludo
+    body = [(x - S(130), y - S(520)), (x + S(130), y - S(520)), (x + S(120), y - S(240)), (x - S(120), y - S(240))]
+    d.polygon(body, fill=FUR, outline=BLK); d.line(body + [body[0]], fill=BLK, width=W_(5))
+    for k in range(10):
+        px = x - S(120) + k * S(26); d.polygon([(px, y - S(250)), (px + S(13), y - S(215)), (px + S(26), y - S(250))], fill=FUR)
+    for k in range(9):
+        fx = x - S(100) + (k % 3) * S(80) + (k // 3) * S(12); fy = y - S(480) + (k // 3) * S(80)
+        d.arc([fx, fy, fx + S(40), fy + S(40)], 200, 340, fill=FUR2, width=W_(6))
+    # cadena cruzada
+    for k in range(9):
+        u = k / 8; cx_, cy_ = x - S(120) + u * S(240), y - S(500) + u * S(230)
+        d.ellipse([cx_ - S(16), cy_ - S(10), cx_ + S(16), cy_ + S(10)], outline=(150, 150, 160), width=W_(6))
+    def arm(hx, hy, sx):
+        sh = (x + sx * S(120), y - S(480))
+        d.line([sh, (hx, hy)], fill=BLK, width=W_(62)); d.line([sh, (hx, hy)], fill=FUR, width=W_(52))
+        d.ellipse([hx - S(32), hy - S(30), hx + S(32), hy + S(30)], fill=SKN, outline=BLK, width=W_(4))
+        for k in (-1, 0, 1): d.polygon([(hx + k * S(18) - S(6), hy + S(22)), (hx + k * S(18) + S(6), hy + S(22)), (hx + k * S(22), hy + S(46))], fill=(230, 225, 210), outline=BLK)
+    pose = {"down": ((x - S(190), y - S(270)), (x + S(190), y - S(270))), "up": ((x - S(230), y - S(700)), (x + S(230), y - S(700))),
+            "hold": ((x - S(80), y - S(330)), (x + S(80), y - S(330))), "stop": ((x - S(190), y - S(270)), (x + f * S(260), y - S(520)))}[arms]
+    arm(*pose[0], -1); arm(*pose[1], 1)
+    if rods and arms != "hold":
+        hx, hy = pose[0]
+        for k in range(5): d.line([(hx - S(10) + k * S(5), hy + S(10)), (hx - S(60) + k * S(25), hy + S(200))], fill=(140, 110, 70), width=W_(7))
+        d.rectangle([hx - S(16), hy - S(4), hx + S(20), hy + S(26)], fill=(200, 40, 40), outline=BLK, width=W_(3))
+    if torch:
+        hx, hy = pose[1]
+        d.line([(hx, hy), (hx + S(10), hy - S(180))], fill=(110, 75, 45), width=W_(16))
+        fl = math.sin(t * 12) * S(8)
+        d.polygon([(hx - S(20), hy - S(175)), (hx + S(10) + fl, hy - S(270)), (hx + S(40), hy - S(175))], fill=(250, 160, 40), outline=(220, 90, 30))
+    # cabeza de cabra
+    hx, hy = x, y - S(600)
+    for sx in (-1, 1):
+        horn = [(hx + sx * S(50), hy - S(70)), (hx + sx * S(110), hy - S(170)), (hx + sx * S(190), hy - S(190)), (hx + sx * S(170), hy - S(150)), (hx + sx * S(115), hy - S(120)), (hx + sx * S(85), hy - S(55))]
+        d.polygon(horn, fill=(215, 200, 170), outline=BLK); d.line(horn + [horn[0]], fill=BLK, width=W_(4))
+        d.polygon([(hx + sx * S(90), hy - S(20)), (hx + sx * S(170), hy - S(10)), (hx + sx * S(100), hy + S(25))], fill=FUR2, outline=BLK)
+    face = (180, 150, 120) if mask else SKN
+    d.ellipse([hx - S(100), hy - S(110), hx + S(100), hy + S(110)], fill=FUR, outline=BLK, width=W_(5))
+    d.ellipse([hx - S(70), hy - S(70), hx + S(70), hy + S(95)], fill=face, outline=BLK, width=W_(4))
+    if mask:
+        for k in range(3): d.arc([hx - S(55), hy - S(50) + k * S(30), hx + S(55), hy - S(10) + k * S(30)], 200, 340, fill=(140, 110, 80), width=W_(4))
+    # ojos
+    for sx in (-1, 1):
+        ex, ey = hx + sx * S(32), hy - S(15)
+        if mood == "tired":
+            d.chord([ex - S(20), ey - S(8), ex + S(20), ey + S(18)], 0, 180, fill=(255, 220, 80), outline=BLK)
+            d.arc([ex - S(22), ey + S(10), ex + S(22), ey + S(32)], 20, 160, fill=(70, 30, 60), width=W_(5))
+        else:
+            r = S(24) if mood == "stop" else S(19)
+            d.ellipse([ex - r, ey - r, ex + r, ey + r], fill=(255, 220, 80), outline=BLK, width=W_(4))
+            pr = S(6) if mood == "suspicious" else S(8)
+            d.rectangle([ex - pr / 2, ey - S(14), ex + pr / 2, ey + S(14)], fill=BLK)
+            if mood == "suspicious": d.line([(ex - S(24), ey - S(8)), (ex + S(24), ey - S(8))], fill=face, width=W_(14)); d.line([(ex - S(24), ey - S(14)), (ex + S(24), ey - S(14))], fill=BLK, width=W_(5))
+            else: d.line([(ex - sx * S(26), ey - S(32)), (ex + sx * S(20), ey - S(22))], fill=BLK, width=W_(7))
+    d.polygon([(hx - S(30), hy + S(90)), (hx + S(30), hy + S(90)), (hx, hy + S(170))], fill=FUR2, outline=BLK)
+    # boca y lengua
+    my = hy + S(45)
+    if mood == "stop": d.ellipse([hx - S(26), my - S(14), hx + S(26), my + S(34)], fill=(60, 15, 25), outline=BLK, width=W_(4))
+    else:
+        d.chord([hx - S(50), my - S(20), hx + S(50), my + S(40)], 0, 180, fill=(60, 15, 25), outline=BLK)
+        for k in range(5): d.polygon([(hx - S(40) + k * S(20), my + S(10)), (hx - S(30) + k * S(20), my + S(10)), (hx - S(35) + k * S(20), my + S(24))], fill=WHITE)
+        if mood in ("grin", "suspicious"):
+            tl = S(110) + math.sin(t * 5) * S(12)
+            d.polygon([(hx - S(14), my + S(20)), (hx + S(14), my + S(20)), (hx + f * S(10), my + S(20) + tl), (hx - f * S(20), my + tl - S(5))], fill=(220, 50, 70), outline=BLK)
+
+def bells(d, x, y, s=1.0, t=0.0, n=3):
+    """Cascabeles colgando de una correa; (x, y) = punto de arriba."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    d.line([(x - S(60), y), (x + S(60), y)], fill=(120, 70, 40), width=W_(10))
+    for k in range(n):
+        bx = x - S(45) + k * S(45) + math.sin(t * 12 + k) * S(4); by = y + S(30)
+        d.ellipse([bx - S(20), by - S(20), bx + S(20), by + S(20)], fill=(235, 190, 60), outline=BLK, width=W_(3))
+        d.line([(bx - S(12), by + S(4)), (bx + S(12), by + S(4))], fill=BLK, width=W_(3))

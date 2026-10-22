@@ -141,6 +141,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `heart_face(d, x, y, s=1.0, t=0.0)` · lib.criaturas — Corazón con cara, latiendo rápido (x, y = centro).
 - `hero_pixel(d, x, y, scared=False, frame=0, big=2)` · mision002
 - `hero_pixel_v1(d, x, y, scared=False, frame=0, big=2)` · pixel
+- `krampus(d, x, y, s=1.0, t=0.0, mood='grin', arms='down', sack=False, rods=True, mask=False, flip=False, torch=False)` · lib.criaturas — Krampus (caricatura, no gore): peludo café oscuro, cuernos curvos, lengua roja larga, un pie humano y una pezuña.
 - `lion(d, x, y, s=1.0, t=0.0, mood='neutral')` · lib.animales — León sentado de frente; y = piso.
 - `listeria(d, x, y, s, t)` · reel26
 - `llorona(d, x, y, s=1.0, t=0.0, mood='wail', arms='down')` · lib.criaturas — La Llorona (caricatura, no gore): vestido blanco largo que flota, velo, cabello negro largo y lágrimas.
@@ -167,6 +168,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `soldier(d, x, y, s=1.0, t=0.0, mood='neutral', arms='down', era='modern', binoculars=False, col=None)` · lib.humanos — Soldadito de caricatura SIN armas (sirve para desfiles, filas, ejércitos). y = pies.
 - `soul(d, x, y, t, s=1.0)` · ofrenda
 - `sponge(d, cx, cy, s, t=0.0, mood='smug', dirt=0.0, wet=0.0, sparkle=False)` · reel16
+- `st_nicholas(d, x, y, s=1.0, t=0.0, mood='calm', arms='down')` · lib.humanos — San Nicolás (caricatura): obispo con mitra blanca y dorada, barba blanca, capa roja y báculo dorado. y = pies.
 - `stamp_guy(img, x, y, s, ang, mood='scared', arms='up', t=0.0, hoodie=(240, 120, 40))` · reel25
 - `stego(d, x, y, s=1.0, t=0.0, mood='normal', flip=False)` · lib.animales — Estegosaurio; y = piso. mood: normal | confused.
 - `swarm(d, cx, cy, t, n=24, spread=14, angry=False, seed=7)` · mision003
@@ -205,6 +207,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `basketball_hoop(img, cx, base, h=640, seed=1, shadow=False)` · reels_engine.sketch.sports — Basketball hoop on a pole: backboard, orange rim, net. Returns the rim center.
 - `bed(d, x, y, s=1.0, dirty=0.0)` · reel12
 - `bed_v5(d, cx, cy, s, t, sleeping=True)` · reel5
+- `bells(d, x, y, s=1.0, t=0.0, n=3)` · lib.criaturas — Cascabeles colgando de una correa; (x, y) = punto de arriba.
 - `bicycle(img, cx, base, w=320, color=GREEN, seed=1, shadow=False)` · reels_engine.sketch.everyday — Bicycle seen from the side, facing right.
 - `big_toilet(d, cx, base, s=1.0)` · reel7
 - `bill(img, cx, cy, w=150, ang=0.0, label=None, seed=1)` · reels_engine.sketch.props — Banknote centered on (cx, cy), 'w' px wide, turned 'ang' radians; label = text in the middle ("$10").

@@ -1,0 +1,14 @@
+Video: Cómo sobrevivir a Krampus esta noche (Noche de Krampus)
+Fecha: sábado 5 de diciembre 2026, 10:00
+Código: specs/s43_krampus.py · Sin voz: sinvoz/2026-12-05_krampus_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4, una sola toma
+Producir final: python3 -m lib.produce specs/s43_krampus.py final audio/43-krampus.mp3
+
+[whispers] Hoy, cinco de diciembre, es la Noche de Krampus. Y si te portaste mal este año… esto te interesa. [serious] Krampus es el compañero oscuro de San Nicolás en los Alpes: cuernos, lengua larguísima, una pezuña de cabra… y un pie humano. Nadie es perfecto. [dramatically] Su nombre viene de “krampen”, garra en alemán. Trae cadenas, cascabeles, un manojo de varas… y un costal para llevarse a los que se portaron mal. [confident] Así sobrevives. Paso uno: confiesa tus pecados del año. Sí, el “visto” que le dejaste a tu tía también cuenta. [sarcastic] Paso dos: si a medianoche oyes cascabeles… no es el carrito de los elotes. Escóndete. [mischievously] Paso tres: no le dejes galletas, él no es Santa. Mejor ofrécele una silla y un café: lleva siglos haciendo turno nocturno. [serious] Paso cuatro: si te encuentra, finge que te portaste bien. Enséñale una boleta de puros dieces… de tu primo. [excited] Paso cinco: corre hacia San Nicolás. Es el único que lo controla… porque es su jefe. [whispers] Dato real: en pueblos de Austria y Alemania, cada diciembre, la gente se disfraza de Krampus y sale a correr por las calles persiguiendo a los demás. Se llama Krampuslauf… y sí, a veces dan varazos. [sarcastic] ¿Te portaste bien este año? Dime la verdad en los comentarios… Krampus está leyendo.
+
+# words: 212  estimated duration: 85 s
+
+Fuentes:
+- National Geographic: nombre de "krampen" (garra), aparece el 5 de diciembre (Krampusnacht), cadenas, cascabeles, varas de abedul, costal
+- History.com: leyenda alpina (Austria y partes de Alemania), 5-6 de diciembre
+- Mental Floss: un pie humano y una pezuña; Krampuslauf, donde los disfrazados persiguen y a veces golpean a espectadores

@@ -139,3 +139,37 @@ def robo_cw(d, x, y, s=1.0, t=0.0, mood="smile", arms="down", shades=False, oil=
             yy = hy - S(20) + S((t * 70 + k * 30) % 60)
             d.polygon([(hx + S(dx), yy - S(22)), (hx + S(dx) - S(11), yy), (hx + S(dx) + S(11), yy)], fill=(40, 40, 45))
             d.ellipse([hx + S(dx) - S(11), yy - S(10), hx + S(dx) + S(11), yy + S(12)], fill=(40, 40, 45))
+
+def st_nicholas(d, x, y, s=1.0, t=0.0, mood="calm", arms="down"):
+    """San Nicolás (caricatura): obispo con mitra blanca y dorada, barba blanca, capa roja y báculo dorado. y = pies.
+    mood: calm | stern. arms: down | stop (mano al frente para frenar)."""
+    from .core import WHITE
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    RED, GOLD, SK = (190, 35, 45), (235, 190, 60), (241, 194, 150)
+    d.ellipse([x - S(130), y - S(16), x + S(130), y + S(16)], fill=(60, 60, 65))
+    robe = [(x - S(80), y - S(420)), (x + S(80), y - S(420)), (x + S(130), y), (x - S(130), y)]
+    d.polygon(robe, fill=WHITE, outline=BLK); d.line(robe + [robe[0]], fill=BLK, width=W_(4))
+    cape = [(x - S(95), y - S(420)), (x + S(95), y - S(420)), (x + S(150), y - S(20)), (x + S(70), y - S(20)), (x + S(40), y - S(380)), (x - S(40), y - S(380)), (x - S(70), y - S(20)), (x - S(150), y - S(20))]
+    d.polygon(cape, fill=RED, outline=BLK); d.line(cape + [cape[0]], fill=BLK, width=W_(4))
+    d.rectangle([x - S(14), y - S(380), x + S(14), y - S(20)], fill=GOLD)
+    sx_ = x + S(170)
+    d.line([(sx_, y), (sx_, y - S(620))], fill=BLK, width=W_(16)); d.line([(sx_, y), (sx_, y - S(620))], fill=GOLD, width=W_(10))
+    d.arc([sx_ - S(70), y - S(700), sx_ + S(10), y - S(600)], 180, 360, fill=GOLD, width=W_(14)); d.arc([sx_ - S(70), y - S(700), sx_ - S(10), y - S(640)], 0, 180, fill=GOLD, width=W_(14))
+    d.line([(x + S(80), y - S(380)), (sx_ - S(8), y - S(330))], fill=RED, width=W_(40)); d.ellipse([sx_ - S(22), y - S(352), sx_ + S(18), y - S(312)], fill=SK, outline=BLK, width=W_(3))
+    if arms == "stop":
+        d.line([(x - S(80), y - S(380)), (x - S(200), y - S(450))], fill=RED, width=W_(40)); d.ellipse([x - S(230), y - S(480), x - S(180), y - S(420)], fill=SK, outline=BLK, width=W_(3))
+    else:
+        d.line([(x - S(80), y - S(380)), (x - S(120), y - S(220))], fill=RED, width=W_(40)); d.ellipse([x - S(140), y - S(240), x - S(100), y - S(200)], fill=SK, outline=BLK, width=W_(3))
+    hx, hy = x, y - S(500)
+    d.ellipse([hx - S(70), hy - S(75), hx + S(70), hy + S(70)], fill=SK, outline=BLK, width=W_(4))
+    d.polygon([(hx - S(75), hy + S(5)), (hx + S(75), hy + S(5)), (hx + S(55), hy + S(110)), (hx, hy + S(150)), (hx - S(55), hy + S(110))], fill=WHITE, outline=BLK)
+    d.chord([hx - S(40), hy + S(10), hx + S(40), hy + S(40)], 0, 180, fill=WHITE, outline=BLK)
+    mit = [(hx - S(70), hy - S(45)), (hx + S(70), hy - S(45)), (hx + S(55), hy - S(170)), (hx, hy - S(215)), (hx - S(55), hy - S(170))]
+    d.polygon(mit, fill=WHITE, outline=BLK); d.line(mit + [mit[0]], fill=BLK, width=W_(4))
+    d.rectangle([hx - S(70), hy - S(70), hx + S(70), hy - S(45)], fill=GOLD, outline=BLK, width=W_(3))
+    d.rectangle([hx - S(12), hy - S(200), hx + S(12), hy - S(70)], fill=GOLD)
+    d.line([(hx - S(10), hy - S(150)), (hx + S(10), hy - S(150))], fill=RED, width=W_(6)); d.line([(hx, hy - S(162)), (hx, hy - S(138))], fill=RED, width=W_(6))
+    for sx in (-1, 1):
+        ex, ey = hx + sx * S(26), hy - S(12)
+        d.ellipse([ex - S(8), ey - S(8), ex + S(8), ey + S(8)], fill=BLK)
+        d.line([(ex - S(16), ey - S(20) - (sx * S(4) if mood == "stern" else 0)), (ex + S(16), ey - S(20) + (sx * S(4) if mood == "stern" else 0))], fill=(200, 200, 200), width=W_(6))
