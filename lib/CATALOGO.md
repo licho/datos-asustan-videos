@@ -8,6 +8,8 @@ Contraste: toda pieza nueva lleva contorno; sobre fondos oscuros, contorno + rel
 
 Objetos en personajes: usa `anchors(x, pies, escala)` (lib.personajes) para cabeza, cuello, pecho y manos de cada pose; nunca coordenadas a ojo.
 
+Animación estándar (lib.motion): entradas con `tw(t, t0, dur, a, b, back_out|elastic_out)`, flotar con `yoyo`, aplastar/estirar/girar/desvanecer con `layer`, susto con `shake`, brillo con `glow`, volumen con `sphere_shade`. Subtítulos palabra por palabra y viñeta salen solos (CAPTION_STYLE='static' / VIGNETTE=0 para desactivar).
+
 Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300 · subtítulos 1500 (no poner nada entre 1380 y 1640).
 
 
@@ -25,6 +27,29 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `stamp(img, draw_fn, x, y, size=900, angle=0.0, flip=False, **kw)` — Dibuja cualquier personaje en una capa aparte y la pega rotada/volteada.
 - `shake_arr(arr, t, amp)`
 - `fit_font(d, text, maxw, size)` — Fuente del tamaño más grande (<= size) para que 'text' quepa en maxw px.
+
+## lib.motion
+
+- `linear(u)`
+- `sine_in_out(u)`
+- `quad_out(u)`
+- `cubic_out(u)`
+- `expo_out(u)`
+- `power_in(u, p=3)`
+- `back_out(u, s=1.70158)`
+- `back_in(u, s=1.70158)`
+- `elastic_out(u, amp=1.0, period=0.35)`
+- `bounce_out(u)`
+- `tw(t, t0, dur, a, b, ease=cubic_out)` — Valor que va de a a b entre t0 y t0+dur con la curva 'ease' (antes: a, después: b).
+- `yoyo(t, t0, period, a, b, ease=sine_in_out)` — Va y viene entre a y b (flotar, respirar). Determinista: depende solo de t.
+- `shake(t, t0, dur, amp=10, freq=40)`
+- `layer(img, draw_fn, x, y, size=600, sx=1.0, sy=1.0, rot=0.0, alpha=1.0, **kw)` — Dibuja draw_fn(d, cx, cy, **kw) en una capa y la pega centrada en (x, y) con escala (sx, sy), giro y transparencia.
+- `glow(img, x, y, r, col=(255, 250, 210), alpha=0.5)` — Resplandor suave (radial) centrado en (x, y).
+- `caption_words(d, text, lt, y=CAP_Y, size=70, maxw=960, stagger=0.12, dur=0.3)` — Como rich_caption, pero cada palabra salta con 'back_out' una tras otra. *resaltado* en amarillo.
+- `radial_bg(stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))), cx=540, cy=670, rx=760, ry=1250)` — Fondo con degradado radial (centro iluminado, orillas oscuras). stops=((posición 0..1, color), ...). Cacheado.
+- `vignette(img, strength=0.55)` — Oscurece suavemente las orillas (da profundidad a cualquier fondo).
+- `space_bg(t=0.0, n=170, seed=7, stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))))` — Espacio con degradado radial y estrellas que titilan (distinto brillo y tamaño).
+- `sphere_shade(img, cx, cy, r, light=0.35, dark=0.28)` — Luz y sombra de esfera sobre algo redondo ya dibujado (planetas, luna, pelotas): le da volumen.
 
 ## lib.audio
 
@@ -78,7 +103,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `don_tono(d, x, y, s=1.0, mood='neutral', arms='down', t=0.0)` · lib.humanos — Don Toño: señor de bigote y gorra (cliente eterno del minisúper).
 - `doppel(d, x, y, s, t, mood='smile', glow=1.0, point=False)` · reel9
 - `employee(d, x, y, s, t)` · reel8
-- `face(d, cx, cy, r, mood='happy')` · reel23
+- `face(d, cx, cy, r, mood='happy', look=(0.0, 0.0), eye=1.0)` · reel23 — look=(dx, dy) hacia dónde mira (-1..1); eye = tamaño de ojos (1 normal, 1.3 sorpresa).
 - `fly(d, x, y, s, t, phase=0)` · reel12
 - `germ(d, x, y, r, kind, t=0.0, phase=0.0, shade=1.0)` · reel2
 - `ghost(img, x, y, s=1.0, t=0.0, alpha=1.0, pixel=0, bob=True, **kw)` · lib.criaturas — Pega un fantasma con transparencia (alpha 0..1) y opcionalmente pixelado (pixel = tamaño de bloque).
@@ -255,7 +280,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `pillow(d, cx, cy, s)` · reel12
 - `pizza(d, cx, cy, s)` · reel2
 - `plane(d, x, y, s)` · reel25
-- `planet_earth(d, cx, cy, r, mood='happy')` · reel23
+- `planet_earth(d, cx, cy, r, mood='happy', look=(0.0, 0.0), eye=1.0, shade=True)` · reel23
 - `podium(d, cx, base, w=250, heights=(330, 230, 160), cols=((240, 190, 40), (190, 195, 205), (205, 130, 60)), appear=1.0)` · lib.objetos — Podio 1-2-3 (1 al centro, 2 izq, 3 der). Devuelve [(x, y_top)] en orden 1,2,3.
 - `poop(d, cx, cy, s)` · reel7
 - `popup_pixel(d, s, y, c='yellow', bg='purple')` · oso
@@ -343,7 +368,8 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `make_room(dark=False)` · reel9
 - `make_sea()` · reel3
 - `make_site()` · reel4
-- `make_space()` · reel13
+- `make_space(t=0.0, n=170, seed=7, stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))))` · lib.motion — Espacio con degradado radial y estrellas que titilan (distinto brillo y tamaño).
+- `make_space_v1()` · reel13
 - `make_store()` · reel
 - `make_street()` · reel9
 - `moon(d, x, y, r)` · reel17
@@ -351,6 +377,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `night_room(lamp=True)` · reel14
 - `office(night=False)` · reel15
 - `outside_day(w, h)` · reel8
+- `radial_bg(stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))), cx=540, cy=670, rx=760, ry=1250)` · lib.motion — Fondo con degradado radial (centro iluminado, orillas oscuras). stops=((posición 0..1, color), ...). Cacheado.
 - `rlyeh_city(d, cx, base, s, t, col=(60, 75, 80))` · reel3
 - `room(mess=0.0, dark=0.0, seed=1)` · reel12
 - `room_ofrenda_pixel(d, t)` · ofrenda

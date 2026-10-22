@@ -86,6 +86,9 @@ def moon(d, x, y, r=80, bg=(20, 25, 55), crescent=False):
         d.bitmap((int(x - r), int(y - r)), m, fill=(245, 240, 200)); return
     d.ellipse([x - r, y - r, x + r, y + r], fill=(245, 240, 200))
     for (dx, dy, rr) in ((-.3, -.2, .18), (.25, .2, .12), (.1, -.4, .1)): d.ellipse([x + dx * r - rr * r, y + dy * r - rr * r, x + dx * r + rr * r, y + dy * r + rr * r], fill=(225, 220, 180))
+    if r >= 30:
+        from .motion import sphere_shade
+        sphere_shade(d._image, x, y, r, .25, .3)                      # volumen de esfera
 
 def clouds(d, x, y, s=1.0, col=WHITE, t=0.0, rain=False):
     """Nube (x, y = centro). rain=True dibuja lluvia."""

@@ -7,11 +7,13 @@ from reel13 import SPACE, earth
 FPS = 30
 CX, CY = 540, 820
 
-def face(d, cx, cy, r, mood="happy"):
+def face(d, cx, cy, r, mood="happy", look=(0.0, 0.0), eye=1.0):
+    """look=(dx, dy) hacia dónde mira (-1..1); eye = tamaño de ojos (1 normal, 1.3 sorpresa)."""
     for sx in (-1, 1):
         ex, ey = cx + sx * r * 0.32, cy - r * 0.12
-        d.ellipse([ex - r * 0.13, ey - r * 0.16, ex + r * 0.13, ey + r * 0.16], fill=WHITE, outline=BLK, width=max(2, int(r * 0.03)))
-        d.ellipse([ex - r * 0.06, ey - r * 0.06, ex + r * 0.06, ey + r * 0.1], fill=BLK)
+        d.ellipse([ex - r * 0.13 * eye, ey - r * 0.16 * eye, ex + r * 0.13 * eye, ey + r * 0.16 * eye], fill=WHITE, outline=BLK, width=max(2, int(r * 0.03)))
+        px_, py_ = ex + look[0] * r * 0.06, ey + look[1] * r * 0.07
+        d.ellipse([px_ - r * 0.06, py_ - r * 0.06, px_ + r * 0.06, py_ + r * 0.1], fill=BLK)
         if mood == "angry":
             d.line([(ex - r * 0.17, ey - r * 0.24 - sx * r * 0.06), (ex + r * 0.17, ey - r * 0.24 + sx * r * 0.06)], fill=BLK, width=max(3, int(r * 0.05)))
         if mood == "scared":
@@ -27,9 +29,12 @@ def face(d, cx, cy, r, mood="happy"):
     else:
         d.line([(cx - r * 0.18, cy + r * 0.32), (cx + r * 0.18, cy + r * 0.32)], fill=BLK, width=max(3, int(r * 0.05)))
 
-def planet_earth(d, cx, cy, r, mood="happy"):
+def planet_earth(d, cx, cy, r, mood="happy", look=(0.0, 0.0), eye=1.0, shade=True):
     earth(d, cx, cy, r)
-    if r > 60: face(d, cx, cy, r, mood)
+    if shade:
+        from lib.motion import sphere_shade
+        sphere_shade(d._image, cx, cy, r)
+    if r > 60: face(d, cx, cy, r, mood, look, eye)
 
 def jupiter(d, cx, cy, r, mood="neutral"):
     d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=(215, 170, 120), outline=(120, 80, 50), width=max(2, int(r * 0.02)))

@@ -82,7 +82,7 @@ def chancla(c):
 
 def ending(c):
     img, d = canvas(((40, 30, 40), (90, 60, 50))); lt = c.lt
-    d.ellipse([60, 560, 1020, 1330], fill=(150, 120, 100))                 # foco de luz: las patas se distinguen
+    d.ellipse([60, 560, 1020, 1300], fill=(150, 120, 100))                 # foco de luz: las patas se distinguen
     if lt < 3.0:
         roach(d, 360, 1150, 0.9, c.t); bigtext(d, "¿CUCARACHA…", 540, 380, 90, fill=WHITE)
     else:

@@ -69,7 +69,15 @@ def render_frame(m, v, t, rec=None):
     img = fn(c)
     d = ImageDraw.Draw(img)
     if rec: rec.tag = "caption"
-    if getattr(m, "CAPTIONS", True) and c.cap: rich_caption(d, c.cap, y=CAP_Y, appear=c.cap_lt / 0.25)
+    if getattr(m, "VIGNETTE", .35) and getattr(m, "CAPTIONS", True):        # viñeta estándar (no en pixel)
+        from .motion import vignette
+        d = vignette(img, getattr(m, "VIGNETTE", .35))
+    if getattr(m, "CAPTIONS", True) and c.cap:
+        if getattr(m, "CAPTION_STYLE", "words") == "words":                  # estándar: palabra por palabra
+            from .motion import caption_words
+            caption_words(d, c.cap, c.cap_lt)
+        else:
+            rich_caption(d, c.cap, y=CAP_Y, appear=c.cap_lt / 0.25)
     arr = np.asarray(img)
     if c.shake: arr = np.roll(arr, int(math.sin(t * 60) * c.shake), axis=1)
     return arr
