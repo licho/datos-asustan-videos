@@ -218,3 +218,67 @@ def microphone(d, x, y, s=1.0):
     d.line([(x, y + S(20)), (x - S(10), y - S(60))], fill=BLK, width=W_(22)); d.line([(x, y + S(20)), (x - S(10), y - S(60))], fill=(60, 60, 70), width=W_(14))
     d.ellipse([x - S(42), y - S(110), x + S(22), y - S(46)], fill=(170, 175, 185), outline=BLK, width=W_(4))
     for k in range(3): d.line([(x - S(36), y - S(95) + k * S(14)), (x + S(14), y - S(95) + k * S(14))], fill=(120, 125, 135), width=W_(3))
+
+def elf(d, x, y, s=1.0, t=0.0, mood="happy", arms="down", col=(60, 150, 80), hat=None, sweater=False, flip=False):
+    """Duende navideño (caricatura): gorro puntiagudo con cascabel, orejas puntiagudas, túnica con cinturón,
+    medias de rayas y zapatos curvos. y = pies; alto ≈ 470·s. Manos en (x±115s, y-190s) con arms='down'.
+    mood: happy | sleepy (ojeras, resaca) | scared | sad | sly. arms: down | up | hold (al frente) | scratch | point.
+    sweater=True: suéter navideño rojo con zigzag (pica). hat: color del gorro (por defecto = col)."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s)); f = -1 if flip else 1
+    SK, CH = (250, 205, 170), (240, 140, 140)
+    hat = hat or col; body = (200, 45, 55) if sweater else col
+    d.ellipse([x - S(95), y - S(12), x + S(95), y + S(12)], fill=(70, 72, 75))
+    for sx in (-1, 1):
+        lx = x + sx * S(32)
+        d.rectangle([lx - S(16), y - S(150), lx + S(16), y - S(30)], fill=WHITE, outline=BLK, width=W_(3))
+        for k in range(4): d.rectangle([lx - S(16), y - S(140) + k * S(30), lx + S(16), y - S(126) + k * S(30)], fill=(210, 40, 50))
+        d.polygon([(lx - S(22), y - S(35)), (lx + sx * S(40), y - S(35)), (lx + sx * S(62), y - S(60)), (lx + sx * S(55), y), (lx - S(22), y)], fill=(120, 70, 40), outline=BLK)
+    def arm(hx, hy, sx):
+        sh = (x + sx * S(62), y - S(275))
+        d.line([sh, (hx, hy)], fill=BLK, width=W_(36)); d.line([sh, (hx, hy)], fill=body, width=W_(28))
+        d.ellipse([hx - S(17), hy - S(17), hx + S(17), hy + S(17)], fill=SK, outline=BLK, width=W_(3))
+    hands = {"down": ((x - S(105), y - S(170)), (x + S(105), y - S(170))), "up": ((x - S(130), y - S(420)), (x + S(130), y - S(420))),
+             "hold": ((x - S(55), y - S(200)), (x + S(55), y - S(200))), "scratch": ((x - S(40), y - S(260)), (x + S(130), y - S(330))),
+             "point": ((x - S(105), y - S(170)), (x + f * S(160), y - S(300)))}[arms]
+    if arms not in ("hold", "scratch"): arm(*hands[0], -1); arm(*hands[1], 1)
+    tun = [(x - S(70), y - S(300)), (x + S(70), y - S(300)), (x + S(95), y - S(140)), (x + S(60), y - S(115)), (x + S(30), y - S(140)), (x, y - S(112)), (x - S(30), y - S(140)), (x - S(60), y - S(115)), (x - S(95), y - S(140))]
+    d.polygon(tun, fill=body, outline=BLK); d.line(tun + [tun[0]], fill=BLK, width=W_(4))
+    if sweater:
+        for k in range(6):
+            zx = x - S(60) + k * S(24); d.line([(zx, y - S(225)), (zx + S(12), y - S(205)), (zx + S(24), y - S(225))], fill=WHITE, width=W_(5))
+        d.polygon([(x - S(10), y - S(270)), (x + S(10), y - S(270)), (x, y - S(250))], fill=(240, 200, 60))
+        if mood != "happy":
+            for k in range(5):
+                ax, ay = x + S(((k * 37) % 120) - 60), y - S(160 + (k * 23) % 110)
+                d.line([(ax - S(8), ay - S(8)), (ax + S(8), ay + S(8))], fill=(255, 230, 120), width=W_(3)); d.line([(ax + S(8), ay - S(8)), (ax - S(8), ay + S(8))], fill=(255, 230, 120), width=W_(3))
+    else:
+        d.rectangle([x - S(80), y - S(200), x + S(80), y - S(175)], fill=(40, 30, 25), outline=BLK, width=W_(2))
+        d.rectangle([x - S(18), y - S(206), x + S(18), y - S(169)], fill=(240, 200, 60), outline=BLK, width=W_(3))
+    if arms in ("hold", "scratch"): arm(*hands[0], -1); arm(*hands[1], 1)
+    hx, hy = x, y - S(380)
+    for sx in (-1, 1):
+        ear = [(hx + sx * S(70), hy - S(20)), (hx + sx * S(135), hy - S(55)), (hx + sx * S(78), hy + S(25))]
+        d.polygon(ear, fill=SK, outline=BLK); d.line(ear + [ear[0]], fill=BLK, width=W_(3))
+    d.ellipse([hx - S(80), hy - S(85), hx + S(80), hy + S(78)], fill=SK, outline=BLK, width=W_(4))
+    tipx = hx - f * S(110) + math.sin(t * 3) * S(8)
+    hatp = [(hx - S(88), hy - S(40)), (hx - S(30), hy - S(150)), (tipx, hy - S(205)), (hx + S(60), hy - S(110)), (hx + S(90), hy - S(40))]
+    d.polygon(hatp, fill=hat, outline=BLK); d.line(hatp + [hatp[0]], fill=BLK, width=W_(4))
+    d.rounded_rectangle([hx - S(95), hy - S(55), hx + S(95), hy - S(25)], int(S(12)), fill=WHITE, outline=BLK, width=W_(3))
+    d.ellipse([tipx - S(18), hy - S(223), tipx + S(18), hy - S(187)], fill=(240, 200, 60), outline=BLK, width=W_(3))
+    for sx in (-1, 1):
+        ex, ey = hx + sx * S(30), hy + S(5)
+        if mood == "sleepy":
+            d.chord([ex - S(16), ey - S(10), ex + S(16), ey + S(16)], 0, 180, fill=BLK)
+            d.arc([ex - S(18), ey + S(8), ex + S(18), ey + S(30)], 20, 160, fill=(150, 110, 160), width=W_(4))
+        else:
+            r = S(19) if mood == "scared" else S(14)
+            d.ellipse([ex - r, ey - r, ex + r, ey + r], fill=WHITE, outline=BLK, width=W_(3))
+            d.ellipse([ex - S(6) + (f * S(3) if mood == "sly" else 0), ey - S(6), ex + S(6) + (f * S(3) if mood == "sly" else 0), ey + S(6)], fill=BLK)
+            if mood == "sly": d.line([(ex - S(16), ey - S(14)), (ex + S(16), ey - S(8))], fill=BLK, width=W_(5))
+        d.ellipse([hx + sx * S(52) - S(14), hy + S(25), hx + sx * S(52) + S(14), hy + S(43)], fill=CH)
+    d.ellipse([hx - S(12), hy + S(14), hx + S(12), hy + S(36)], fill=(235, 150, 130), outline=BLK, width=W_(2))
+    my = hy + S(52)
+    if mood in ("happy", "sly"): d.arc([hx - S(28), my - S(18), hx + S(28), my + S(14)], 20, 160, fill=BLK, width=W_(5))
+    elif mood == "scared": d.ellipse([hx - S(12), my - S(6), hx + S(12), my + S(18)], fill=(80, 20, 30), outline=BLK, width=W_(3))
+    elif mood == "sad": d.arc([hx - S(22), my, hx + S(22), my + S(24)], 200, 340, fill=BLK, width=W_(5))
+    else: d.line([(hx - S(18), my + S(4)), (hx + S(14), my + S(8))], fill=BLK, width=W_(5))

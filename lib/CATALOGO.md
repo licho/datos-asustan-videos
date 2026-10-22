@@ -110,6 +110,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `dog(d, x, y, s, t, kind=0, bow=False)` · reel17
 - `don_tono(d, x, y, s=1.0, mood='neutral', arms='down', t=0.0)` · lib.humanos — Don Toño: señor de bigote y gorra (cliente eterno del minisúper).
 - `doppel(d, x, y, s, t, mood='smile', glow=1.0, point=False)` · reel9
+- `elf(d, x, y, s=1.0, t=0.0, mood='happy', arms='down', col=(60, 150, 80), hat=None, sweater=False, flip=False)` · lib.criaturas — Duende navideño (caricatura): gorro puntiagudo con cascabel, orejas puntiagudas, túnica con cinturón,
 - `employee(d, x, y, s, t)` · reel8
 - `emu(d, x, y, s=1.0, t=0.0, flip=False, run=True, mood='normal')` · lib.animales — Emú de caricatura (plumaje café, cuello azulado, patas largas). y = piso. run=True: patas corriendo.
 - `face(d, cx, cy, r, mood='happy', look=(0.0, 0.0), eye=1.0)` · reel23 — look=(dx, dy) hacia dónde mira (-1..1); eye = tamaño de ojos (1 normal, 1.3 sorpresa).
@@ -180,9 +181,11 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `boat(d, x, y, s=1.0, t=0.0, with_guy=True, mood='neutral', tilt=0.0)` · reel3
 - `bolt(d, x0, y0, x1, y1, seed=1, width=14, col=(255, 245, 140), glow=True, branches=2)` · reels_engine.exterior — Rayo en zigzag de (x0,y0) a (x1,y1) con ramas y resplandor.
 - `book(d, cx, cy, s)` · reel3
+- `bookshelf_crooked(d, x, y, s=1.0, lean=8)` · lib.objetos — Librero recién armado y chueco. y = base.
 - `booth(d, x, y, s=1.0, label='SEGURIDAD', col=(200, 205, 210))` · reels_engine.exterior — Caseta (vigilancia, cobro).
 - `bottle(d, x, y, s)` · reel2
 - `bottle_v8(d, x, y, s=1.0)` · reel8
+- `box_lid(d, x, y, s=1.0, col=(220, 60, 70), ribbon=(250, 210, 60), ang=0.0)` · lib.objetos — Tapa de regalo con moño (x, y = centro de la tapa).
 - `bridge(d, t, broken=0.0, fixed=False)` · reel4
 - `bubbles(d, t, x0, x1, ybot, n=25, seed=3)` · reel3
 - `bucket(d, x, y, s=1.0, water=True, larvae=0.0, t=0.0)` · lib.objetos — Cubeta; y = piso.
@@ -296,6 +299,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `net(d, box, col=(255, 255, 255), step=26)` · lib.objetos — Mosquitero: rejilla dentro de box=(x0,y0,x1,y1).
 - `nopal(d, x, y, s=1.0)` · lib.objetos — Nopal sobre una roca (como en el escudo). y = base de la roca.
 - `offering(d, x, y, s)` · reel4
+- `open_box(d, x, y, s=1.0, col=(220, 60, 70), ribbon=(250, 210, 60), front=True)` · lib.objetos — Caja de regalo abierta (sin tapa). y = base. Llama con front=False antes del personaje (fondo de la caja)
 - `outhouse(d, x, y, s=1.0, door=0.0, label='WC')` · lib.objetos — Letrina de madera con luna en la puerta. y = piso. door 0..1 = abierta.
 - `panel_catalogo_pixel(d, v, t)` · ofrenda
 - `pellet(d, x, y, s)` · reel5
@@ -331,7 +335,10 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `sandal(d, cx, cy, s, ang=0.0)` · reel27
 - `sandwich_pixel(d, x, y, big=2)` · oso
 - `sarcophagus(d, x, y, s=1.0, col=(220, 170, 60))` · lib.objetos — Sarcófago de pie; y = base.
+- `sausages(d, x0, y0, x1, y1, n=5)` · lib.objetos — Cadena de salchichas de (x0,y0) a (x1,y1).
 - `scar(d, x, y, s)` · reel9
+- `screw(d, x, y, s=1.0, ang=20)` · lib.objetos
+- `scroll(d, x, y, w, h, title='', lines=(), size=34, fine=None)` · lib.objetos — Pergamino largo con rollos arriba y abajo. (x, y) = esquina sup. izq. fine = letra chiquita al pie.
 - `shelf(d, x0, y0, x1, y1, rows=4, seed=1, items=True)` · reels_engine.muebles — Anaquel con productos de colores (tienda, despensa).
 - `ship(d, x, y, s)` · reel13
 - `shoe(d, x, y, s)` · reel12

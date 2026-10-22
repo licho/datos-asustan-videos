@@ -403,3 +403,55 @@ def cardboard_box(d, x, y, s=1.0, label="OBJETOS PERSONALES", items=True):
     d.line([(x - S(150), y - S(170)), (x + S(150), y - S(170)), (x + S(135), y), (x - S(135), y), (x - S(150), y - S(170))], fill=BLK, width=W_(5))
     d.polygon([(x - S(150), y - S(170)), (x - S(190), y - S(230)), (x - S(40), y - S(230)), (x - S(20), y - S(170))], fill=(185, 145, 95), outline=BLK)
     if label: d.text((x, y - S(85)), label, font=F(int(S(19))), fill=(90, 60, 30), anchor="mm")
+
+def open_box(d, x, y, s=1.0, col=(220, 60, 70), ribbon=(250, 210, 60), front=True):
+    """Caja de regalo abierta (sin tapa). y = base. Llama con front=False antes del personaje (fondo de la caja)
+    y con front=True después (frente de la caja) para que el personaje quede 'dentro'."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    if not front:
+        d.polygon([(x - S(120), y - S(190)), (x + S(120), y - S(190)), (x + S(95), y - S(225)), (x - S(95), y - S(225))], fill=dk(col, .6), outline=BLK)
+        return
+    d.rectangle([x - S(120), y - S(190), x + S(120), y], fill=col, outline=BLK, width=W_(5))
+    d.rectangle([x - S(16), y - S(190), x + S(16), y], fill=ribbon, outline=BLK, width=W_(2))
+
+def box_lid(d, x, y, s=1.0, col=(220, 60, 70), ribbon=(250, 210, 60), ang=0.0):
+    """Tapa de regalo con moño (x, y = centro de la tapa)."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s)); a = math.radians(ang)
+    def R(px, py): return (x + px * math.cos(a) - py * math.sin(a), y + px * math.sin(a) + py * math.cos(a))
+    pts = [R(-S(132), -S(20)), R(S(132), -S(20)), R(S(132), S(20)), R(-S(132), S(20))]
+    d.polygon(pts, fill=col, outline=BLK); d.line(pts + [pts[0]], fill=BLK, width=W_(4))
+    for sx in (-1, 1):
+        cx, cy = R(sx * S(30), -S(45)); d.ellipse([cx - S(30), cy - S(22), cx + S(30), cy + S(22)], outline=ribbon, width=W_(12))
+
+def bookshelf_crooked(d, x, y, s=1.0, lean=8):
+    """Librero recién armado y chueco. y = base."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s)); WD = (175, 130, 85)
+    top = y - S(520); dx = S(lean * 6)
+    d.polygon([(x - S(150), y), (x + S(150), y), (x + S(150) + dx, top), (x - S(150) + dx, top)], fill=WD, outline=BLK)
+    d.line([(x - S(150), y), (x + S(150), y), (x + S(150) + dx, top), (x - S(150) + dx, top), (x - S(150), y)], fill=BLK, width=W_(6))
+    for k in range(1, 4):
+        u = k / 4; yy = y - S(520) * u; xx = dx * u
+        d.line([(x - S(150) + xx, yy + (S(18) if k == 2 else 0)), (x + S(150) + xx, yy - (S(10) if k == 2 else 0))], fill=BLK, width=W_(8))
+    for k in range(3): d.rectangle([x - S(110) + k * S(55) + dx * .2, y - S(110) - k * S(4), x - S(80) + k * S(55) + dx * .2, y - S(15)], fill=[(60, 120, 200), (200, 70, 60), (240, 190, 60)][k], outline=BLK, width=W_(2))
+
+def screw(d, x, y, s=1.0, ang=20):
+    S = lambda v: v * s; a = math.radians(ang); W_ = lambda v: max(2, int(v * s))
+    p0 = (x - math.cos(a) * S(22), y - math.sin(a) * S(22)); p1 = (x + math.cos(a) * S(22), y + math.sin(a) * S(22))
+    d.line([p0, p1], fill=(150, 150, 160), width=W_(8)); d.ellipse([p0[0] - S(9), p0[1] - S(9), p0[0] + S(9), p0[1] + S(9)], fill=(170, 170, 180), outline=BLK, width=W_(2))
+
+def scroll(d, x, y, w, h, title="", lines=(), size=34, fine=None):
+    """Pergamino largo con rollos arriba y abajo. (x, y) = esquina sup. izq. fine = letra chiquita al pie."""
+    P = (245, 230, 190)
+    d.rectangle([x, y + 25, x + w, y + h - 25], fill=P, outline=BLK, width=4)
+    for yy in (y + 25, y + h - 25): d.rounded_rectangle([x - 20, yy - 25, x + w + 20, yy + 25], 25, fill=dk(P, .9), outline=BLK, width=4)
+    if title: d.text((x + w / 2, y + 85), title, font=F(int(size * 1.1)), fill=(170, 40, 40), anchor="mm")
+    for i, ln in enumerate(lines): d.text((x + 40, y + 140 + i * (size + 16)), ln, font=F(size), fill=(60, 40, 30), anchor="lm")
+    if fine: d.text((x + w / 2, y + h - 65), fine, font=F(int(size * .55)), fill=(60, 40, 30), anchor="mm")
+
+def sausages(d, x0, y0, x1, y1, n=5):
+    """Cadena de salchichas de (x0,y0) a (x1,y1)."""
+    for k in range(n):
+        u0, u1 = k / n, (k + 1) / n
+        a = (x0 + (x1 - x0) * u0, y0 + (y1 - y0) * u0); b = (x0 + (x1 - x0) * u1, y0 + (y1 - y0) * u1)
+        d.line([a, b], fill=BLK, width=52); d.line([a, b], fill=(200, 100, 80), width=42)
+        d.ellipse([b[0] - 6, b[1] - 6, b[0] + 6, b[1] + 6], fill=(150, 70, 55))

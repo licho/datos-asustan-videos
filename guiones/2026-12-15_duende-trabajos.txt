@@ -1,0 +1,13 @@
+Video: Guía laboral Ep. 7 — El duende de Santa (despedido)
+Fecha: martes 15 de diciembre 2026, 10:00
+Código: specs/s41_duende.py · Sin voz: sinvoz/2026-12-15_duende-trabajos_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4, una sola toma
+Producir final: python3 -m lib.produce specs/s41_duende.py final audio/41-duende.mp3
+
+[mischievously] Guía laboral para monstruos, episodio siete: el duende de Santa. [sarcastic] Su currículum: trescientos años armando juguetes en el Polo Norte… sin aguinaldo y sin calefacción. Motivo de salida: lo despidieron. [dramatically] ¿Por qué? Se quedó dormido dentro de una caja, lo envolvieron… y lo entregaron. Un niño pidió una bicicleta y le llegó un duende con resaca. [confident] Trabajo número uno: repartidor de paquetería. Entrega en todo el mundo en una sola noche… pero el resto del año, tu paquete “va en camino” tres semanas. [serious] Trabajo número dos: armador de muebles. Arma lo que sea sin instructivo… y siempre le sobran tres tornillos. Igual que a ti. [mischievously] Trabajo número tres: Recursos Humanos. Tiene trescientos años de experiencia haciendo listas de quién se portó mal… ahora decide quién no regresa el lunes. [whispers] Dato real: en Islandia no hay un duende navideño… hay trece. Y son de cuidado: uno roba salchichas, otro lame cucharas y otro azota puertas en la madrugada. [dramatically] El verdadero problema no es el despido. Es que trabajó trescientos años para el mismo jefe… [sarcastic] …y su liquidación fue un suéter navideño. Que pica. ¿Qué otro monstruo quieres que busque trabajo? Te leo en los comentarios.
+
+# palabras: 194  duración estimada: 79 s
+
+Fuentes:
+- Wikipedia, "Icelandic Christmas folklore": 13 Yule Lads (Jólasveinar); Bjúgnakrækir roba salchichas, Þvörusleikir lame cucharas, Hurðaskellir azota puertas; llegan del 12 al 24 de diciembre
+- Mental Floss, "Iceland Yule Lads"
