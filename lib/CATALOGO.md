@@ -91,6 +91,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `blob(d, cx, cy, r, t)` · reel15
 - `brain(d, x, y, s=1.0, t=0.0, mood='happy', eyes_open=True, broom=False)` · lib.criaturas — Cerebro con cara (x, y = centro).
 - `cat(d, x, y, s)` · reel17
+- `cleopatra(d, x, y, s=1.0, t=0.0, mood='neutral', arms='down')` · lib.humanos — Cleopatra (caricatura): fleco negro, diadema dorada, collar ancho y vestido blanco. y = pies. mood: neutral | bored | happy.
 - `coral(d, x, y, s=1.0, t=0.0, kind='branch', col=(240, 120, 150), spawn=0.0)` · lib.animales — Coral; y = fondo marino. kind: branch | brain. spawn 0..1 suelta huevecillos.
 - `cow(d, x, y, s)` · reel25
 - `crab(d, x, y, s=1.0, t=0.0, mood='normal')` · lib.animales — Cangrejo de frente; y = piso. mood: normal | confused.
@@ -114,6 +115,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `hero_pixel_v1(d, x, y, scared=False, frame=0, big=2)` · pixel
 - `lion(d, x, y, s=1.0, t=0.0, mood='neutral')` · lib.animales — León sentado de frente; y = piso.
 - `listeria(d, x, y, s, t)` · reel26
+- `mammoth(d, x, y, s=1.0, t=0.0, flip=False)` · lib.animales — Mamut lanudo de lado; y = piso.
 - `medal(d, x, y, s=1.0, text='1º', ribbon=(40, 120, 220), neck=None)` · lib.humanos — Medalla colgada; (x, y) = centro de la medalla. neck=(x, y) dibuja el listón desde el cuello.
 - `mite(d, x, y, s=1.0, t=0.0, phase=0.0, mood='grin', shade=1.0, dizzy=False)` · reel5
 - `mold(d, cx, cy, r, k, t, seed=1)` · reel26
@@ -132,10 +134,12 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `soul(d, x, y, t, s=1.0)` · ofrenda
 - `sponge(d, cx, cy, s, t=0.0, mood='smug', dirt=0.0, wet=0.0, sparkle=False)` · reel16
 - `stamp_guy(img, x, y, s, ang, mood='scared', arms='up', t=0.0, hoodie=(240, 120, 40))` · reel25
+- `stego(d, x, y, s=1.0, t=0.0, mood='normal', flip=False)` · lib.animales — Estegosaurio; y = piso. mood: normal | confused.
 - `swarm(d, cx, cy, t, n=24, spread=14, angry=False, seed=7)` · mision003
 - `taquero(d, x, y, s, t, mood='neutral', arms='down')` · reel24
 - `tentacle(d, x0, y0, length, ang, t, w0, col, phase=0.0, curl=1.0)` · reel3
 - `thief(d, x, y, s, t)` · reel4
+- `trex(d, x, y, s=1.0, t=0.0, flip=False, roar=False)` · lib.animales — Tiranosaurio; y = piso.
 - `vampire(d, x, y, s=1.0, t=0.0, mood='smug', outfit='cape', eyes_glow=0.0, arms='down', hat=None)` · reel14
 - `wolf(d, x, y, s=1.0, t=0.0, mood='smug', outfit='shirt', arms='down', hat=None, howl=False)` · reel17
 - `zomb(d, x, y, s=1.0, t=0.0, mood='blank', arms='out', outfit='office', hat=None, arm_off=False)` · reel18
@@ -266,6 +270,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `mower(d, x, y, hx, hy, t)` · mision003
 - `mug(d, x, y, s=1.0, t=0.0, col=(240, 240, 235), level=1.0, steam=True, label=None)` · lib.objetos — Taza de café; y = base. level 0..1 = cuánto café queda (se ve por arriba).
 - `net(d, box, col=(255, 255, 255), step=26)` · lib.objetos — Mosquitero: rejilla dentro de box=(x0,y0,x1,y1).
+- `nopal(d, x, y, s=1.0)` · lib.objetos — Nopal sobre una roca (como en el escudo). y = base de la roca.
 - `offering(d, x, y, s)` · reel4
 - `panel_catalogo_pixel(d, v, t)` · ofrenda
 - `pellet(d, x, y, s)` · reel5
@@ -288,12 +293,14 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `portal(d, cx, cy, r, t)` · reel24
 - `post(d, cx, cy, s, t)` · reel4
 - `pot(d, x, y, s, t)` · reel8
+- `pyramid(d, x, y, s=1.0, built=1.0, col=(225, 190, 120))` · lib.objetos — Pirámide; y = base. built 0..1 = qué tanto está construida (de abajo hacia arriba).
 - `radar(d, cx, cy, rings, t=0.0)` · lib.objetos — rings=[(radio, texto, color, activo)] de mayor a menor.
 - `ranger_hat(d, x, y, s=1.0, col=(150, 110, 60))` · lib.objetos — Sombrero de guardabosques; (x, y) = centro de la cabeza (ponlo sobre guy: x, pies - 520·s).
 - `rec_frame(d, t, label='REC', box=(40, 470, 1040, 1330))` · lib.objetos — Marco de cámara grabando: esquinas + REC parpadeando + contador.
 - `rice_bowl(d, cx, ybot, s=1.0)` · reel26
 - `ring_light(d, x, y, r=170, on=True)` · lib.objetos
 - `road(d, y0, y1, t=0.0, speed=0.0, col=(70, 70, 75))` · lib.exterior — Calle horizontal con líneas (speed>0 se mueven).
+- `rocket(d, x, y, s=1.0, t=0.0, flame=True)` · lib.objetos — Cohete; (x, y) = base.
 - `ruler(d, x, y0, y1, marks, current=None, appear=1.0, w=60, col=(250, 210, 60))` · lib.pantallas — Regla vertical de tamaños. marks=[(fracción 0=abajo..1=arriba, texto)]; current = índice resaltado.
 - `salad(d, cx, ybot)` · reel26
 - `sandal(d, cx, cy, s, ang=0.0)` · reel27

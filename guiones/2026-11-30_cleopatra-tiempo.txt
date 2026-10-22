@@ -1,0 +1,15 @@
+Video: Cleopatra vivió más cerca de la Luna que de las pirámides (datos de tiempo)
+Fecha: lunes 30 de noviembre 2026, 10:00
+Código: specs/s37_cleopatra.py · Sin voz: sinvoz/2026-11-30_cleopatra-tiempo_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4
+Producir final: python3 -m lib.produce specs/s37_cleopatra.py final audio/37-cleopatra.mp3
+
+[mischievously] Cleopatra vivió más cerca de la llegada a la Luna… que de la construcción de la Gran Pirámide. [serious] La pirámide tiene unos cuatro mil quinientos años. Cuando Cleopatra nació, ya tenía más de dos mil. [sarcastic] Para ella, la pirámide era más antigua… que ella para nosotros. Y su familia ni siquiera era egipcia: venía de Macedonia, en Grecia. Gobernaron Egipto siglos… sin aprender egipcio. Ella sí. [dramatically] Más: cuando se construían las pirámides, todavía había mamuts vivos, en una isla del Ártico. [mischievously] La Universidad de Oxford ya daba clases… antes de que se fundara Tenochtitlan. [sarcastic] Sí: hay universidades más viejas que el imperio azteca. Y siguen cobrando colegiatura. [whispers] Y el más fuerte: el tiranosaurio vivió más cerca de nosotros… que del estegosaurio. Entre ellos hay más de ochenta millones de años. Entre el T-rex y tú, sesenta y seis. [sarcastic] O sea, para el estegosaurio, el T-rex era el futuro. Y tú también. ¿Cuál te rompió más la cabeza? Te leo en los comentarios.
+
+# palabras: 164  duración estimada: 68 s
+
+Fuentes:
+- Smithsonian (Oxford vs. aztecas): clases en Oxford desde 1096; Tenochtitlan 1325 (229 años después); Cleopatra reinó ~26 siglos después de la Gran Pirámide; hoy estamos más cerca de ella que ella de la pirámide
+- World History Encyclopedia: dinastía ptolemaica de origen macedonio-griego; sus antepasados no aprendieron egipcio, ella sí
+- Cálculo: Gran Pirámide ~2560 a.C. → Cleopatra (m. 30 a.C.) ~2,530 años; Cleopatra → Luna (1969) ~2,000 años
+- Conocimiento común (no verificado en esta sesión): mamuts en isla de Wrangel hasta ~4,000 años; T-rex ~68-66 Ma, estegosaurio ~150 Ma

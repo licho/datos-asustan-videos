@@ -231,3 +231,33 @@ def hourglass(d, x, y, s=1.0, frac=.5, t=0.0):
     d.polygon([(x - S(70) * top / S(140), y - top + S(2)), (x + S(70) * top / S(140), y - top + S(2)), (x, y)], fill=(230, 190, 100))
     d.polygon([(x - S(70), y + S(150)), (x + S(70), y + S(150)), (x + S(70) - S(60) * (bot / S(140)), y + S(150) - bot), (x - S(70) + S(60) * (bot / S(140)), y + S(150) - bot)], fill=(230, 190, 100))
     if 0 < frac < 1: d.line([(x, y), (x, y + S(150) - bot)], fill=(230, 190, 100), width=int(S(5)))
+
+def pyramid(d, x, y, s=1.0, built=1.0, col=(225, 190, 120)):
+    """Pirámide; y = base. built 0..1 = qué tanto está construida (de abajo hacia arriba)."""
+    S = lambda v: v * s; h = S(420); w = S(440)
+    top = y - h * built; wt = w * (1 - built)
+    d.polygon([(x - w, y), (x - wt, top), (x + wt, top), (x + w, y)], fill=col, outline=BLK)
+    d.polygon([(x, y - h if built >= 1 else top), (x + wt if built < 1 else x, top), (x + w, y), (x + S(60), y)], fill=dk(col, .82))
+    for k in range(1, 8):
+        yy = y - h * k / 8
+        if yy >= top: hw = w * (1 - k / 8); d.line([(x - hw, yy), (x + hw, yy)], fill=dk(col, .7), width=3)
+    d.polygon([(x - w, y), (x, y - h), (x + w, y)] if built >= 1 else [(x - w, y), (x - wt, top), (x + wt, top), (x + w, y)], outline=BLK)
+
+def rocket(d, x, y, s=1.0, t=0.0, flame=True):
+    """Cohete; (x, y) = base."""
+    S = lambda v: v * s
+    if flame:
+        fl = S(60) + math.sin(t * 25) * S(15)
+        d.polygon([(x - S(40), y), (x, y + fl + S(60)), (x + S(40), y)], fill=(250, 150, 40)); d.polygon([(x - S(22), y), (x, y + fl), (x + S(22), y)], fill=(255, 230, 120))
+    for sx in (-1, 1): d.polygon([(x + sx * S(50), y - S(120)), (x + sx * S(110), y + S(10)), (x + sx * S(50), y)], fill=(220, 60, 60), outline=BLK)
+    d.rounded_rectangle([x - S(55), y - S(330), x + S(55), y], int(S(30)), fill=(240, 240, 245), outline=BLK, width=5)
+    d.polygon([(x - S(55), y - S(300)), (x, y - S(420)), (x + S(55), y - S(300))], fill=(220, 60, 60), outline=BLK)
+    d.ellipse([x - S(28), y - S(250), x + S(28), y - S(194)], fill=(120, 190, 250), outline=BLK, width=4)
+
+def nopal(d, x, y, s=1.0):
+    """Nopal sobre una roca (como en el escudo). y = base de la roca."""
+    S = lambda v: v * s; G = (80, 150, 80)
+    d.ellipse([x - S(110), y - S(60), x + S(110), y + S(10)], fill=(140, 120, 110), outline=BLK, width=4)
+    for (dx, dy, w, h) in ((0, -170, 55, 110), (-80, -260, 45, 85), (80, -270, 45, 85), (0, -330, 40, 75)):
+        d.ellipse([x + S(dx) - S(w), y + S(dy) - S(h), x + S(dx) + S(w), y + S(dy) + S(h)], fill=G, outline=BLK, width=4)
+    for (dx, dy) in ((-80, -340), (80, -350), (0, -400)): d.ellipse([x + S(dx) - S(12), y + S(dy) - S(14), x + S(dx) + S(12), y + S(dy) + S(14)], fill=(220, 50, 90), outline=BLK, width=2)

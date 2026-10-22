@@ -183,3 +183,52 @@ def coral(d, x, y, s=1.0, t=0.0, kind="branch", col=(240, 120, 150), spawn=0.0):
         ph = (t * .4 + k / 18) % 1
         px = x + rnd.uniform(-S(90), S(90)) + math.sin(t + k) * S(10); py = y - S(150) - ph * S(500)
         d.ellipse([px - S(7), py - S(7), px + S(7), py + S(7)], fill=(255, 210, 220), outline=dk(col, .7))
+
+def mammoth(d, x, y, s=1.0, t=0.0, flip=False):
+    """Mamut lanudo de lado; y = piso."""
+    S = lambda v: v * s; f = -1 if flip else 1; W_ = lambda v: max(2, int(v * s)); B, D = (130, 85, 50), (95, 60, 35)
+    for dx in (-110, -40, 60, 120):
+        d.rounded_rectangle([x + f * S(dx) - S(32), y - S(170), x + f * S(dx) + S(32), y], int(S(16)), fill=D, outline=BLK, width=W_(4))
+    d.ellipse([x - S(200), y - S(340), x + S(170), y - S(110)], fill=B, outline=BLK, width=W_(5))
+    for k in range(9):
+        px = x - S(180) + k * S(42); d.polygon([(px, y - S(150)), (px + S(20), y - S(95)), (px + S(40), y - S(150))], fill=B)
+    hx = x + f * S(190); hy = y - S(260)
+    d.ellipse([hx - S(95), hy - S(105), hx + S(95), hy + S(80)], fill=B, outline=BLK, width=W_(5))
+    d.ellipse([hx - f * S(55) - S(55), hy - S(60), hx - f * S(55) + S(55), hy + S(50)], fill=D, outline=BLK, width=W_(3))
+    sw = math.sin(t * 2) * S(15)
+    trunk = [(hx + f * S(70), hy + S(20)), (hx + f * S(110), hy + S(110)), (hx + f * S(95) + sw, hy + S(200)), (hx + f * S(130) + sw, hy + S(240))]
+    d.line(trunk, fill=BLK, width=W_(44), joint="curve"); d.line(trunk, fill=B, width=W_(36), joint="curve")
+    d.arc([hx + f * S(10) - S(60), hy + S(10), hx + f * S(10) + S(130), hy + S(170)] if f > 0 else [hx - S(130), hy + S(10), hx + S(60), hy + S(170)], 20 if f > 0 else 70, 160 if f > 0 else 200, fill=(245, 240, 225), width=W_(16))
+    d.ellipse([hx + f * S(35) - S(11), hy - S(40), hx + f * S(35) + S(11), hy - S(18)], fill=BLK)
+
+def stego(d, x, y, s=1.0, t=0.0, mood="normal", flip=False):
+    """Estegosaurio; y = piso. mood: normal | confused."""
+    S = lambda v: v * s; f = -1 if flip else 1; W_ = lambda v: max(2, int(v * s)); G, P = (120, 170, 90), (220, 120, 70)
+    for k in range(7):
+        px = x - S(150) + k * S(50); hgt = S(70 + 50 * math.sin(k / 6 * math.pi))
+        d.polygon([(px - S(28), y - S(220)), (px, y - S(220) - hgt), (px + S(28), y - S(220))], fill=P, outline=BLK)
+    d.polygon([(x - f * S(170), y - S(160)), (x - f * S(360), y - S(120)), (x - f * S(170), y - S(110))], fill=G, outline=BLK)
+    for k in range(2): d.polygon([(x - f * S(320 + k * 25), y - S(125)), (x - f * S(340 + k * 25), y - S(190)), (x - f * S(300 + k * 25), y - S(128))], fill=(240, 230, 200), outline=BLK)
+    for dx in (-110, -40, 50, 120): d.rounded_rectangle([x + f * S(dx) - S(26), y - S(140), x + f * S(dx) + S(26), y], int(S(12)), fill=dk(G, .85), outline=BLK, width=W_(4))
+    d.ellipse([x - S(200), y - S(260), x + S(200), y - S(90)], fill=G, outline=BLK, width=W_(5))
+    hx = x + f * S(250); d.line([(x + f * S(150), y - S(170)), (hx, y - S(130))], fill=BLK, width=W_(50)); d.line([(x + f * S(150), y - S(170)), (hx, y - S(130))], fill=G, width=W_(42))
+    d.ellipse([hx - S(55), y - S(170), hx + S(55), y - S(90)], fill=G, outline=BLK, width=W_(4))
+    d.ellipse([hx + f * S(10) - S(13), y - S(150), hx + f * S(10) + S(13), y - S(124)], fill=WHITE, outline=BLK, width=2)
+    d.ellipse([hx + f * S(14) - S(6), y - S(144), hx + f * S(14) + S(6), y - S(132)], fill=BLK)
+    if mood == "confused": d.text((hx, y - S(240)), "?", font=None, fill=BLK)
+
+def trex(d, x, y, s=1.0, t=0.0, flip=False, roar=False):
+    """Tiranosaurio; y = piso."""
+    S = lambda v: v * s; f = -1 if flip else 1; W_ = lambda v: max(2, int(v * s)); G = (90, 150, 110)
+    d.polygon([(x - f * S(60), y - S(260)), (x - f * S(330), y - S(150)), (x - f * S(60), y - S(190))], fill=G, outline=BLK)
+    for dx, k in ((-50, 0), (40, 1)):
+        d.polygon([(x + f * S(dx) - S(35), y - S(210)), (x + f * S(dx) + S(35), y - S(210)), (x + f * S(dx) + S(20), y), (x + f * S(dx) - S(30), y)], fill=dk(G, .85), outline=BLK)
+    d.ellipse([x - S(120), y - S(380), x + S(130), y - S(160)], fill=G, outline=BLK, width=W_(5))
+    hx, hy = x + f * S(170), y - S(450)
+    d.line([(x + f * S(60), y - S(340)), (hx - f * S(30), hy + S(30))], fill=BLK, width=W_(90)); d.line([(x + f * S(60), y - S(340)), (hx - f * S(30), hy + S(30))], fill=G, width=W_(80))
+    jaw = S(40) if roar else S(10)
+    d.rounded_rectangle([hx - S(90), hy - S(60), hx + S(110), hy + S(25)], int(S(30)), fill=G, outline=BLK, width=W_(5))
+    d.rounded_rectangle([hx - S(70), hy + S(10) + jaw, hx + S(100), hy + S(55) + jaw], int(S(20)), fill=G, outline=BLK, width=W_(5))
+    for k in range(5): d.polygon([(hx - S(40) + k * S(30), hy + S(25)), (hx - S(30) + k * S(30), hy + S(45)), (hx - S(20) + k * S(30), hy + S(25))], fill=WHITE, outline=BLK)
+    d.ellipse([hx + f * S(10) - S(16), hy - S(45), hx + f * S(10) + S(16), hy - S(13)], fill=WHITE, outline=BLK, width=3); d.ellipse([hx + f * S(14) - S(7), hy - S(36), hx + f * S(14) + S(7), hy - S(22)], fill=BLK)
+    d.line([(x + f * S(100), y - S(300)), (x + f * S(150), y - S(260)), (x + f * S(165), y - S(275))], fill=BLK, width=W_(16))
