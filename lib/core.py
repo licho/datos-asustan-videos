@@ -60,7 +60,7 @@ def bubble(d, x, y, text, size=52, tail=None, maxw=760, fill=WHITE, fg=BLK, max_
         Lc = min(L, max_tail or size * 2.0); tip = (ex + dx / L * Lc, ey + dy / L * Lc)
         hw = size * .42; vertical = ty > y1 or ty < y0
         b1, b2 = ((ex - hw, ey), (ex + hw, ey)) if vertical else ((ex, ey - hw), (ex, ey + hw))
-        nx, ny = -dy / L, dx / L; bend = Lc * .25                    # curva hacia un lado (como trazo a mano)
+        nx, ny = -dy / L, dx / L; bend = Lc * .2                    # curva hacia un lado (como trazo a mano)
         c1 = ((b1[0] + tip[0]) / 2 + nx * bend, (b1[1] + tip[1]) / 2 + ny * bend)
         c2 = ((b2[0] + tip[0]) / 2 + nx * bend * .6, (b2[1] + tip[1]) / 2 + ny * bend * .6)
         tail_poly = _qbez(b1, c1, tip) + _qbez(tip, c2, b2)[1:]
@@ -86,31 +86,39 @@ def say(d, text, mouth, head=110, size=52, maxw=520, fill=WHITE, fg=BLK, side=No
     mouth = (x, y) de la boca; head = radio de la cabeza (px); avoid = cajas (x0,y0,x1,y1) a no tapar (otros personajes, letreros).
     Prueba varias posiciones (arriba al centro, arriba a cada lado, a los lados, más arriba) y elige la que:
     no tape la cabeza ni lo de 'avoid', quede dentro de la pantalla (entre letreros y subtítulos) y tenga la punta más corta."""
-    _, _, _, bw, bh = _bubble_layout(d, text, size, maxw)
-    mx, my = mouth; toward = side or (1 if mx < W / 2 else -1)
+    reserve = [(a[0] + (a[2] - a[0]) * .2, a[1] - 200, a[2] - (a[2] - a[0]) * .2, a[1]) for a in avoid]  # espacio sobre los otros (para SU globo)
+    mx, my = mouth
+    if side: toward = side
+    elif avoid:                                                  # se aleja de los demás personajes
+        ac = sum((a[0] + a[2]) / 2 for a in avoid) / len(avoid); toward = 1 if ac < mx else -1
+    else: toward = 1 if mx < W / 2 else -1
     head_box = (mx - head * 1.15, my - head * 1.9, mx + head * 1.15, my + head * .5)
-    top_lim, bot_lim = 380 + bh / 2, 1330 - bh / 2
-    cands = []
-    for lift in (0, 80, 170, 260):
-        above = my - head * 1.9 - bh / 2 - 20 - lift
-        for sx, bias in ((toward, 0), (0, 15), (-toward, 30)):
-            cands.append((mx + sx * (head * .6 + bw * .32), above, bias + lift * .25))
-    for sd, bias in ((toward, 40), (-toward, 70)):
-        cands.append((mx + sd * (head * 1.15 + 40 + bw / 2), my - head * .9, bias))
-    if side: cands = [c for c in cands if (c[0] - mx) * side > 0] or cands
     def over(a, b): return max(0, min(a[2], b[2]) - max(a[0], b[0])) * max(0, min(a[3], b[3]) - max(a[1], b[1]))
     best = None
-    for bx, by, bias in cands:
-        cx = min(max(bx, bw / 2 + 30), W - bw / 2 - 30); cy = min(max(by, top_lim), bot_lim)
-        box = (cx - bw / 2, cy - bh / 2, cx + bw / 2, cy + bh / 2)
-        tipx = mx + (1 if cx > mx else -1) * head * .8
-        ex = min(max(tipx, box[0] + 40), box[2] - 40); ey = box[3] if cy < my else box[1]
-        tail_len = math.hypot(tipx - ex, my - ey)
-        score = bias + tail_len * .6 + abs(cx - bx) * .5 + abs(cy - by) * .8 + over(box, head_box) * 1.0 + sum(over(box, a) for a in avoid) * 1.0 + sum(over(box, a) for a in _SAID) * 1.0
-        if best is None or score < best[0]: best = (score, cx, cy)
-    _, cx, cy = best
+    for wi, mw in enumerate((maxw, int(maxw * .72))):             # si no cabe cerca, prueba un globo más angosto (más renglones)
+        _, _, _, bw, bh = _bubble_layout(d, text, size, mw)
+        top_lim, bot_lim = 380 + bh / 2, 1330 - bh / 2
+        cands = []
+        for lift in (0, 80, 170, 260):
+            above = my - head * 1.9 - bh / 2 - 20 - lift
+            for sx, bias in ((0, 0), (toward, 10), (-toward, 25)):
+                cands.append((mx + sx * (head * .6 + bw * .32), above, bias + lift * .25))
+        for sd, bias in ((toward, 40), (-toward, 70)):
+            cands.append((mx + sd * (head * 1.15 + 40 + bw / 2), my - head * .9, bias))
+        if side: cands = [c for c in cands if (c[0] - mx) * side > 0] or cands
+        for bx, by, bias in cands:
+            cx = min(max(bx, bw / 2 + 30), W - bw / 2 - 30); cy = min(max(by, top_lim), bot_lim)
+            box = (cx - bw / 2, cy - bh / 2, cx + bw / 2, cy + bh / 2)
+            tipx = mx + (1 if cx > mx else -1) * head * .8
+            ex = min(max(tipx, box[0] + 40), box[2] - 40); ey = box[3] if cy < my else box[1]
+            tail_len = math.hypot(tipx - ex, my - ey)
+            score = (bias + wi * 35 + tail_len * 1.4 + abs(cx - bx) * .5 + abs(cy - by) * .8
+                     + (over(box, head_box) * 8000 + sum(over(box, a) for a in avoid) * 2000
+                        + sum(over(box, a) for a in reserve) * 500 + sum(over(box, a) for a in _SAID) * 20000) / (bw * bh))
+            if best is None or score < best[0]: best = (score, cx, cy, mw)
+    _, cx, cy, mw = best
     tip = (mx + (1 if cx > mx else -1) * head * .8, my - head * .2)
-    box = bubble(d, cx, cy, text, size, tail=tip, maxw=maxw, fill=fill, fg=fg, max_tail=head * 2.6 + 60)
+    box = bubble(d, cx, cy, text, size, tail=tip, maxw=mw, fill=fill, fg=fg, max_tail=size * 1.9)
     _SAID.append(box)
     return box
 
