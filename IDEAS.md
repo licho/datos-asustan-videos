@@ -32,6 +32,7 @@ Octubre–noviembre 2026: zombie en el minisúper · teclado sucio · aluxes · 
 - [ ] **¿Tu compañero es un robot?** Contesta correos a las 3 a.m., nunca va al baño, sin foto de perfil, dice "con gusto" a todo. Remate: no es robot, es el que reemplazó a medio departamento con IA. *(recomendada: continúa al alien y al tema IA)*
 - [ ] **¿Tu roomie es un fantasma?** Nunca lo ves, la comida desaparece, puertas que se cierran solas, no paga renta. Remate: sí es fantasma… y el contrato está a tu nombre.
 - [ ] **¿Tu vecino es hombre lobo?** Fiestas en luna llena, pelos en el elevador, le ladra al repartidor, pide la carne cruda. Remate: tiene tres perros en un depa de 40 m².
+- [ ] **¿Tu vecino es nahual?** *(idea de Luis)* Misma estructura que el hombre lobo, reusando vecino, edificio y escenas, pero con lo propio del nahual: se transforma en animal (perro negro, guajolote, coyote), aparecen animales raros en la azotea de noche, nunca está cuando los ves y conoce cosas que no debería. Dato real de la tradición mesoamericana con fuente. **Publicar separado del hombre lobo, con al menos 2–3 semanas entre uno y otro.**
 - [ ] **¿Tu jefe es un vampiro?** Juntas a las 7 p.m., nunca ve el sol, te deja sin energía. Remate: no te chupa la sangre, te chupa las horas extra.
 - [ ] **¿El grupo familiar está poseído?** "Buenos días" con brillitos a las 5 a.m., cadenas que maldicen si no reenvías, audios de 7 minutos. Remate: no es posesión, es tu tía.
 
