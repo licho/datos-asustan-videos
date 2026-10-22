@@ -232,3 +232,65 @@ def trex(d, x, y, s=1.0, t=0.0, flip=False, roar=False):
     for k in range(5): d.polygon([(hx - S(40) + k * S(30), hy + S(25)), (hx - S(30) + k * S(30), hy + S(45)), (hx - S(20) + k * S(30), hy + S(25))], fill=WHITE, outline=BLK)
     d.ellipse([hx + f * S(10) - S(16), hy - S(45), hx + f * S(10) + S(16), hy - S(13)], fill=WHITE, outline=BLK, width=3); d.ellipse([hx + f * S(14) - S(7), hy - S(36), hx + f * S(14) + S(7), hy - S(22)], fill=BLK)
     d.line([(x + f * S(100), y - S(300)), (x + f * S(150), y - S(260)), (x + f * S(165), y - S(275))], fill=BLK, width=W_(16))
+
+def emu(d, x, y, s=1.0, t=0.0, flip=False, run=True, mood="normal"):
+    """Emú de caricatura (plumaje café, cuello azulado, patas largas). y = piso. run=True: patas corriendo."""
+    S = lambda v: v * s; f = -1 if flip else 1; W_ = lambda v: max(2, int(v * s))
+    B, N, L = (120, 100, 80), (120, 140, 175), (110, 105, 95)
+    ph = t * 14 if run else 0
+    for k in (0, 1):
+        a = math.sin(ph + k * math.pi) * (.6 if run else 0)
+        hip = (x + f * S(10 + k * 20), y - S(250)); knee = (hip[0] + f * math.sin(a) * S(80) - f * S(20), y - S(130))
+        foot = (knee[0] - f * math.sin(a) * S(30) + f * S(15), y - max(0, math.cos(ph + k * math.pi)) * S(40) * (1 if run else 0))
+        d.line([hip, knee, foot], fill=BLK, width=W_(30), joint="curve"); d.line([hip, knee, foot], fill=L, width=W_(21), joint="curve")
+        for dx in (-25, 0, 25): d.line([foot, (foot[0] + f * S(30) + S(dx) * .6, foot[1] + S(4))], fill=BLK, width=W_(6))
+    d.ellipse([x - S(180), y - S(430), x + S(150), y - S(215)], fill=B, outline=BLK, width=W_(5))
+    for k in range(8):
+        px = x - S(150) + k * S(34); d.polygon([(px, y - S(240)), (px + S(18), y - S(190)), (px + S(36), y - S(240))], fill=B, outline=BLK)
+    d.ellipse([x - S(175), y - S(425), x + S(145), y - S(225)], fill=B)
+    for k in range(5): d.arc([x - S(120) + k * S(50), y - S(380), x - S(60) + k * S(50), y - S(300)], 200, 340, fill=dk(B, .8), width=W_(5))
+    nx = x + f * S(120); neck = [(nx, y - S(360)), (nx + f * S(35), y - S(440)), (nx + f * S(30), y - S(495))]
+    d.line(neck, fill=BLK, width=W_(48), joint="curve"); d.line(neck, fill=N, width=W_(40), joint="curve")
+    hx, hy = nx + f * S(40), y - S(515)
+    d.ellipse([hx - S(48), hy - S(42), hx + S(48), hy + S(42)], fill=N, outline=BLK, width=W_(4))
+    d.polygon([(hx + f * S(35), hy - S(8)), (hx + f * S(95), hy + S(8)), (hx + f * S(35), hy + S(22))], fill=(70, 60, 55), outline=BLK)
+    er = S(20) if mood == "crazy" else S(16)
+    d.ellipse([hx + f * S(5) - er, hy - S(18) - er, hx + f * S(5) + er, hy - S(18) + er], fill=WHITE, outline=BLK, width=W_(3))
+    px = hx + f * S(10) + (math.sin(t * 9) * S(5) if mood == "crazy" else 0)
+    d.ellipse([px - S(7), hy - S(25), px + S(7), hy - S(11)], fill=BLK)
+
+def army_ant(d, x, y, s=1.0, t=0.0, flip=False, helmet=False):
+    """Hormiga guerrera (café rojizo, mandíbulas grandes) de lado; y = piso, mira a la derecha. Largo ≈ 230·s. helmet=True: casquito verde."""
+    S = lambda v: v * s; f = -1 if flip else 1; W_ = lambda v: max(1, int(v * s)); C = (150, 60, 30)
+    for i, dx in enumerate((-30, 10, 45)):
+        for k, side in enumerate((-1, 1)):
+            sw = math.sin(t * 16 + i * 2 + k * math.pi) * S(14)
+            base = (x + f * S(dx), y - S(45)); knee = (base[0] + f * S(15) + sw, y - S(75)); foot = (base[0] + f * S(30) * side + sw, y)
+            d.line([base, knee, foot], fill=BLK, width=W_(7))
+    d.ellipse([x - f * S(40) - S(70), y - S(110), x - f * S(40) + S(70), y - S(20)], fill=C, outline=BLK, width=W_(4))
+    d.ellipse([x - S(35), y - S(85), x + S(35), y - S(40)], fill=C, outline=BLK, width=W_(4))
+    hx, hy = x + f * S(70), y - S(80)
+    d.ellipse([hx - S(42), hy - S(36), hx + S(42), hy + S(36)], fill=C, outline=BLK, width=W_(4))
+    for k in (-1, 1):
+        d.arc([hx + f * S(20) - S(40), hy + k * S(6) - S(25), hx + f * S(20) + S(40), hy + k * S(6) + S(25)], 300 if f > 0 else 120, 60 if f > 0 else 240, fill=BLK, width=W_(8))
+    d.line([(hx, hy - S(30)), (hx + f * S(30), hy - S(75)), (hx + f * S(70), hy - S(70))], fill=BLK, width=W_(5))
+    d.ellipse([hx + f * S(12) - S(9), hy - S(17), hx + f * S(12) + S(9), hy - S(1)], fill=WHITE, outline=BLK, width=W_(2))
+    d.ellipse([hx + f * S(15) - S(4), hy - S(12), hx + f * S(15) + S(4), hy - S(5)], fill=BLK)
+    if helmet:
+        d.chord([hx - S(46), hy - S(64), hx + S(46), hy + S(10)], 180, 360, fill=(80, 100, 60), outline=BLK, width=W_(3))
+
+def ant_column(d, path, t, s=0.4, gap=95, speed=180, helmet=False):
+    """Columna de hormigas marchando sobre una línea path=[(x,y),...] (pies en la línea). Avanzan con el tiempo."""
+    segs = []; total = 0
+    for a, b in zip(path, path[1:]):
+        L = math.hypot(b[0] - a[0], b[1] - a[1]); segs.append((a, b, L)); total += L
+    off = (t * speed) % (gap * s / .4)
+    pos = off; k = 0
+    while pos < total:
+        acc = 0
+        for a, b, L in segs:
+            if acc + L >= pos:
+                u = (pos - acc) / L; px, py = a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u
+                army_ant(d, px, py, s, t + k * .37, flip=b[0] < a[0], helmet=helmet); break
+            acc += L
+        pos += gap * s / .4; k += 1

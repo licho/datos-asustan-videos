@@ -144,3 +144,18 @@ def heart_face(d, x, y, s=1.0, t=0.0):
     d.rectangle([x - S(100), y - S(40), x + S(100), y - S(10)], fill=RED)
     for sx in (-1, 1): d.ellipse([x + sx * S(35) - S(16), y - S(40) - S(16), x + sx * S(35) + S(16), y - S(40) + S(16)], fill=WHITE, outline=BLK, width=3); d.ellipse([x + sx * S(35) - S(6), y - S(46), x + sx * S(35) + S(6), y - S(34)], fill=BLK)
     d.ellipse([x - S(14), y + S(5), x + S(14), y + S(35)], fill=(80, 10, 20))
+
+def rat_skeleton(d, x, y, s=1.0):
+    """Esqueleto de rata de caricatura (huesitos blancos, sin sangre). y = piso, mira a la derecha."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s)); B = (245, 242, 230)
+    d.line([(x - S(110), y - S(40)), (x - S(200), y - S(20)), (x - S(260), y - S(45))], fill=BLK, width=W_(10), joint="curve")
+    d.line([(x - S(110), y - S(40)), (x - S(200), y - S(20)), (x - S(260), y - S(45))], fill=B, width=W_(5), joint="curve")
+    for k in range(7):
+        rx = x - S(90) + k * S(26)
+        d.arc([rx - S(16), y - S(95), rx + S(16), y - S(15)], 200, 340, fill=BLK, width=W_(9)); d.arc([rx - S(16), y - S(95), rx + S(16), y - S(15)], 200, 340, fill=B, width=W_(5))
+    d.line([(x - S(110), y - S(75)), (x + S(80), y - S(75))], fill=BLK, width=W_(14)); d.line([(x - S(110), y - S(75)), (x + S(80), y - S(75))], fill=B, width=W_(8))
+    for dx in (-80, 40):
+        d.line([(x + S(dx), y - S(70)), (x + S(dx), y)], fill=BLK, width=W_(9)); d.line([(x + S(dx), y - S(70)), (x + S(dx), y)], fill=B, width=W_(4))
+    d.ellipse([x + S(60), y - S(115), x + S(160), y - S(45)], fill=B, outline=BLK, width=W_(4))
+    d.ellipse([x + S(100), y - S(100), x + S(125), y - S(78)], fill=BLK)
+    d.polygon([(x + S(150), y - S(95)), (x + S(195), y - S(70)), (x + S(150), y - S(60))], fill=B, outline=BLK)

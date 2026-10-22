@@ -1,4 +1,5 @@
 """Personajes humanos recurrentes construidos sobre 'guy'."""
+import math
 from ._lazy import SRC
 from reel import guy, BLK
 from .core import dk
@@ -60,3 +61,69 @@ def cleopatra(d, x, y, s=1.0, t=0.0, mood="neutral", arms="down"):
         d.line([(ex + sx * S(16), ey - S(2)), (ex + sx * S(34), ey - S(12))], fill=BLK, width=W_(5))
     if mood == "happy": d.arc([x - S(28), hy + S(25), x + S(28), hy + S(60)], 20, 160, fill=(150, 30, 40), width=W_(6))
     else: d.line([(x - S(22), hy + S(45)), (x + S(22), hy + S(45))], fill=(150, 30, 40), width=W_(6))
+
+def _hat_base(x, y, s):
+    S = lambda v: v * s; return S, x, y - S(505)
+
+def soldier(d, x, y, s=1.0, t=0.0, mood="neutral", arms="down", era="modern", binoculars=False, col=None):
+    """Soldadito de caricatura SIN armas (sirve para desfiles, filas, ejércitos). y = pies.
+    era: modern (casco verde) | persian (gorro alto) | napoleon (chacó azul) | ancient (casco griego). binoculars=True: binoculares en los ojos."""
+    from .core import F, WHITE
+    cols = {"modern": (95, 115, 70), "persian": (150, 60, 110), "napoleon": (45, 65, 140), "ancient": (170, 60, 50)}
+    guy(d, x, y, s, mood=mood, arms=arms, t=t, hoodie=col or cols.get(era, (95, 115, 70)))
+    S, hx, hy = _hat_base(x, y, s); W_ = lambda v: max(2, int(v * s))
+    if era == "modern":
+        hc = (80, 100, 60)
+        d.chord([hx - S(118), hy - S(125), hx + S(118), hy + S(40)], 180, 360, fill=hc, outline=BLK, width=W_(5))
+        d.rounded_rectangle([hx - S(132), hy - S(48), hx + S(132), hy - S(30)], int(S(8)), fill=dk(hc, .8), outline=BLK, width=W_(4))
+    elif era == "persian":
+        hc = (230, 200, 120)
+        d.polygon([(hx - S(100), hy - S(40)), (hx - S(70), hy - S(190)), (hx + S(10), hy - S(215)), (hx + S(100), hy - S(40))], fill=hc, outline=BLK)
+        d.rectangle([hx - S(104), hy - S(58), hx + S(104), hy - S(36)], fill=(150, 60, 110), outline=BLK, width=W_(3))
+    elif era == "napoleon":
+        hc = (30, 30, 40)
+        d.rectangle([hx - S(80), hy - S(210), hx + S(80), hy - S(50)], fill=hc, outline=BLK, width=W_(4))
+        d.rectangle([hx - S(84), hy - S(80), hx + S(84), hy - S(50)], fill=(200, 40, 40), outline=BLK, width=W_(3))
+        d.ellipse([hx - S(18), hy - S(200), hx + S(18), hy - S(164)], fill=WHITE, outline=BLK, width=W_(3))
+        d.rectangle([hx - S(110), hy - S(56), hx + S(110), hy - S(42)], fill=hc)
+    elif era == "ancient":
+        hc = (210, 170, 70)
+        d.chord([hx - S(112), hy - S(120), hx + S(112), hy + S(50)], 180, 360, fill=hc, outline=BLK, width=W_(5))
+        d.polygon([(hx - S(20), hy - S(118)), (hx - S(60), hy - S(200)), (hx + S(70), hy - S(210)), (hx + S(20), hy - S(118))], fill=(200, 40, 40), outline=BLK)
+    if binoculars:
+        for sx in (-1, 1):
+            d.ellipse([hx + sx * S(40) - S(32), hy - S(25), hx + sx * S(40) + S(32), hy + S(39)], fill=(40, 40, 45), outline=BLK, width=W_(4))
+            d.ellipse([hx + sx * S(40) - S(18), hy - S(11), hx + sx * S(40) + S(18), hy + S(25)], fill=(120, 170, 220))
+        d.rectangle([hx - S(10), hy - S(5), hx + S(10), hy + S(15)], fill=(40, 40, 45))
+
+def napoleon(d, x, y, s=1.0, t=0.0, mood="neutral", arms="down", sweat=False):
+    """Napoleón de caricatura (sin armas): saco azul con solapas rojas y sombrero bicornio. y = pies. sweat=True: gotas de sudor."""
+    from .core import WHITE, YEL
+    guy(d, x, y, s, mood=mood, arms=arms, t=t, hoodie=(40, 55, 120))
+    S, hx, hy = _hat_base(x, y, s); W_ = lambda v: max(2, int(v * s))
+    by = y - S(400)
+    d.polygon([(x - S(45), by), (x, by + S(110)), (x + S(45), by)], fill=WHITE, outline=BLK)
+    for sx in (-1, 1):
+        d.polygon([(x + sx * S(45), by), (x + sx * S(85), by + S(10)), (x + sx * S(20), by + S(150))], fill=(200, 40, 40), outline=BLK)
+        d.ellipse([x + sx * S(95) - S(28), by - S(8), x + sx * S(95) + S(28), by + S(16)], fill=YEL, outline=BLK, width=W_(3))
+    d.chord([hx - S(175), hy - S(165), hx + S(175), hy + S(5)], 180, 360, fill=(25, 25, 30), outline=BLK, width=W_(5))
+    d.rectangle([hx - S(175), hy - S(85), hx + S(175), hy - S(68)], fill=(25, 25, 30))
+    d.ellipse([hx - S(26), hy - S(150), hx + S(26), hy - S(98)], fill=(40, 70, 170), outline=WHITE, width=W_(6))
+    d.ellipse([hx - S(10), hy - S(134), hx + S(10), hy - S(114)], fill=(200, 40, 40))
+    if sweat:
+        for k, (dx, dy) in enumerate(((-120, -20), (115, 10), (-95, 60))):
+            yy = hy + S(dy) + S((t * 90 + k * 25) % 50)
+            d.polygon([(hx + S(dx), yy - S(24)), (hx + S(dx) - S(12), yy), (hx + S(dx) + S(12), yy)], fill=(120, 190, 255))
+            d.ellipse([hx + S(dx) - S(12), yy - S(10), hx + S(dx) + S(12), yy + S(14)], fill=(120, 190, 255))
+
+def scribe(d, x, y, s=1.0, t=0.0, mood="neutral", arms="down"):
+    """Escriba/historiador griego: toga blanca con banda y corona de laurel. y = pies."""
+    from .core import WHITE
+    guy(d, x, y, s, mood=mood, arms=arms, t=t, hoodie=(240, 238, 228))
+    S, hx, hy = _hat_base(x, y, s); W_ = lambda v: max(2, int(v * s))
+    d.line([(x - S(95), y - S(400)), (x + S(80), y - S(200))], fill=(60, 110, 190), width=W_(30))
+    for sx in (-1, 1):
+        for k in range(5):
+            a = math.radians(200 + k * 18) if sx < 0 else math.radians(340 - k * 18)
+            lx, ly = hx + math.cos(a) * S(108), hy - S(20) + math.sin(a) * S(100)
+            d.ellipse([lx - S(20), ly - S(11), lx + S(20), ly + S(11)], fill=(90, 160, 70), outline=BLK, width=W_(2))

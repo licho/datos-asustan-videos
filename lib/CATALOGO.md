@@ -90,6 +90,8 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `alux(d, x, y, s=1.0, t=0.0, mood='grin', face=1, arm=None, shade=1.0)` · reel4 — Original cartoon alux: small Maya guardian in white clothes with embroidered border and red headband.
 - `alux_laugh(d, x, y, t, size=46)` · reel4
 - `anchors(x, y, s=1.0)` · lib.humanos — Puntos del cuerpo de 'guy' (y de don_tono) para poner objetos encima sin que floten.
+- `ant_column(d, path, t, s=0.4, gap=95, speed=180, helmet=False)` · lib.animales — Columna de hormigas marchando sobre una línea path=[(x,y),...] (pies en la línea). Avanzan con el tiempo.
+- `army_ant(d, x, y, s=1.0, t=0.0, flip=False, helmet=False)` · lib.animales — Hormiga guerrera (café rojizo, mandíbulas grandes) de lado; y = piso, mira a la derecha. Largo ≈ 230·s. helmet=True: casquito verde.
 - `bacteria(d, x, y, s, t, kind='green', suitcase=False, shades=False)` · reel26
 - `bear(d, x, y, big=2, kind='brown', frame=0, mood='normal')` · oso
 - `bee(d, x, y, angry=False)` · mision003
@@ -109,6 +111,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `don_tono(d, x, y, s=1.0, mood='neutral', arms='down', t=0.0)` · lib.humanos — Don Toño: señor de bigote y gorra (cliente eterno del minisúper).
 - `doppel(d, x, y, s, t, mood='smile', glow=1.0, point=False)` · reel9
 - `employee(d, x, y, s, t)` · reel8
+- `emu(d, x, y, s=1.0, t=0.0, flip=False, run=True, mood='normal')` · lib.animales — Emú de caricatura (plumaje café, cuello azulado, patas largas). y = piso. run=True: patas corriendo.
 - `face(d, cx, cy, r, mood='happy', look=(0.0, 0.0), eye=1.0)` · reel23 — look=(dx, dy) hacia dónde mira (-1..1); eye = tamaño de ojos (1 normal, 1.3 sorpresa).
 - `fly(d, x, y, s, t, phase=0)` · reel12
 - `germ(d, x, y, r, kind, t=0.0, phase=0.0, shade=1.0)` · reel2
@@ -126,16 +129,20 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `mold(d, cx, cy, r, k, t, seed=1)` · reel26
 - `mosquito(d, x, y, s=1.0, t=0.0, flip=False, female=False, mask=False, hat=False, mood='normal', fly=True)` · lib.animales — Mosquito (patrón rayado tipo Aedes). mood: normal | angry | happy. Centro en el tórax.
 - `mummy(d, x, y, s=1.0, t=0.0, arms='forward', mood='neutral', trail=0.0, hat=None)` · lib.criaturas — Momia de pie; y = pies. arms: forward | down | wave | up. mood: neutral | happy | scared. trail = venda suelta (0..1).
+- `napoleon(d, x, y, s=1.0, t=0.0, mood='neutral', arms='down', sweat=False)` · lib.humanos — Napoleón de caricatura (sin armas): saco azul con solapas rojas y sombrero bicornio. y = pies. sweat=True: gotas de sudor.
 - `person(d, cx, cy, s, col)` · reel2
 - `president(d, x, y, s, t)` · reel24
 - `rat(d, x, y, s=1.0, t=0.0, flip=False)` · lib.criaturas — Rata de laboratorio de lado; y = piso.
+- `rat_skeleton(d, x, y, s=1.0)` · lib.criaturas — Esqueleto de rata de caricatura (huesitos blancos, sin sangre). y = piso, mira a la derecha.
 - `roach(d, cx, cy, s, t, head=True, walk=True, wings=0.0, face='neutral', flip=False)` · reel27
 - `roach_head(d, x, y, s, t, blink=True)` · reel27
 - `roach_v12(d, x, y, s, t, ang=0.0, phase=0, eyes=True)` · reel12
 - `scientist(d, x, y, s, t, mood='neutral')` · reel24
+- `scribe(d, x, y, s=1.0, t=0.0, mood='neutral', arms='down')` · lib.humanos — Escriba/historiador griego: toga blanca con banda y corona de laurel. y = pies.
 - `shark(d, x, y, s=1.0, t=0.0, flip=False, mood='neutral')` · lib.animales — Tiburón de lado. mood: neutral | cry | grin. Centro del cuerpo.
 - `sick_guy(d, x, y, s, t)` · reel26
 - `snake(d, x, y, s=1.0, t=0.0, flip=False, mood='neutral')` · lib.animales — Serpiente enroscada; y = piso.
+- `soldier(d, x, y, s=1.0, t=0.0, mood='neutral', arms='down', era='modern', binoculars=False, col=None)` · lib.humanos — Soldadito de caricatura SIN armas (sirve para desfiles, filas, ejércitos). y = pies.
 - `soul(d, x, y, t, s=1.0)` · ofrenda
 - `sponge(d, cx, cy, s, t=0.0, mood='smug', dirt=0.0, wet=0.0, sparkle=False)` · reel16
 - `stamp_guy(img, x, y, s, ang, mood='scared', arms='up', t=0.0, hoodie=(240, 120, 40))` · reel25
@@ -161,6 +168,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `backpack(d, x, y, big=2, fill=0, closed=False)` · alien
 - `balloons(d, x, y, t=0.0, n=3, s=1.0, seed=4, cols=((230, 60, 80), (60, 140, 230), (250, 200, 40), (120, 200, 90)))` · lib.objetos — Racimo de globos atado en (x, y).
 - `banana(d, x, y, s, rot=0.0)` · reel12
+- `bar_chart(d, x0, y0, x1, items, vmax=None, frac=1.0, size=40, gap=30, bar_h=70, fmt=None)` · lib.pantallas — Barras horizontales: items=[(etiqueta, valor, color)]. frac (0..1) anima el crecimiento. Devuelve y final.
 - `bed(d, x, y, s=1.0, dirty=0.0)` · reel12
 - `bed_v5(d, cx, cy, s, t, sleeping=True)` · reel5
 - `big_toilet(d, cx, base, s=1.0)` · reel7
@@ -238,6 +246,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `heater(d, x, y, s=1.0)` · reel8
 - `heli(d, x, y, t)` · mision002
 - `helicopter(d, x, y, s=1.0, t=0.0, flip=False, light=False, col=(200, 60, 50), beam_to=1300)` · lib.objetos — Helicóptero de rescate (cartoon). facing derecha salvo flip. (x, y) = centro de la cabina. beam_to = y donde termina el reflector.
+- `helmet(d, x, y, s=1.0, col=(80, 100, 60))` · lib.objetos — Casco militar grande suelto. (x, y) = centro de la orilla de abajo.
 - `hive(d, x, y, t, shake=0.0)` · mision003
 - `hourglass(d, x, y, s=1.0, frac=0.5, t=0.0)` · lib.objetos — Reloj de arena (x, y = centro). frac = arena que ya cayó.
 - `house(d, x, y, s=1.0, wall=(240, 220, 180), roof=(190, 70, 50), lights=False, door_col=(140, 90, 50))` · lib.exterior — Casa de una planta con techo de dos aguas.
@@ -277,6 +286,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `net(d, box, col=(255, 255, 255), step=26)` · lib.objetos — Mosquitero: rejilla dentro de box=(x0,y0,x1,y1).
 - `nopal(d, x, y, s=1.0)` · lib.objetos — Nopal sobre una roca (como en el escudo). y = base de la roca.
 - `offering(d, x, y, s)` · reel4
+- `outhouse(d, x, y, s=1.0, door=0.0, label='WC')` · lib.objetos — Letrina de madera con luna en la puerta. y = piso. door 0..1 = abierta.
 - `panel_catalogo_pixel(d, v, t)` · ofrenda
 - `pellet(d, x, y, s)` · reel5
 - `people_grid(d, x, y, n=10, cols=5, highlight=(), gap=95, size=1.0, col=(150, 155, 165), hcol=RED)` · lib.pantallas — Íconos de personas ('1 de cada 10'). (x, y) = centro de la cuadrícula.
@@ -341,6 +351,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `ticket(d, cx, cy, sc)` · reel19
 - `tire(d, x, y, s=1.0, water=True)` · lib.objetos — Llanta tirada; y = piso.
 - `toilet_seat(d, cx, cy, s=1.0, sparkle_t=None)` · reel2
+- `tortillas(d, x, y, s=1.0)` · lib.objetos — Paquete de tortillas envuelto en papel (de la tortillería). (x, y) = centro.
 - `tree(d, x, y, s=1.0, kind='round', t=0.0, col=(70, 160, 80))` · lib.exterior — Árbol. kind: round | pine | palm.
 - `tree_pixel(d)` · mision003
 - `trompo(d, x, y, s, t, k_pastor=1.0, pineapple=True)` · reel24
@@ -354,6 +365,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `wave(d, t, k)` · reel25
 - `waves(d, t, y=SEA_Y, col=(60, 90, 140))` · reel3
 - `whistle(d, x, y, s=1.0, col=(240, 160, 40))` · lib.objetos
+- `white_flag(d, x, y, s=1.0, t=0.0, h=380)` · lib.objetos — Bandera blanca ondeando (rendición). (x, y) = base del palo.
 - `window(d, x0, y0, x1, y1, kind='day', t=0.0, frame=(240, 240, 240))` · lib.muebles — Ventana en caja. kind: day | night (con luna) | blinds (persianas) | storm.
 - `window_frame(d, x, y, w, h, broken=0.0)` · reel13
 

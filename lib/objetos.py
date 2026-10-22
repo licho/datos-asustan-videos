@@ -261,3 +261,40 @@ def nopal(d, x, y, s=1.0):
     for (dx, dy, w, h) in ((0, -170, 55, 110), (-80, -260, 45, 85), (80, -270, 45, 85), (0, -330, 40, 75)):
         d.ellipse([x + S(dx) - S(w), y + S(dy) - S(h), x + S(dx) + S(w), y + S(dy) + S(h)], fill=G, outline=BLK, width=4)
     for (dx, dy) in ((-80, -340), (80, -350), (0, -400)): d.ellipse([x + S(dx) - S(12), y + S(dy) - S(14), x + S(dx) + S(12), y + S(dy) + S(14)], fill=(220, 50, 90), outline=BLK, width=2)
+
+def outhouse(d, x, y, s=1.0, door=0.0, label="WC"):
+    """Letrina de madera con luna en la puerta. y = piso. door 0..1 = abierta."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s)); WD, DK = (160, 110, 60), (120, 80, 45)
+    d.polygon([(x - S(150), y - S(470)), (x, y - S(540)), (x + S(150), y - S(470))], fill=(110, 60, 40), outline=BLK)
+    d.rectangle([x - S(130), y - S(470), x + S(130), y], fill=WD, outline=BLK, width=W_(5))
+    for k in range(1, 5): d.line([(x - S(130) + k * S(52), y - S(470)), (x - S(130) + k * S(52), y)], fill=DK, width=W_(3))
+    dw = S(180) * (1 - door * .8)
+    d.rectangle([x - S(90), y - S(420), x - S(90) + dw, y - S(5)], fill=dk(WD, .9), outline=BLK, width=W_(5))
+    if door < .3:
+        mx, my = x - S(90) + dw / 2, y - S(340)
+        d.chord([mx - S(30), my - S(30), mx + S(30), my + S(30)], 60, 300, fill=(40, 30, 25)); d.ellipse([mx - S(10), my - S(30), mx + S(40), my + S(26)], fill=dk(WD, .9))
+    if label: d.text((x, y - S(500)), label, font=F(int(S(48))), fill=WHITE, anchor="mm", stroke_width=W_(4), stroke_fill=BLK)
+
+def white_flag(d, x, y, s=1.0, t=0.0, h=380):
+    """Bandera blanca ondeando (rendición). (x, y) = base del palo."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    d.line([(x, y), (x, y - S(h))], fill=BLK, width=W_(14)); d.line([(x, y), (x, y - S(h))], fill=(150, 110, 70), width=W_(8))
+    top = y - S(h) + S(10); pts_t, pts_b = [], []
+    for k in range(9):
+        u = k / 8; wy = math.sin(t * 6 - u * 5) * S(14) * u
+        pts_t.append((x + u * S(200), top + wy)); pts_b.append((x + u * S(200), top + S(130) + wy))
+    d.polygon(pts_t + pts_b[::-1], fill=WHITE, outline=BLK); d.line(pts_t, fill=BLK, width=W_(4)); d.line(pts_b, fill=BLK, width=W_(4))
+
+def helmet(d, x, y, s=1.0, col=(80, 100, 60)):
+    """Casco militar grande suelto. (x, y) = centro de la orilla de abajo."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    d.chord([x - S(200), y - S(200), x + S(200), y + S(70)], 180, 360, fill=col, outline=BLK, width=W_(7))
+    d.rounded_rectangle([x - S(230), y - S(70), x + S(230), y - S(40)], int(S(12)), fill=dk(col, .8), outline=BLK, width=W_(5))
+    d.arc([x - S(140), y - S(170), x + S(40), y - S(10)], 200, 260, fill=lc(col, WHITE, .4), width=W_(14))
+
+def tortillas(d, x, y, s=1.0):
+    """Paquete de tortillas envuelto en papel (de la tortillería). (x, y) = centro."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    d.ellipse([x - S(80), y - S(30), x + S(80), y + S(40)], fill=(235, 215, 160), outline=BLK, width=W_(4))
+    d.polygon([(x - S(85), y), (x - S(60), y - S(60)), (x + S(60), y - S(60)), (x + S(85), y), (x + S(70), y + S(35)), (x - S(70), y + S(35))], fill=(240, 240, 235), outline=BLK)
+    d.text((x, y - S(10)), "1 KG", font=F(int(S(32))), fill=(200, 60, 50), anchor="mm")

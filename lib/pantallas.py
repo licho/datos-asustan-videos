@@ -143,3 +143,23 @@ def cracks(d, box, seed=1, n=6, col=WHITE, width=4):
         for k in range(5):
             a = rnd.uniform(0, 6.28); L = rnd.uniform(.3, .7) * min(x1 - x0, y1 - y0)
             d.line([(cx, cy), (max(x0, min(x1, cx + math.cos(a) * L)), max(y0, min(y1, cy + math.sin(a) * L)))], fill=col, width=width)
+
+def bar_chart(d, x0, y0, x1, items, vmax=None, frac=1.0, size=40, gap=30, bar_h=70, fmt=None):
+    """Barras horizontales: items=[(etiqueta, valor, color)]. frac (0..1) anima el crecimiento. Devuelve y final.
+    El valor va escrito al final de cada barra (fmt(valor) o con separadores)."""
+    vmax = vmax or max(v for _, v, _ in items); y = y0; lw = 0
+    f = F(size)
+    for lab, _, _ in items: lw = max(lw, d.textlength(lab, font=f))
+    bx = x0 + lw + 20
+    for i, (lab, v, col) in enumerate(items):
+        k = max(0.0, min(1.0, frac * len(items) - i))
+        d.text((x0 + lw, y + bar_h / 2), lab, font=f, fill=WHITE, anchor="rm", stroke_width=max(3, size // 9), stroke_fill=BLK)
+        wpx = max(6, (x1 - bx - 10) * v / vmax * k)
+        d.rounded_rectangle([bx, y, bx + wpx, y + bar_h], 12, fill=col, outline=BLK, width=4)
+        if k > .95:
+            txt = fmt(v) if fmt else f"{v:,.0f}"
+            tw_ = d.textlength(txt, font=F(int(size * .9)))
+            tx = bx + wpx + 12 if bx + wpx + 12 + tw_ < x1 + 60 else bx + wpx - 12 - tw_
+            d.text((tx, y + bar_h / 2), txt, font=F(int(size * .9)), fill=WHITE, anchor="lm", stroke_width=max(3, size // 9), stroke_fill=BLK)
+        y += bar_h + gap
+    return y

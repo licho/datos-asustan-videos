@@ -43,6 +43,7 @@ MAP = {
  "road": "lib.exterior:road",
  "booth": "lib.exterior:booth",
  "checklist": "lib.pantallas:checklist",
+ "bar_chart": "lib.pantallas:bar_chart", "outhouse": "lib.objetos", "white_flag": "lib.objetos", "helmet": "lib.objetos", "tortillas": "lib.objetos",
  "document": "lib.pantallas:document",
  "phone_chat": "lib.pantallas:phone_chat",
  "monitor": "lib.pantallas:monitor",

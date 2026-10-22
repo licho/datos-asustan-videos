@@ -21,6 +21,7 @@ MAP = {
  "don_tono": "lib.humanos",
  "brain": "lib.criaturas", "rat": "lib.criaturas", "heart_face": "lib.criaturas",
  "anchors": "lib.humanos", "medal": "lib.humanos",
- "mammoth": "lib.animales", "stego": "lib.animales", "trex": "lib.animales", "cleopatra": "lib.humanos"
+ "mammoth": "lib.animales", "stego": "lib.animales", "trex": "lib.animales", "cleopatra": "lib.humanos",
+ "soldier": "lib.humanos", "napoleon": "lib.humanos", "scribe": "lib.humanos", "emu": "lib.animales", "army_ant": "lib.animales", "ant_column": "lib.animales", "rat_skeleton": "lib.criaturas"
 }
 __getattr__ = make(MAP, __name__)
