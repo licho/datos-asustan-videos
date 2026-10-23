@@ -19,13 +19,13 @@ def grad(top, bot):
 def vampire(d, x, y, s=1.0, t=0.0, mood="smug", outfit="cape", eyes_glow=0.0, arms="down", hat=None):
     S = lambda v: v * s
     d.ellipse([x - S(120), y - S(16), x + S(120), y + S(16)], fill=(40, 40, 50))
-    for sx in (-1, 1):
-        d.rounded_rectangle([x + sx * S(10) - (S(55) if sx < 0 else 0), y - S(190), x + sx * S(10) + (S(55) if sx > 0 else 0), y - S(10)], int(S(18)), fill=(30, 30, 40))
-        d.ellipse([x + sx * S(45) - S(45), y - S(40), x + sx * S(45) + S(45), y + S(4)], fill=(10, 10, 15))
     if outfit == "cape":
         d.polygon([(x - S(150), y - S(420)), (x + S(150), y - S(420)), (x + S(210), y - S(60)), (x - S(210), y - S(60))], fill=CAPE_IN)
         d.polygon([(x - S(150), y - S(420)), (x - S(110), y - S(420)), (x - S(170), y - S(60)), (x - S(210), y - S(60))], fill=CAPE)
         d.polygon([(x + S(150), y - S(420)), (x + S(110), y - S(420)), (x + S(170), y - S(60)), (x + S(210), y - S(60))], fill=CAPE)
+    for sx in (-1, 1):
+        d.rounded_rectangle([x + sx * S(10) - (S(55) if sx < 0 else 0), y - S(190), x + sx * S(10) + (S(55) if sx > 0 else 0), y - S(10)], int(S(18)), fill=(30, 30, 40))
+        d.ellipse([x + sx * S(45) - S(45), y - S(40), x + sx * S(45) + S(45), y + S(4)], fill=(10, 10, 15))
     body = {"cape": (40, 35, 50), "store": (40, 120, 200), "call": (230, 230, 235), "lab": (245, 245, 250), "suit": (45, 45, 60)}[outfit]
     d.rounded_rectangle([x - S(100), y - S(420), x + S(100), y - S(170)], int(S(50)), fill=body, outline=BLK, width=4)
     if outfit in ("cape", "suit"):
@@ -138,11 +138,17 @@ CAPS = [
     (60.0, 68.0, "¿De qué pondrías a trabajar *a un vampiro*? *Comenta*"),
 ]
 
+def desk_top(d, x0, y0, x1, y1, col=(110, 75, 50), floor=None):
+    """Mesa con patas: tablero de (x0,y0) a (x1,y1) y patas hasta el piso."""
+    floor = floor or FEET
+    for lx in (x0 + 40, x1 - 70):
+        d.rectangle([lx, y1, lx + 30, floor], fill=dk(col, .8), outline=BLK, width=4)
+    d.rectangle([x0, y0, x1, y1], fill=col, outline=BLK, width=5)
+
 def s_hook(t):
     img = night_room(); d = ImageDraw.Draw(img)
-    d.rectangle([150, 1150, 930, 1190], fill=(110, 75, 50), outline=BLK, width=5)
     vampire(d, 540, FEET, 0.9, t, mood="sad", arms="desk")
-    d.rectangle([150, 1150, 930, 1190], fill=(110, 75, 50), outline=BLK, width=5)
+    desk_top(d, 150, 1150, 930, 1190)
     d.rectangle([250, 1100, 470, 1150], fill=WHITE, outline=BLK, width=3)
     d.text((360, 1125), "RENTA", font=F(36), fill=RED, anchor="mm")
     d.rectangle([760, 1060, 790, 1150], fill=(240, 235, 210)); d.ellipse([764, 1030 + math.sin(t * 9) * 4, 786, 1062], fill=(255, 200, 60))
@@ -202,7 +208,7 @@ def s_job2(t):
         d.line(pts, fill=(40, 180, 90), width=10)
         d.text((800, 370), "VENTAS", font=F(40), fill=(40, 40, 40), anchor="mm")
         vampire(d, 360, FEET, 0.85, t, mood="smug", outfit="call", hat="headset", arms="desk")
-        d.rectangle([100, 1130, 1000, 1200], fill=(130, 90, 60), outline=BLK, width=5)
+        desk_top(d, 100, 1130, 1000, 1200, col=(130, 90, 60))
         for i, (st, txt) in enumerate([(1.5, "SEGUROS ✓"), (2.6, "TARJETAS ✓"), (3.8, "HIPOTECA 30 AÑOS ✓")]):
             if lt > st: d.text((800, 780 + i * 80), txt, font=F(44), fill=(40, 160, 80), anchor="mm", stroke_width=4, stroke_fill=WHITE)
         chip(d, "TRABAJO #2: VENTAS POR TELÉFONO", 230, bg=(150, 60, 200), size=48, appear=lt / 0.3)
@@ -256,7 +262,7 @@ def s_job4(t):
     if crash > 0:
         bigtext(d, "-90%", 540, 520, int(150 * pop((lt - 5.0) / 0.3)), fill=(230, 50, 50), stroke=WHITE, sw=10)
     vampire(d, 540, FEET + 60, 0.75, t, mood="smug" if crash < 0.5 else "sad", outfit="cape", arms="desk")
-    d.rectangle([150, 1150, 930, 1190], fill=(110, 75, 50), outline=BLK, width=5)
+    desk_top(d, 150, 1150, 930, 1190)
     chip(d, "TRABAJO #4: CRIPTOMONEDAS", 230, bg=(220, 140, 30), size=52, appear=lt / 0.3)
     return img, 1.0, 1.0, (5.0 < lt < 5.4)
 
