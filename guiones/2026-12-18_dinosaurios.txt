@@ -1,0 +1,16 @@
+¿Qué pasaría si los dinosaurios siguieran existiendo? — viernes 18 de diciembre de 2026 (serie ¿Qué pasaría si…?)
+Código: specs/s45_dinosaurios.py · Sin voz: sinvoz/2026-12-18_dinosaurios_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4, una sola toma
+Producir final: python3 -m lib.produce specs/s45_dinosaurios.py final audio/45-dinosaurios.mp3
+
+[mischievously] ¿Qué pasaría si los dinosaurios siguieran existiendo? La mala noticia: tú probablemente no existirías. La buena: tu ex tampoco. [serious] Hace sesenta y seis millones de años, un asteroide acabó con casi el setenta por ciento de las especies. Mientras los dinosaurios mandaban, el mamífero más grande pesaba unos diez kilos. Básicamente, éramos botana. [sarcastic] Pero digamos que sí naces. El tiranosaurio muerde con hasta cincuenta y siete mil newtons: como si un elefante se te sentara encima. Y tu seguro de gastos médicos… «eso no lo cubre la póliza». [mischievously] La buena noticia: un estudio dice que no podía correr; iba a unos dieciocho kilómetros por hora. Si te alcanza, en tu velorio dirán: «Al menos murió haciendo cardio». [dramatically] ¿Y el velocirraptor de las películas? Era del tamaño de un pavo… y tenía plumas. En Navidad no sabrías si cenártelo… o si él te cena a ti. [whispers] Pero lo que asusta: los dinosaurios nunca se fueron. Las aves son dinosaurios, del mismo grupo que el tiranosaurio. Hay unas once mil especies… y te están viendo. [sarcastic] La paloma que te robó la torta es un dinosaurio. Y el pollo de tu caldo también: te estás comiendo a los primos del tiranosaurio. Venganza servida… con limón. ¿Qué dinosaurio tendrías de mascota? Si dices tiranosaurio, deja tu testamento en los comentarios.
+
+# words: 216  estimated duration: 86 s
+
+Fuentes:
+- RSPB (Birds: they're small flying dinosaurs): las aves son los únicos dinosaurios vivos, descienden de los terópodos como el T. rex; ~11,000 especies; el asteroide de hace ~66 millones de años acabó con casi el 70% de las especies
+- ScienceDaily (2010, Science): con los dinosaurios, los mamíferos no pasaban de ~10 kg; después llegaron a ~17 toneladas (mil veces más)
+- Christian Science Monitor (2012, Bates y Falkingham): mordida del T. rex de 35,000 a 57,000 newtons, "como si se te sentara un elefante mediano"
+- CBC (2017, Sellers et al.): el T. rex no podía correr; velocidad máxima ~18 km/h
+- Live Science: el velocirraptor era del tamaño de un pavo pequeño (hasta 15 kg) y tenía plumas
+Nota: "tú no existirías" se presenta como lo más probable (hipótesis), no como hecho.

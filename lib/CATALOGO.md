@@ -129,6 +129,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `doodle_tennis_player(img, x, y, s=1.0, mood='happy', arms=('down', 'up'), look=0.0, color=GREEN, racket=RED, ang=None, headband=True, ball=False, seed=1)` · reels_engine.sketch.sports — doodle as a tennis player: polo shirt, white shorts, headband and racket; ball=True drops a ball at the feet.
 - `doodle_viking(img, x, y, s=1.0, mood='happy', arms=('show', 'up'), look=0.0, weapon='axe', shield=True, ang=None, color=None, seed=1)` · reels_engine.sketch.history — doodle as a viking: horned helmet, red beard, fur collar, tunic; weapon axe/sword/spear/None, round shield.
 - `doppel(d, x, y, s, t, mood='smile', glow=1.0, point=False)` · reel9
+- `elephant(d, x, y, s=1.0, t=0.0, sit=False, flip=False)` · lib.animales — Elefante gris de caricatura; y = piso, mira a la derecha. sit=True: sentado de nalgas con las patas de atrás al frente
 - `elf(d, x, y, s=1.0, t=0.0, mood='happy', arms='down', col=(60, 150, 80), hat=None, sweater=False, flip=False)` · lib.criaturas — Duende navideño (caricatura): gorro puntiagudo con cascabel, orejas puntiagudas, túnica con cinturón,
 - `employee(d, x, y, s, t)` · reel8
 - `emu(d, x, y, s=1.0, t=0.0, flip=False, run=True, mood='normal')` · lib.animales — Emú de caricatura (plumaje café, cuello azulado, patas largas). y = piso. run=True: patas corriendo.
@@ -155,7 +156,9 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `mummy(d, x, y, s=1.0, t=0.0, arms='forward', mood='neutral', trail=0.0, hat=None)` · lib.criaturas — Momia de pie; y = pies. arms: forward | down | wave | up. mood: neutral | happy | scared. trail = venda suelta (0..1).
 - `napoleon(d, x, y, s=1.0, t=0.0, mood='neutral', arms='down', sweat=False)` · lib.humanos — Napoleón de caricatura (sin armas): saco azul con solapas rojas y sombrero bicornio. y = pies. sweat=True: gotas de sudor.
 - `person(d, cx, cy, s, col)` · reel2
+- `pigeon(d, x, y, s=1.0, t=0.0, flip=False, mood='normal', fly=False, look=False)` · lib.animales — Paloma de ciudad; y = piso (o centro del cuerpo si fly=True). Mira a la derecha. mood: normal | sly.
 - `president(d, x, y, s, t)` · reel24
+- `raptor(d, x, y, s=1.0, t=0.0, feathers=True, mood='sly', run=False, napkin=False, flip=False)` · lib.animales — Velocirraptor; y = piso, mira a la derecha. feathers=True: el real (plumas cafés y de colores, tamaño de pavo, ~300s de largo);
 - `rat(d, x, y, s=1.0, t=0.0, flip=False)` · lib.criaturas — Rata de laboratorio de lado; y = piso.
 - `rat_skeleton(d, x, y, s=1.0)` · lib.criaturas — Esqueleto de rata de caricatura (huesitos blancos, sin sangre). y = piso, mira a la derecha.
 - `roach(d, cx, cy, s, t, head=True, walk=True, wings=0.0, face='neutral', flip=False)` · reel27
@@ -165,6 +168,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `scientist(d, x, y, s, t, mood='neutral')` · reel24
 - `scribe(d, x, y, s=1.0, t=0.0, mood='neutral', arms='down')` · lib.humanos — Escriba/historiador griego: toga blanca con banda y corona de laurel. y = pies.
 - `shark(d, x, y, s=1.0, t=0.0, flip=False, mood='neutral')` · lib.animales — Tiburón de lado. mood: neutral | cry | grin. Centro del cuerpo.
+- `shrew(d, x, y, s=1.0, t=0.0, mood='scared', flip=False)` · lib.animales — Mamífero chiquito de la época de los dinosaurios (tipo musaraña): café, hocico largo y bigotes. y = piso. ~150s de largo.
 - `sick_guy(d, x, y, s, t)` · reel26
 - `snake(d, x, y, s=1.0, t=0.0, flip=False, mood='neutral')` · lib.animales — Serpiente enroscada; y = piso.
 - `soldier(d, x, y, s=1.0, t=0.0, mood='neutral', arms='down', era='modern', binoculars=False, col=None)` · lib.humanos — Soldadito de caricatura SIN armas (sirve para desfiles, filas, ejércitos). y = pies.
@@ -178,6 +182,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `tentacle(d, x0, y0, length, ang, t, w0, col, phase=0.0, curl=1.0)` · reel3
 - `thief(d, x, y, s, t)` · reel4
 - `trex(d, x, y, s=1.0, t=0.0, flip=False, roar=False)` · lib.animales — Tiranosaurio; y = piso.
+- `tyranno(d, x, y, s=1.0, t=0.0, mood='grin', mouth=0.3, run=False, napkin=False, collar=None, flip=False, col=(95, 160, 95))` · lib.animales — Tiranosaurio de caricatura (más detallado que trex): cabezota, bracitos, panza clara y rayas. y = piso, mira a la derecha.
 - `vampire(d, x, y, s=1.0, t=0.0, mood='smug', outfit='cape', eyes_glow=0.0, arms='down', hat=None)` · reel14
 - `wolf(d, x, y, s=1.0, t=0.0, mood='smug', outfit='shirt', arms='down', hat=None, howl=False)` · reel17
 - `zomb(d, x, y, s=1.0, t=0.0, mood='blank', arms='out', outfit='office', hat=None, arm_off=False)` · reel18
@@ -390,6 +395,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `pellet(d, x, y, s)` · reel5
 - `people_grid(d, x, y, n=10, cols=5, highlight=(), gap=95, size=1.0, col=(150, 155, 165), hcol=RED)` · reels_engine.screens — People icons ('1 in 10'). (x, y) = center of the grid.
 - `percent_badge(img, cx, cy, r=80, text='%', color=RED, seed=1)` · reels_engine.sketch.finance — Starburst badge with a percent sign (interest, discounts, inflation).
+- `pet_collar(d, x, y, w=60, col=(220, 50, 60))` · lib.objetos — Collar de mascota con plaquita dorada; (x, y) = centro del cuello, w = ancho.
 - `phone(d, cx, cy, s, glow=1.0)` · reel2
 - `phone_case(d, cx, cy, s, col=(240, 110, 120), lift=0.0)` · reel7
 - `phone_chat(d, x, y, w, h, title, msgs, shown=None, size=32)` · reels_engine.screens — Phone with a chat. msgs = [(side 'l'|'r', text, time)]. shown = how many messages are visible.
@@ -453,6 +459,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `skin_flake(d, x, y, s)` · reel5
 - `skull(d, x, y, r=30, col=WHITE)` · lib.objetos — Calavera tipo ícono.
 - `slot_pixel(d, x, y, kind=None, sel=False, cross=False, sz=30)` · alien
+- `snack_plate(d, x, y, s=1.0, flag=True)` · lib.objetos — Platito de botana con palillo y banderita; y = base. Pon la botana encima en (x, y - 20s).
 - `sneaker(img, cx, base, w=220, color=RED, seed=1, shadow=False)` · reels_engine.sketch.sports — Running shoe seen from the side, toe on the right.
 - `snow_fall(d, t, n=18, seed=5, box=(0, 480, W, 1300), size=(12, 22), speed=(60, 130), col=WHITE, wobble=25)` · lib.efectos — Copos de nieve cayendo dentro de box=(x0, y0, x1, y1). Determinista (depende de t y seed).
 - `snowflake(d, x, y, r=50, col=(120, 190, 250), width=8)` · lib.objetos
@@ -460,6 +467,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `soccer_goal(img, cx, base, w=520, seed=1, shadow=False)` · reels_engine.sketch.sports — Soccer goal with net, seen from the front.
 - `sofa(d, cx, y, s=1.0)` · reel9
 - `sound_waves(d, x, y, t, n=3, col=(200, 220, 255), width=7)` · lib.efectos — Ondas de sonido saliendo a los lados de (x, y) (llanto, grito, alarma).
+- `soup_bowl(d, x, y, s=1.0, t=0.0, lemon=True)` · lib.objetos — Plato de caldo de pollo humeante con pierna de pollo, verduras y limón; y = base. ~320s de ancho.
 - `spear(img, gx, gy, L=520, ang=0.0, seed=1)` · reels_engine.sketch.history — Spear gripped at (gx, gy), L = total length.
 - `spin_earth(img, cx, cy, r, ang, mood='happy')` · reel25
 - `sport_ball(img, cx, cy, r=60, kind='soccer', ang=0.0, seed=1)` · reels_engine.sketch.sports — Sports ball: kind = soccer, basketball, tennis, baseball, volleyball or football (American); ang = spin.
@@ -498,6 +506,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `toilet_seat(d, cx, cy, s=1.0, sparkle_t=None)` · reel2
 - `tombstone(d, x, y, s=1.0, text='Q.E.P.D.', col=(170, 170, 180))` · lib.objetos — Lápida de caricatura; y = base.
 - `torch(img, gx, gy, h=220, t=0.0, seed=1)` · reels_engine.sketch.history — Burning torch held at (gx, gy); pass t (seconds) to make the flame flicker.
+- `torta(d, x, y, s=1.0)` · lib.objetos — Torta (bolillo relleno de jamón, jitomate y lechuga) de lado; (x, y) = centro. ~200s de ancho.
 - `tortillas(d, x, y, s=1.0)` · lib.objetos — Paquete de tortillas envuelto en papel (de la tortillería). (x, y) = centro.
 - `trash_can(d, x, y, s=1.0, full=False)` · lib.objetos — Bote de basura metálico de calle; y = base. full: con bolsas asomando.
 - `tree(d, x, y, s=1.0, kind='round', t=0.0, col=(70, 160, 80))` · reels_engine.exterior — Tree. kind: round | pine | palm.

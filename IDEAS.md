@@ -9,7 +9,7 @@ Al aprobar una idea, pásala a "Listos / en producción"; al publicarla, a "Hech
 |---|---|---|
 | **Guía laboral para monstruos** | El monstruo busca trabajo: currículum, 4 trabajos, dato real, remate burocrático (SAT, afore, Ley del Trabajo) | Vampiro, Zombi, Fantasma (Ep. 4), Momia (Ep. 5), Llorona (Ep. 6) |
 | **Señales de que…** | Lista de señales cotidianas con remate sarcástico ("no es alien, es el empleado ideal") | Compañero alien |
-| **¿Qué pasaría si…?** | Escenario imposible explicado con datos | La Tierra deja de girar, la Luna desaparece, dejar de dormir, el refri un mes sin abrir, los humanos desaparecen |
+| **¿Qué pasaría si…?** | Escenario imposible explicado con datos | La Tierra deja de girar, la Luna desaparece, dejar de dormir, el refri un mes sin abrir, los humanos desaparecen, los dinosaurios siguen vivos |
 | **Misiones (pixel art)** | Supervivencia en pixel art | 001 zombi, 002 desierto, 003 abejas, 004 las máquinas se rebelan |
 | **Zombies en el minisúper** | Historia por partes | Partes 1 a 4 |
 | **Datos que rompen el tiempo** | Comparaciones de fechas que no cuadran | Cleopatra / pirámides / Luna |
@@ -30,6 +30,7 @@ Octubre–noviembre 2026: zombie en el minisúper · teclado sucio · aluxes · 
 - Guía laboral Ep. 7: el duende de Santa (despedido) — sin voz listo (mar 15 dic)
 - Misión 006: ayudar a Santa a entregar los juguetes — sin voz listo (jue 17 dic)
 - ¿Qué pasaría si los humanos desapareciéramos? — sin voz listo (lun 7 dic)
+- ¿Qué pasaría si los dinosaurios siguieran existiendo? — sin voz listo (vie 18 dic)
 
 ## Calendario diciembre 2026 (lunes a sábado, 10:00; el 25 no se publica)
 
@@ -50,7 +51,7 @@ Octubre–noviembre 2026: zombie en el minisúper · teclado sucio · aluxes · 
 | Mar 15 | Guía laboral Ep. 7: duende de Santa | sin voz listo |
 | Mié 16 | Datos que rompen el tiempo, parte 2 | pendiente |
 | Jue 17 | Misión 006: ayudar a Santa | sin voz listo |
-| Vie 18 | (libre) | pendiente |
+| Vie 18 | ¿Qué pasaría si los dinosaurios siguieran existiendo? | sin voz listo |
 | Sáb 19 | Señales: grupo familiar poseído | pendiente |
 | Lun 21 | Lo que vive en tu árbol de Navidad | pendiente |
 | Mar 22 | Zombies parte 6 (Navidad) | pendiente |

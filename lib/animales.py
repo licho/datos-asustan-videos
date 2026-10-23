@@ -351,3 +351,210 @@ def hawk(d, x, y, s=1.0, t=0.0, flip=False, dive=False):
     # ala de enfrente
     if dive: wing(0, -10, 155, 330, BR, 0)
     else: wing(0, -20, 118, 310, BR, flap)
+
+def _poly(d, pts, col, w):
+    d.polygon(pts, fill=col, outline=BLK); d.line(pts + [pts[0]], fill=BLK, width=w, joint="curve")
+
+def tyranno(d, x, y, s=1.0, t=0.0, mood="grin", mouth=0.3, run=False, napkin=False, collar=None, flip=False, col=(95, 160, 95)):
+    """Tiranosaurio de caricatura (más detallado que trex): cabezota, bracitos, panza clara y rayas. y = piso, mira a la derecha.
+    mood: grin | angry | sad | tired (con sudor). mouth 0..1 = qué tan abierta la boca. run: patas corriendo.
+    napkin: servilleta al cuello. collar: color del collar de mascota (o None). A s=1 mide ~640 de largo y ~600 de alto.
+    Cabeza ~ (x + 230s, y - 470s); boca ~ (x + 300s, y - 430s)."""
+    f = -1 if flip else 1; W_ = lambda v: max(2, int(v * s))
+    P = lambda u, v: (x + f * u * s, y + v * s)
+    DK, BL = dk(col, .72), lc(col, (245, 235, 190), .55)
+    def oval(u, v, ru, rv, c, w=5):
+        q = [P(u + ru * math.cos(a / 18 * math.pi), v + rv * math.sin(a / 18 * math.pi)) for a in range(36)]
+        _poly(d, q, c, W_(w))
+    sw = math.sin(t * 9) if run else 0
+    bob = abs(math.sin(t * 9)) * 12 if run else 0
+    Q = lambda u, v: P(u, v - bob)
+    # pata de atrás (lejana)
+    for leg, (ph, c) in enumerate(((math.pi, DK), (0, col))):
+        a = math.sin(t * 9 + ph) * .5 if run else (.08 if leg else -.08)
+        hx, hy = 10 + leg * 20, -250
+        kx, ky = hx + 70 * math.sin(a) + 40, -120
+        fx, fy = hx + 150 * math.sin(a) - 10, -18 if not run else -18 - max(0, math.sin(t * 9 + ph)) * 40
+        if leg == 0:
+            _poly(d, [Q(hx - 50, hy), Q(hx + 60, hy - 20), Q(kx + 30, ky), Q(kx - 25, ky + 10)], c, W_(5))
+        d.line([Q(kx, ky), P(fx, fy)], fill=BLK, width=W_(48)); d.line([Q(kx, ky), P(fx, fy)], fill=c, width=W_(38))
+        _poly(d, [P(fx - 45, fy - 10), P(fx + 70, fy - 6), P(fx + 80, fy + 18), P(fx - 45, fy + 18)], c, W_(4))
+        for k in range(3): _poly(d, [P(fx + 30 + k * 18, fy - 4), P(fx + 44 + k * 18, fy - 4), P(fx + 37 + k * 18, fy + 8)], (240, 235, 220), W_(2))
+    # cola
+    tw_ = math.sin(t * 3) * 25
+    _poly(d, [Q(-60, -330), Q(-380, -230 + tw_), Q(-395, -215 + tw_), Q(-60, -230)], col, W_(5))
+    for k in range(4): d.line([Q(-110 - k * 60, -322 + k * 22 + tw_ * k / 5), Q(-110 - k * 60, -248 + k * 2 + tw_ * k / 5)], fill=DK, width=W_(7))
+    # cuerpo y panza
+    oval(10, -310, 165, 125, col)
+    oval(60, -280, 95, 85, BL, 3)
+    for k in range(4): d.line([Q(20 + k * 22, -230 + k * 2), Q(100, -238 + k * 4)], fill=dk(BL, .85), width=W_(3))
+    for k in range(4): d.line([Q(-120 + k * 45, -415 + abs(k - 1.5) * 8), Q(-110 + k * 45, -365)], fill=DK, width=W_(9))
+    # pata cercana encima del cuerpo
+    a = math.sin(t * 9) * .5 if run else .08
+    oval(40 + 70 * math.sin(a) * .3, -220, 70, 90, col)
+    # cuello
+    _poly(d, [Q(80, -400), Q(170, -470), Q(210, -390), Q(140, -330)], col, W_(5))
+    if collar:
+        _poly(d, [Q(120, -420), Q(185, -470), Q(200, -440), Q(135, -392)], collar, W_(4))
+        oval(175, -405, 18, 18, (250, 210, 60), 3)
+    # bracitos
+    for k, dv in enumerate((0, 25)):
+        ax0, ay0 = 150, -330 + dv
+        wave = math.sin(t * 6 + k) * 8
+        d.line([Q(ax0, ay0), Q(ax0 + 45, ay0 + 10 + wave), Q(ax0 + 62, ay0 - 8 + wave)], fill=BLK, width=W_(20), joint="curve")
+        d.line([Q(ax0, ay0), Q(ax0 + 45, ay0 + 10 + wave), Q(ax0 + 62, ay0 - 8 + wave)], fill=DK if k else col, width=W_(12), joint="curve")
+    # cabeza: mandíbula de abajo (gira con mouth) y cráneo
+    m = mouth * 70
+    jaw = [Q(150, -440), Q(355, -440 + m * .8), Q(350, -405 + m), Q(170, -385)]
+    _poly(d, jaw, col, W_(5))
+    if mouth > .05:
+        _poly(d, [Q(165, -440), Q(345, -440), Q(345, -440 + m * .75), Q(175, -425)], (170, 50, 60), W_(3))
+        for k in range(5): _poly(d, [Q(190 + k * 32, -440 + m * .1 * k / 4 + m * .55 * k / 4), Q(203 + k * 32, -455 + m * .65 * k / 4), Q(216 + k * 32, -440 + m * .6 * k / 4)], WHITE, W_(2))
+    skull = [Q(140, -520), Q(250, -545), Q(360, -500), Q(372, -455), Q(350, -440), Q(150, -440), Q(130, -470)]
+    _poly(d, skull, col, W_(5))
+    for k in range(6): _poly(d, [Q(180 + k * 30, -442), Q(193 + k * 30, -418), Q(206 + k * 30, -442)], WHITE, W_(2))
+    oval(335, -495, 9, 6, BLK, 1)
+    ex, ey = Q(230, -495)
+    r = 24 * s
+    d.ellipse([ex - r, ey - r, ex + r, ey + r], fill=WHITE, outline=BLK, width=W_(4))
+    pr = 11 * s
+    d.ellipse([ex + f * 6 * s - pr, ey - pr, ex + f * 6 * s + pr, ey + pr], fill=BLK)
+    if mood == "angry": d.line([Q(195, -540), Q(265, -515)], fill=BLK, width=W_(12))
+    elif mood == "sad":
+        d.line([Q(200, -515), Q(260, -535)], fill=BLK, width=W_(10))
+        tl = (t * 70) % 60
+        d.line([Q(232, -470), Q(236, -450 + tl)], fill=(110, 180, 255), width=W_(12))
+    elif mood == "tired":
+        d.line([Q(205, -510), Q(258, -510)], fill=BLK, width=W_(9))
+        for k in range(2): oval(150 + k * 30, -540 + ((t * 80 + k * 30) % 50), 9, 14, (120, 190, 255), 2)
+    else: d.line([Q(200, -530), Q(262, -528)], fill=BLK, width=W_(9))
+    if napkin:
+        _poly(d, [Q(150, -390), Q(260, -400), Q(200, -300)], WHITE, W_(4))
+        d.line([Q(170, -385), Q(240, -392)], fill=(200, 60, 60), width=W_(5))
+
+def raptor(d, x, y, s=1.0, t=0.0, feathers=True, mood="sly", run=False, napkin=False, flip=False):
+    """Velocirraptor; y = piso, mira a la derecha. feathers=True: el real (plumas cafés y de colores, tamaño de pavo, ~300s de largo);
+    feathers=False: el de película (verde, escamas, sin plumas). mood: sly | angry | scared."""
+    f = -1 if flip else 1; W_ = lambda v: max(2, int(v * s))
+    P = lambda u, v: (x + f * u * s, y + v * s)
+    col = (170, 120, 70) if feathers else (110, 140, 80)
+    DK = dk(col, .7)
+    sw = math.sin(t * 12) * .6 if run else 0
+    for leg, ph in enumerate((math.pi, 0)):
+        a = math.sin(t * 12 + ph) * .6 if run else (.1 if leg else -.15)
+        kx, ky = 10 + 40 * math.sin(a), -70
+        fx = -10 + 80 * math.sin(a)
+        c = DK if leg == 0 else col
+        d.line([P(0, -120), P(kx + 20, ky), P(fx, -8)], fill=BLK, width=W_(20), joint="curve"); d.line([P(0, -120), P(kx + 20, ky), P(fx, -8)], fill=c, width=W_(12), joint="curve")
+        _poly(d, [P(fx - 15, -14), P(fx + 35, -12), P(fx + 38, 0), P(fx - 15, 0)], c, W_(3))
+        d.line([P(fx + 2, -14), P(fx + 12, -34)], fill=(240, 235, 220), width=W_(6))   # garra famosa
+    tail = [P(-40, -150), P(-230, -170), P(-235, -150), P(-40, -110)]
+    _poly(d, tail, col, W_(4))
+    if feathers:
+        for k in range(4): _poly(d, [P(-120 - k * 35, -165), P(-150 - k * 35, -195 + k * 4), P(-160 - k * 35, -155)], (200, 90, 60) if k % 2 else (90, 120, 160), W_(2))
+    _poly(d, [P(-60, -165), P(60, -175), P(90, -130), P(40, -95), P(-50, -105)], col, W_(4))
+    if feathers:
+        for k in range(4): d.arc([P(-40 + k * 30, -170)[0] - 18 * s, P(0, -170)[1] - 12 * s, P(-40 + k * 30, -170)[0] + 18 * s, P(0, -170)[1] + 12 * s], 0, 180, fill=DK, width=W_(4))
+        _poly(d, [P(40, -140), P(110, -125), P(70, -95), P(30, -105)], (200, 90, 60), W_(3))        # ala con plumas
+        for k in range(3): d.line([P(70 + k * 12, -110), P(80 + k * 12, -88)], fill=(90, 120, 160), width=W_(5))
+    else:
+        for k in range(5): d.ellipse([P(-30 + k * 22, -150)[0] - 5 * s, P(0, -150)[1] - 5 * s, P(-30 + k * 22, -150)[0] + 5 * s, P(0, -150)[1] + 5 * s], fill=DK)
+        d.line([P(50, -140), P(95, -115), P(105, -128)], fill=BLK, width=W_(14)); d.line([P(50, -140), P(95, -115), P(105, -128)], fill=col, width=W_(8))
+    _poly(d, [P(50, -170), P(90, -230), P(120, -215), P(85, -150)], col, W_(4))
+    head = [P(80, -230), P(130, -255), P(195, -235), P(200, -215), P(120, -205)]
+    _poly(d, head, col, W_(4))
+    if feathers:
+        for k in range(3): _poly(d, [P(85 + k * 12, -245), P(70 + k * 12, -285 + k * 6), P(100 + k * 12, -250)], (200, 90, 60) if k % 2 else (90, 120, 160), W_(2))
+    d.line([P(135, -218), P(195, -220)], fill=BLK, width=W_(4))
+    for k in range(3): _poly(d, [P(150 + k * 14, -219), P(156 + k * 14, -210), P(162 + k * 14, -219)], WHITE, W_(1))
+    ex, ey = P(130, -237); r = 11 * s
+    d.ellipse([ex - r, ey - r, ex + r, ey + r], fill=(250, 210, 60) if mood != "scared" else WHITE, outline=BLK, width=W_(3))
+    d.ellipse([ex + f * 2 * s - 5 * s, ey - 5 * s, ex + f * 2 * s + 5 * s, ey + 5 * s], fill=BLK)
+    if mood in ("sly", "angry"): d.line([P(112, -255 if mood == "angry" else -250), P(150, -245 if mood == "angry" else -250)], fill=BLK, width=W_(6))
+    if napkin: _poly(d, [P(85, -200), P(140, -200), P(110, -150)], WHITE, W_(3))
+
+def pigeon(d, x, y, s=1.0, t=0.0, flip=False, mood="normal", fly=False, look=False):
+    """Paloma de ciudad; y = piso (o centro del cuerpo si fly=True). Mira a la derecha. mood: normal | sly.
+    look=True: voltea la cabeza hacia la cámara (los dos ojos). Mide ~170s de largo."""
+    f = -1 if flip else 1; W_ = lambda v: max(2, int(v * s))
+    P = lambda u, v: (x + f * u * s, y + v * s)
+    G, DK, NK = (150, 155, 170), (100, 105, 120), (110, 170, 140)
+    by = -70 if not fly else 0
+    if not fly:
+        for dx in (-10, 15):
+            d.line([P(dx, by + 40), P(dx + 5, 0)], fill=(230, 110, 110), width=W_(7))
+            for c in (-1, 1): d.line([P(dx + 5, 0), P(dx + 5 + c * 12, 0)], fill=(230, 110, 110), width=W_(5))
+    _poly(d, [P(-60, by - 10), P(-110, by + 5), P(-105, by + 25), P(-55, by + 18)], DK, W_(3))
+    q = [P(-70 + 140 * (.5 + .5 * math.cos(a / 16 * math.pi)), by + 10 + 38 * math.sin(a / 16 * math.pi)) for a in range(32)]
+    _poly(d, q, G, W_(4))
+    if fly:
+        fl = math.sin(t * 14) * 45
+        _poly(d, [P(-30, by - 10), P(10, by - 90 - fl), P(50, by - 70 - fl), P(30, by - 10)], DK, W_(3))
+    else:
+        _poly(d, [P(-50, by), P(30, by - 5), P(10, by + 25), P(-45, by + 25)], DK, W_(3))
+        for k in range(2): d.line([P(-30 + k * 25, by + 5), P(-30 + k * 25, by + 20)], fill=(60, 60, 70), width=W_(4))
+    hx, hy = 70, by - 30
+    d.ellipse([P(hx - 35, hy - 30)[0] if f > 0 else P(hx + 35, 0)[0], y + (hy - 30) * s, P(hx + 35, 0)[0] if f > 0 else P(hx - 35, 0)[0], y + (hy + 30) * s], fill=G, outline=BLK, width=W_(4))
+    _poly(d, [P(hx - 20, hy + 15), P(hx + 25, hy + 18), P(hx + 10, hy + 45), P(hx - 25, hy + 40)], NK, W_(2))
+    if look:
+        for sx in (-1, 1):
+            ex, ey = P(hx + sx * 13, hy - 6)
+            d.ellipse([ex - 9 * s, ey - 9 * s, ex + 9 * s, ey + 9 * s], fill=(240, 130, 40), outline=BLK, width=W_(2)); d.ellipse([ex - 4 * s, ey - 4 * s, ex + 4 * s, ey + 4 * s], fill=BLK)
+        _poly(d, [P(hx - 6, hy + 4), P(hx + 6, hy + 4), P(hx, hy + 18)], (240, 200, 120), W_(2))
+    else:
+        _poly(d, [P(hx + 30, hy - 4), P(hx + 58, hy + 4), P(hx + 30, hy + 8)], (240, 200, 120), W_(2))
+        ex, ey = P(hx + 10, hy - 8)
+        d.ellipse([ex - 9 * s, ey - 9 * s, ex + 9 * s, ey + 9 * s], fill=(240, 130, 40), outline=BLK, width=W_(2)); d.ellipse([ex - 4 * s, ey - 4 * s, ex + 4 * s, ey + 4 * s], fill=BLK)
+        if mood == "sly": d.line([P(hx - 6, hy - 22), P(hx + 24, hy - 14)], fill=BLK, width=W_(5))
+
+def shrew(d, x, y, s=1.0, t=0.0, mood="scared", flip=False):
+    """Mamífero chiquito de la época de los dinosaurios (tipo musaraña): café, hocico largo y bigotes. y = piso. ~150s de largo."""
+    f = -1 if flip else 1; W_ = lambda v: max(2, int(v * s))
+    P = lambda u, v: (x + f * u * s, y + v * s)
+    C = (150, 110, 80)
+    sh = math.sin(t * 50) * 2 if mood == "scared" else 0
+    d.line([P(-60, -20), P(-110, -10), P(-130, -25)], fill=(230, 170, 170), width=W_(6))
+    q = [P(-70 + 140 * (.5 + .5 * math.cos(a / 16 * math.pi)) + sh, -38 + 34 * math.sin(a / 16 * math.pi)) for a in range(32)]
+    _poly(d, q, C, W_(4))
+    _poly(d, [P(50 + sh, -55), P(110 + sh, -30), P(55 + sh, -15)], C, W_(4))
+    d.ellipse([P(108, -36)[0] - 6 * s + sh, y - 36 * s, P(108, -36)[0] + 6 * s + sh, y - 24 * s], fill=(230, 120, 140))
+    d.ellipse([P(30, -78)[0] - 14 * s + sh, y - 80 * s, P(30, -78)[0] + 14 * s + sh, y - 54 * s], fill=(200, 150, 120), outline=BLK, width=W_(3))
+    ex, ey = P(68, -45)
+    d.ellipse([ex - 9 * s + sh, ey - 9 * s, ex + 9 * s + sh, ey + 9 * s], fill=WHITE, outline=BLK, width=W_(2)); d.ellipse([ex - 4 * s + sh, ey - 4 * s, ex + 4 * s + sh, ey + 4 * s], fill=BLK)
+    for k in (-1, 1): d.line([P(95, -32), P(130, -32 + k * 12)], fill=BLK, width=W_(2))
+    for dx in (-35, 30): d.line([P(dx, -8), P(dx, 0)], fill=(230, 170, 170), width=W_(8))
+
+def elephant(d, x, y, s=1.0, t=0.0, sit=False, flip=False):
+    """Elefante gris de caricatura; y = piso, mira a la derecha. sit=True: sentado de nalgas con las patas de atrás al frente
+    (para aplastar algo). ~420s de largo parado, ~330s de alto sentado."""
+    f = -1 if flip else 1; W_ = lambda v: max(2, int(v * s))
+    P = lambda u, v: (x + f * u * s, y + v * s)
+    G, DK, LT = (165, 170, 185), (130, 135, 150), (190, 195, 205)
+    def oval(u, v, ru, rv, c, w=5):
+        q = [P(u + ru * math.cos(a / 18 * math.pi), v + rv * math.sin(a / 18 * math.pi)) for a in range(36)]
+        _poly(d, q, c, W_(w))
+    if sit:
+        oval(-40, -170, 140, 165, G)
+        oval(-10, -150, 80, 110, LT, 3)
+        oval(-30, -60, 100, 60, G)                                               # muslo
+        for dx in (95, 145): _poly(d, [P(dx - 28, -230), P(dx + 28, -230), P(dx + 30, 0), P(dx - 30, 0)], G if dx == 115 else DK, W_(4))
+        oval(40, -42, 40, 44, G, 4); oval(48, -42, 27, 31, (230, 225, 210), 3)   # planta de la pata de atrás
+        for k in range(3): oval(72, -68 + k * 26, 7, 9, (250, 248, 235), 2)
+        hx, hy = 120, -320
+        tail = [P(-150, -80), P(-200, -40)]
+    else:
+        for dx in (-110, 90): _poly(d, [P(dx - 30, -140), P(dx + 30, -140), P(dx + 30, 0), P(dx - 30, 0)], DK, W_(4))
+        oval(0, -200, 200, 120, G)
+        for dx in (-70, 130): _poly(d, [P(dx - 30, -140), P(dx + 30, -140), P(dx + 30, 0), P(dx - 30, 0)], G, W_(4))
+        hx, hy = 190, -250
+        tail = [P(-198, -230), P(-235, -150)]
+    d.line(tail, fill=BLK, width=W_(6))
+    oval(hx - 35, hy + 10, 70, 100, DK)                                             # oreja
+    oval(hx + 25, hy, 80, 78, G)
+    sw = math.sin(t * 3) * 10
+    tr = [P(hx + 85, hy - 5), P(hx + 125, hy + 60), P(hx + 135, hy + 140 + sw), P(hx + 160, hy + 125 + sw), P(hx + 170, hy + 140 + sw), P(hx + 135, hy + 165 + sw), P(hx + 100, hy + 145), P(hx + 95, hy + 70), P(hx + 60, hy + 35)]
+    _poly(d, tr, G, W_(4))
+    _poly(d, [P(hx + 60, hy + 45), P(hx + 92, hy + 95), P(hx + 76, hy + 52)], (250, 248, 235), W_(2))
+    ex, ey = P(hx + 45, hy - 20)
+    d.ellipse([ex - 10 * s, ey - 10 * s, ex + 10 * s, ey + 10 * s], fill=BLK)
+    d.line([P(hx + 25, hy - 45), P(hx + 65, hy - 38)], fill=BLK, width=W_(5))

@@ -581,3 +581,47 @@ def trash_can(d, x, y, s=1.0, full=False):
     d.polygon([(x - S(90), y - S(220)), (x + S(90), y - S(220)), (x + S(75), y), (x - S(75), y)], fill=G, outline=BLK); d.line([(x - S(90), y - S(220)), (x + S(90), y - S(220)), (x + S(75), y), (x - S(75), y), (x - S(90), y - S(220))], fill=BLK, width=W_(4))
     for k in range(4): d.line([(x - S(60) + k * S(40), y - S(205)), (x - S(52) + k * S(35), y - S(15))], fill=dk(G, .8), width=W_(5))
     d.rounded_rectangle([x - S(100), y - S(238), x + S(100), y - S(214)], int(S(10)), fill=dk(G, .9), outline=BLK, width=W_(3))
+
+def torta(d, x, y, s=1.0):
+    """Torta (bolillo relleno de jamón, jitomate y lechuga) de lado; (x, y) = centro. ~200s de ancho."""
+    W_ = lambda v: max(2, int(v * s)); S = lambda v: v * s
+    d.chord([x - S(100), y - S(70), x + S(100), y + S(30)], 180, 360, fill=(220, 160, 80), outline=BLK, width=W_(4))
+    for k in range(3): d.arc([x - S(70) + k * S(45), y - S(60), x - S(30) + k * S(45), y - S(30)], 200, 340, fill=(180, 120, 60), width=W_(4))
+    d.rectangle([x - S(96), y - S(20), x + S(96), y - S(8)], fill=(110, 190, 80), outline=BLK, width=W_(2))
+    d.rectangle([x - S(92), y - S(8), x + S(92), y + S(4)], fill=(230, 80, 70), outline=BLK, width=W_(2))
+    d.rectangle([x - S(96), y + S(4), x + S(96), y + S(16)], fill=(240, 160, 170), outline=BLK, width=W_(2))
+    d.chord([x - S(100), y - S(10), x + S(100), y + S(50)], 0, 180, fill=(220, 160, 80), outline=BLK, width=W_(4))
+
+def soup_bowl(d, x, y, s=1.0, t=0.0, lemon=True):
+    """Plato de caldo de pollo humeante con pierna de pollo, verduras y limón; y = base. ~320s de ancho."""
+    W_ = lambda v: max(2, int(v * s)); S = lambda v: v * s
+    for k in range(3):
+        sx = x - S(70) + k * S(70); off = math.sin(t * 3 + k) * S(10)
+        d.arc([sx - S(20) + off, y - S(260), sx + S(20) + off, y - S(200)], 90, 270, fill=(230, 230, 235), width=W_(6))
+        d.arc([sx - S(20) - off, y - S(210), sx + S(20) - off, y - S(150)], 270, 90, fill=(230, 230, 235), width=W_(6))
+    d.ellipse([x - S(160), y - S(150), x + S(160), y - S(90)], fill=(235, 190, 90), outline=BLK, width=W_(4))
+    d.ellipse([x - S(70), y - S(150), x + S(30), y - S(110)], fill=(230, 180, 120), outline=BLK, width=W_(3))      # pierna de pollo
+    d.rounded_rectangle([x + S(10), y - S(140), x + S(70), y - S(124)], int(S(8)), fill=(250, 245, 235), outline=BLK, width=W_(2))
+    d.ellipse([x + S(40), y - S(128), x + S(80), y - S(104)], fill=(240, 140, 60), outline=BLK, width=W_(2))         # zanahoria
+    d.ellipse([x - S(130), y - S(130), x - S(90), y - S(108)], fill=(120, 190, 90), outline=BLK, width=W_(2))
+    d.chord([x - S(160), y - S(190), x + S(160), y + S(10)], 0, 180, fill=(250, 250, 250), outline=BLK, width=W_(5))
+    d.line([(x - S(130), y - S(70)), (x + S(130), y - S(70))], fill=(90, 140, 200), width=W_(6))
+    if lemon:
+        lx, ly = x + S(190), y - S(20)
+        d.pieslice([lx - S(45), ly - S(45), lx + S(45), ly + S(45)], 180, 360, fill=(150, 210, 80), outline=BLK, width=W_(4))
+        d.pieslice([lx - S(34), ly - S(34), lx + S(34), ly + S(34)], 180, 360, fill=(220, 240, 150))
+        for a in (210, 270, 330): d.line([(lx, ly), (lx + S(32) * math.cos(math.radians(a)), ly + S(32) * math.sin(math.radians(a)))], fill=(150, 200, 80), width=W_(3))
+
+def snack_plate(d, x, y, s=1.0, flag=True):
+    """Platito de botana con palillo y banderita; y = base. Pon la botana encima en (x, y - 20s)."""
+    W_ = lambda v: max(2, int(v * s)); S = lambda v: v * s
+    d.ellipse([x - S(170), y - S(30), x + S(170), y + S(10)], fill=(250, 250, 250), outline=BLK, width=W_(4))
+    d.ellipse([x - S(120), y - S(20), x + S(120), y], outline=(200, 200, 210), width=W_(3))
+    if flag:
+        d.line([(x + S(60), y - S(15)), (x + S(80), y - S(150))], fill=(210, 180, 120), width=W_(6))
+        d.polygon([(x + S(80), y - S(150)), (x + S(130), y - S(138)), (x + S(78), y - S(118))], fill=RED, outline=BLK)
+
+def pet_collar(d, x, y, w=60, col=(220, 50, 60)):
+    """Collar de mascota con plaquita dorada; (x, y) = centro del cuello, w = ancho."""
+    d.rounded_rectangle([x - w / 2, y - w * .12, x + w / 2, y + w * .12], int(w * .1), fill=col, outline=BLK, width=3)
+    d.ellipse([x - w * .12, y + w * .05, x + w * .12, y + w * .29], fill=(250, 210, 60), outline=BLK, width=3)
