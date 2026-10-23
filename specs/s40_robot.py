@@ -7,6 +7,9 @@ from lib.personajes import guy, robo_cw, anchors
 from lib.props import (alarm_clock, wall_clock, phone_chat, monitor, checklist, laptop, mug, captcha, curtain, ball_chain,
                        cardboard_box, chair, table, document)
 from lib.fondos import oficina
+from lib.efectos import tag
+from lib.props import office_desk
+def desk2(d, x0, x1, top=1000): office_desk(d, x0, x1, top)
 
 NAME = "2026-12-03_robot-companero"
 END = 4.5
@@ -26,20 +29,6 @@ LINES = [
 OFF = oficina()
 OFF_N = oficina(night=True)
 DESK_Y = 1000                    # superficie de los escritorios
-
-def desk2(d, x0, x1, top=DESK_Y):
-    """Escritorio simple de oficina (frente)."""
-    d.rectangle([x0, top, x1, top + 34], fill=(150, 110, 75), outline=BLK, width=5)
-    for x in (x0 + 30, x1 - 60): d.rectangle([x, top + 34, x + 30, 1290], fill=(120, 85, 55), outline=BLK, width=4)
-    d.rectangle([x1 - 200, top + 34, x1 - 60, top + 200], fill=(130, 95, 62), outline=BLK, width=4)
-    d.line([(x1 - 160, top + 115), (x1 - 100, top + 115)], fill=BLK, width=5)
-
-def tag(img, text, x, y, k, rot=-10, bg=RED, size=56):
-    def fn(dd, cx, cy):
-        f = F(size); w = dd.textlength(text, font=f) + 70
-        dd.rounded_rectangle([cx - w / 2, cy - size * .8, cx + w / 2, cy + size * .8], 30, fill=bg, outline=BLK, width=6)
-        dd.text((cx, cy), text, font=f, fill=WHITE, anchor="mm")
-    return layer(img, fn, x, y, 1000, sx=k, sy=k, rot=rot)
 
 # ------------------------------------------------------------------ escenas
 def hook(c):

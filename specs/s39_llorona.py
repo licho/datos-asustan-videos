@@ -5,7 +5,9 @@ from lib.core import say
 from lib.motion import tw, yoyo, layer, glow, shake, back_out, cubic_out, radial_bg
 from lib.personajes import guy, llorona, anchors
 from lib.props import document, alarm_clock, bed, coffin, candle, shopping_cart, time_clock, codex, pyramid, sign_board, moon_disc, templo
-from lib.fondos import make_store, office
+from lib.fondos import make_store, office, river_night as _river
+from lib.efectos import tag, sound_waves as wail_waves
+def river_night(c, y=1150, moon=(900, 790)): return _river(c.t, y, moon)
 
 NAME = "2026-12_llorona-trabajos"
 END = 4.5
@@ -24,30 +26,6 @@ LINES = [
 RIVER = ((0, (60, 70, 130)), (.6, (25, 30, 70)), (1, (8, 10, 30)))
 STORE = make_store()
 OFFICE = office()
-
-def river_night(c, y=1150, moon=(900, 790)):
-    img = radial_bg(RIVER, cy=700); d = ImageDraw.Draw(img)
-    if moon: moon_disc(d, moon[0], moon[1], 60, bg=(30, 35, 80))
-    d.rectangle([0, y, W, 1380], fill=(30, 60, 110))
-    for k in range(6):
-        yy = y + 25 + k * 40; ph = c.t * 2 + k
-        d.line([(x, yy + math.sin(x / 70 + ph) * 6) for x in range(0, W + 40, 40)], fill=(80, 120, 180), width=4)
-    d.rectangle([0, y - 20, W, y], fill=(40, 70, 50))
-    return img, d
-
-def wail_waves(d, x, y, t, n=3, col=(200, 220, 255)):
-    for k in range(n):
-        r = 60 + ((t * 140 + k * 60) % 180)
-        for sx in (-1, 1):
-            a0, a1 = (300, 60) if sx > 0 else (120, 240)
-            d.arc([x - r, y - r, x + r, y + r], a0, a1, fill=col, width=7)
-
-def tag(img, text, x, y, k, rot=-10, bg=RED, size=58):
-    def fn(dd, cx, cy):
-        f = F(size); w = dd.textlength(text, font=f) + 70
-        dd.rounded_rectangle([cx - w / 2, cy - size * .8, cx + w / 2, cy + size * .8], 30, fill=bg, outline=BLK, width=6)
-        dd.text((cx, cy), text, font=f, fill=WHITE, anchor="mm")
-    return layer(img, fn, x, y, 900, sx=k, sy=k, rot=rot)
 
 def intro(c):
     img, d = river_night(c); lt = c.lt

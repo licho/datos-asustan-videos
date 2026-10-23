@@ -6,7 +6,9 @@ from lib.motion import tw, yoyo, layer, shake, back_out, cubic_out, radial_bg
 from lib.personajes import guy, elf, anchors
 from lib.props import (document, open_box, box_lid, bookshelf_crooked, screw, scroll, sausages, cardboard_box, phone_chat,
                        snowflake, gift, tree)
-from lib.fondos import oficina
+from lib.fondos import oficina, living_room as room
+from lib.efectos import tag, snow_fall
+from lib.props import xmas_tree
 
 NAME = "2026-12-15_duende-trabajos"
 END = 4.5
@@ -24,31 +26,6 @@ LINES = [
 ]
 NIGHT = ((0, (40, 55, 110)), (.6, (20, 28, 65)), (1, (8, 10, 30)))
 SNOWY = ((0, (230, 240, 252)), (1, (180, 200, 228)))
-
-def snow_fall(d, t, n=16, seed=5, col=WHITE):
-    r = random.Random(seed)
-    for k in range(n):
-        x0, sp, sz = r.uniform(0, W), r.uniform(60, 130), r.uniform(12, 22)
-        y = 480 + (t * sp + r.uniform(0, 800)) % 820; x = x0 + math.sin(t * 2 + k) * 25
-        snowflake(d, x, y, sz, col=col, width=4)
-
-def tag(img, text, x, y, k, rot=-10, bg=RED, size=56):
-    def fn(dd, cx, cy):
-        f = F(size); w = dd.textlength(text, font=f) + 70
-        dd.rounded_rectangle([cx - w / 2, cy - size * .8, cx + w / 2, cy + size * .8], 30, fill=bg, outline=BLK, width=6)
-        dd.text((cx, cy), text, font=f, fill=WHITE, anchor="mm")
-    return layer(img, fn, x, y, 1000, sx=k, sy=k, rot=rot)
-
-def room(night=False):
-    img = radial_bg(((0, (250, 225, 200)), (1, (215, 170, 140))) if not night else NIGHT, cy=800); d = ImageDraw.Draw(img)
-    d.rectangle([0, 1250, W, 1380], fill=(150, 100, 70)); d.line([(0, 1250), (W, 1250)], fill=(110, 70, 45), width=6)
-    return img, d
-
-def xmas_tree(d, x, y, s, t):
-    tree(d, x, y, s, kind="pine", col=(50, 140, 80))
-    for k, (dx, dy, c) in enumerate(((-60, -200, RED), (50, -260, YEL), (-30, -340, (80, 140, 240)), (70, -150, (240, 140, 40)), (0, -430, RED))):
-        on = (int(t * 3) + k) % 3 != 0
-        d.ellipse([x + dx * s - 14, y + dy * s - 14, x + dx * s + 14, y + dy * s + 14], fill=c if on else dk(c, .5), outline=BLK, width=3)
 
 # ------------------------------------------------------------------ escenas
 def intro(c):

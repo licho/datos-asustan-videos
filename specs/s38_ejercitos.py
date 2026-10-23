@@ -4,7 +4,8 @@ from lib.core import *
 from lib.core import say
 from lib.motion import power_in, tw, yoyo, layer, glow, shake, back_out, elastic_out, cubic_out, bounce_out, radial_bg, linear
 from lib.personajes import guy, soldier, napoleon, scribe, emu, army_ant, ant_column, rat, rat_skeleton, anchors, medal
-from lib.props import document, outhouse, white_flag, helmet, tortillas, bar_chart, blob_map, arrow, snowflake, phone_chat, sign_board
+from lib.efectos import snow_fall, rubber_stamp
+from lib.props import fish, document, outhouse, white_flag, helmet, tortillas, bar_chart, blob_map, arrow, snowflake, phone_chat, sign_board
 
 NAME = "2026-12_ejercitos"
 END = 4.5
@@ -32,26 +33,6 @@ SOIL = ((0, (215, 190, 140)), (.6, (170, 130, 85)), (1, (110, 75, 45)))
 
 def ground(d, col, y=1290):
     d.rectangle([0, y, W, 1380], fill=col); d.line([(0, y), (W, y)], fill=dk(col, .75), width=6)
-
-def snow_fall(d, t, n=18, seed=5):
-    import random; r = random.Random(seed)
-    for k in range(n):
-        x0, sp, sz = r.uniform(0, W), r.uniform(60, 140), r.uniform(14, 26)
-        y = 480 + (t * sp + r.uniform(0, 800)) % 820; x = x0 + math.sin(t * 2 + k) * 25
-        snowflake(d, x, y, sz, col=WHITE, width=4)
-
-def rubber_stamp(img, text, x, y, k, col=RED, size=78):
-    def fn(dd, cx, cy):
-        f = F(size); w = dd.textlength(text, font=f) + 60
-        dd.rounded_rectangle([cx - w / 2, cy - size * .85, cx + w / 2, cy + size * .85], 18, outline=col, width=12)
-        dd.text((cx, cy), text, font=f, fill=col, anchor="mm")
-    return layer(img, fn, x, y, 1000, sx=k, sy=k, rot=-10)
-
-def fish(d, x, y, s=1.0):
-    S = lambda v: v * s
-    d.polygon([(x - S(90), y), (x - S(140), y - S(40)), (x - S(140), y + S(40))], fill=(120, 180, 220), outline=BLK)
-    d.ellipse([x - S(110), y - S(45), x + S(70), y + S(45)], fill=(120, 180, 220), outline=BLK, width=4)
-    d.ellipse([x + S(25), y - S(18), x + S(45), y + 2], fill=BLK)
 
 # ------------------------------------------------------------------ escenas
 def s_hook(c):
@@ -104,7 +85,7 @@ def s_real(c):
 def s_napoleon(c):
     img = radial_bg(SNOW, cy=700); d = ImageDraw.Draw(img); lt = c.lt
     ground(d, (240, 245, 250))
-    snow_fall(d, c.t)
+    snow_fall(d, c.t, size=(14, 26), speed=(60, 140))
     napoleon(d, 230 + shake(lt, 0, 99, 4, 30), 1290, .6, c.t, mood="scared")
     frac = tw(lt, .5, 1.5, 0, 1, cubic_out)
     bar_chart(d, 420, 600, 1020, [("ENTRARON", 450000, (45, 65, 140)), ("VOLVIERON", 120000 if lt > 2.6 else 450000 * (1 - tw(lt, 1.6, 1.0, 0, .73, cubic_out)), (200, 60, 60))],
@@ -115,7 +96,7 @@ def s_napoleon(c):
 def s_toilet(c):
     img = radial_bg(SNOW, cy=700); d = ImageDraw.Draw(img); lt = c.lt
     ground(d, (240, 245, 250))
-    snow_fall(d, c.t, n=10)
+    snow_fall(d, c.t, n=10, size=(14, 26), speed=(60, 140))
     outhouse(d, 900, 1290, .75)
     for i in range(6):
         x = 110 + i * 80; soldier(d, x, 1200 - i * 4, .26, c.t + i, era="napoleon", mood="scared")
@@ -137,7 +118,7 @@ def s_1941(c):
         if k > 0: arrow(d, 330, yy, 330 + 330 * k, yy - 20 * k, col=RED, w=18)
     bigtext(d, "+3,800,000", 540, 580, 110, fill=WHITE); bigtext(d, "SOLDADOS", 540, 670, 44, fill=YEL)
     if lt > c.dur * .65:
-        snow_fall(d, c.t, n=14, seed=8)
+        snow_fall(d, c.t, n=14, seed=8, size=(14, 26), speed=(60, 140))
         k = tw(lt, c.dur * .65, .4, 0, 1, back_out); d = rubber_stamp(img, "IGUAL QUE NAPOLEÓN", 540, 1180, k, size=62)
     chip(d, "1941 · LA INVASIÓN MÁS GRANDE", CHIP1, bg=RED, size=48, appear=lt / .3)
     return img

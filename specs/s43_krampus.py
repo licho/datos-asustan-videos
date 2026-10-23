@@ -6,6 +6,8 @@ from lib.core import say
 from lib.motion import tw, yoyo, layer, shake, back_out, cubic_out, radial_bg
 from lib.personajes import guy, krampus, st_nicholas, anchors
 from lib.props import bells, scroll, phone_chat, mug, chair, document, house, tree, snowflake, arrow, sign_board
+from lib.fondos import village
+from lib.efectos import tag, snow_fall
 from reels_engine.camera import Shot, film, path, pan, zoom_in, ken_burns, whip, impact, handheld
 
 NAME = "2026-12-05_krampus"
@@ -24,40 +26,13 @@ LINES = [
 ]
 NIGHT = ((0, (55, 65, 120)), (.6, (25, 30, 70)), (1, (10, 12, 35)))
 
-def snow_fall(d, t, n=18, seed=5, box=(0, 0, W, 1300)):
-    r = random.Random(seed)
-    for k in range(n):
-        x0, sp, sz = r.uniform(box[0], box[2]), r.uniform(60, 130), r.uniform(10, 20)
-        y = box[1] + (t * sp + r.uniform(0, box[3])) % (box[3] - box[1]); x = x0 + math.sin(t * 2 + k) * 25
-        snowflake(d, x, y, sz, col=WHITE, width=4)
-
-def village(t, w=W, h=H, lights=True):
-    """Pueblo alpino nevado de noche (mundo para la cámara)."""
-    img = radial_bg(NIGHT, cy=600).resize((w, h)); d = ImageDraw.Draw(img)
-    for k, (x0, top, x1) in enumerate(((-200, 520, 520), (300, 440, 1050), (750, 560, 1400))):
-        d.polygon([(x0, 1000), ((x0 + x1) / 2, top), (x1, 1000)], fill=(70, 80, 120))
-        d.polygon([((x0 + x1) / 2 - 90, top + 100), ((x0 + x1) / 2, top), ((x0 + x1) / 2 + 90, top + 100)], fill=(235, 240, 250))
-    d.rectangle([0, 1000, w, h], fill=(225, 232, 245)); d.line([(0, 1000), (w, 1000)], fill=(180, 190, 210), width=6)
-    for k, x in enumerate((120, 420, 760, 1000)):
-        if x < w: house(d, x, 1250, .9 + .1 * (k % 2), wall=(230, 200, 160), roof=(120, 60, 50), lights=lights)
-    tree(d, 290, 1260, .9, kind="pine", col=(40, 100, 70)); tree(d, 900, 1250, .8, kind="pine", col=(40, 100, 70))
-    d.rectangle([0, 1250, w, 1380], fill=(240, 244, 252))
-    return img, d
-
-def tag(img, text, x, y, k, rot=-10, bg=RED, size=56):
-    def fn(dd, cx, cy):
-        f = F(size); ww = dd.textlength(text, font=f) + 70
-        dd.rounded_rectangle([cx - ww / 2, cy - size * .8, cx + ww / 2, cy + size * .8], 30, fill=bg, outline=BLK, width=6)
-        dd.text((cx, cy), text, font=f, fill=WHITE, anchor="mm")
-    return layer(img, fn, x, y, 1000, sx=k, sy=k, rot=rot)
-
 # ------------------------------------------------------------------ escenas
 def hook(c):
     world, d = village(c.t)
     d.rectangle([700, 1060, 800, 1150], fill=(255, 220, 120))
     if c.lt > 1.2: krampus(d, 960, 1250, .32, c.t, mood="grin", rods=False)              # ronda el pueblo
     d.rectangle([700, 1060, 800, 1150], outline=BLK, width=6); d.line([(750, 1060), (750, 1150)], fill=BLK, width=5)
-    snow_fall(d, c.t)
+    snow_fall(d, c.t, box=(0, 0, W, 1300), size=(10, 20))
     img = Image.new("RGB", (W, H)); film(img, world, handheld(path(c.lt, [(0, Shot(540, 960, 1.0)), (c.dur, Shot(860, 1050, 1.7))]), c.t, 5))
     d = ImageDraw.Draw(img)
     chip(d, "5 DE DICIEMBRE", CHIP1, bg=RED, appear=c.lt / .3)
@@ -130,7 +105,7 @@ def step2(c):
 def step3(c):
     img = radial_bg(((0, (250, 220, 180)), (1, (190, 140, 110))), cy=800); d = ImageDraw.Draw(img); lt = c.lt; f = lt / c.dur
     d.rectangle([0, 1250, W, 1380], fill=(140, 100, 70))
-    d.rectangle([80, 520, 360, 760], fill=(40, 30, 50), outline=BLK, width=8); snow_fall(d, c.t, 6, box=(90, 530, 350, 750))
+    d.rectangle([80, 520, 360, 760], fill=(40, 30, 50), outline=BLK, width=8); snow_fall(d, c.t, 6, box=(90, 530, 350, 750), size=(10, 20))
     chair(d, 640, 1290, 1.3, kind="chair", facing=-1)
     krampus(d, 600, 1290, .78, c.t, mood="tired" if f > .45 else "grin", arms="hold", rods=False)
     if f > .35: mug(d, 600, 1290 - .78 * 330 + 10, .45, c.t)

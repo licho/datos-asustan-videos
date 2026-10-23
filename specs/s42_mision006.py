@@ -29,10 +29,6 @@ INV = [(2, "lista", "REVISADA 2 VECES"), (3, "zanahoria", "GASOLINA DE RENO"), (
 MN = "MISIÓN 006"
 def fin(c, img, **kw): return finish(c, img, MN, INV, **kw)
 
-def sack_carrier(d, n):
-    h = 10 + n * 3
-    d.ellipse([56, 230 - h, 84, 232], fill=P["brown"]); rect(d, 66, 226 - h, 8, 3, "yellow")
-
 # ------------------------------------------------------------------ escenas
 def s_intro(c):
     world = Image.new("RGB", (360, LH)); d = ImageDraw.Draw(world)
@@ -65,7 +61,7 @@ def s_sack(c):
 
 def s_inv(c):
     img, d = canvas_px()
-    inv_grid_px(d, c, INV, xmas_item_px, title="COSTAL  6 ESPACIOS", carrier=sack_carrier,
+    inv_grid_px(d, c, INV, xmas_item_px, title="COSTAL  6 ESPACIOS", carrier=sack_px,
                 bottom=lambda dd: reindeer_px(dd, 118 + math.sin(c.t * 3) * 8, 220, c.t))
     return fin(c, img)
 
@@ -110,20 +106,10 @@ def s_tamales(c):
         if c.cap_lt < c.dur * .5 + .5: sh = (random.randint(-3, 3), random.randint(-1, 1))
     return fin(c, img, shake=sh)
 
-def houses_world(t):
-    w, h = 1440, 2560
-    world = Image.new("RGB", (w, h), P["navy"]); d = ImageDraw.Draw(world)
-    r = random.Random(4); cols = ("peach", "lgray", "pink", "lav", "orange", "white")
-    for row in range(0, h, 64):
-        rect(d, 0, row + 60, w, 4, "white")
-        for col in range(0, w, 60):
-            house_px(d, col + 6, row + 60, 44, 26, wall=r.choice(cols), roof=r.choice(("red", "brown", "dgreen")), lit=(col // 60 + row // 64) % 3 != 0)
-    return world
-
 _HW = None
 def s_houses(c):
     global _HW
-    if _HW is None: _HW = houses_world(0)
+    if _HW is None: _HW = houses_grid_px()
     cx, cy = 720 + 28, 1280 + 40
     s = path(c.cap_lt, [(0, Shot(cx, cy, 2.4)), (c.dur * .75, Shot(cx, cy, .14))])
     img = px_film(_HW, s.x, s.y, s.zoom); d = ImageDraw.Draw(img)

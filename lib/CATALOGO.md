@@ -293,6 +293,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `eye_icon(d, cx, cy, s)` · reel3
 - `fence(d, x0, x1, y, h=160, col=(240, 240, 235))` · reels_engine.exterior
 - `finish_flag(img, cx, base, h=420, wave=0.0, seed=1, shadow=False)` · reels_engine.sketch.sports — Checkered finish flag on a pole; wave = 0…1 phase of the flutter (animate with t).
+- `fish(d, x, y, s=1.0, col=(120, 180, 220))` · lib.objetos — Pescado de caricatura (el de 'así de grande'); (x, y) = centro, mira a la derecha.
 - `flicker(t)` · reel
 - `floor_lamp(d, x, y, s=1.0, on=True)` · reels_engine.furniture — Floor lamp; y = floor.
 - `flowerpot(d, x, y, s=1.0, water=True)` · lib.objetos — Maceta con plato de agua; y = piso.
@@ -376,6 +377,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `nopal(d, x, y, s=1.0)` · lib.objetos — Nopal sobre una roca (como en el escudo). y = base de la roca.
 - `obelisk(img, cx, base, h=420, seed=1, shadow=False)` · reels_engine.sketch.history — Egyptian obelisk with a few carved signs.
 - `offering(d, x, y, s)` · reel4
+- `office_desk(d, x0, x1, top=1000, floor=1290, col=(150, 110, 75))` · lib.objetos — Escritorio de oficina visto de frente: cubierta, dos patas y cajonera. Pon a la persona ANTES (queda detrás).
 - `olmec_head(img, cx, base, h=280, seed=1, shadow=False)` · reels_engine.sketch.history — Colossal Olmec stone head: helmet, wide nose and full lips.
 - `open_box(d, x, y, s=1.0, col=(220, 60, 70), ribbon=(250, 210, 60), front=True)` · lib.objetos — Caja de regalo abierta (sin tapa). y = base. Llama con front=False antes del personaje (fondo de la caja)
 - `outhouse(d, x, y, s=1.0, door=0.0, label='WC')` · lib.objetos — Letrina de madera con luna en la puerta. y = piso. door 0..1 = abierta.
@@ -415,6 +417,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `road(d, y0, y1, t=0.0, speed=0.0, col=(70, 70, 75))` · reels_engine.exterior — Horizontal road with lane lines (speed>0 makes them move).
 - `rocket(d, x, y, s=1.0, t=0.0, flame=True)` · lib.objetos — Cohete; (x, y) = base.
 - `round_shield(img, cx, cy, r=110, color=CRIMSON, color2=CREAM, seed=1)` · reels_engine.sketch.history — Viking round shield, painted in quarters, with an iron boss.
+- `rubber_stamp(img, text, x, y, k, col=RED, size=78, rot=-10)` · lib.efectos — Sello de goma (solo contorno y letras) girado; k = escala de entrada.
 - `ruler(d, x, y0, y1, marks, current=None, appear=1.0, w=60, col=(250, 210, 60))` · reels_engine.screens — Vertical size ruler. marks=[(fraction 0=bottom..1=top, text)]; current = highlighted index.
 - `safe(img, cx, base, h=300, open=False, seed=1, shadow=False)` · reels_engine.sketch.finance — Steel safe with a dial and handle; open=True shows the door swung open and money inside.
 - `salad(d, cx, ybot)` · reel26
@@ -445,10 +448,12 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `skull(d, x, y, r=30, col=WHITE)` · lib.objetos — Calavera tipo ícono.
 - `slot_pixel(d, x, y, kind=None, sel=False, cross=False, sz=30)` · alien
 - `sneaker(img, cx, base, w=220, color=RED, seed=1, shadow=False)` · reels_engine.sketch.sports — Running shoe seen from the side, toe on the right.
+- `snow_fall(d, t, n=18, seed=5, box=(0, 480, W, 1300), size=(12, 22), speed=(60, 130), col=WHITE, wobble=25)` · lib.efectos — Copos de nieve cayendo dentro de box=(x0, y0, x1, y1). Determinista (depende de t y seed).
 - `snowflake(d, x, y, r=50, col=(120, 190, 250), width=8)` · lib.objetos
 - `soccer_ball(img, cx, cy, r=60, ang=0.0, seed=1)` · reels_engine.sketch.sports — Soccer ball with black pentagons.
 - `soccer_goal(img, cx, base, w=520, seed=1, shadow=False)` · reels_engine.sketch.sports — Soccer goal with net, seen from the front.
 - `sofa(d, cx, y, s=1.0)` · reel9
+- `sound_waves(d, x, y, t, n=3, col=(200, 220, 255), width=7)` · lib.efectos — Ondas de sonido saliendo a los lados de (x, y) (llanto, grito, alarma).
 - `spear(img, gx, gy, L=520, ang=0.0, seed=1)` · reels_engine.sketch.history — Spear gripped at (gx, gy), L = total length.
 - `spin_earth(img, cx, cy, r, ang, mood='happy')` · reel25
 - `sport_ball(img, cx, cy, r=60, kind='soccer', ang=0.0, seed=1)` · reels_engine.sketch.sports — Sports ball: kind = soccer, basketball, tennis, baseball, volleyball or football (American); ang = spin.
@@ -471,6 +476,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `table(d, x, y, s=1.0, w=520, col=WOOD, cloth=None)` · reels_engine.furniture — Table (~330·s tall). cloth = tablecloth color.
 - `table_v13(d, cx, y, s)` · reel13
 - `taco(d, x, y, s)` · reel24
+- `tag(img, text, x, y, k, rot=-10, bg=RED, size=56)` · lib.efectos — Etiqueta redondeada y girada que entra con escala k (0..1); úsala con k = tw(lt, t0, .4, 0, 1, back_out).
 - `tank(d, x, y, s, t)` · reel24
 - `taper(d, x, y, w=360, h=170, lid=(60, 140, 220), food=(150, 80, 40), label=None)` · reel26
 - `temple(img, cx, base, w=520, seed=1, shadow=False)` · reels_engine.sketch.history — Greek temple: steps, six columns and a triangular pediment.
@@ -507,6 +513,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `white_flag(d, x, y, s=1.0, t=0.0, h=380)` · lib.objetos — Bandera blanca ondeando (rendición). (x, y) = base del palo.
 - `window(d, x0, y0, x1, y1, kind='day', t=0.0, frame=(240, 240, 240))` · reels_engine.furniture — Window in a box. kind: day | night (with moon) | blinds | storm.
 - `window_frame(d, x, y, w, h, broken=0.0)` · reel13
+- `xmas_tree(d, x, y, s=1.0, t=0.0)` · lib.objetos — Arbolito de Navidad (pino con esferas que parpadean). y = base.
 
 ## lib.fondos
 
@@ -519,6 +526,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `garden_pixel(d, t)` · mision003
 - `ground_pixel(d)` · pixel
 - `kitchen()` · reel16
+- `living_room(night=False)` · lib.fondos_canal — Sala cálida con piso de madera (escenas navideñas, de casa). Devuelve (img, d).
 - `make_bath()` · reel7
 - `make_coldroom_in()` · reel
 - `make_coldroom_out()` · reel
@@ -542,6 +550,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `oficina(night=False)` · lib.fondos_canal — Oficina: pared con ventana (sin invadir letreros), piso y zoclo. Piso en y=1290.
 - `outside_day(w, h)` · reel8
 - `radial_bg(stops=((0, (27, 21, 80)), (0.55, (10, 10, 42)), (1, (5, 5, 21))), cx=540, cy=670, rx=760, ry=1250)` · reels_engine.motion — Radial gradient background (lit center, dark edges). stops=((position 0..1, color), ...). Cached.
+- `river_night(t, ground_y=1150, moon=(900, 790))` · lib.fondos_canal — Río de noche con agua que se mueve y orilla de pasto (Llorona, leyendas). Devuelve (img, d).
 - `rlyeh_city(d, cx, base, s, t, col=(60, 75, 80))` · reel3
 - `room(mess=0.0, dark=0.0, seed=1)` · reel12
 - `room_ofrenda_pixel(d, t)` · ofrenda
@@ -555,3 +564,4 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `street_pixel(d, t, red=False)` · zombi11
 - `sun_desert(t)` · reel19
 - `town(d, lit, rng)` · reel25
+- `village(t=0.0, w=1080, h=1920, lights=True)` · lib.fondos_canal — Pueblo alpino nevado de noche, con montañas, casas y pinos (sirve de 'mundo' para la cámara). Devuelve (img, d).

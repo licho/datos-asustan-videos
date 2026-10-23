@@ -455,3 +455,25 @@ def sausages(d, x0, y0, x1, y1, n=5):
         a = (x0 + (x1 - x0) * u0, y0 + (y1 - y0) * u0); b = (x0 + (x1 - x0) * u1, y0 + (y1 - y0) * u1)
         d.line([a, b], fill=BLK, width=52); d.line([a, b], fill=(200, 100, 80), width=42)
         d.ellipse([b[0] - 6, b[1] - 6, b[0] + 6, b[1] + 6], fill=(150, 70, 55))
+
+def fish(d, x, y, s=1.0, col=(120, 180, 220)):
+    """Pescado de caricatura (el de 'así de grande'); (x, y) = centro, mira a la derecha."""
+    S = lambda v: v * s
+    d.polygon([(x - S(90), y), (x - S(140), y - S(40)), (x - S(140), y + S(40))], fill=col, outline=BLK)
+    d.ellipse([x - S(110), y - S(45), x + S(70), y + S(45)], fill=col, outline=BLK, width=4)
+    d.ellipse([x + S(25), y - S(18), x + S(45), y + 2], fill=BLK)
+
+def office_desk(d, x0, x1, top=1000, floor=1290, col=(150, 110, 75)):
+    """Escritorio de oficina visto de frente: cubierta, dos patas y cajonera. Pon a la persona ANTES (queda detrás)."""
+    d.rectangle([x0, top, x1, top + 34], fill=col, outline=BLK, width=5)
+    for x in (x0 + 30, x1 - 60): d.rectangle([x, top + 34, x + 30, floor], fill=dk(col, .8), outline=BLK, width=4)
+    d.rectangle([x1 - 200, top + 34, x1 - 60, top + 200], fill=dk(col, .87), outline=BLK, width=4)
+    d.line([(x1 - 160, top + 115), (x1 - 100, top + 115)], fill=BLK, width=5)
+
+def xmas_tree(d, x, y, s=1.0, t=0.0):
+    """Arbolito de Navidad (pino con esferas que parpadean). y = base."""
+    from reels_engine.exterior import tree
+    tree(d, x, y, s, kind="pine", col=(50, 140, 80))
+    for k, (dx, dy, c) in enumerate(((-60, -200, RED), (50, -260, YEL), (-30, -340, (80, 140, 240)), (70, -150, (240, 140, 40)), (0, -430, RED))):
+        on = (int(t * 3) + k) % 3 != 0
+        d.ellipse([x + dx * s - 14, y + dy * s - 14, x + dx * s + 14, y + dy * s + 14], fill=c if on else dk(c, .5), outline=BLK, width=3)

@@ -215,3 +215,18 @@ def xmas_item_px(d, kind, x, y, big=2):
     elif kind == "galletas": cookie_milk_px(d, x, y, big)
     elif kind == "tamal": tamal_px(d, x, y, big)
     else: item_px(d, kind, x, y, big)
+
+def sack_px(d, n, x=56, base=232):
+    """Costal pixel que crece con n objetos (para inv_grid_px(carrier=...))."""
+    h = 10 + n * 3
+    d.ellipse([x, base - 2 - h, x + 28, base], fill=P["brown"]); rect(d, x + 10, base - 6 - h, 8, 3, "yellow")
+
+def houses_grid_px(w=1440, h=2560, seed=4):
+    """Mundo pixel enorme de techos y casitas nevadas en filas (para alejar la cámara: 'miles de casas')."""
+    world = Image.new("RGB", (w, h), P["navy"]); d = ImageDraw.Draw(world)
+    r = random.Random(seed); cols = ("peach", "lgray", "pink", "lav", "orange", "white")
+    for row in range(0, h, 64):
+        rect(d, 0, row + 60, w, 4, "white")
+        for col in range(0, w, 60):
+            house_px(d, col + 6, row + 60, 44, 26, wall=r.choice(cols), roof=r.choice(("red", "brown", "dgreen")), lit=(col // 60 + row // 64) % 3 != 0)
+    return world
