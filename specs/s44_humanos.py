@@ -37,12 +37,15 @@ def hook(c):
     f = c.lt / c.dur
     if f < .55:
         world, d = city_street(c.t)
-        for x, col in ((230, (240, 120, 40)), (560, (90, 160, 220)), (880, (200, 60, 90))): empty_clothes(d, x, 1300, .9, hoodie=col)
-        if f > .2: d.text((560, 1215), "?", font=F(70), fill=YEL, anchor="mm", stroke_width=6, stroke_fill=BLK)
-        img = Image.new("RGB", (W, H)); film(img, world, path(c.lt, [(0, Shot(540, 1090, 1.5)), (c.dur * .55, Shot(540, 1000, 1.0))]))
+        for x, col, cp in ((290, (240, 120, 40), (200, 40, 50)), (800, (90, 160, 220), (60, 60, 70))): empty_clothes(d, x, 1290, 1.0, hoodie=col, cap=cp)
+        img = Image.new("RGB", (W, H)); s_ = film(img, world, path(c.lt, [(0, Shot(330, 1190, 1.7)), (c.dur * .5, Shot(540, 1090, 1.12))]))
         d = ImageDraw.Draw(img)
         chip(d, "¿QUÉ PASARÍA SI…?", CHIP1, bg=RED, appear=c.lt / .3)
         bigtext(d, "TODOS DESAPARECEMOS", 540, 560, 64, fill=WHITE)
+        if f > .3:
+            for wx in (290, 800):
+                sx, sy = s_.to_screen((wx - 60, 1180))
+                d.text((sx, sy - 60), "?", font=F(int(90 * s_.scale)), fill=YEL, anchor="mm", stroke_width=6, stroke_fill=BLK)
         return img
     img = radial_bg(SPACE, cy=900); d = ImageDraw.Draw(img); stars(d)
     lt = c.lt - c.dur * .55
@@ -102,8 +105,7 @@ def roaches(c):
         d.text((240, 670), "CIUDAD FRÍA", font=F(46), fill=BLK, anchor="mm")
     if f > .45:
         roach(d, 620, 1190, .7, c.t, walk=True)
-        hx = 620 + 210 * .7
-        shades(d, hx + 12, 1190 - 14, w=70)
+        shades(d, 620 + 190 * .7, 1190, w=64, vertical=True, arms=-30)
         d.text((240, 1000), "CIUDAD CALIENTE", font=F(46), fill=BLK, anchor="mm")
     chip(d, "CUCARACHAS", CHIP1, bg=ORANGE, appear=c.lt / .3)
     if f > .75: bigtext(d, "NUNCA NOS NECESITARON", 540, 540, 56, fill=YEL)
@@ -115,7 +117,7 @@ def rats(c):
     rat(d, 560, 1300, 1.3, c.t)
     if f > .45:
         k = cl((f - .45) / .3)
-        hawk(d, lerp(1150, 760, k), lerp(450, 1120, k), 1.5, c.t, flip=True, dive=k > .3)
+        hawk(d, lerp(1250, 770, k), lerp(450, 1060, k), 1.6, c.t, flip=True, dive=k > .3)
     img = Image.new("RGB", (W, H)); film(img, world, path(c.lt, [(0, Shot(420, 1100, 1.4)), (c.dur * .5, Shot(540, 960, 1.0))]))
     d = ImageDraw.Draw(img)
     chip(d, "RATAS", CHIP1, bg=GRAY, appear=c.lt / .3)

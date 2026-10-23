@@ -478,16 +478,44 @@ def xmas_tree(d, x, y, s=1.0, t=0.0):
         on = (int(t * 3) + k) % 3 != 0
         d.ellipse([x + dx * s - 14, y + dy * s - 14, x + dx * s + 14, y + dy * s + 14], fill=c if on else dk(c, .5), outline=BLK, width=3)
 
-def empty_clothes(d, x, y, s=1.0, hoodie=(240, 120, 40)):
-    """Ropa tirada en el piso (sudadera, pantalón y tenis) de alguien que desapareció. y = piso."""
-    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
-    d.ellipse([x - S(170), y - S(20), x + S(170), y + S(14)], fill=(60, 60, 65))
-    d.polygon([(x - S(150), y - S(10)), (x - S(40), y - S(55)), (x + S(20), y - S(30)), (x - S(20), y)], fill=(45, 65, 120), outline=BLK)
-    d.polygon([(x - S(60), y - S(30)), (x + S(140), y - S(70)), (x + S(160), y - S(10)), (x - S(30), y)], fill=hoodie, outline=BLK)
-    d.line([(x + S(10), y - S(45)), (x + S(30), y - S(5))], fill=WHITE, width=W_(4))
-    for k, sx in enumerate((-190, -125)):
-        d.rounded_rectangle([x + S(sx), y - S(26), x + S(sx) + S(60), y], int(S(10)), fill=(30, 30, 30), outline=BLK, width=W_(2))
-        d.rectangle([x + S(sx), y - S(8), x + S(sx) + S(60), y], fill=WHITE)
+def empty_clothes(d, x, y, s=1.0, hoodie=(240, 120, 40), pants=(50, 80, 150), cap=(200, 40, 50), phone=True):
+    """Ropa vacía tirada en el piso con forma de persona acostada (alguien que desapareció): capucha y gorra, sudadera con
+    mangas abiertas, pantalón de mezclilla con cinturón, tenis y un celular. Vista desde arriba en perspectiva. (x, y) = centro en el piso;
+    mide ~460*s de largo."""
+    k = .5                                                     # perspectiva (aplanado vertical)
+    P = lambda u, v: (x + u * s, y - 18 * s + v * s * k)
+    W_ = lambda v: max(2, int(v * s))
+    def poly(pts, col, w=4):
+        q = [P(*p) for p in pts]; d.polygon(q, fill=col, outline=BLK); d.line(q + [q[0]], fill=BLK, width=W_(w), joint="curve")
+    def oval(u, v, ru, rv, col, w=4):
+        q = [P(u + ru * math.cos(a / 16 * math.pi), v + rv * math.sin(a / 16 * math.pi)) for a in range(32)]
+        d.polygon(q, fill=col, outline=BLK); d.line(q + [q[0]], fill=BLK, width=W_(w))
+    d.ellipse([x - 290 * s, y - 34 * s, x + 230 * s, y + 10 * s], fill=(70, 70, 78))
+    # pantalón: dos piernas un poco abiertas
+    for sv in (-1, 1):
+        poly([(-40, sv * 4), (-40, sv * 58), (150, sv * 78), (160, sv * 30)], pants)
+        d.line([P(-20, sv * 30), P(140, sv * 52)], fill=dk(pants, .7), width=W_(3))
+    poly([(-50, -60), (-30, -60), (-30, 60), (-50, 60)], (90, 60, 40), 3)              # cinturón
+    oval(-40, 0, 9, 14, (230, 200, 80), 3)
+    # sudadera: torso + mangas abiertas
+    for sv in (-1, 1): poly([(-150, sv * 50), (-110, sv * 70), (-40, sv * 150), (-15, sv * 128), (-80, sv * 42)], hoodie)
+    for sv in (-1, 1): oval(-28, sv * 140, 16, 20, dk(hoodie, .8), 3)              # puños
+    poly([(-180, -68), (-40, -62), (-40, 62), (-180, 68)], hoodie)
+    poly([(-120, -30), (-60, -26), (-60, 26), (-120, 30)], dk(hoodie, .85), 3)         # bolsa canguro
+    for sv in (-1, 1): d.line([P(-172, sv * 14), P(-130, sv * 10)], fill=WHITE, width=W_(4))   # cordones
+    oval(-215, 0, 46, 62, dk(hoodie, .8))                                              # capucha vacía
+    oval(-212, 0, 26, 40, (40, 30, 30), 3)
+    # gorra junto a la capucha
+    oval(-250, -95, 34, 30, cap, 3); poly([(-222, -110), (-188, -118), (-184, -78), (-222, -82)], dk(cap, .75), 3)
+    # tenis al final de cada pierna (vistos desde arriba, punta hacia arriba)
+    for sv in (-1, 1):
+        oval(178, sv * 66, 30, 30, (250, 250, 250))
+        oval(196, sv * 66, 10, 22, (200, 60, 60), 3)
+        for kk in range(3): d.line([P(160 + kk * 9, sv * 66 - 14), P(160 + kk * 9, sv * 66 + 14)], fill=BLK, width=W_(3))
+    if phone:
+        px, py = P(70, -150)
+        d.rounded_rectangle([px - 34 * s, py - 14 * s, px + 34 * s, py + 14 * s], int(6 * s), fill=(30, 30, 35), outline=BLK, width=W_(3))
+        d.rounded_rectangle([px - 28 * s, py - 9 * s, px + 28 * s, py + 9 * s], int(4 * s), fill=(150, 210, 255))
 
 def plastic_bag(d, x, y, s=1.0, t=0.0, col=(240, 240, 245), text=None):
     """Bolsa de plástico flotando (se mece). (x, y) = centro."""
@@ -526,11 +554,24 @@ def tombstone(d, x, y, s=1.0, text="Q.E.P.D.", col=(170, 170, 180)):
     d.text((x, y - S(95)), text, font=F(int(S(26))), fill=(70, 70, 80), anchor="mm")
     d.rectangle([x - S(100), y - S(10), x + S(100), y + S(6)], fill=(90, 140, 70))
 
-def shades(d, x, y, w=60, col=(25, 25, 30)):
-    """Lentes oscuros para ponérselos a cualquier personaje; (x, y) = centro entre los ojos, w = ancho total."""
-    h = w * .28
-    for sx in (-1, 1): d.rounded_rectangle([x + sx * w * .27 - w * .22, y - h / 2, x + sx * w * .27 + w * .22, y + h / 2], int(h * .3), fill=col, outline=BLK, width=3)
-    d.line([(x - w * .06, y - h * .2), (x + w * .06, y - h * .2)], fill=BLK, width=4)
+def shades(d, x, y, w=60, col=(25, 25, 30), vertical=False, arms=0):
+    """Lentes oscuros para cualquier personaje; (x, y) = centro entre los ojos, w = ancho total.
+    vertical=True: lentes uno arriba del otro (personajes de perfil con ojos encimados, como la cucaracha).
+    arms: largo de las patitas hacia atrás (negativo = hacia la izquierda), 0 = sin patitas."""
+    if not vertical:
+        h = w * .28
+        for sx in (-1, 1): d.rounded_rectangle([x + sx * w * .27 - w * .22, y - h / 2, x + sx * w * .27 + w * .22, y + h / 2], int(h * .3), fill=col, outline=BLK, width=3)
+        d.line([(x - w * .06, y - h * .2), (x + w * .06, y - h * .2)], fill=BLK, width=4)
+        if arms:
+            for sx in (-1, 1): d.line([(x + sx * w * .49, y - h * .3), (x + sx * w * .49 + sx * abs(arms), y - h * .6)], fill=BLK, width=4)
+        return
+    r = w * .25
+    for sy in (-1, 1):
+        cy = y + sy * w * .26
+        if arms: d.line([(x, cy), (x + arms, cy + sy * w * .05)], fill=BLK, width=max(3, int(w * .07)))
+        d.rounded_rectangle([x - r, cy - r, x + r, cy + r], int(r * .5), fill=col, outline=BLK, width=3)
+        d.line([(x - r * .5, cy - r * .45), (x - r * .1, cy - r * .45)], fill=(120, 120, 140), width=max(2, int(w * .04)))
+    d.line([(x + r * .6, y - w * .05), (x + r * .6, y + w * .05)], fill=BLK, width=max(3, int(w * .07)))
 
 def trash_can(d, x, y, s=1.0, full=False):
     """Bote de basura metálico de calle; y = base. full: con bolsas asomando."""

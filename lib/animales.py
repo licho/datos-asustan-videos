@@ -296,18 +296,58 @@ def ant_column(d, path, t, s=0.4, gap=95, speed=180, helmet=False):
         pos += gap * s / .4; k += 1
 
 def hawk(d, x, y, s=1.0, t=0.0, flip=False, dive=False):
-    """Halcón volando (alas que aletean); (x, y) = centro del cuerpo. dive=True: alas recogidas, en picada."""
-    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s)); f = -1 if flip else 1
-    B, Wg = (120, 85, 55), (95, 65, 40)
-    flap = 0 if dive else math.sin(t * 9) * S(60)
-    span = S(80) if dive else S(190)
-    for sx in (-1, 1):
-        wing = [(x + sx * S(20), y - S(10)), (x + sx * span, y - S(30) - flap), (x + sx * (span - S(40)), y + S(15) - flap * .5), (x + sx * S(20), y + S(20))]
-        d.polygon(wing, fill=Wg, outline=BLK); d.line(wing + [wing[0]], fill=BLK, width=W_(4))
-    d.ellipse([x - S(45), y - S(30), x + S(45), y + S(35)], fill=B, outline=BLK, width=W_(4))
-    d.polygon([(x - f * S(40), y), (x - f * S(85), y - S(20)), (x - f * S(85), y + S(25))], fill=Wg, outline=BLK)
-    hx = x + f * S(45)
-    d.ellipse([hx - S(28), y - S(40), hx + S(28), y + S(10)], fill=(235, 230, 215), outline=BLK, width=W_(3))
-    d.polygon([(hx + f * S(22), y - S(22)), (hx + f * S(48), y - S(12)), (hx + f * S(24), y - S(4))], fill=(240, 190, 50), outline=BLK)
-    d.ellipse([hx + f * S(4) - S(7), y - S(28), hx + f * S(4) + S(7), y - S(14)], fill=BLK)
-    d.line([(hx - S(10), y - S(36)), (hx + f * S(20), y - S(28))], fill=BLK, width=W_(4))
+    """Halcón de caricatura volando, mirando a la derecha (flip=True: a la izquierda); (x, y) = centro del cuerpo.
+    Pico ganchudo amarillo, ceja enojada, alas con plumas en punta, cola de abanico rayada y garras amarillas.
+    dive=True: en picada, alas hacia atrás y garras por delante. A s=1 mide ~330 de largo y ~600 de envergadura."""
+    f = -1 if flip else 1; W_ = lambda v: max(2, int(v * s))
+    P = lambda u, v: (x + f * u * s, y + v * s)
+    BR, DK, CR, YL = (140, 90, 50), (95, 60, 35), (245, 232, 205), (250, 200, 40)
+    def wing(u0, v0, ang, span, col, flap):
+        a = math.radians(ang + flap)
+        ca, sa = math.cos(a), math.sin(a)
+        R = lambda L, w: P(u0 + L * ca * span - w * sa * span, v0 - L * sa * span - w * ca * span)
+        pts = [R(0, 0), R(.55, .06), R(1.0, .02)]
+        for k in range(5):                                    # plumas en punta (dedos)
+            L0 = 1.0 - k * .1
+            pts += [R(L0 - .02, -.06), R(L0 - .08, -.03)]
+        for k in range(4): pts += [R(.48 - k * .12, -.24), R(.42 - k * .12, -.2)]
+        pts.append(R(0, -.22))
+        d.polygon(pts, fill=col, outline=BLK); d.line(pts + [pts[0]], fill=BLK, width=W_(4), joint="curve")
+        for k in range(3): d.line([R(.15 + k * .12, -.04), R(.12 + k * .12, -.17)], fill=dk(col, .75), width=W_(3))
+    flap = 0 if dive else math.sin(t * 8) * 22
+    # cola de abanico rayada
+    tail = [P(-110, -10), P(-230, -45), P(-245, 0), P(-230, 45), P(-110, 20)]
+    d.polygon(tail, fill=BR, outline=BLK); d.line(tail + [tail[0]], fill=BLK, width=W_(4))
+    for k in range(2): d.line([P(-165 - k * 35, -30 + k * 0), P(-165 - k * 35, 30)], fill=DK, width=W_(6))
+    # ala de atrás
+    if dive: wing(-10, -20, 140, 300, DK, 0)
+    else: wing(20, -30, 95, 280, DK, flap)
+    # garras
+    if dive:
+        for k, dv in enumerate((0, 22)):
+            d.line([P(40, 40 + dv), P(130, 75 + dv)], fill=YL, width=W_(12))
+            for c in (-1, 0, 1): d.line([P(130, 75 + dv), P(152, 75 + dv + c * 14)], fill=BLK, width=W_(5))
+    else:
+        for dv in (0, 18):
+            d.line([P(-30, 40), P(-80, 70 + dv)], fill=YL, width=W_(11))
+            for c in (-1, 1): d.line([P(-80, 70 + dv), P(-98, 70 + dv + c * 10)], fill=BLK, width=W_(5))
+    # cuerpo
+    d.ellipse([P(-130, -55)[0] if f > 0 else P(110, -55)[0], y - 55 * s, P(110, 55)[0] if f > 0 else P(-130, 55)[0], y + 55 * s], fill=BR, outline=BLK, width=W_(5))
+    belly = [P(-60, 10), P(30, 0), P(100, 15), P(70, 50), P(-40, 50)]
+    d.polygon(belly, fill=CR)
+    for k in range(5): d.line([P(-30 + k * 25, 22), P(-36 + k * 25, 40)], fill=BR, width=W_(5))
+    # cabeza
+    hx, hy = 125, -30
+    d.ellipse([min(P(hx - 55, 0)[0], P(hx + 55, 0)[0]), y + (hy - 52) * s, max(P(hx - 55, 0)[0], P(hx + 55, 0)[0]), y + (hy + 52) * s], fill=BR, outline=BLK, width=W_(5))
+    cheek = [P(hx - 10, hy + 5), P(hx + 50, hy - 5), P(hx + 45, hy + 40), P(hx - 5, hy + 45)]
+    d.polygon(cheek, fill=CR)
+    beak = [P(hx + 42, hy - 18), P(hx + 92, hy - 6), P(hx + 98, hy + 18), P(hx + 82, hy + 8), P(hx + 44, hy + 12)]
+    d.polygon(beak, fill=YL, outline=BLK); d.line(beak + [beak[0]], fill=BLK, width=W_(4))
+    d.polygon([P(hx + 86, hy - 4), P(hx + 98, hy + 18), P(hx + 84, hy + 9)], fill=(60, 60, 65))
+    ex, ey = P(hx + 22, hy - 12)
+    d.ellipse([ex - 17 * s, ey - 17 * s, ex + 17 * s, ey + 17 * s], fill=YL, outline=BLK, width=W_(3))
+    d.ellipse([ex - 8 * s, ey - 8 * s, ex + 8 * s, ey + 8 * s], fill=BLK)
+    d.line([P(hx - 5, hy - 40), P(hx + 48, hy - 20)], fill=DK, width=W_(11))      # ceja enojada
+    # ala de enfrente
+    if dive: wing(0, -10, 155, 330, BR, 0)
+    else: wing(0, -20, 118, 310, BR, flap)

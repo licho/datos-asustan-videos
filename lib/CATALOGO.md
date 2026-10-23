@@ -138,7 +138,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `ghost(img, x, y, s=1.0, t=0.0, alpha=1.0, pixel=0, bob=True, **kw)` · lib.criaturas — Pega un fantasma con transparencia (alpha 0..1) y opcionalmente pixelado (pixel = tamaño de bloque).
 - `ghost_draw(d, x, y, s=1.0, t=0.0, mood='happy', tie=None, headset=False, col=(245, 248, 255), arms='down')` · lib.criaturas — Fantasma de sábana. (x, y) = centro del cuerpo. Alto ~420·s. mood: happy | scared | sad | smug.
 - `guy(d, x, y, s=1.0, mood='neutral', arms='down', look=0.0, t=0.0, hoodie=(240, 120, 40))` · reels_engine.humans
-- `hawk(d, x, y, s=1.0, t=0.0, flip=False, dive=False)` · lib.animales — Halcón volando (alas que aletean); (x, y) = centro del cuerpo. dive=True: alas recogidas, en picada.
+- `hawk(d, x, y, s=1.0, t=0.0, flip=False, dive=False)` · lib.animales — Halcón de caricatura volando, mirando a la derecha (flip=True: a la izquierda); (x, y) = centro del cuerpo.
 - `heart_face(d, x, y, s=1.0, t=0.0)` · lib.criaturas — Corazón con cara, latiendo rápido (x, y = centro).
 - `hero_pixel(d, x, y, scared=False, frame=0, big=2)` · mision002
 - `hero_pixel_v1(d, x, y, scared=False, frame=0, big=2)` · pixel
@@ -290,7 +290,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `dust(d, cx, cy, s, t)` · reel2
 - `earth(d, cx, cy, r)` · reel13
 - `egg_raft(d, x, y, s=1.0, n=14)` · lib.objetos — Huevecillos (balsa de huevos) flotando.
-- `empty_clothes(d, x, y, s=1.0, hoodie=(240, 120, 40))` · lib.objetos — Ropa tirada en el piso (sudadera, pantalón y tenis) de alguien que desapareció. y = piso.
+- `empty_clothes(d, x, y, s=1.0, hoodie=(240, 120, 40), pants=(50, 80, 150), cap=(200, 40, 50), phone=True)` · lib.objetos — Ropa vacía tirada en el piso con forma de persona acostada (alguien que desapareció): capucha y gorra, sudadera con
 - `evil_eyes_px(d, x, y, w=10, t=0.0)` · lib.pixel_mision — Ojos rojos de máquina malvada (x, y = centro).
 - `extra_icon_pixel(d, kind, x, y, big=2)` · zombi11
 - `eye_icon(d, cx, cy, s)` · reel3
@@ -437,7 +437,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `screw(d, x, y, s=1.0, ang=20)` · lib.objetos
 - `scroll(d, x, y, w, h, title='', lines=(), size=34, fine=None)` · lib.objetos — Pergamino largo con rollos arriba y abajo. (x, y) = esquina sup. izq. fine = letra chiquita al pie.
 - `scutum(img, cx, cy, h=280, color=CRIMSON, seed=1)` · reels_engine.sketch.history — Roman legionary shield (tall rectangle with gold wings).
-- `shades(d, x, y, w=60, col=(25, 25, 30))` · lib.objetos — Lentes oscuros para ponérselos a cualquier personaje; (x, y) = centro entre los ojos, w = ancho total.
+- `shades(d, x, y, w=60, col=(25, 25, 30), vertical=False, arms=0)` · lib.objetos — Lentes oscuros para cualquier personaje; (x, y) = centro entre los ojos, w = ancho total.
 - `shelf(d, x0, y0, x1, y1, rows=4, seed=1, items=True)` · reels_engine.furniture — Shelf with colorful products (store, pantry).
 - `ship(d, x, y, s)` · reel13
 - `shoe(d, x, y, s)` · reel12
