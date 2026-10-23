@@ -30,6 +30,37 @@ Octubre–noviembre 2026: zombie en el minisúper · teclado sucio · aluxes · 
 - Guía laboral Ep. 7: el duende de Santa (despedido) — sin voz listo (mar 15 dic)
 - Misión 006: ayudar a Santa a entregar los juguetes — sin voz listo (jue 17 dic)
 
+## Calendario diciembre 2026 (lunes a sábado, 10:00; el 25 no se publica)
+
+| Fecha | Video | Estado |
+|---|---|---|
+| Mar 1 | Asteroide que destruye una ciudad | sin voz listo |
+| Mié 2 | Guía laboral Ep. 5: momia | sin voz listo |
+| Jue 3 | Señales: compañero robot | sin voz listo |
+| Vie 4 | Ejércitos más grandes de la historia | sin voz listo |
+| Sáb 5 | Cómo sobrevivir a Krampus (Noche de Krampus) | sin voz listo |
+| Lun 7 | ¿Qué pasaría si los humanos desaparecieran? | pendiente |
+| Mar 8 | Guía laboral Ep. 6: Llorona | sin voz listo |
+| Mié 9 | Zombies en el minisúper, parte 5 | pendiente |
+| Jue 10 | ¿Cuánto frío aguanta tu cuerpo? | pendiente |
+| Vie 11 | Señales: roomie fantasma | pendiente |
+| Sáb 12 | Ranking: el veneno más potente de la naturaleza | pendiente |
+| Lun 14 | Señales: vecino hombre lobo | pendiente |
+| Mar 15 | Guía laboral Ep. 7: duende de Santa | sin voz listo |
+| Mié 16 | Datos que rompen el tiempo, parte 2 | pendiente |
+| Jue 17 | Misión 006: ayudar a Santa | sin voz listo |
+| Vie 18 | (libre) | pendiente |
+| Sáb 19 | Señales: grupo familiar poseído | pendiente |
+| Lun 21 | Lo que vive en tu árbol de Navidad | pendiente |
+| Mar 22 | Zombies parte 6 (Navidad) | pendiente |
+| Mié 23 | Cuánto aguanta el recalentado | pendiente |
+| Jue 24 | Tradiciones navideñas más raras del mundo | pendiente |
+| Sáb 26 | Señales: jefe vampiro | pendiente |
+| Lun 28 | Día de los Inocentes: mentiras históricas | pendiente |
+| Mar 29 | Guía laboral Ep. 8: bruja | pendiente |
+| Mié 30 | Lo que le hace la cena de fin de año a tu cuerpo | pendiente |
+| Jue 31 | ¿De dónde salen las 12 uvas? | pendiente |
+
 ## Ideas pendientes
 
 ### Señales de que…
