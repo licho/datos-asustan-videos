@@ -24,6 +24,6 @@ MAP = {**PERSONAJES,
  "brain": "lib.criaturas", "rat": "lib.criaturas", "heart_face": "lib.criaturas",
 
  "mammoth": "lib.animales", "stego": "lib.animales", "trex": "lib.animales", "cleopatra": "lib.humanos",
- "soldier": "lib.humanos", "napoleon": "lib.humanos", "scribe": "lib.humanos", "emu": "lib.animales", "army_ant": "lib.animales", "ant_column": "lib.animales", "rat_skeleton": "lib.criaturas", "llorona": "lib.criaturas", "robo_cw": "lib.humanos", "elf": "lib.criaturas", "krampus": "lib.criaturas", "louse": "lib.criaturas", "hawk": "lib.animales", "tyranno": "lib.animales", "raptor": "lib.animales", "pigeon": "lib.animales", "shrew": "lib.animales", "elephant": "lib.animales", "st_nicholas": "lib.humanos"
+ "soldier": "lib.humanos", "napoleon": "lib.humanos", "scribe": "lib.humanos", "emu": "lib.animales", "army_ant": "lib.animales", "ant_column": "lib.animales", "rat_skeleton": "lib.criaturas", "llorona": "lib.criaturas", "robo_cw": "lib.humanos", "elf": "lib.criaturas", "krampus": "lib.criaturas", "louse": "lib.criaturas", "hawk": "lib.animales", "tyranno": "lib.animales", "stamp_point": "lib.humanos", "raptor": "lib.animales", "pigeon": "lib.animales", "shrew": "lib.animales", "elephant": "lib.animales", "st_nicholas": "lib.humanos"
 }
 __getattr__ = make(MAP, __name__)

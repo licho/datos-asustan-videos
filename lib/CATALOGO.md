@@ -176,6 +176,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `sponge(d, cx, cy, s, t=0.0, mood='smug', dirt=0.0, wet=0.0, sparkle=False)` · reel16
 - `st_nicholas(d, x, y, s=1.0, t=0.0, mood='calm', arms='down')` · lib.humanos — San Nicolás (caricatura): obispo con mitra blanca y dorada, barba blanca, capa roja y báculo dorado. y = pies.
 - `stamp_guy(img, x, y, s, ang, mood='scared', arms='up', t=0.0, hoodie=(240, 120, 40))` · reel25
+- `stamp_point(x, y, s, ang, p, cx=None, cy=None)` · lib.humanos — Dónde queda un punto p=(px, py) de un personaje dibujado con stamp_guy(img, x, y, s, ang) después de girarlo.
 - `stego(d, x, y, s=1.0, t=0.0, mood='normal', flip=False)` · lib.animales — Estegosaurio; y = piso. mood: normal | confused.
 - `swarm(d, cx, cy, t, n=24, spread=14, angry=False, seed=7)` · mision003
 - `taquero(d, x, y, s, t, mood='neutral', arms='down')` · reel24
@@ -407,6 +408,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `pillow(d, cx, cy, s)` · reel12
 - `pizza(d, cx, cy, s)` · reel2
 - `pizza_slice(img, cx, cy, h=200, ang=0.0, seed=1)` · reels_engine.sketch.everyday — Pizza slice pointing down, with crust and pepperoni; ang = turn in radians.
+- `place_setting(d, x, y, s=1.0, food=None)` · lib.objetos — Lugar en la mesa visto de frente: plato con cubiertos a los lados y copa. y = superficie de la mesa.
 - `plane(d, x, y, s)` · reel25
 - `planet_earth(d, cx, cy, r, mood='happy', look=(0.0, 0.0), eye=1.0, shade=True)` · reel23
 - `plastic_bag(d, x, y, s=1.0, t=0.0, col=(240, 240, 245), text=None)` · lib.objetos — Bolsa de plástico flotando (se mece). (x, y) = centro.
@@ -467,7 +469,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `soccer_goal(img, cx, base, w=520, seed=1, shadow=False)` · reels_engine.sketch.sports — Soccer goal with net, seen from the front.
 - `sofa(d, cx, y, s=1.0)` · reel9
 - `sound_waves(d, x, y, t, n=3, col=(200, 220, 255), width=7)` · lib.efectos — Ondas de sonido saliendo a los lados de (x, y) (llanto, grito, alarma).
-- `soup_bowl(d, x, y, s=1.0, t=0.0, lemon=True)` · lib.objetos — Plato de caldo de pollo humeante con pierna de pollo, verduras y limón; y = base. ~320s de ancho.
+- `soup_bowl(d, x, y, s=1.0, t=0.0, lemon=True)` · lib.objetos — Plato hondo de caldo de pollo humeante (pierna con hueso, zanahoria, calabacita) sobre su platito, con limón al lado;
 - `spear(img, gx, gy, L=520, ang=0.0, seed=1)` · reels_engine.sketch.history — Spear gripped at (gx, gy), L = total length.
 - `spin_earth(img, cx, cy, r, ang, mood='happy')` · reel25
 - `sport_ball(img, cx, cy, r=60, kind='soccer', ang=0.0, seed=1)` · reels_engine.sketch.sports — Sports ball: kind = soccer, basketball, tennis, baseball, volleyball or football (American); ang = spin.

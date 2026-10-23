@@ -593,24 +593,44 @@ def torta(d, x, y, s=1.0):
     d.chord([x - S(100), y - S(10), x + S(100), y + S(50)], 0, 180, fill=(220, 160, 80), outline=BLK, width=W_(4))
 
 def soup_bowl(d, x, y, s=1.0, t=0.0, lemon=True):
-    """Plato de caldo de pollo humeante con pierna de pollo, verduras y limón; y = base. ~320s de ancho."""
+    """Plato hondo de caldo de pollo humeante (pierna con hueso, zanahoria, calabacita) sobre su platito, con limón al lado;
+    y = base (ponlo sobre la superficie de una mesa). ~330s de ancho."""
     W_ = lambda v: max(2, int(v * s)); S = lambda v: v * s
+    d.ellipse([x - S(175), y - S(22), x + S(175), y + S(8)], fill=(235, 235, 240), outline=BLK, width=W_(4))       # platito
+    d.chord([x - S(150), y - S(230), x + S(150), y], 0, 180, fill=(250, 250, 250), outline=BLK, width=W_(5))       # cuerpo del plato
+    d.arc([x - S(120), y - S(150), x + S(120), y - S(40)], 20, 160, fill=(90, 140, 200), width=W_(6))              # rayita azul
+    d.ellipse([x - S(150), y - S(140), x + S(150), y - S(90)], fill=(250, 250, 250), outline=BLK, width=W_(5))      # borde
+    d.ellipse([x - S(132), y - S(134), x + S(132), y - S(96)], fill=(235, 180, 80))                               # caldo
+    d.ellipse([x - S(80), y - S(128), x + S(10), y - S(102)], fill=(225, 175, 115), outline=BLK, width=W_(3))      # pierna
+    d.line([(x + S(5), y - S(118)), (x + S(55), y - S(150))], fill=(250, 245, 230), width=W_(14))                 # hueso
+    d.ellipse([x + S(45), y - S(162), x + S(70), y - S(140)], fill=(250, 245, 230), outline=BLK, width=W_(2))
+    d.ellipse([x + S(30), y - S(122), x + S(70), y - S(104)], fill=(240, 140, 60), outline=BLK, width=W_(2))       # zanahoria
+    d.ellipse([x - S(120), y - S(122), x - S(85), y - S(106)], fill=(120, 190, 90), outline=BLK, width=W_(2))      # calabacita
     for k in range(3):
-        sx = x - S(70) + k * S(70); off = math.sin(t * 3 + k) * S(10)
-        d.arc([sx - S(20) + off, y - S(260), sx + S(20) + off, y - S(200)], 90, 270, fill=(230, 230, 235), width=W_(6))
-        d.arc([sx - S(20) - off, y - S(210), sx + S(20) - off, y - S(150)], 270, 90, fill=(230, 230, 235), width=W_(6))
-    d.ellipse([x - S(160), y - S(150), x + S(160), y - S(90)], fill=(235, 190, 90), outline=BLK, width=W_(4))
-    d.ellipse([x - S(70), y - S(150), x + S(30), y - S(110)], fill=(230, 180, 120), outline=BLK, width=W_(3))      # pierna de pollo
-    d.rounded_rectangle([x + S(10), y - S(140), x + S(70), y - S(124)], int(S(8)), fill=(250, 245, 235), outline=BLK, width=W_(2))
-    d.ellipse([x + S(40), y - S(128), x + S(80), y - S(104)], fill=(240, 140, 60), outline=BLK, width=W_(2))         # zanahoria
-    d.ellipse([x - S(130), y - S(130), x - S(90), y - S(108)], fill=(120, 190, 90), outline=BLK, width=W_(2))
-    d.chord([x - S(160), y - S(190), x + S(160), y + S(10)], 0, 180, fill=(250, 250, 250), outline=BLK, width=W_(5))
-    d.line([(x - S(130), y - S(70)), (x + S(130), y - S(70))], fill=(90, 140, 200), width=W_(6))
+        sx = x - S(60) + k * S(60); off = math.sin(t * 3 + k) * S(8)
+        d.arc([sx - S(18) + off, y - S(250), sx + S(18) + off, y - S(200)], 90, 270, fill=(235, 235, 240), width=W_(6))
+        d.arc([sx - S(18) - off, y - S(205), sx + S(18) - off, y - S(155)], 270, 90, fill=(235, 235, 240), width=W_(6))
     if lemon:
-        lx, ly = x + S(190), y - S(20)
-        d.pieslice([lx - S(45), ly - S(45), lx + S(45), ly + S(45)], 180, 360, fill=(150, 210, 80), outline=BLK, width=W_(4))
-        d.pieslice([lx - S(34), ly - S(34), lx + S(34), ly + S(34)], 180, 360, fill=(220, 240, 150))
-        for a in (210, 270, 330): d.line([(lx, ly), (lx + S(32) * math.cos(math.radians(a)), ly + S(32) * math.sin(math.radians(a)))], fill=(150, 200, 80), width=W_(3))
+        lx, ly = x + S(215), y
+        d.pieslice([lx - S(40), ly - S(40), lx + S(40), ly + S(40)], 180, 360, fill=(150, 210, 80), outline=BLK, width=W_(4))
+        d.pieslice([lx - S(30), ly - S(30), lx + S(30), ly + S(30)], 180, 360, fill=(220, 240, 150))
+        for a in (215, 270, 325): d.line([(lx, ly), (lx + S(28) * math.cos(math.radians(a)), ly + S(28) * math.sin(math.radians(a)))], fill=(150, 200, 80), width=W_(3))
+
+def place_setting(d, x, y, s=1.0, food=None):
+    """Lugar en la mesa visto de frente: plato con cubiertos a los lados y copa. y = superficie de la mesa.
+    food: None | "pavo" (pierna de pavo)."""
+    W_ = lambda v: max(2, int(v * s)); S = lambda v: v * s
+    d.ellipse([x - S(80), y - S(16), x + S(80), y + S(8)], fill=WHITE, outline=BLK, width=W_(4))
+    d.ellipse([x - S(55), y - S(10), x + S(55), y + S(3)], outline=(200, 200, 210), width=W_(2))
+    for sx, tip in ((-1, "fork"), (1, "knife")):
+        fx = x + sx * S(105)
+        d.line([(fx, y - S(70)), (fx, y)], fill=(170, 170, 180), width=W_(8))
+        if tip == "fork":
+            for k in (-1, 0, 1): d.line([(fx + k * S(7), y - S(90)), (fx + k * S(7), y - S(68))], fill=(170, 170, 180), width=W_(4))
+        else: d.ellipse([fx - S(7), y - S(100), fx + S(9), y - S(55)], fill=(190, 190, 200), outline=BLK, width=W_(2))
+    if food == "pavo":
+        d.ellipse([x - S(45), y - S(45), x + S(25), y - S(5)], fill=(190, 120, 60), outline=BLK, width=W_(3))
+        d.line([(x + S(15), y - S(28)), (x + S(55), y - S(50))], fill=(250, 245, 230), width=W_(12))
 
 def snack_plate(d, x, y, s=1.0, flag=True):
     """Platito de botana con palillo y banderita; y = base. Pon la botana encima en (x, y - 20s)."""

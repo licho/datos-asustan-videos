@@ -173,3 +173,11 @@ def st_nicholas(d, x, y, s=1.0, t=0.0, mood="calm", arms="down"):
         ex, ey = hx + sx * S(26), hy - S(12)
         d.ellipse([ex - S(8), ey - S(8), ex + S(8), ey + S(8)], fill=BLK)
         d.line([(ex - S(16), ey - S(20) - (sx * S(4) if mood == "stern" else 0)), (ex + S(16), ey - S(20) + (sx * S(4) if mood == "stern" else 0))], fill=(200, 200, 200), width=W_(6))
+
+
+def stamp_point(x, y, s, ang, p, cx=None, cy=None):
+    """Dónde queda un punto p=(px, py) de un personaje dibujado con stamp_guy(img, x, y, s, ang) después de girarlo.
+    p se da como si el personaje estuviera derecho con sus pies en (x, y + 300s) (usa anchors(x, y + 300 * s, s))."""
+    import math as _m
+    a = _m.radians(ang); dx, dy = p[0] - x, p[1] - y
+    return (x + dx * _m.cos(a) + dy * _m.sin(a), y - dx * _m.sin(a) + dy * _m.cos(a))

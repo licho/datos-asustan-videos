@@ -3,8 +3,8 @@ import math, random
 from PIL import Image, ImageDraw
 from lib.core import *
 from lib.motion import tw, yoyo, layer, shake, back_out, cubic_out, radial_bg
-from lib.personajes import guy, anchors, tyranno, raptor, pigeon, shrew, elephant, stamp_guy
-from lib.props import (asteroid, picture, window, document, sneaker, table, sofa, tombstone, torta, soup_bowl,
+from lib.personajes import stamp_point, guy, anchors, tyranno, raptor, pigeon, shrew, elephant, stamp_guy
+from lib.props import (place_setting, candle, asteroid, picture, window, document, sneaker, table, sofa, tombstone, torta, soup_bowl,
                        snack_plate, pet_collar, tree)
 from lib.fondos import living_room, city_street
 from lib.efectos import tag, rubber_stamp
@@ -157,7 +157,10 @@ def raptors(c):
             chip(d, "EN LA VIDA REAL", CHIP1, bg=GREEN)
             if f > .46: bigtext(d, "TAMAÑO PAVO… Y CON PLUMAS", 540, 560, 56, fill=YEL)
         return img
-    table(d, 540, 1290, 1.0, w=420, cloth=(200, 60, 60))
+    top = table(d, 540, 1290, 1.0, w=460, cloth=WHITE)
+    d.line([(540 - 240, 1290 - 222), (540 + 260, 1290 - 222)], fill=RED, width=10)
+    candle(d, 540, top, 1.0, c.t)
+    place_setting(d, 400, top, .8); place_setting(d, 680, top, .8, food="pavo")
     a = anchors(220, 1290, .85)
     guy(d, 220, 1290, .85, mood="scared", t=c.t)
     nx, ny = a["neck"]; d.polygon([(nx - 45, ny - 5), (nx + 45, ny - 5), (nx, ny + 70)], fill=WHITE, outline=BLK)
@@ -210,8 +213,8 @@ def revenge(c):
     tyranno(pd, 630, 1150, .75, c.t, mood="sad", mouth=0)
     mask = Image.new("L", (W, H), 0); ImageDraw.Draw(mask).rectangle([632, 572, 988, 888], fill=255)
     img.paste(pk, (0, 0), mask); d = ImageDraw.Draw(img)
-    table(d, 420, 1290, 1.0, w=520, cloth=(240, 240, 235))
-    soup_bowl(d, 400, 1290 - 330 + 10, .9, c.t)
+    top = table(d, 400, 1290, 1.0, w=560, cloth=(240, 240, 235))
+    soup_bowl(d, 380, top - 5, .95, c.t)
     chip(d, "VENGANZA CON LIMÓN", CHIP1, bg=GREEN)
     if f > .55: bigtext(d, "PRIMOS DEL T. REX", 540, 500, 62, fill=YEL)
     return img
@@ -223,10 +226,12 @@ def ending(c):
     rx = lerp(560, 640, cl(f))
     tyranno(d, rx, 1290, .72, c.t, mood="grin", mouth=.3, run=True, collar=(220, 50, 60))
     cx, cy = rx + 175 * .72, 1290 - 405 * .72
-    stamp_guy(img, 200 + 30 * math.sin(c.t * 4), 1290 - 270, .9, -28, mood="scared", arms="up", t=c.t)
+    gx, gy, gs, ga = 200 + 30 * math.sin(c.t * 4), 1290 - 270, .9, -28
+    stamp_guy(img, gx, gy, gs, ga, mood="scared", arms="up", t=c.t)
     d = ImageDraw.Draw(img)
-    hx, hy = 200 + 30 * math.sin(c.t * 4) + 150, 1290 - 610
-    d.line([(cx, cy), ((cx + hx) / 2, min(cy, hy) - 40), (hx, hy)], fill=(200, 40, 50), width=8, joint="curve")
+    hx, hy = stamp_point(gx, gy, gs, ga, anchors(gx, gy + 300 * gs, gs)["hand_r_up"])
+    d.line([(cx, cy), (hx, hy)], fill=(200, 40, 50), width=9)
+    d.ellipse([hx - 24, hy - 24, hx + 24, hy + 24], fill=SKIN, outline=BLK, width=3)          # la mano agarra la correa
     pigeon(d, 940, 1290, .9, c.t, flip=True, mood="sly")
     pet_collar(d, 940 - 70 * .9, 1290 - 70 * .9 - 30 * .9 + 35, w=46)
     chip(d, "¿CUÁL TENDRÍAS DE MASCOTA?", CHIP1, bg=GREEN, appear=c.lt / .3)
