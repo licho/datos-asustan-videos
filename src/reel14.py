@@ -303,7 +303,9 @@ def s_bank(t):
     d.rectangle([420, 300, 1040, 520], fill=(60, 90, 140), outline=BLK, width=5)
     d.text((730, 410), "BANCO", font=F(80), fill=WHITE, anchor="mm")
     vampire(d, 700, FEET, 0.8, t, mood="sad" if lt > 2.0 else "smug", outfit="suit")
-    d.rectangle([380, 1120, 1060, 1220], fill=(110, 75, 50), outline=BLK, width=5)
+    d.rectangle([400, 1150, 1040, FEET], fill=(95, 65, 45), outline=BLK, width=5)          # mostrador del banco hasta el piso
+    for px in (560, 720, 880): d.rectangle([px - 60, 1190, px + 60, FEET - 30], outline=(70, 48, 33), width=5)
+    d.rectangle([380, 1120, 1060, 1155], fill=(140, 100, 70), outline=BLK, width=5)
     if lt < 5.0:
         sc = pop(lt / 0.3)
         d.rounded_rectangle([120, 880 - 60 * sc, 520, 880 + 60 * sc], int(16 * sc), fill=WHITE, outline=BLK, width=4)
