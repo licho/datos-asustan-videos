@@ -374,3 +374,30 @@ def bells(d, x, y, s=1.0, t=0.0, n=3):
         bx = x - S(45) + k * S(45) + math.sin(t * 12 + k) * S(4); by = y + S(30)
         d.ellipse([bx - S(20), by - S(20), bx + S(20), by + S(20)], fill=(235, 190, 60), outline=BLK, width=W_(3))
         d.line([(bx - S(12), by + S(4)), (bx + S(12), by + S(4))], fill=BLK, width=W_(3))
+
+def louse(d, x, y, s=1.0, t=0.0, mood="sad", suitcase=True, flip=False):
+    """Piojo de caricatura (gris café, 6 patitas, antenas cortas); y = piso. mood: sad | happy. suitcase: maleta en la mano."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s)); f = -1 if flip else 1
+    C = (150, 120, 95)
+    for i, dx in enumerate((-30, 0, 30)):
+        sw = math.sin(t * 10 + i) * S(8)
+        for side in (-1, 1):
+            d.line([(x + S(dx), y - S(60)), (x + S(dx) + side * S(28) + sw, y - S(35)), (x + S(dx) + side * S(40) + sw, y)], fill=BLK, width=W_(6))
+    d.ellipse([x - S(70), y - S(150), x + S(70), y - S(30)], fill=C, outline=BLK, width=W_(4))
+    for k in range(3): d.arc([x - S(55), y - S(120) + k * S(25), x + S(55), y - S(70) + k * S(25)], 200, 340, fill=dk(C, .75), width=W_(4))
+    hx, hy = x + f * S(15), y - S(185)
+    d.ellipse([hx - S(48), hy - S(42), hx + S(48), hy + S(42)], fill=C, outline=BLK, width=W_(4))
+    for sx in (-1, 1): d.line([(hx + sx * S(20), hy - S(38)), (hx + sx * S(40), hy - S(75))], fill=BLK, width=W_(5))
+    for sx in (-1, 1):
+        ex, ey = hx + sx * S(18), hy - S(5)
+        d.ellipse([ex - S(11), ey - S(11), ex + S(11), ey + S(11)], fill=WHITE, outline=BLK, width=W_(2)); d.ellipse([ex - S(5), ey - S(3), ex + S(5), ey + S(7)], fill=BLK)
+        if mood == "sad": d.line([(ex - sx * S(12), ey - S(20)), (ex + sx * S(10), ey - S(14))], fill=BLK, width=W_(4))
+    if mood == "sad":
+        d.arc([hx - S(16), hy + S(14), hx + S(16), hy + S(32)], 200, 340, fill=BLK, width=W_(4))
+        ty = (t * 60) % S(30); d.ellipse([hx + S(14), hy + S(4) + ty, hx + S(24), hy + S(16) + ty], fill=(120, 190, 255))
+    else: d.arc([hx - S(18), hy + S(6), hx + S(18), hy + S(28)], 20, 160, fill=BLK, width=W_(4))
+    if suitcase:
+        bx = x - f * S(95)
+        d.rounded_rectangle([bx - S(35), y - S(70), bx + S(35), y - S(5)], int(S(8)), fill=(170, 60, 50), outline=BLK, width=W_(3))
+        d.arc([bx - S(16), y - S(90), bx + S(16), y - S(60)], 180, 360, fill=BLK, width=W_(5))
+        d.line([(x - f * S(55), y - S(90)), (bx, y - S(80))], fill=BLK, width=W_(6))

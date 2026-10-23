@@ -138,6 +138,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `ghost(img, x, y, s=1.0, t=0.0, alpha=1.0, pixel=0, bob=True, **kw)` · lib.criaturas — Pega un fantasma con transparencia (alpha 0..1) y opcionalmente pixelado (pixel = tamaño de bloque).
 - `ghost_draw(d, x, y, s=1.0, t=0.0, mood='happy', tie=None, headset=False, col=(245, 248, 255), arms='down')` · lib.criaturas — Fantasma de sábana. (x, y) = centro del cuerpo. Alto ~420·s. mood: happy | scared | sad | smug.
 - `guy(d, x, y, s=1.0, mood='neutral', arms='down', look=0.0, t=0.0, hoodie=(240, 120, 40))` · reels_engine.humans
+- `hawk(d, x, y, s=1.0, t=0.0, flip=False, dive=False)` · lib.animales — Halcón volando (alas que aletean); (x, y) = centro del cuerpo. dive=True: alas recogidas, en picada.
 - `heart_face(d, x, y, s=1.0, t=0.0)` · lib.criaturas — Corazón con cara, latiendo rápido (x, y = centro).
 - `hero_pixel(d, x, y, scared=False, frame=0, big=2)` · mision002
 - `hero_pixel_v1(d, x, y, scared=False, frame=0, big=2)` · pixel
@@ -145,6 +146,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `lion(d, x, y, s=1.0, t=0.0, mood='neutral')` · lib.animales — León sentado de frente; y = piso.
 - `listeria(d, x, y, s, t)` · reel26
 - `llorona(d, x, y, s=1.0, t=0.0, mood='wail', arms='down')` · lib.criaturas — La Llorona (caricatura, no gore): vestido blanco largo que flota, velo, cabello negro largo y lágrimas.
+- `louse(d, x, y, s=1.0, t=0.0, mood='sad', suitcase=True, flip=False)` · lib.criaturas — Piojo de caricatura (gris café, 6 patitas, antenas cortas); y = piso. mood: sad | happy. suitcase: maleta en la mano.
 - `mammoth(d, x, y, s=1.0, t=0.0, flip=False)` · lib.animales — Mamut lanudo de lado; y = piso.
 - `medal(d, x, y, s=1.0, text='1º', ribbon=(40, 120, 220), neck=None)` · reels_engine.humans — Hanging medal; (x, y) = center of the medal. neck=(x, y) draws the ribbon from the neck.
 - `mite(d, x, y, s=1.0, t=0.0, phase=0.0, mood='grin', shade=1.0, dizzy=False)` · reel5
@@ -288,6 +290,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `dust(d, cx, cy, s, t)` · reel2
 - `earth(d, cx, cy, r)` · reel13
 - `egg_raft(d, x, y, s=1.0, n=14)` · lib.objetos — Huevecillos (balsa de huevos) flotando.
+- `empty_clothes(d, x, y, s=1.0, hoodie=(240, 120, 40))` · lib.objetos — Ropa tirada en el piso (sudadera, pantalón y tenis) de alguien que desapareció. y = piso.
 - `evil_eyes_px(d, x, y, w=10, t=0.0)` · lib.pixel_mision — Ojos rojos de máquina malvada (x, y = centro).
 - `extra_icon_pixel(d, kind, x, y, big=2)` · zombi11
 - `eye_icon(d, cx, cy, s)` · reel3
@@ -378,6 +381,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `obelisk(img, cx, base, h=420, seed=1, shadow=False)` · reels_engine.sketch.history — Egyptian obelisk with a few carved signs.
 - `offering(d, x, y, s)` · reel4
 - `office_desk(d, x0, x1, top=1000, floor=1290, col=(150, 110, 75))` · lib.objetos — Escritorio de oficina visto de frente: cubierta, dos patas y cajonera. Pon a la persona ANTES (queda detrás).
+- `old_tv(d, x, y, s=1.0, t=0.0, screen=(120, 180, 220), show='novela')` · lib.objetos — Tele vieja de perilla con antenas. y = base. show: novela (corazón y dos siluetas) | static | blank.
 - `olmec_head(img, cx, base, h=280, seed=1, shadow=False)` · reels_engine.sketch.history — Colossal Olmec stone head: helmet, wide nose and full lips.
 - `open_box(d, x, y, s=1.0, col=(220, 60, 70), ribbon=(250, 210, 60), front=True)` · lib.objetos — Caja de regalo abierta (sin tapa). y = base. Llama con front=False antes del personaje (fondo de la caja)
 - `outhouse(d, x, y, s=1.0, door=0.0, label='WC')` · lib.objetos — Letrina de madera con luna en la puerta. y = piso. door 0..1 = abierta.
@@ -399,6 +403,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `pizza_slice(img, cx, cy, h=200, ang=0.0, seed=1)` · reels_engine.sketch.everyday — Pizza slice pointing down, with crust and pepperoni; ang = turn in radians.
 - `plane(d, x, y, s)` · reel25
 - `planet_earth(d, cx, cy, r, mood='happy', look=(0.0, 0.0), eye=1.0, shade=True)` · reel23
+- `plastic_bag(d, x, y, s=1.0, t=0.0, col=(240, 240, 245), text=None)` · lib.objetos — Bolsa de plástico flotando (se mece). (x, y) = centro.
 - `podium(d, cx, base, w=250, heights=(330, 230, 160), cols=((240, 190, 40), (190, 195, 205), (205, 130, 60)), appear=1.0)` · lib.objetos — Podio 1-2-3 (1 al centro, 2 izq, 3 der). Devuelve [(x, y_top)] en orden 1,2,3.
 - `poop(d, cx, cy, s)` · reel7
 - `popup_pixel(d, s, y, c='yellow', bg='purple')` · oso
@@ -432,6 +437,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `screw(d, x, y, s=1.0, ang=20)` · lib.objetos
 - `scroll(d, x, y, w, h, title='', lines=(), size=34, fine=None)` · lib.objetos — Pergamino largo con rollos arriba y abajo. (x, y) = esquina sup. izq. fine = letra chiquita al pie.
 - `scutum(img, cx, cy, h=280, color=CRIMSON, seed=1)` · reels_engine.sketch.history — Roman legionary shield (tall rectangle with gold wings).
+- `shades(d, x, y, w=60, col=(25, 25, 30))` · lib.objetos — Lentes oscuros para ponérselos a cualquier personaje; (x, y) = centro entre los ojos, w = ancho total.
 - `shelf(d, x0, y0, x1, y1, rows=4, seed=1, items=True)` · reels_engine.furniture — Shelf with colorful products (store, pantry).
 - `ship(d, x, y, s)` · reel13
 - `shoe(d, x, y, s)` · reel12
@@ -479,6 +485,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `tag(img, text, x, y, k, rot=-10, bg=RED, size=56)` · lib.efectos — Etiqueta redondeada y girada que entra con escala k (0..1); úsala con k = tw(lt, t0, .4, 0, 1, back_out).
 - `tank(d, x, y, s, t)` · reel24
 - `taper(d, x, y, w=360, h=170, lid=(60, 140, 220), food=(150, 80, 40), label=None)` · reel26
+- `tears(d, x, y, s=1.0, t=0.0, col=(110, 180, 255))` · lib.efectos — Chorritos de lágrimas que caen desde los ojos en (x - 30s, y) y (x + 30s, y).
 - `temple(img, cx, base, w=520, seed=1, shadow=False)` · reels_engine.sketch.history — Greek temple: steps, six columns and a triangular pediment.
 - `templo(d, x, y, s=1.0, col=(200, 185, 160), twin=True, tiers=4)` · lib.objetos — Pirámide mesoamericana escalonada (tipo Templo Mayor): cuerpos escalonados, escalinata al frente y templo(s) arriba.
 - `tennis_ball(img, cx, cy, r=36, ang=0.0, seed=1)` · reels_engine.sketch.sports — Yellow-green tennis ball.
@@ -489,8 +496,10 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `time_clock(d, x, y, s=1.0, card_text='ENTRADA: 1509', full=1.0)` · lib.objetos — Reloj checador de pared con tarjeta. (x, y) = centro del aparato. full = qué tan llena está la tarjeta.
 - `tire(d, x, y, s=1.0, water=True)` · lib.objetos — Llanta tirada; y = piso.
 - `toilet_seat(d, cx, cy, s=1.0, sparkle_t=None)` · reel2
+- `tombstone(d, x, y, s=1.0, text='Q.E.P.D.', col=(170, 170, 180))` · lib.objetos — Lápida de caricatura; y = base.
 - `torch(img, gx, gy, h=220, t=0.0, seed=1)` · reels_engine.sketch.history — Burning torch held at (gx, gy); pass t (seconds) to make the flame flicker.
 - `tortillas(d, x, y, s=1.0)` · lib.objetos — Paquete de tortillas envuelto en papel (de la tortillería). (x, y) = centro.
+- `trash_can(d, x, y, s=1.0, full=False)` · lib.objetos — Bote de basura metálico de calle; y = base. full: con bolsas asomando.
 - `tree(d, x, y, s=1.0, kind='round', t=0.0, col=(70, 160, 80))` · reels_engine.exterior — Tree. kind: round | pine | palm.
 - `tree_pixel(d)` · mision003
 - `trompo(d, x, y, s, t, k_pastor=1.0, pineapple=True)` · reel24
@@ -520,8 +529,10 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `altar_pixel(d)` · ofrenda
 - `city(snow=True, flash=0.0)` · reel13
 - `city_pixel(d, t, alarm=True)` · alien
+- `city_street(t=0.0, decay=0.0, w=1080, h=1920, seed=3)` · lib.fondos_canal — Calle de ciudad vacía de día. decay 0..1: grietas, hierba, hiedra en edificios y un árbol que sale de la alcantarilla. Devuelve (img, d).
 - `desert_pixel(d, t, noon=False)` · mision002
 - `desk_glow(img)` · reel2
+- `forest_city(t=0.0, w=2160, h=3840, seed=5)` · lib.fondos_canal — Ciudad tragada por el bosque (mundo grande para alejar la cámara): edificios en ruinas entre árboles. Devuelve (img, d).
 - `forest_pixel(d, t)` · oso
 - `garden_pixel(d, t)` · mision003
 - `ground_pixel(d)` · pixel
@@ -562,6 +573,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `store_floor(d, top, base1, base2)` · reel
 - `store_pixel(d, t, light=True)` · pixel
 - `street_pixel(d, t, red=False)` · zombi11
+- `subway_tunnel(t=0.0, water=0.0)` · lib.fondos_canal — Corte de un túnel de metro con un tren detenido; water 0..1 = qué tanto se inundó. Devuelve (img, d).
 - `sun_desert(t)` · reel19
 - `town(d, lit, rng)` · reel25
 - `village(t=0.0, w=1080, h=1920, lights=True)` · lib.fondos_canal — Pueblo alpino nevado de noche, con montañas, casas y pinos (sirve de 'mundo' para la cámara). Devuelve (img, d).

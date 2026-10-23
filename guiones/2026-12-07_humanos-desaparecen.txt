@@ -1,0 +1,13 @@
+¿Qué pasaría si los humanos desapareciéramos? — lunes 7 de diciembre de 2026 (serie ¿Qué pasaría si…?)
+Código: specs/s44_humanos.py · Sin voz: sinvoz/2026-12-07_humanos-desaparecen_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4, una sola toma
+Producir final: python3 -m lib.produce specs/s44_humanos.py final audio/44-humanos.mp3
+
+[mischievously] ¿Qué pasaría si mañana todos los humanos desapareciéramos? Spoiler: el planeta ni nos extrañaría. Bueno… casi nadie. [dramatically] En dos o tres días, el metro de Nueva York se inunda. Hoy lo salvan bombas que sacan cuarenta y nueve millones de litros de agua al día. Sin nadie que las prenda… glu, glu. [sarcastic] Los primeros en extrañarnos: los piojos. Solo viven en humanos… y sin una cabeza se mueren en uno o dos días. Nadie les va a hacer funeral. [mischievously] En las ciudades frías, las cucarachas tampoco la libran: sin calefacción, no aguantan el invierno. En las calientes… siguen como si nada. Ellas nunca nos necesitaron. [serious] Las ratas de ciudad pierden su comida favorita: nuestra basura. Y los halcones se dan un banquete. [dramatically] A los veinte años, las calles de Nueva York empiezan a hundirse: las columnas que las sostienen por debajo se oxidan. [serious] En menos de cien años, la mayoría de las casas ya se cayeron… y la ciudad vuelve a ser bosque. [whispers] Pero hay cosas que duran miles de años: el plástico… y nuestras señales de radio y tele, viajando por el espacio para siempre. [sarcastic] O sea: lo último que va a quedar de la humanidad son bolsas de plástico… y tus telenovelas. ¿Qué crees que dure más: tu casa… o tu ex? Te leo en los comentarios.
+
+# words: 219  estimated duration: 88 s
+
+Fuentes:
+- Arizona PBS, entrevista a Alan Weisman ("The World Without Us"): el metro de Nueva York se inunda en 2–3 días; 800 bombas sacan 13 millones de galones (~49 millones de litros) al día; cucarachas mueren en ciudades frías sin calefacción y siguen en las calientes; ratas pierden la basura y las cazan halcones; las calles empiezan a colapsar en unas dos décadas al oxidarse las columnas del metro
+- CityBeat, reseña de "The World Without Us": la mayoría de las casas duran menos de 100 años; el plástico dura miles de años; las señales de radio y tele viajan por el espacio indefinidamente
+- Texas DSHS, hoja informativa de piojos: los humanos son su único huésped; fuera de la cabeza mueren en 1–2 días

@@ -9,7 +9,7 @@ Al aprobar una idea, pásala a "Listos / en producción"; al publicarla, a "Hech
 |---|---|---|
 | **Guía laboral para monstruos** | El monstruo busca trabajo: currículum, 4 trabajos, dato real, remate burocrático (SAT, afore, Ley del Trabajo) | Vampiro, Zombi, Fantasma (Ep. 4), Momia (Ep. 5), Llorona (Ep. 6) |
 | **Señales de que…** | Lista de señales cotidianas con remate sarcástico ("no es alien, es el empleado ideal") | Compañero alien |
-| **¿Qué pasaría si…?** | Escenario imposible explicado con datos | La Tierra deja de girar, la Luna desaparece, dejar de dormir, el refri un mes sin abrir |
+| **¿Qué pasaría si…?** | Escenario imposible explicado con datos | La Tierra deja de girar, la Luna desaparece, dejar de dormir, el refri un mes sin abrir, los humanos desaparecen |
 | **Misiones (pixel art)** | Supervivencia en pixel art | 001 zombi, 002 desierto, 003 abejas, 004 las máquinas se rebelan |
 | **Zombies en el minisúper** | Historia por partes | Partes 1 a 4 |
 | **Datos que rompen el tiempo** | Comparaciones de fechas que no cuadran | Cleopatra / pirámides / Luna |
@@ -29,6 +29,7 @@ Octubre–noviembre 2026: zombie en el minisúper · teclado sucio · aluxes · 
 - Cómo sobrevivir a Krampus esta noche — sin voz listo (sáb 5 dic, Noche de Krampus)
 - Guía laboral Ep. 7: el duende de Santa (despedido) — sin voz listo (mar 15 dic)
 - Misión 006: ayudar a Santa a entregar los juguetes — sin voz listo (jue 17 dic)
+- ¿Qué pasaría si los humanos desapareciéramos? — sin voz listo (lun 7 dic)
 
 ## Calendario diciembre 2026 (lunes a sábado, 10:00; el 25 no se publica)
 
@@ -39,7 +40,7 @@ Octubre–noviembre 2026: zombie en el minisúper · teclado sucio · aluxes · 
 | Jue 3 | Señales: compañero robot | sin voz listo |
 | Vie 4 | Ejércitos más grandes de la historia | sin voz listo |
 | Sáb 5 | Cómo sobrevivir a Krampus (Noche de Krampus) | sin voz listo |
-| Lun 7 | ¿Qué pasaría si los humanos desaparecieran? | pendiente |
+| Lun 7 | ¿Qué pasaría si los humanos desaparecieran? | sin voz listo |
 | Mar 8 | Guía laboral Ep. 6: Llorona | sin voz listo |
 | Mié 9 | Zombies en el minisúper, parte 5 | pendiente |
 | Jue 10 | ¿Cuánto frío aguanta tu cuerpo? | pendiente |

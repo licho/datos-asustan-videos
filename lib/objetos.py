@@ -477,3 +477,66 @@ def xmas_tree(d, x, y, s=1.0, t=0.0):
     for k, (dx, dy, c) in enumerate(((-60, -200, RED), (50, -260, YEL), (-30, -340, (80, 140, 240)), (70, -150, (240, 140, 40)), (0, -430, RED))):
         on = (int(t * 3) + k) % 3 != 0
         d.ellipse([x + dx * s - 14, y + dy * s - 14, x + dx * s + 14, y + dy * s + 14], fill=c if on else dk(c, .5), outline=BLK, width=3)
+
+def empty_clothes(d, x, y, s=1.0, hoodie=(240, 120, 40)):
+    """Ropa tirada en el piso (sudadera, pantalón y tenis) de alguien que desapareció. y = piso."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    d.ellipse([x - S(170), y - S(20), x + S(170), y + S(14)], fill=(60, 60, 65))
+    d.polygon([(x - S(150), y - S(10)), (x - S(40), y - S(55)), (x + S(20), y - S(30)), (x - S(20), y)], fill=(45, 65, 120), outline=BLK)
+    d.polygon([(x - S(60), y - S(30)), (x + S(140), y - S(70)), (x + S(160), y - S(10)), (x - S(30), y)], fill=hoodie, outline=BLK)
+    d.line([(x + S(10), y - S(45)), (x + S(30), y - S(5))], fill=WHITE, width=W_(4))
+    for k, sx in enumerate((-190, -125)):
+        d.rounded_rectangle([x + S(sx), y - S(26), x + S(sx) + S(60), y], int(S(10)), fill=(30, 30, 30), outline=BLK, width=W_(2))
+        d.rectangle([x + S(sx), y - S(8), x + S(sx) + S(60), y], fill=WHITE)
+
+def plastic_bag(d, x, y, s=1.0, t=0.0, col=(240, 240, 245), text=None):
+    """Bolsa de plástico flotando (se mece). (x, y) = centro."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s)); sw = math.sin(t * 2) * S(10)
+    body = [(x - S(70), y - S(40) + sw * .3), (x + S(70), y - S(40) - sw * .3), (x + S(85), y + S(70)), (x - S(85), y + S(70))]
+    d.polygon(body, fill=col, outline=BLK); d.line(body + [body[0]], fill=BLK, width=W_(4))
+    for sx in (-1, 1): d.arc([x + sx * S(45) - S(30), y - S(95), x + sx * S(45) + S(30), y - S(25)], 180, 360, fill=BLK, width=W_(6))
+    for k in range(3): d.line([(x - S(50) + k * S(45), y - S(20)), (x - S(60) + k * S(50), y + S(55))], fill=(200, 200, 210), width=W_(3))
+    if text: d.text((x, y + S(20)), text, font=F(int(S(24))), fill=(200, 60, 60), anchor="mm")
+
+def old_tv(d, x, y, s=1.0, t=0.0, screen=(120, 180, 220), show="novela"):
+    """Tele vieja de perilla con antenas. y = base. show: novela (corazón y dos siluetas) | static | blank."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    for sx in (-1, 1): d.line([(x, y - S(300)), (x + sx * S(90), y - S(420))], fill=BLK, width=W_(6))
+    d.rounded_rectangle([x - S(170), y - S(300), x + S(170), y - S(30)], int(S(24)), fill=(150, 105, 70), outline=BLK, width=W_(5))
+    sx0, sy0, sx1, sy1 = x - S(145), y - S(275), x + S(80), y - S(55)
+    d.rounded_rectangle([sx0, sy0, sx1, sy1], int(S(20)), fill=screen, outline=BLK, width=W_(4))
+    if show == "novela":
+        cx, cy = (sx0 + sx1) / 2, (sy0 + sy1) / 2
+        for k, dx in enumerate((-40, 40)): d.ellipse([cx + S(dx) - S(18), cy - S(50), cx + S(dx) + S(18), cy - S(14)], fill=(60, 50, 60)); d.rectangle([cx + S(dx) - S(22), cy - S(14), cx + S(dx) + S(22), cy + S(60)], fill=(60, 50, 60))
+        hb = 1 + .15 * math.sin(t * 6)
+        d.polygon([(cx - S(18) * hb, cy - S(70)), (cx, cy - S(50)), (cx + S(18) * hb, cy - S(70)), (cx, cy - S(90))], fill=(230, 60, 90))
+    elif show == "static":
+        import random as _r; r = _r.Random(int(t * 12))
+        for k in range(60):
+            px, py = r.uniform(sx0, sx1 - 8), r.uniform(sy0, sy1 - 4); d.rectangle([px, py, px + S(8), py + S(4)], fill=(230, 230, 230))
+    for k in range(2): d.ellipse([x + S(100) - S(18), y - S(250) + k * S(80) - S(18), x + S(100) + S(18), y - S(250) + k * S(80) + S(18)], fill=(90, 90, 95), outline=BLK, width=W_(3))
+    for sx in (-1, 1): d.line([(x + sx * S(120), y - S(30)), (x + sx * S(140), y)], fill=BLK, width=W_(8))
+
+def tombstone(d, x, y, s=1.0, text="Q.E.P.D.", col=(170, 170, 180)):
+    """Lápida de caricatura; y = base."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    d.rounded_rectangle([x - S(80), y - S(170), x + S(80), y], int(S(70)), fill=col, outline=BLK, width=W_(4))
+    d.rectangle([x - S(80), y - S(90), x + S(80), y], fill=col)
+    d.line([(x - S(80), y - S(90)), (x - S(80), y)], fill=BLK, width=W_(4)); d.line([(x + S(80), y - S(90)), (x + S(80), y)], fill=BLK, width=W_(4))
+    d.text((x, y - S(95)), text, font=F(int(S(26))), fill=(70, 70, 80), anchor="mm")
+    d.rectangle([x - S(100), y - S(10), x + S(100), y + S(6)], fill=(90, 140, 70))
+
+def shades(d, x, y, w=60, col=(25, 25, 30)):
+    """Lentes oscuros para ponérselos a cualquier personaje; (x, y) = centro entre los ojos, w = ancho total."""
+    h = w * .28
+    for sx in (-1, 1): d.rounded_rectangle([x + sx * w * .27 - w * .22, y - h / 2, x + sx * w * .27 + w * .22, y + h / 2], int(h * .3), fill=col, outline=BLK, width=3)
+    d.line([(x - w * .06, y - h * .2), (x + w * .06, y - h * .2)], fill=BLK, width=4)
+
+def trash_can(d, x, y, s=1.0, full=False):
+    """Bote de basura metálico de calle; y = base. full: con bolsas asomando."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s)); G = (150, 155, 165)
+    if full:
+        for k, (dx, c) in enumerate(((-30, (60, 60, 70)), (25, (40, 110, 60)))): d.ellipse([x + S(dx) - S(45), y - S(260), x + S(dx) + S(45), y - S(180)], fill=c, outline=BLK, width=W_(3))
+    d.polygon([(x - S(90), y - S(220)), (x + S(90), y - S(220)), (x + S(75), y), (x - S(75), y)], fill=G, outline=BLK); d.line([(x - S(90), y - S(220)), (x + S(90), y - S(220)), (x + S(75), y), (x - S(75), y), (x - S(90), y - S(220))], fill=BLK, width=W_(4))
+    for k in range(4): d.line([(x - S(60) + k * S(40), y - S(205)), (x - S(52) + k * S(35), y - S(15))], fill=dk(G, .8), width=W_(5))
+    d.rounded_rectangle([x - S(100), y - S(238), x + S(100), y - S(214)], int(S(10)), fill=dk(G, .9), outline=BLK, width=W_(3))

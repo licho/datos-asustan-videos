@@ -36,3 +36,10 @@ def sound_waves(d, x, y, t, n=3, col=(200, 220, 255), width=7):
         for sx in (-1, 1):
             a0, a1 = (300, 60) if sx > 0 else (120, 240)
             d.arc([x - r, y - r, x + r, y + r], a0, a1, fill=col, width=width)
+
+def tears(d, x, y, s=1.0, t=0.0, col=(110, 180, 255)):
+    """Chorritos de lágrimas que caen desde los ojos en (x - 30s, y) y (x + 30s, y)."""
+    for sx in (-1, 1):
+        ex = x + sx * 30 * s; L = 40 * s + (t * 90 * s) % (60 * s)
+        d.line([(ex, y), (ex + sx * 4 * s, y + L)], fill=col, width=max(3, int(8 * s)))
+        d.ellipse([ex + sx * 4 * s - 8 * s, y + L - 4 * s, ex + sx * 4 * s + 8 * s, y + L + 12 * s], fill=col)

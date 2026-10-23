@@ -294,3 +294,20 @@ def ant_column(d, path, t, s=0.4, gap=95, speed=180, helmet=False):
                 army_ant(d, px, py, s, t + k * .37, flip=b[0] < a[0], helmet=helmet); break
             acc += L
         pos += gap * s / .4; k += 1
+
+def hawk(d, x, y, s=1.0, t=0.0, flip=False, dive=False):
+    """Halcón volando (alas que aletean); (x, y) = centro del cuerpo. dive=True: alas recogidas, en picada."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s)); f = -1 if flip else 1
+    B, Wg = (120, 85, 55), (95, 65, 40)
+    flap = 0 if dive else math.sin(t * 9) * S(60)
+    span = S(80) if dive else S(190)
+    for sx in (-1, 1):
+        wing = [(x + sx * S(20), y - S(10)), (x + sx * span, y - S(30) - flap), (x + sx * (span - S(40)), y + S(15) - flap * .5), (x + sx * S(20), y + S(20))]
+        d.polygon(wing, fill=Wg, outline=BLK); d.line(wing + [wing[0]], fill=BLK, width=W_(4))
+    d.ellipse([x - S(45), y - S(30), x + S(45), y + S(35)], fill=B, outline=BLK, width=W_(4))
+    d.polygon([(x - f * S(40), y), (x - f * S(85), y - S(20)), (x - f * S(85), y + S(25))], fill=Wg, outline=BLK)
+    hx = x + f * S(45)
+    d.ellipse([hx - S(28), y - S(40), hx + S(28), y + S(10)], fill=(235, 230, 215), outline=BLK, width=W_(3))
+    d.polygon([(hx + f * S(22), y - S(22)), (hx + f * S(48), y - S(12)), (hx + f * S(24), y - S(4))], fill=(240, 190, 50), outline=BLK)
+    d.ellipse([hx + f * S(4) - S(7), y - S(28), hx + f * S(4) + S(7), y - S(14)], fill=BLK)
+    d.line([(hx - S(10), y - S(36)), (hx + f * S(20), y - S(28))], fill=BLK, width=W_(4))
