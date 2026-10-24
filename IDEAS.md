@@ -31,6 +31,7 @@ Octubre–noviembre 2026: zombie en el minisúper · teclado sucio · aluxes · 
 - Misión 006: ayudar a Santa a entregar los juguetes — sin voz listo (jue 17 dic)
 - ¿Qué pasaría si los humanos desapareciéramos? — sin voz listo (lun 7 dic)
 - ¿Qué pasaría si los dinosaurios siguieran existiendo? — sin voz listo (vie 18 dic)
+- ¿Cuánta energía genera el Sol? — sin voz listo (propuesto para lun 21 dic, solsticio; "lo que vive en tu árbol de Navidad" queda sin fecha)
 - ¿Cómo duermen las jirafas? — sin voz listo (sáb 19 dic; "grupo familiar poseído" pasa a ideas pendientes)
 
 ## Calendario diciembre 2026 (lunes a sábado, 10:00; el 25 no se publica)
@@ -54,7 +55,7 @@ Octubre–noviembre 2026: zombie en el minisúper · teclado sucio · aluxes · 
 | Jue 17 | Misión 006: ayudar a Santa | sin voz listo |
 | Vie 18 | ¿Qué pasaría si los dinosaurios siguieran existiendo? | sin voz listo |
 | Sáb 19 | ¿Cómo duermen las jirafas? | sin voz listo |
-| Lun 21 | Lo que vive en tu árbol de Navidad | pendiente |
+| Lun 21 | ¿Cuánta energía genera el Sol? (solsticio de invierno) | sin voz listo (propuesta) |
 | Mar 22 | Zombies parte 6 (Navidad) | pendiente |
 | Mié 23 | Cuánto aguanta el recalentado | pendiente |
 | Jue 24 | Tradiciones navideñas más raras del mundo | pendiente |

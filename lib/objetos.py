@@ -729,3 +729,58 @@ def sweat(d, x, y, t, s=1.0, n=2, col=(120, 190, 255)):
         cx, cy = x + k * 22 * s, y + u * 50 * s
         d.polygon([(cx, cy - 14 * s), (cx - 8 * s, cy + 2 * s), (cx + 8 * s, cy + 2 * s)], fill=col)
         d.ellipse([cx - 8 * s, cy - 6 * s, cx + 8 * s, cy + 10 * s], fill=col, outline=BLK, width=2)
+
+def bathroom_scale(d, x, y, s=1.0, text="", col=(235, 235, 240)):
+    """Báscula de baño vista de frente; y = piso. text = lo que marca la pantallita. Devuelve la y de la superficie."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    d.rounded_rectangle([x - S(230), y - S(70), x + S(230), y], int(S(24)), fill=col, outline=BLK, width=W_(5))
+    d.rounded_rectangle([x - S(110), y - S(58), x + S(110), y - S(14)], int(S(8)), fill=(40, 60, 50), outline=BLK, width=W_(3))
+    if text: d.text((x, y - S(36)), text, font=F(int(S(30))), fill=(120, 255, 150), anchor="mm")
+    return y - S(70)
+
+def atom_ball(d, x, y, r=40, kind="H"):
+    """Bolita de átomo para animar fusión: H (hidrógeno, azul) o He (helio, naranja, más grande)."""
+    col = (110, 170, 255) if kind == "H" else (255, 170, 70)
+    d.ellipse([x - r, y - r, x + r, y + r], fill=col, outline=BLK, width=max(3, int(r * .1)))
+    d.ellipse([x - r * .5, y - r * .6, x - r * .1, y - r * .2], fill=lc(col, WHITE, .5))
+    d.text((x, y + r * .05), kind, font=F(int(r * .8)), fill=BLK, anchor="mm")
+
+def light_bill(d, x, y, w=420, total="$4,850", title="RECIBO DE LUZ"):
+    """Recibo de luz genérico (sin marca); (x, y) = esquina superior izquierda."""
+    h = w * 1.35
+    d.rectangle([x, y, x + w, y + h], fill=WHITE, outline=BLK, width=5)
+    d.rectangle([x, y, x + w, y + w * .18], fill=(90, 160, 90), outline=BLK, width=5)
+    d.text((x + w / 2, y + w * .09), title, font=F(int(w * .085)), fill=WHITE, anchor="mm")
+    for k in range(5): d.line([(x + w * .1, y + w * (.3 + k * .12)), (x + w * (.9 - .2 * (k % 2)), y + w * (.3 + k * .12))], fill=(190, 190, 195), width=6)
+    d.text((x + w * .1, y + h - w * .28), "TOTAL A PAGAR", font=F(int(w * .07)), fill=BLK, anchor="lm")
+    d.text((x + w * .9, y + h - w * .14), total, font=F(int(w * .14)), fill=RED, anchor="rm")
+
+def stock_pot(d, x, y, s=1.0, t=0.0, col=(170, 175, 185), liquid=(90, 150, 220), boil=True):
+    """Olla grande con asas, vista de frente; y = base. Devuelve (x, y_borde) para meter algo adentro."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    top = y - S(300)
+    for sx in (-1, 1): d.rounded_rectangle([x + sx * S(250) - S(40), top + S(50), x + sx * S(250) + S(40), top + S(80)], int(S(12)), fill=dk(col, .8), outline=BLK, width=W_(4))
+    d.rounded_rectangle([x - S(240), top, x + S(240), y], int(S(30)), fill=col, outline=BLK, width=W_(6))
+    d.ellipse([x - S(240), top - S(40), x + S(240), top + S(40)], fill=dk(col, .7), outline=BLK, width=W_(6))
+    d.ellipse([x - S(215), top - S(28), x + S(215), top + S(28)], fill=liquid)
+    if boil:
+        import random as _r
+        r = _r.Random(int(t * 8))
+        for k in range(7):
+            bx = x + r.uniform(-S(190), S(190)); by = top + r.uniform(-S(15), S(15)); br = S(r.uniform(10, 22))
+            d.ellipse([bx - br, by - br, bx + br, by + br], outline=WHITE, width=W_(4))
+    for k in range(3): d.line([(x - S(180) + k * S(180), top + S(120)), (x - S(140) + k * S(180), top + S(120))], fill=lc(col, WHITE, .5), width=W_(6))
+    return x, top
+
+def solar_panel(d, x, y, w=220, tilt=.35):
+    """Panel solar inclinado (para azoteas); (x, y) = centro de la base."""
+    h = w * .55
+    pts = [(x - w / 2, y), (x + w / 2, y), (x + w / 2 - w * .12, y - h), (x - w / 2 + w * .12, y - h)]
+    d.polygon(pts, fill=(40, 70, 140), outline=BLK); d.line(pts + [pts[0]], fill=BLK, width=4)
+    for k in range(1, 4):
+        u = k / 4
+        d.line([(x - w / 2 + w * u, y), (x - w / 2 + w * .12 + (w - w * .24) * u, y - h)], fill=(150, 180, 230), width=3)
+    for k in range(1, 3):
+        v = k / 3
+        d.line([(x - w / 2 + w * .12 * v, y - h * v), (x + w / 2 - w * .12 * v, y - h * v)], fill=(150, 180, 230), width=3)
+    d.line([(x, y), (x, y + 18)], fill=(90, 90, 95), width=8)

@@ -1,0 +1,18 @@
+¿Cuánta energía genera el Sol? — lunes 21 de diciembre de 2026 (solsticio de invierno, propuesta)
+Código: specs/s48_sol_energia.py · Sin voz: sinvoz/2026-12-21_sol-energia_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4, una sola toma
+Producir final: python3 -m lib.produce specs/s48_sol_energia.py final audio/48-sol-energia.mp3
+Estructura: gancho ("hice la cuenta") = línea 1 · tensión = líneas 2–7 · recompensa = recibo de la luz
+
+[mischievously] Hice la cuenta: en un solo segundo, el Sol produce la energía que la humanidad usaría en más de seiscientos mil años. [sarcastic] Cada segundo convierte unos cuatro millones de toneladas de su propia masa en energía. Baja de peso sin dieta… y sin gimnasio. [serious] Para lograrlo, fusiona seiscientos millones de toneladas de hidrógeno. Por segundo. [excited] ¿Y qué harías con un solo segundo de esa energía? Cargarle el celular a todas las personas del planeta, todos los días… durante más de dos mil millones de años. [dramatically] Y con menos de diez segundos, podrías hervir todos los océanos de la Tierra. Caldo de mariscos para todos. [whispers] Y a la Tierra solo le llega una migaja: menos de una parte en dos mil millones. [confident] Aun así, con esa migaja, en hora y media nos cae toda la energía que la humanidad usa en un año. [sarcastic] Y tú, todavía peleándote con el recibo de la luz. ¿Ya pusiste paneles solares o sigues pagando? Te leo.
+
+# words: 161  estimated duration: 66 s
+
+Fuentes y cuentas:
+- Ohio State University (Astronomy 162, B. Ryden): luminosidad del Sol ~3.9 × 10^26 W; convierte >4 millones de toneladas de masa por segundo; fusiona ~600 millones de toneladas de hidrógeno por segundo
+- Energy Institute, Statistical Review of World Energy 2026 (vía DieselNet): la humanidad usó poco más de 600 EJ en 2025
+  → 3.9e26 J ÷ 6e20 J/año ≈ 650,000 años ("más de seiscientos mil")
+- Science News (Reaching Rays): el Sol entrega ~120,000 TW a la Tierra → 6e20 J ÷ (1.2e17 W × 3600 s) ≈ 1.4 h ("hora y media"; el "1 hora" clásico usa el consumo de 2001)
+- Fracción que llega a la Tierra: área de la Tierra (π·6371 km²) ÷ esfera de 1 UA (4π·1.496e8 km²) ≈ 1/2,200 millones
+- Celulares: 15 Wh = 54,000 J por carga × 8,200 millones de personas ≈ 4.4e14 J/día → 3.9e26 ÷ 4.4e14 ≈ 8.8e11 días ≈ 2,400 millones de años
+- Océanos (NOAA: 1,335 millones de km³ ≈ 1.37e21 kg): calentar de ~4 °C a 100 °C y evaporar ≈ 2.6e6 J/kg → ~3.6e27 J ÷ 3.9e26 ≈ 9 s ("menos de diez segundos")

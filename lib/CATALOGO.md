@@ -200,6 +200,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `arrow(d, x0, y0, x1, y1, col=RED, w=14)` · reels_engine.screens
 - `asteroid(d, cx, cy, r, t=0.0, face='angry', fire=0.0, ang=-2.4)` · reel13
 - `atm(img, cx, base, h=420, cash=True, seed=1, shadow=False)` · reels_engine.sketch.finance — Cash machine (ATM) with screen and keypad; cash=True shows bills coming out of the slot.
+- `atom_ball(d, x, y, r=40, kind='H')` · lib.objetos — Bolita de átomo para animar fusión: H (hidrógeno, azul) o He (helio, naranja, más grande).
 - `axe(img, gx, gy, L=280, ang=0.0, seed=1)` · reels_engine.sketch.history — Viking axe gripped at (gx, gy).
 - `backpack(d, x, y, big=2, fill=0, closed=False)` · alien
 - `balance_scale(img, cx, base, h=360, tilt=0.0, seed=1, shadow=False)` · reels_engine.sketch.finance — Balance scale; tilt > 0 lowers the right pan (-1…1). Returns the centers of the (left, right) pans.
@@ -214,6 +215,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `baseball_bat(img, gx, gy, L=320, ang=0.0, seed=1)` · reels_engine.sketch.sports — Wooden baseball bat held at (gx, gy); ang = tilt from straight up.
 - `basketball(img, cx, cy, r=60, ang=0.0, seed=1)` · reels_engine.sketch.sports — Orange basketball with black lines.
 - `basketball_hoop(img, cx, base, h=640, seed=1, shadow=False)` · reels_engine.sketch.sports — Basketball hoop on a pole: backboard, orange rim, net. Returns the rim center.
+- `bathroom_scale(d, x, y, s=1.0, text='', col=(235, 235, 240))` · lib.objetos — Báscula de baño vista de frente; y = piso. text = lo que marca la pantallita. Devuelve la y de la superficie.
 - `bed(d, x, y, s=1.0, dirty=0.0)` · reel12
 - `bed_v5(d, cx, cy, s, t, sleeping=True)` · reel5
 - `bells(d, x, y, s=1.0, t=0.0, n=3)` · lib.criaturas — Cascabeles colgando de una correa; (x, y) = punto de arriba.
@@ -359,6 +361,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `laptop(d, x, y, s=1.0, screen=(40, 120, 220), back=False)` · reels_engine.furniture — Laptop on a surface at y. back=True shows it from behind.
 - `laurel_wreath(img, cx, cy, r=80, seed=1)` · reels_engine.sketch.history — Laurel wreath (victory, emperors); (cx, cy) = center of the head it would crown.
 - `lettuce(d, cx, ybot, melt=0.0)` · reel26
+- `light_bill(d, x, y, w=420, total='$4,850', title='RECIBO DE LUZ')` · lib.objetos — Recibo de luz genérico (sin marca); (x, y) = esquina superior izquierda.
 - `light_bulb(img, cx, cy, h=200, on=True, seed=1)` · reels_engine.sketch.everyday — Light bulb (an idea!); on = yellow glass with rays.
 - `light_switch(d, x, y, s=1.0, on=False)` · reels_engine.furniture
 - `line_chart(img, x, y, w=600, h=360, values=(3, 4, 3.5, 6, 5.5, 8), color=MONEY, area=True, dots=True, seed=1)` · reels_engine.sketch.finance — Line chart with axes; (x, y) = bottom left corner (origin). The line goes up or down with 'values'.
@@ -472,6 +475,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `soccer_goal(img, cx, base, w=520, seed=1, shadow=False)` · reels_engine.sketch.sports — Soccer goal with net, seen from the front.
 - `social_house(d, x, y, s=1.0, col=(240, 225, 190), bars=True, door=0.0, cobweb=False, tinaco=True, lit=False, num=None)` · lib.objetos — Casita de interés social de un piso vista de frente (block, azotea plana, tinaco, rejas). y = piso; ~320s de ancho.
 - `sofa(d, cx, y, s=1.0)` · reel9
+- `solar_panel(d, x, y, w=220, tilt=0.35)` · lib.objetos — Panel solar inclinado (para azoteas); (x, y) = centro de la base.
 - `sound_waves(d, x, y, t, n=3, col=(200, 220, 255), width=7)` · lib.efectos — Ondas de sonido saliendo a los lados de (x, y) (llanto, grito, alarma).
 - `soup_bowl(d, x, y, s=1.0, t=0.0, lemon=True)` · lib.objetos — Plato hondo de caldo de pollo humeante (pierna con hueso, zanahoria, calabacita) sobre su platito, con limón al lado;
 - `spear(img, gx, gy, L=520, ang=0.0, seed=1)` · reels_engine.sketch.history — Spear gripped at (gx, gy), L = total length.
@@ -482,6 +486,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `stela(img, cx, base, h=380, seed=1, shadow=False)` · reels_engine.sketch.history — Maya stela: tall carved stone with a column of glyph blocks.
 - `step_badge(d, n, cx=140, cy=470, sc=1.0)` · reel2
 - `step_pyramid(img, cx, base, w=480, tiers=5, color=MESO, seed=1, shadow=False)` · reels_engine.sketch.history — Mesoamerican stepped pyramid (Chichén Itzá, Teotihuacan) with a central stairway and a temple on top.
+- `stock_pot(d, x, y, s=1.0, t=0.0, col=(170, 175, 185), liquid=(90, 150, 220), boil=True)` · lib.objetos — Olla grande con asas, vista de frente; y = base. Devuelve (x, y_borde) para meter algo adentro.
 - `stool(img, cx, y, w=120, seed=1)` · reels_engine.sketch.props — Three-legged wooden stool; (cx, y) = center of the seat.
 - `stopwatch(d, x, y, r=110, secs=0.0, total=240, col=(240, 240, 245))` · lib.objetos — Cronómetro con botón y aguja; secs = segundos transcurridos (una vuelta = total). Muestra MM:SS abajo. (x, y) = centro.
 - `store_lights(d, b)` · reel
