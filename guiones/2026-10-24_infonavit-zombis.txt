@@ -1,4 +1,4 @@
-Ventajas de tu casa de Infonavit en un apocalipsis zombi — (fecha por definir; pensado para sábado 24 de octubre)
+Ventajas de tu casa de Infonavit en un apocalipsis zombi — sábado 24 de octubre de 2026
 Código: specs/s47_infonavit_zombis.py · Sin voz: sinvoz/2026-10-24_infonavit-zombis_SINVOZ.mp4
 Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4, una sola toma (~820 caracteres)
 Producir final: python3 -m lib.produce specs/s47_infonavit_zombis.py final audio/47-infonavit-zombis.mp3
