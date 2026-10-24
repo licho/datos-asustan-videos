@@ -675,3 +675,57 @@ def pillow(d, x, y, w=140, col=(240, 240, 255), stripe=(150, 170, 230)):
     h = w * .45
     d.rounded_rectangle([x - w / 2, y - h / 2, x + w / 2, y + h / 2], int(h * .45), fill=col, outline=BLK, width=4)
     d.line([(x - w * .35, y), (x + w * .35, y)], fill=stripe, width=max(3, int(w * .05)))
+
+def social_house(d, x, y, s=1.0, col=(240, 225, 190), bars=True, door=0.0, cobweb=False, tinaco=True, lit=False, num=None):
+    """Casita de interés social de un piso vista de frente (block, azotea plana, tinaco, rejas). y = piso; ~320s de ancho.
+    door 0..1 = qué tan abierta está la puerta (0 cerrada). cobweb: telarañas (casa abandonada). num: número de la casa."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    x0, x1, top = x - S(160), x + S(160), y - S(250)
+    d.rectangle([x0, top, x1, y], fill=col, outline=BLK, width=W_(5))
+    for k in range(1, 6):                                                    # hiladas de block
+        d.line([(x0 + S(4), top + k * S(42)), (x1 - S(4), top + k * S(42))], fill=dk(col, .9), width=W_(2))
+    d.rectangle([x0 - S(10), top - S(18), x1 + S(10), top], fill=dk(col, .85), outline=BLK, width=W_(4))   # pretil
+    if tinaco:
+        d.rounded_rectangle([x1 - S(110), top - S(95), x1 - S(30), top - S(18)], int(S(14)), fill=(40, 40, 45), outline=BLK, width=W_(4))
+        d.rectangle([x1 - S(100), top - S(108), x1 - S(40), top - S(92)], fill=(40, 40, 45), outline=BLK, width=W_(3))
+    # ventana con rejas
+    wx0, wy0, wx1, wy1 = x0 + S(30), top + S(70), x0 + S(150), top + S(170)
+    d.rectangle([wx0, wy0, wx1, wy1], fill=(255, 220, 120) if lit else (120, 170, 210), outline=BLK, width=W_(4))
+    if bars:
+        for k in range(1, 6): d.line([(wx0 + k * (wx1 - wx0) / 6, wy0), (wx0 + k * (wx1 - wx0) / 6, wy1)], fill=(50, 50, 55), width=W_(5))
+        d.line([(wx0, (wy0 + wy1) / 2), (wx1, (wy0 + wy1) / 2)], fill=(50, 50, 55), width=W_(5))
+    # puerta (se abre hacia adentro: se ve más angosta)
+    dx0, dx1 = x1 - S(120), x1 - S(35)
+    d.rectangle([dx0, top + S(80), dx1, y], fill=(40, 30, 30), outline=BLK, width=W_(4))
+    dw = (dx1 - dx0) * (1 - .8 * door)
+    d.rectangle([dx0, top + S(80), dx0 + dw, y], fill=(150, 90, 50), outline=BLK, width=W_(4))
+    if door < .5: d.ellipse([dx0 + dw - S(18), top + S(165), dx0 + dw - S(8), top + S(175)], fill=(230, 200, 80))
+    if num: d.text((x0 + S(90), top + S(210)), str(num), font=F(int(S(30))), fill=BLK, anchor="mm")
+    if cobweb:
+        for cx, cy, sx in ((x0, top, 1), (x1, top, -1)):
+            for k in range(1, 4): d.arc([cx - S(30 * k), cy - S(30 * k), cx + S(30 * k), cy + S(30 * k)], 0 if sx > 0 else 90, 90 if sx > 0 else 180, fill=(235, 235, 240), width=W_(2))
+            for a in (10, 45, 80): 
+                import math as _m
+                d.line([(cx, cy), (cx + sx * S(95) * _m.cos(_m.radians(a)), cy + S(95) * _m.sin(_m.radians(a)))], fill=(235, 235, 240), width=W_(2))
+
+def delivery_bag(d, x, y, s=1.0, col=(240, 140, 40)):
+    """Mochila térmica de repartidor (cubo sin marca); (x, y) = centro."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    d.rectangle([x - S(70), y - S(70), x + S(70), y + S(70)], fill=col, outline=BLK, width=W_(5))
+    d.polygon([(x - S(70), y - S(70)), (x - S(40), y - S(95)), (x + S(100), y - S(95)), (x + S(70), y - S(70))], fill=dk(col, .85), outline=BLK)
+    d.line([(x - S(40), y - S(10)), (x + S(40), y - S(10))], fill=WHITE, width=W_(8))
+
+def lunchbox(d, x, y, s=1.0, col=(80, 140, 220)):
+    """Lonchera; y = base, x = centro."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    d.arc([x - S(30), y - S(105), x + S(30), y - S(55)], 180, 360, fill=BLK, width=W_(8))
+    d.rounded_rectangle([x - S(60), y - S(80), x + S(60), y], int(S(12)), fill=col, outline=BLK, width=W_(4))
+    d.line([(x - S(60), y - S(55)), (x + S(60), y - S(55))], fill=dk(col, .7), width=W_(4))
+
+def sweat(d, x, y, t, s=1.0, n=2, col=(120, 190, 255)):
+    """Gotas de sudor que caen junto a una cabeza en (x, y)."""
+    for k in range(n):
+        u = (t * 1.5 + k / n) % 1
+        cx, cy = x + k * 22 * s, y + u * 50 * s
+        d.polygon([(cx, cy - 14 * s), (cx - 8 * s, cy + 2 * s), (cx + 8 * s, cy + 2 * s)], fill=col)
+        d.ellipse([cx - 8 * s, cy - 6 * s, cx + 8 * s, cy + 10 * s], fill=col, outline=BLK, width=2)

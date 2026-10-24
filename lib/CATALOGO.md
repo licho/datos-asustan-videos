@@ -287,6 +287,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `curve_arrow(img, pts, w=10, color=GREEN, seed=1)` · reels_engine.sketch.props — Hand-drawn curved arrow through the points, with the head at the last one.
 - `dashed_line(img, x, y0, y1, dash=22, gap=16, color=(150, 150, 155), seed=1)` · reels_engine.sketch.props — Vertical dashed divider from y0 to y1 (split screens).
 - `dehumidifier(d, cx, cy, s, t, ls)` · reel5
+- `delivery_bag(d, x, y, s=1.0, col=(240, 140, 40))` · lib.objetos — Mochila térmica de repartidor (cubo sin marca); (x, y) = centro.
 - `desk(d, x0, x1, y=None)` · reel15
 - `dialog_pixel(d, s, t0, t, cps=26)` · oso
 - `dirty_hand(d, cx, cy, s)` · reel2
@@ -364,6 +365,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `lives_score_pixel(t)` · oso
 - `longship(img, cx, base, w=560, sail=RED, seed=1)` · reels_engine.sketch.history — Viking longship on the water: dragon prow, shields along the side, striped square sail. base = waterline.
 - `loose_arm(d, x, y, s, rot=0.0, shirt=(225, 225, 215))` · reel18
+- `lunchbox(d, x, y, s=1.0, col=(80, 140, 220))` · lib.objetos — Lonchera; y = base, x = centro.
 - `macuahuitl(img, gx, gy, L=300, ang=0.0, seed=1)` · reels_engine.sketch.history — Aztec wooden sword edged with obsidian blades, gripped at (gx, gy).
 - `magnifier(img, cx, cy, R, t, n_germs)` · reel2
 - `meat(d, x, ybot)` · reel26
@@ -468,6 +470,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `snowflake(d, x, y, r=50, col=(120, 190, 250), width=8)` · lib.objetos
 - `soccer_ball(img, cx, cy, r=60, ang=0.0, seed=1)` · reels_engine.sketch.sports — Soccer ball with black pentagons.
 - `soccer_goal(img, cx, base, w=520, seed=1, shadow=False)` · reels_engine.sketch.sports — Soccer goal with net, seen from the front.
+- `social_house(d, x, y, s=1.0, col=(240, 225, 190), bars=True, door=0.0, cobweb=False, tinaco=True, lit=False, num=None)` · lib.objetos — Casita de interés social de un piso vista de frente (block, azotea plana, tinaco, rejas). y = piso; ~320s de ancho.
 - `sofa(d, cx, y, s=1.0)` · reel9
 - `sound_waves(d, x, y, t, n=3, col=(200, 220, 255), width=7)` · lib.efectos — Ondas de sonido saliendo a los lados de (x, y) (llanto, grito, alarma).
 - `soup_bowl(d, x, y, s=1.0, t=0.0, lemon=True)` · lib.objetos — Plato hondo de caldo de pollo humeante (pierna con hueso, zanahoria, calabacita) sobre su platito, con limón al lado;
@@ -489,6 +492,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `sun_pillow(d, t, ls)` · reel5
 - `sun_simple(d, x, y, r=90, t=0.0, rays=True)` · reels_engine.exterior
 - `sun_stone(img, cx, cy, r=170, seed=1)` · reels_engine.sketch.history — Aztec Sun Stone (calendar stone): central face, ring of day signs and sun rays.
+- `sweat(d, x, y, t, s=1.0, n=2, col=(120, 190, 255))` · lib.objetos — Gotas de sudor que caen junto a una cabeza en (x, y).
 - `sword(img, gx, gy, L=300, ang=0.0, kind='long', seed=1)` · reels_engine.sketch.history — Sword gripped at (gx, gy): kind 'long' (knight/viking) or 'gladius' (short, Roman).
 - `table(d, x, y, s=1.0, w=520, col=WOOD, cloth=None)` · reels_engine.furniture — Table (~330·s tall). cloth = tablecloth color.
 - `table_v13(d, cx, y, s)` · reel13

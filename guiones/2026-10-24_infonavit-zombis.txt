@@ -1,0 +1,14 @@
+Ventajas de tu casa de Infonavit en un apocalipsis zombi — (fecha por definir; pensado para sábado 24 de octubre)
+Código: specs/s47_infonavit_zombis.py · Sin voz: sinvoz/2026-10-24_infonavit-zombis_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4, una sola toma (~820 caracteres)
+Producir final: python3 -m lib.produce specs/s47_infonavit_zombis.py final audio/47-infonavit-zombis.mp3
+Estructura: gancho (contradicción) = línea 1 · tensión = ventajas 1–5 y cardio · recompensa = "el crédito no"
+
+[mischievously] Tu casa de Infonavit es el búnker perfecto contra zombis. Y tengo pruebas. [sarcastic] Ventaja uno: está tan lejos que los zombis se cansan antes de llegar. Ni el repartidor la encuentra. [confident] Dos: paredes de block y rejas en todas las ventanas. Ya venía blindada. [mischievously] Tres: hay casas de apenas treinta metros cuadrados. Cierras una puerta… y ya aseguraste toda la casa. [sarcastic] Cuatro: el vecino está tan pegado que lo oyes estornudar. Alarma gratis. [confident] Cinco: si te encuentran, te cambias. Hay unas seiscientas mil viviendas abandonadas. [mischievously] Y tú ya entrenaste: dos horas de camión diario. Correr de zombis es cardio ligero. [dramatically] El único problema: los zombis algún día se van… el crédito no. ¿Qué otra ventaja le encuentras? Te leo.
+
+# words: 119  estimated duration: 50 s
+
+Fuentes:
+- UnoTV (5 may 2025): la presidenta Sheinbaum estimó más de 600 mil viviendas abandonadas u ocupadas de forma irregular
+- La Jornada (6 mar 2021): viviendas de interés social "incluso de 30 metros cuadrados"; traslados de dos a tres horas al trabajo en el Estado de México
+Notas: "block y rejas" y "vecino pegado" son observaciones generales (sin cifra); "te faltan 20 años" es chiste. Infonavit es institución pública (sin logo).
