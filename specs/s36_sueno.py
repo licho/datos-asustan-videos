@@ -8,8 +8,8 @@ from lib.fondos import night_room
 NAME = "2026-11-28_dejar-de-dormir"
 END = 4.5
 LINES = [
- ("mischievously", "¿Qué pasaría si dejaras de dormir? Spoiler: el café no te va a salvar.", "¿Qué pasaría si *dejaras de dormir*? El café *no te va a salvar*"),
- ("sarcastic", "Hora dieciocho: tus reflejos ya andan como si te hubieras tomado unas copas. “No pasa nada, otro café.”", "*18 horas:* reflejos como con *unas copas*. “Otro café.”"),
+ ("sarcastic", "Con dieciocho horas sin dormir, tus reflejos andan como si llevaras unas copas.", "*18 horas sin dormir:* reflejos como con *unas copas*"),
+ ("mischievously", "“No pasa nada, otro café.” Spoiler: el café no te va a salvar.", "“Otro café.” Spoiler: *el café no te va a salvar*"),
  ("", "Hora veinticuatro: como pasado de copas. Y hay quien maneja así… con un café en la mano, como si fuera cinturón de seguridad.", "*24 horas:* como *pasado de copas*. Y hay quien maneja así"),
  ("whispers", "Luego llegan los microsueños: tu cerebro se apaga unos segundos sin avisarte. Te deja en visto.", "*Microsueños:* tu cerebro se apaga unos segundos. *Te deja en visto*"),
  ("mischievously", "Día dos: café número ocho. Arriba de cuatrocientos miligramos al día ya te pasaste. Y mil doscientos de golpe pueden darte convulsiones.", "Más de *400 mg al día* ya es mucho. *1,200 de golpe:* convulsiones"),
@@ -28,7 +28,7 @@ def s_hook(c):
     hx, hy = 420 + 200 * .75, FEET - 285 * .75
     mug(d, hx + 40, hy + 120, .8, c.t)                                      # la taza en la mano
     d.ellipse([hx - 20, hy - 20, hx + 20, hy + 20], fill=SKIN, outline=BLK, width=2)   # mano encima del asa
-    chip(d, "¿Y SI DEJAS DE DORMIR?", CHIP1, bg=PURPLE, appear=c.lt / .3)
+    chip(d, "¿Y SI DEJAS DE DORMIR?", CHIP1, bg=PURPLE)
     return img
 
 def s_18(c):
@@ -37,6 +37,7 @@ def s_18(c):
     gauge(d, 300, 960, 160, lerp(10, 5, ease(f)), 10, "", fg=WHITE); d.text((300, 1010), "REFLEJOS", font=F(40), fill=WHITE, anchor="mm")
     n = 1 + int(4 * cl(f / .8))
     for k in range(n): mug(d, 780, 1290 - k * 150, .55, c.t, steam=(k == n - 1))
+    chip(d, "SIN DORMIR", CHIP1, bg=PURPLE)
     return img
 
 def s_24(c):
@@ -121,7 +122,7 @@ def ending(c):
     follow_btn(d, c.lt, y=1250, delay=c.dur * .5)
     return img
 
-SCENES = [(0, s_hook), (1, s_18), (2, s_24), (3, s_micro), (4, s_coffee), (5, s_ghost), (6, s_student), (7, s_rats), (8, s_seven), (9, s_tv), (10, ending)]
-SFX = [(0, .2, "sting", {}), (1, .5, "pop", {}), (1, 1.5, "pop", {}), (1, 2.5, "pop", {}), (2, .3, "skid", {}), (3, 1.0, "buzzer", {}), (4, 1.0, "alarm", {}),
+SCENES = [(0, s_18), (1, s_hook), (2, s_24), (3, s_micro), (4, s_coffee), (5, s_ghost), (6, s_student), (7, s_rats), (8, s_seven), (9, s_tv), (10, ending)]
+SFX = [(0, .2, "sting", {}), (0, .8, "pop", {}), (0, 1.8, "pop", {}), (1, .3, "pop", {}), (2, .3, "skid", {}), (3, 1.0, "buzzer", {}), (4, 1.0, "alarm", {}),
        (5, 1.0, "sting", {}), (6, 3.0, "ding", {}), (7, .5, "sadtrom", {}), (8, 1.0, "ding", {}), (9, 3.0, "boing", {}), (10, 2.0, "jingle", {})]
 MUSIC = ("pad", [], None)

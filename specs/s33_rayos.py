@@ -7,8 +7,8 @@ from lib.props import sun, thermo, building, bolt, ground_current, ranger_hat, t
 NAME = "2026-11-25_rayos"
 END = 4.5
 LINES = [
- ("dramatically", "Un rayo calienta el aire a casi veintiocho mil grados. Cinco veces más caliente que la superficie del Sol.", "Un rayo calienta el aire a *casi 28,000 °C*: *5 veces más que el Sol*"),
- ("mischievously", "Y aun así, mucha gente sigue creyendo estos mitos.", "Y aun así, mucha gente cree *estos mitos*"),
+ ("dramatically", "Un rayo es cinco veces más caliente que la superficie del Sol.", "Un rayo es *5 veces más caliente* que la superficie del Sol"),
+ ("mischievously", "Casi veintiocho mil grados… y aun así, mucha gente sigue creyendo estos mitos.", "*Casi 28,000 °C*… y aun así, mucha gente cree *estos mitos*"),
  ("sarcastic", "Mito uno: “un rayo nunca cae dos veces en el mismo lugar”. Falso: a un rascacielos de Nueva York le caen unos veintitrés al año.", "Mito 1: “nunca cae dos veces en el mismo lugar”. *Falso: ~23 al año*"),
  ("", "Y un guardabosques recibió siete rayos en su vida. Récord mundial.", "Un guardabosques recibió *7 rayos*. Récord mundial"),
  ("serious", "Mito dos: “si no está lloviendo, estoy a salvo”. Falso: un rayo puede caer a más de quince kilómetros de la tormenta.", "Mito 2: “si no llueve, estoy a salvo”. *Falso: puede caer a +15 km*"),

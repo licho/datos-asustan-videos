@@ -7,8 +7,8 @@ NAME = "2026-11-23_mision004-maquinas"
 CAPTIONS = False
 END = 4.5
 LINES = [
- ("dramatically", "Misión 004: siete de la mañana. Tu refri te dice: “Hoy no hay leche. Ni mañana. Ni nunca.”", "Misión 004: 7 a.m. Tu refri te dice: “Hoy no hay leche. Ni mañana. Ni nunca.”"),
- ("serious", "Las máquinas se rebelaron: tu asistente de voz, tu celular… y hasta la freidora de aire.", "Las máquinas se rebelaron. Asistente de voz, celular… y hasta la freidora de aire."),
+ ("dramatically", "Tu refri acaba de decirte: “Hoy no hay leche. Ni mañana. Ni nunca.”", "Tu refri acaba de decirte: “Hoy no hay leche. Ni mañana. Ni nunca.”"),
+ ("serious", "Misión 004: las máquinas se rebelaron. Tu asistente de voz, tu celular… y hasta la freidora de aire.", "Misión 004: las máquinas se rebelaron. Asistente de voz, celular… y hasta la freidora."),
  ("excited", "Tienes una mochila con seis espacios. ¡Desconéctate!", "Tienes una mochila con 6 espacios. ¡DESCONÉCTATE!"),
  ("confident", "Uno: efectivo. Sin internet, tu tarjeta es un plástico bonito.", "1: efectivo. Sin internet, tu tarjeta es un plástico bonito."),
  ("", "Dos: radio de pilas. Noticias de verdad, no el chat que te dice “confía en mí”.", "2: radio de pilas. Noticias de verdad, no el chat que te dice “confía en mí”."),
@@ -69,8 +69,8 @@ def vacuum(d, x, y, t):
 def s_fridge(c):
     img, d = canvas_px(); kitchen(d); counter(d); fridge(d, c.t)
     hero(d, 50, GROUND - 46, scared=c.cap_lt > 2.5, frame=0)
-    if c.lt > 1.0: popup(d, "HOY NO HAY LECHE.", 70, "white", "red")
-    if c.lt > c.dur * .6: popup(d, "NI MAÑANA. NI NUNCA.", 92, "yellow", "black")
+    popup(d, "HOY NO HAY LECHE.", 70, "white", "red")
+    if c.lt > c.dur * .45: popup(d, "NI MAÑANA. NI NUNCA.", 92, "yellow", "black")
     return fin(c, img)
 
 def s_rebel(c):

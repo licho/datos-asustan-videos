@@ -9,8 +9,8 @@ from lib.fondos import night_room
 NAME = "2026-11-20_mosquito"
 END = 5.0
 LINES = [
- ("mischievously", "¿Cuál es el animal más peligroso del mundo? ¿El tiburón? ¿El león? ¿La serpiente?", "¿Cuál es el animal *más peligroso* del mundo?"),
- ("dramatically", "No. Es este.", "No. *Es este.*"),
+ ("mischievously", "Si crees que el animal más peligroso es el tiburón… estás muy lejos.", "¿El animal *más peligroso* es el tiburón? *Estás muy lejos*"),
+ ("dramatically", "El más peligroso… es este.", "El más peligroso… *es este.*"),
  ("serious", "Solo por la malaria murieron unas seiscientas diez mil personas en 2024, según la OMS.", "Solo por la *malaria* murieron unas *610 mil personas* en 2024"),
  ("", "Las serpientes matan entre ochenta y un mil y ciento treinta y ocho mil al año. ¿Los tiburones? Apenas un puñado.", "Serpientes: *81 a 138 mil* al año. ¿Tiburones? *Apenas un puñado*"),
  ("", "Y eso sin contar el dengue, el zika, el chikungunya y la fiebre amarilla.", "Y eso sin contar *dengue, zika, chikungunya y fiebre amarilla*"),
@@ -44,7 +44,7 @@ def hook(c):
     chip(d, "¿EL MÁS PELIGROSO?", CHIP1, bg=RED, appear=lt / .3)
     xs = (200, 540, 880)
     for i, (x, kind) in enumerate(zip(xs, ("shark", "lion", "snake"))):
-        poster(img, x, 860, kind, c.t, (lt - a1 * (.3 + .2 * i)) / .35)
+        poster(img, x, 860, kind, c.t, 1.0 if i == 0 else (lt - .2 * i) / .3)
     d = ImageDraw.Draw(img)
     if lt >= a1:
         for i, x in enumerate(xs):

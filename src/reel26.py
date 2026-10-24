@@ -149,7 +149,7 @@ def sick_guy(d, x, y, s, t):
     d.ellipse([hx + S(140), hy + S(10), hx + S(160), hy + S(30)], fill=RED)
 
 CAPS = [
-    (0.0, 4.0, "¿Qué pasa si olvidas comida en el refri *durante un mes*?"),
+    (0.0, 4.0, "¿Crees que el refri *mata las bacterias*? Algunas *crecen ahí, felices*"),
     (4.0, 7.0, "Día 1: guardas el guisado. Todo bien."),
     (7.0, 11.0, "Regla de oro: las sobras se comen en *3 o 4 días*"),
     (11.0, 14.3, "Pero lo olvidaste *detrás del frasco de mostaza*…"),
@@ -181,7 +181,9 @@ def render(v, t=None):
         if v >= 11.0:
             jar(d, lerp(1200, 460, ease((v - 11.0) / 1.0)), SH2)
         day = 1 if v < 7.0 else int(lerp(1, 4, cl((v - 7.0) / 3.5)))
-        if v < 4.0: chip(d, "¿QUÉ PASA SI…?", 380, bg=RED, appear=v / 0.3)
+        if v < 4.0:                                   # gancho: bacterias de fiesta en el refri desde el cuadro 0
+            chip(d, "EL REFRI NO LAS MATA", 380, bg=RED)
+            for i in range(3): bacteria(d, 230 + i * 300, SH2 - 95 - abs(math.sin(t * 6 + i)) * 25, 1.7, t + i, "green", shades=True)
         calendar(d, 880, 260, day)
         if 7.0 <= v < 11.0: chip(d, "SOBRAS: 3–4 DÍAS", 1290, bg=(30, 140, 80), appear=(v - 7.0) / 0.3)
         if v >= 11.5: chip(d, "OLVIDADO", 1290, bg=(120, 120, 130), appear=(v - 11.5) / 0.3)

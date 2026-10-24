@@ -9,7 +9,7 @@ from lib.fondos import make_space
 NAME = "2026-11-24_luna-desaparece"
 END = 4.5
 LINES = [
- ("mischievously", "¿Qué pasaría si mañana la Luna desapareciera? Spoiler: no explotaría nada… pero la extrañarías más de lo que crees.", "¿Qué pasaría si mañana *la Luna desapareciera*?"),
+ ("mischievously", "Si la Luna desaparece mañana, no explota nada… y eso es lo peor.", "Si la Luna desaparece mañana, *no explota nada*… *y eso es lo peor*"),
  ("serious", "Primero, las noches: sin luna, serían mucho más oscuras. Solo estrellas.", "Las noches serían *mucho más oscuras*. Solo estrellas"),
  ("sarcastic", "Y tu foto de la luna con el celular… pues ya no.", "Y tu foto de la luna con el celular… *pues ya no*"),
  ("serious", "Las mareas quedarían en más o menos un tercio de lo que son hoy. El Sol también jala el mar, pero mucho menos.", "Las mareas quedarían en *un tercio* de lo que son hoy"),
@@ -26,11 +26,11 @@ SPACE = make_space(); NIGHT = ((15, 20, 50), (45, 45, 90))
 
 def hook(c):
     img, d = canvas(SPACE); f = c.lt / c.dur
-    gone = f > .55
+    gone = f > .3
     planet_earth(d, 330, 1060, 230, mood="scared" if gone else "happy")
     if not gone: moon_disc(d, 800, 600, 110)
-    elif f < .75:
-        k = (f - .55) / .2
+    elif f < .5:
+        k = (f - .3) / .2
         for i in range(10):
             a = i / 10 * 6.28; r = 60 + 200 * k
             d.ellipse([800 + math.cos(a) * r - 40 * (1 - k), 600 + math.sin(a) * r - 40 * (1 - k), 800 + math.cos(a) * r + 40 * (1 - k), 600 + math.sin(a) * r + 40 * (1 - k)], fill=(240, 240, 230))

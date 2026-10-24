@@ -10,9 +10,8 @@ NAME = "2026-11-19_cucaracha-sin-cabeza"
 KITCHEN = make_kitchen(); PLAIN = ((250, 240, 225), (230, 215, 195))
 
 LINES = [
- ("mischievously", "¿Sabías que una cucaracha puede vivir… sin cabeza?", "¿Sabías que una cucaracha puede vivir… *sin cabeza*?"),
- ("dramatically", "Hasta una semana.", "*Hasta una semana.*"),
- ("serious", "No respira por la boca: respira por unos agujeritos en el cuerpo llamados espiráculos.", "No respira por la boca: respira por unos agujeritos llamados *espiráculos*"),
+ ("dramatically", "Esta cucaracha no tiene cabeza… y va a vivir una semana más.", "Esta cucaracha *no tiene cabeza*… y va a vivir *una semana más*"),
+ ("serious", "¿Cómo? No respira por la boca: respira por unos agujeritos en el cuerpo llamados espiráculos.", "¿Cómo? No respira por la boca: usa unos agujeritos llamados *espiráculos*"),
  ("", "Y no se desangra, porque su sangre circula a baja presión y la herida se sella rápido.", "Y no se desangra: su sangre circula *a baja presión* y la herida *se sella rápido*"),
  ("sarcastic", "Entonces, ¿de qué muere? De sed. Sin boca, no puede tomar agua.", "¿De qué muere? *De sed.* Sin boca, no puede tomar agua"),
  ("whispers", "Eso sí: la cabeza, por su lado, puede seguir moviendo las antenas durante horas.", "Y la cabeza, por su lado, *puede seguir moviendo las antenas durante horas*"),
@@ -22,15 +21,12 @@ LINES = [
 END = 5.0
 
 def hook(c):
+    """Desde el cuadro 0: la cucaracha ya va caminando sin cabeza y la cabeza mueve las antenas aparte."""
     img, d = canvas(KITCHEN); v = c.lt
-    x = lerp(-200, 480, ease(v / 2.2)); popped = v >= 2.4
-    roach(d, x, 1170, 1.1, c.t, head=not popped)
-    if popped:
-        k = ease((v - 2.4) / 0.6)
-        roach_head(d, lerp(x + 190, 860, k), 1200 - 30 * k - math.sin(k * math.pi) * 420, 1.0, c.t)
-        if v < 3.2: bigtext(d, "¡POP!", 700, 600, 120, fill=YEL); c.shake = 6
-    chip(d, "¿SIN CABEZA?", CHIP1, bg=RED, appear=v / 0.3)
-    if v >= c.at(1): calendar(d, 540, 560, int(lerp(1, 7, cl((v - c.at(1)) / 1.2))))
+    roach(d, 400 + math.sin(c.t * 2) * 30, 1130, 1.5, c.t, head=False)
+    roach_head(d, 830, 1200, 1.3, c.t)
+    chip(d, "SIN CABEZA", CHIP1, bg=RED)
+    calendar(d, 540, 560, int(lerp(1, 7, cl(v / max(1.0, c.dur * .9)))))
     return img
 
 def spiracles(c):
@@ -92,6 +88,6 @@ def ending(c):
         follow_btn(d, lt, y=1220, delay=5.5)
     return img
 
-SCENES = [(0, hook), (2, spiracles), (3, pressure), (4, thirst), (5, head), (6, chancla), (7, ending)]
-SFX = [(0, 2.4, "pop", {}), (1, 0.0, "sting", {}), (4, 1.5, "sadtrom", {}), (6, 0.6, "splat", {}), (6, 2.0, "splat", {}), (7, 3.0, "buzzer", {}), (7, 5.5, "jingle", {})]
-MUSIC = ("bass", [(4, 6)], 7)
+SCENES = [(0, hook), (1, spiracles), (2, pressure), (3, thirst), (4, head), (5, chancla), (6, ending)]
+SFX = [(0, 0.0, "sting", {}), (0, 1.5, "pop", {}), (3, 1.5, "sadtrom", {}), (5, 0.6, "splat", {}), (5, 2.0, "splat", {}), (6, 3.0, "buzzer", {}), (6, 5.5, "jingle", {})]
+MUSIC = ("bass", [(3, 5)], 6)

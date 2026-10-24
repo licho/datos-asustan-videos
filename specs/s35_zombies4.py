@@ -9,8 +9,8 @@ from lib.fondos import store_day, make_store
 NAME = "2026-11-27_zombies-parte4"
 END = 5.0
 LINES = [
- ("dramatically", "Día cuatro del apocalipsis zombi. Se fue la señal… y al celular le queda diez por ciento.", "*Día 4* del apocalipsis zombi. Sin señal… y *10% de batería*"),
- ("sarcastic", "El empleado ya cobra la carga: cincuenta pesos el cinco por ciento.", "El empleado ya cobra la carga: *$50 el 5%*"),
+ ("dramatically", "Al celular le queda diez por ciento… y afuera hay zombis.", "*10% de batería*… y afuera hay *zombis*"),
+ ("sarcastic", "Día cuatro en el minisúper, sin señal. Y el empleado ya cobra la carga: cincuenta pesos el cinco por ciento.", "*Día 4*, sin señal. El empleado cobra la carga: *$50 el 5%*"),
  ("serious", "Regla uno: ahorra batería. Baja el brillo, modo avión y cierra las apps que no uses.", "*Regla 1:* baja el brillo, *modo avión* y cierra las apps"),
  ("", "Regla dos: cuando haya señal, manda mensaje, no llames. Los mensajes pasan más fácil cuando la red está saturada.", "*Regla 2:* manda mensaje, no llames. *Pasa más fácil*"),
  ("sarcastic", "Y no, Don Toño, no es momento de subir historia.", "Y no, Don Toño, *no es momento de subir historia*"),
@@ -37,9 +37,9 @@ def battery(d, x, y, pct, w=220):
 def s_day4(c):
     img = store_day(c.t); img = img if hasattr(img, "size") else img[0]; img = img.copy(); d = ImageDraw.Draw(img)
     guy(d, 330, FEET, .7, mood="scared", t=c.t)
-    battery(d, 760, 640, 10 if int(c.t * 2) % 2 else 9)
-    d.text((760, 740), "SIN SEÑAL", font=F(44), fill=RED, anchor="mm", stroke_width=4, stroke_fill=WHITE)
-    chip(d, "DÍA 4", CHIP1, bg=RED, appear=c.lt / .3)
+    battery(d, 700, 640, 10 if int(c.t * 2) % 2 else 9)
+    d.text((700, 740), "SIN SEÑAL", font=F(44), fill=RED, anchor="mm", stroke_width=4, stroke_fill=WHITE)
+    chip(d, "DÍA 4", CHIP1, bg=RED)
     return img
 
 def s_charge(c):

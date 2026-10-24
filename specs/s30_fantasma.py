@@ -9,8 +9,8 @@ from lib.fondos import office, night_room
 NAME = "2026-11-21_fantasma-trabajos"
 END = 4.5
 LINES = [
- ("mischievously", "Guía laboral para monstruos, episodio cuatro: el fantasma.", "Guía laboral para monstruos, *episodio 4: el fantasma*"),
- ("sarcastic", "Su currículum: ciento cincuenta años de experiencia… en la misma casa. Habilidades: atravesar paredes y aparecer a las tres de la mañana.", "*150 años de experiencia*… en la misma casa"),
+ ("sarcastic", "Ciento cincuenta años en la misma casa… y nunca le han pagado.", "*150 años* en la misma casa… *y nunca le han pagado*"),
+ ("mischievously", "Hoy el fantasma busca trabajo. Habilidades: atravesar paredes y aparecer a las tres de la mañana.", "Hoy *el fantasma busca trabajo*. Habilidades: *atravesar paredes*"),
  ("confident", "Trabajo número uno: agente inmobiliario. Vende la casa embrujada como “con mucho carácter”… y con inquilino incluido.", "*Trabajo #1:* agente inmobiliario. Casa “con mucho carácter”… *e inquilino incluido*"),
  ("serious", "Trabajo número dos: soporte técnico. Cliente: “Se me prenden y se apagan las luces solas”. Él: “Sí… ese soy yo.”", "*Trabajo #2:* soporte técnico. “Las luces parpadean solas”. *“Ese soy yo.”*"),
  ("mischievously", "Trabajo número tres: Recursos Humanos. Te entrevista, te dice “nosotros te llamamos”… y desaparece. Literal. Es el rey del ghosting.", "*Trabajo #3:* Recursos Humanos. “Nosotros te llamamos”… *y desaparece. Literal.*"),
@@ -27,7 +27,7 @@ def intro(c):
     d = ghost(img, 540, 960, .8, c.t, mood="happy", tie=TIE)
     table(d, 540, 1300, .8, w=760)
     chip(d, "GUÍA LABORAL · EP. 4", CHIP1, bg=PURPLE, appear=lt / .3)
-    if lt > .8: bigtext(d, "EL FANTASMA", 540, 620, 100, fill=WHITE)
+    bigtext(d, "150 AÑOS SIN SUELDO", 540, 620, 80, fill=WHITE)
     return img
 
 def cv(c):
