@@ -9,11 +9,23 @@ Antes de empezar lee: `IDEAS.md` (temas hechos y pendientes) y `lib/CATALOGO.md`
 ## Reglas de contenido (no negociables)
 - **Sin marcas** (ni en voz ni en dibujos) y **sin referencias locales** a Yucatán/Mérida.
 - **Datos exactos y con fuente.** Verifica en la web; las fuentes van al final del guion (`guiones/*.txt`) y en la respuesta.
-- **Máximo 90 s.** `texto` da la duración estimada; apunta a ≤ 89 s.
+- **Duración: la necesaria, no la máxima.** Tope duro 90 s, pero no se llena hasta ahí. Guía: un solo dato o curiosidad → 30–45 s; lista, guía o "qué pasaría si" → 60–75 s; más de 75 s solo si cada línea lo justifica. Prueba de cada línea: "si la quito, ¿se pierde algo?" Si no, se quita.
 - **Primero el guion, luego el video.** Muestra el guion (con escenas propuestas) y espera aprobación antes de construir. Muestra el video antes de programarlo.
 - Pide más humor si el guion queda plano: Luis prefiere chistes cotidianos mexicanos, sarcasmo y humor negro ligero.
 - Políticas de plataformas (anuncios): **sin armas en pantalla**, sin símbolos nazis ni uniformes reconocibles, sin sangre/gore, sin muertos visibles. Mencionar temas sensibles está bien; mostrarlos, no.
 - Revisar que no haya objetos flotando, elementos encimados ni texto cortado. El contraste lo revisa Luis al final (no correr `check-contraste` salvo que lo pida).
+
+## Estructura de cada guion: gancho → tensión → recompensa
+- **Gancho (línea 1, ≤ 3 s, ~10 palabras máximo):** rompe el patrón para que no deslicen. Debe ser uno de estos 4 tipos:
+  1. **Error común:** "Si crees que el animal más peligroso es el tiburón… estás muy lejos."
+  2. **Resultado impactante:** "Esta cucaracha no tiene cabeza… y va a vivir una semana más."
+  3. **Contradicción:** "El ejército más grande de la historia no es humano."
+  4. **"Hice la cuenta" / prueba** (la página no tiene cara, así que en vez de historia personal): "Hice la cuenta: Santa tendría que visitar 9,000 casas por segundo."
+- **No abrir con el título ni la serie.** Nada de "¿Qué pasaría si…?", "Guía laboral, episodio cinco" o "Misión 006: …" como primeras palabras: el nombre de la serie va en el letrero (chip) o en la segunda línea. El gancho es el dato o la imagen más fuerte, aunque luego se explique.
+- **Primer cuadro = la imagen más fuerte** (el monstruo, el resultado, el contraste), no un fondo vacío ni un título. Lo que se ve y lo que se oye en el segundo 0 deben decir lo mismo.
+- **Tensión:** cada línea abre la siguiente (listas numeradas, contadores, "pero espera", "y lo peor viene al final"). Nada de líneas de contexto que no empujen hacia adelante.
+- **Recompensa:** el remate o el dato prometido llega al final y cumple lo que prometió el gancho. Si el gancho usa el mejor dato, el final lo cierra con un giro (no lo repite igual).
+- Al proponer un guion, marca qué línea es gancho (y de qué tipo), cuáles son tensión y cuál es la recompensa, y di la duración estimada.
 
 ## Estructura del repo
 | Ruta | Qué es |
