@@ -92,8 +92,9 @@ def oceans(c):
     img = space(c.t, 11); d = ImageDraw.Draw(img); f = c.lt / c.dur
     lay = Image.new("RGBA", (W, H), (0, 0, 0, 0)); big_sun(ImageDraw.Draw(lay), 540, 1420, 380, c.t, mood="happy")   # el Sol como estufa
     lay = lay.crop((0, 0, W, 1370)); img.paste(lay, (0, 0), lay); d = ImageDraw.Draw(img)
-    x, top = stock_pot(d, 540, 1230, 1.25, c.t)
-    planet_earth(d, x, top - 40, 150, "scared")
+    x, top = stock_pot(d, 540, 1230, 1.25, c.t, part="back")
+    planet_earth(d, x, top - 70, 150, "scared")                         # medio sumergida
+    stock_pot(d, 540, 1230, 1.25, c.t, part="front")
     if f > .35:
         k = ((c.t * .8) % 1)
         fish(d, 830 + 60 * k, top - 60 - math.sin(k * math.pi) * 150, .8)

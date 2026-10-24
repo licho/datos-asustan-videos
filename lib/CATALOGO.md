@@ -486,7 +486,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `stela(img, cx, base, h=380, seed=1, shadow=False)` · reels_engine.sketch.history — Maya stela: tall carved stone with a column of glyph blocks.
 - `step_badge(d, n, cx=140, cy=470, sc=1.0)` · reel2
 - `step_pyramid(img, cx, base, w=480, tiers=5, color=MESO, seed=1, shadow=False)` · reels_engine.sketch.history — Mesoamerican stepped pyramid (Chichén Itzá, Teotihuacan) with a central stairway and a temple on top.
-- `stock_pot(d, x, y, s=1.0, t=0.0, col=(170, 175, 185), liquid=(90, 150, 220), boil=True)` · lib.objetos — Olla grande con asas, vista de frente; y = base. Devuelve (x, y_borde) para meter algo adentro.
+- `stock_pot(d, x, y, s=1.0, t=0.0, col=(170, 175, 185), liquid=(90, 150, 220), boil=True, part='all')` · lib.objetos — Olla grande con asas, vista de frente un poco desde arriba; y = base. Devuelve (x, y_borde).
 - `stool(img, cx, y, w=120, seed=1)` · reels_engine.sketch.props — Three-legged wooden stool; (cx, y) = center of the seat.
 - `stopwatch(d, x, y, r=110, secs=0.0, total=240, col=(240, 240, 245))` · lib.objetos — Cronómetro con botón y aguja; secs = segundos transcurridos (una vuelta = total). Muestra MM:SS abajo. (x, y) = centro.
 - `store_lights(d, b)` · reel

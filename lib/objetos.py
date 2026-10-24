@@ -755,21 +755,27 @@ def light_bill(d, x, y, w=420, total="$4,850", title="RECIBO DE LUZ"):
     d.text((x + w * .1, y + h - w * .28), "TOTAL A PAGAR", font=F(int(w * .07)), fill=BLK, anchor="lm")
     d.text((x + w * .9, y + h - w * .14), total, font=F(int(w * .14)), fill=RED, anchor="rm")
 
-def stock_pot(d, x, y, s=1.0, t=0.0, col=(170, 175, 185), liquid=(90, 150, 220), boil=True):
-    """Olla grande con asas, vista de frente; y = base. Devuelve (x, y_borde) para meter algo adentro."""
+def stock_pot(d, x, y, s=1.0, t=0.0, col=(170, 175, 185), liquid=(90, 150, 220), boil=True, part="all"):
+    """Olla grande con asas, vista de frente un poco desde arriba; y = base. Devuelve (x, y_borde).
+    Para meter algo ADENTRO (que se vea sumergido): stock_pot(..., part="back"), dibuja la cosa con su centro cerca
+    de y_borde, y luego stock_pot(..., part="front") tapa la parte de abajo con el cuerpo de la olla."""
     S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
     top = y - S(300)
-    for sx in (-1, 1): d.rounded_rectangle([x + sx * S(250) - S(40), top + S(50), x + sx * S(250) + S(40), top + S(80)], int(S(12)), fill=dk(col, .8), outline=BLK, width=W_(4))
-    d.rounded_rectangle([x - S(240), top, x + S(240), y], int(S(30)), fill=col, outline=BLK, width=W_(6))
-    d.ellipse([x - S(240), top - S(40), x + S(240), top + S(40)], fill=dk(col, .7), outline=BLK, width=W_(6))
-    d.ellipse([x - S(215), top - S(28), x + S(215), top + S(28)], fill=liquid)
-    if boil:
-        import random as _r
-        r = _r.Random(int(t * 8))
-        for k in range(7):
-            bx = x + r.uniform(-S(190), S(190)); by = top + r.uniform(-S(15), S(15)); br = S(r.uniform(10, 22))
-            d.ellipse([bx - br, by - br, bx + br, by + br], outline=WHITE, width=W_(4))
-    for k in range(3): d.line([(x - S(180) + k * S(180), top + S(120)), (x - S(140) + k * S(180), top + S(120))], fill=lc(col, WHITE, .5), width=W_(6))
+    if part in ("all", "back"):
+        for sx in (-1, 1): d.rounded_rectangle([x + sx * S(250) - S(40), top + S(50), x + sx * S(250) + S(40), top + S(80)], int(S(12)), fill=dk(col, .8), outline=BLK, width=W_(4))
+        d.ellipse([x - S(240), top - S(40), x + S(240), top + S(40)], fill=dk(col, .7), outline=BLK, width=W_(6))
+        d.ellipse([x - S(215), top - S(28), x + S(215), top + S(28)], fill=liquid)
+    if part in ("all", "front"):
+        body = [(x - S(240), top)] + [(x - S(240) * math.cos(a / 20 * math.pi), top + S(40) * math.sin(a / 20 * math.pi)) for a in range(21)] + [(x + S(240), top), (x + S(240), y - S(30)), (x + S(210), y), (x - S(210), y), (x - S(240), y - S(30))]
+        d.polygon(body, fill=col, outline=BLK); d.line(body + [body[0]], fill=BLK, width=W_(6), joint="curve")
+        d.arc([x - S(240), top - S(40), x + S(240), top + S(40)], 0, 180, fill=BLK, width=W_(6))
+        if boil:
+            import random as _r
+            r = _r.Random(int(t * 8))
+            for k in range(7):
+                bx = x + r.choice((-1, 1)) * r.uniform(S(120), S(195)); by = top + r.uniform(-S(22), S(10)); br = S(r.uniform(10, 22))
+                d.ellipse([bx - br, by - br, bx + br, by + br], outline=WHITE, width=W_(4))
+        for k in range(3): d.line([(x - S(180) + k * S(180), top + S(120)), (x - S(140) + k * S(180), top + S(120))], fill=lc(col, WHITE, .5), width=W_(6))
     return x, top
 
 def solar_panel(d, x, y, w=220, tilt=.35):
