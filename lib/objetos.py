@@ -645,3 +645,33 @@ def pet_collar(d, x, y, w=60, col=(220, 50, 60)):
     """Collar de mascota con plaquita dorada; (x, y) = centro del cuello, w = ancho."""
     d.rounded_rectangle([x - w / 2, y - w * .12, x + w / 2, y + w * .12], int(w * .1), fill=col, outline=BLK, width=3)
     d.ellipse([x - w * .12, y + w * .05, x + w * .12, y + w * .29], fill=(250, 210, 60), outline=BLK, width=3)
+
+def stopwatch(d, x, y, r=110, secs=0.0, total=240, col=(240, 240, 245)):
+    """Cronómetro con botón y aguja; secs = segundos transcurridos (una vuelta = total). Muestra MM:SS abajo. (x, y) = centro."""
+    d.rectangle([x - r * .15, y - r * 1.3, x + r * .15, y - r * 1.05], fill=(170, 170, 180), outline=BLK, width=4)
+    d.ellipse([x - r * .25, y - r * 1.45, x + r * .25, y - r * 1.25], fill=RED, outline=BLK, width=4)
+    d.ellipse([x - r, y - r, x + r, y + r], fill=col, outline=BLK, width=8)
+    for k in range(12):
+        a = k / 12 * 2 * math.pi
+        d.line([(x + math.sin(a) * r * .8, y - math.cos(a) * r * .8), (x + math.sin(a) * r * .92, y - math.cos(a) * r * .92)], fill=BLK, width=4)
+    a = (secs % total) / total * 2 * math.pi
+    d.line([(x, y), (x + math.sin(a) * r * .75, y - math.cos(a) * r * .75)], fill=RED, width=8)
+    d.ellipse([x - 10, y - 10, x + 10, y + 10], fill=BLK)
+    m, sct = int(secs) // 60, int(secs) % 60
+    d.text((x, y + r + 50), f"{m}:{sct:02d}", font=F(int(r * .55)), fill=WHITE, anchor="mm", stroke_width=5, stroke_fill=BLK)
+
+def vertebrae(d, x, y0, y1, n=7, w=80, col=(245, 240, 225), labels=False):
+    """Columna de n vértebras apiladas entre y0 (arriba) y y1 (abajo), centrada en x; para comparar cuellos."""
+    seg = (y1 - y0) / n
+    d.line([(x, y0), (x, y1)], fill=(200, 80, 80), width=max(4, int(w * .12)))
+    for k in range(n):
+        a, b = y0 + k * seg + seg * .1, y0 + (k + 1) * seg - seg * .1
+        d.rounded_rectangle([x - w / 2, a, x + w / 2, b], int(min(w, b - a) * .25), fill=col, outline=BLK, width=4)
+        d.line([(x + w / 2, (a + b) / 2), (x + w / 2 + w * .25, (a + b) / 2 - seg * .1)], fill=BLK, width=4)
+        if labels: d.text((x - w / 2 - 30, (a + b) / 2), str(k + 1), font=F(max(18, int(min(40, seg * .5)))), fill=WHITE, anchor="mm", stroke_width=3, stroke_fill=BLK)
+
+def pillow(d, x, y, w=140, col=(240, 240, 255), stripe=(150, 170, 230)):
+    """Almohada (vista de lado, un poco aplastada); (x, y) = centro."""
+    h = w * .45
+    d.rounded_rectangle([x - w / 2, y - h / 2, x + w / 2, y + h / 2], int(h * .45), fill=col, outline=BLK, width=4)
+    d.line([(x - w * .35, y), (x + w * .35, y)], fill=stripe, width=max(3, int(w * .05)))

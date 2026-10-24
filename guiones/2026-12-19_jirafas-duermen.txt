@@ -1,0 +1,14 @@
+¿Cómo duermen las jirafas? — sábado 19 de diciembre de 2026 (dato curioso corto)
+Código: specs/s46_jirafas.py · Sin voz: sinvoz/2026-12-19_jirafas-duermen_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4, una sola toma
+Producir final: python3 -m lib.produce specs/s46_jirafas.py final audio/46-jirafas.mp3
+Estructura: gancho (resultado impactante) = línea 1 · tensión = líneas 2–7 · recompensa = línea 8
+
+[mischievously] Una jirafa sueña… menos de media hora por noche. [sarcastic] Y ni siquiera de corrido: en ratitos de dos a cuatro minutos. Ni te da para un capítulo. [mischievously] Para soñar se echa… y hace algo rarísimo: dobla su cuello de casi dos metros hacia atrás, como un arco, y recarga la cabeza en su propio trasero. [sarcastic] Y ese cuello tiene los mismos siete huesos que el tuyo… solo que cada uno mide hasta veinticinco centímetros. Ni la mejor almohada cervical lo arregla. [serious] Es que en esa fase los músculos se aflojan: si estuviera parada, se iría de boca. [dramatically] ¿Y por qué tan poquito? Echada no ve bien ni se levanta rápido… y los leones lo saben. [confident] Por eso duermen por turnos: mientras una sueña, las demás vigilan. [sarcastic] Así que la próxima vez que digas “no dormí nada”… acuérdate de la jirafa: soñó dos minutos y se fue a trabajar. ¿Tú cuántas horas duermes? Te leo en los comentarios.
+
+# words: 157  estimated duration: 65 s
+
+Fuentes:
+- Frontiers for Young Minds (2023), "How do giraffes sleep?": sueño REM de solo 20–30 min por noche, en sesiones de 2–4 min; músculos flojos (atonía) → postura especial con la cabeza apoyada; riesgo de leones; turnos de vigilancia
+- Giraffe Conservation Foundation (Do giraffe lie down?): para soñar doblan las patas y curvan el cuello hacia atrás con la cabeza sobre las ancas; no pueden levantarse rápido; unas vigilan mientras otras duermen; también dormitan de pie
+- WorldAtlas: el cuello mide ~1.8 m y tiene 7 vértebras, como el humano, de hasta 25 cm cada una

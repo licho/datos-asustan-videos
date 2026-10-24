@@ -109,3 +109,29 @@ def forest_city(t=0.0, w=2160, h=3840, seed=5):
     trees = sorted((base + r.uniform(20, 900), r.uniform(0, w), r.uniform(.8, 1.8), r.choice(("round", "pine")), r.randint(0, 40)) for k in range(60))
     for ty, tx, ts, kind, g in trees: tree(d, tx, ty, ts, kind=kind, col=(60, 130 + g, 60))
     return img, d
+
+def savanna(t=0.0, night=False, w=1080, h=1920, seed=4, ground_y=1290):
+    """Sabana africana: cielo (día o noche con luna), acacias de copa plana, pasto seco. Devuelve (img, d)."""
+    import random, math
+    r = random.Random(seed)
+    sky = ((0, (20, 25, 60)), (1, (60, 50, 100))) if night else ((0, (255, 215, 150)), (1, (240, 160, 90)))
+    img = radial_bg(sky, cy=900).resize((w, h)); d = ImageDraw.Draw(img)
+    if night:
+        for k in range(60):
+            x, y = r.uniform(0, w), r.uniform(0, ground_y - 300); d.ellipse([x - 2, y - 2, x + 2, y + 2], fill=(240, 240, 255))
+        d.ellipse([w - 300, 520, w - 180, 640], fill=(250, 245, 220), outline=BLK, width=4)
+    else:
+        d.ellipse([w * .5 - 160, ground_y - 470, w * .5 + 160, ground_y - 150], fill=(255, 240, 180))
+    d.rectangle([0, ground_y - 160, w, ground_y], fill=(200, 170, 100) if not night else (90, 80, 70))
+    for k in range(int(3 * w / 1080)):                                   # acacias al fondo
+        x = r.uniform(60, w - 60); by = ground_y - 150; s = r.uniform(.7, 1.1)
+        col = (110, 90, 60) if not night else (40, 35, 40)
+        d.line([(x, by), (x, by - 170 * s)], fill=col, width=int(16 * s))
+        d.line([(x, by - 110 * s), (x - 60 * s, by - 190 * s)], fill=col, width=int(10 * s))
+        d.ellipse([x - 170 * s, by - 250 * s, x + 170 * s, by - 170 * s], fill=(120, 140, 60) if not night else (35, 45, 40))
+    d.rectangle([0, ground_y, w, ground_y + 90], fill=(180, 150, 80) if not night else (70, 60, 55))
+    d.line([(0, ground_y), (w, ground_y)], fill=BLK, width=4)
+    for k in range(int(40 * w / 1080)):
+        gx = r.uniform(0, w); gy = ground_y + r.uniform(-4, 60)
+        d.line([(gx, gy), (gx - 6, gy - 26)], fill=(150, 120, 60) if not night else (60, 55, 45), width=4); d.line([(gx, gy), (gx + 6, gy - 22)], fill=(150, 120, 60) if not night else (60, 55, 45), width=4)
+    return img, d

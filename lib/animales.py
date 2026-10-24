@@ -558,3 +558,109 @@ def elephant(d, x, y, s=1.0, t=0.0, sit=False, flip=False):
     ex, ey = P(hx + 45, hy - 20)
     d.ellipse([ex - 10 * s, ey - 10 * s, ex + 10 * s, ey + 10 * s], fill=BLK)
     d.line([P(hx + 25, hy - 45), P(hx + 65, hy - 38)], fill=BLK, width=W_(5))
+
+def _bez(p0, p1, p2, u):
+    return ((1 - u) ** 2 * p0[0] + 2 * (1 - u) * u * p1[0] + u * u * p2[0], (1 - u) ** 2 * p0[1] + 2 * (1 - u) * u * p1[1] + u * u * p2[1])
+
+def giraffe(d, x, y, s=1.0, t=0.0, pose="stand", curl=0.0, eyes="open", bags=False, walk=False, tie=None, binoculars=False, droop=0.0, flip=False):
+    """Jirafa de caricatura de lado, mira a la derecha; y = piso. A s=1 mide ~760 de alto parada.
+    pose: stand | lie (echada con las patas dobladas). curl 0..1 (con pose=lie): el cuello se dobla hacia atrás en arco
+    hasta dejar la cabeza sobre las ancas (cómo duermen para soñar). droop 0..1 (parada): el cuello se cae hacia adelante.
+    eyes: open | sleepy | closed. bags: ojeras. walk: patas caminando. tie: color de corbata. binoculars: binoculares en los ojos.
+    Devuelve la posición de la cabeza (x, y)."""
+    f = -1 if flip else 1; W_ = lambda v: max(2, int(v * s))
+    P = lambda u, v: (x + f * u * s, y + v * s)
+    Y, SP, DK = (245, 200, 90), (175, 105, 45), (110, 70, 35)
+    lie = pose == "lie"
+    by = -95 if lie else -330
+    # cola
+    tx0 = P(-150, by - 20)
+    sw = math.sin(t * 3) * 8
+    tx1 = P(-175 + sw, by + (60 if lie else 130))
+    d.line([tx0, tx1], fill=BLK, width=W_(12)); d.line([tx0, tx1], fill=Y, width=W_(6))
+    d.ellipse([tx1[0] - 12 * s, tx1[1] - 6 * s, tx1[0] + 12 * s, tx1[1] + 30 * s], fill=DK, outline=BLK, width=W_(3))
+    def leg(u, ph, far):
+        c = dk(Y, .85) if far else Y
+        if lie:
+            k0 = P(u, by + 40); k1 = P(u + 70, by + 75); k2 = P(u + 5, by + 90)
+            d.line([k0, k1, k2], fill=BLK, width=W_(36), joint="curve"); d.line([k0, k1, k2], fill=c, width=W_(26), joint="curve")
+            d.ellipse([k1[0] - 16 * s, k1[1] - 16 * s, k1[0] + 16 * s, k1[1] + 16 * s], fill=c, outline=BLK, width=W_(3))
+            return
+        a = math.sin(t * 6 + ph) * .25 if walk else 0
+        top = P(u, by + 40); knee = P(u + 140 * math.sin(a) * .5, by + 170); foot = P(u + 260 * math.sin(a) * .6, -14)
+        d.line([top, knee, foot], fill=BLK, width=W_(34), joint="curve"); d.line([top, knee, foot], fill=c, width=W_(24), joint="curve")
+        d.ellipse([knee[0] - 15 * s, knee[1] - 13 * s, knee[0] + 15 * s, knee[1] + 13 * s], fill=c, outline=BLK, width=W_(3))
+        d.rounded_rectangle([foot[0] - 18 * s, foot[1] - 4 * s, foot[0] + 18 * s, foot[1] + 14 * s], int(5 * s), fill=(60, 45, 35), outline=BLK, width=W_(3))
+    for u, ph in ((-95, 0), (95, math.pi)): leg(u, ph, True)
+    # cuerpo con manchas
+    bx0, bx1 = sorted((P(-165, 0)[0], P(155, 0)[0]))
+    d.ellipse([bx0, y + (by - 80) * s, bx1, y + (by + 75) * s], fill=Y, outline=BLK, width=W_(5))
+    for i, (u, v, r) in enumerate(((-110, -30, 26), (-55, -45, 30), (5, -40, 28), (65, -35, 26), (-85, 20, 28), (-25, 15, 30), (40, 22, 27), (105, 5, 20), (-140, -5, 16))):
+        cx, cy = P(u, by + v); rr = r * s
+        d.rounded_rectangle([cx - rr, cy - rr * .8, cx + rr, cy + rr * .8], int(rr * .45), fill=SP)
+    for u, ph in ((-60, math.pi), (125, 0)): leg(u, ph, False)
+    # cuello: curva de Bézier de la cruz a la cabeza
+    S0 = P(115, by - 40)
+    if lie:
+        up = P(170, by - 380); back = P(-120, by - 70)
+        H = (up[0] + (back[0] - up[0]) * curl, up[1] + (back[1] - up[1]) * curl)
+        C = (S0[0] + f * (60 - 160 * curl) * s, S0[1] - (200 + 160 * curl) * s)
+    else:
+        H0 = P(200, by - 380); H1 = P(330, by + 120)
+        H = (H0[0] + (H1[0] - H0[0]) * droop, H0[1] + (H1[1] - H0[1]) * droop)
+        C = (S0[0] + f * (40 + 120 * droop) * s, S0[1] - (200 - 150 * droop) * s)
+    n = 26
+    pts = [_bez(S0, C, H, i / (n - 1)) for i in range(n)]
+    rads = [(48 - 22 * i / (n - 1)) * s for i in range(n)]
+    for (px, py), r in zip(pts, rads): d.ellipse([px - r - 4 * s, py - r - 4 * s, px + r + 4 * s, py + r + 4 * s], fill=BLK)
+    for (px, py), r in zip(pts, rads): d.ellipse([px - r, py - r, px + r, py + r], fill=Y)
+    for i in range(3, n - 3, 4):
+        px, py = pts[i]; r = rads[i] * .45
+        d.rounded_rectangle([px - r, py - r * .8, px + r, py + r * .8], int(r * .4), fill=SP)
+    for i in range(0, n - 4, 2):                                   # melena
+        px, py = pts[i]; qx, qy = pts[i + 1]; nx, ny = -(qy - py), (qx - px); L = max(1, math.hypot(nx, ny)); nx, ny = nx / L, ny / L
+        side = -1 if f > 0 else 1
+        if lie and curl > .5: side = -side
+        d.line([(px + side * nx * rads[i], py + side * ny * rads[i]), (px + side * nx * (rads[i] + 14 * s), py + side * ny * (rads[i] + 14 * s))], fill=DK, width=W_(8))
+    # cabeza: m = hacia dónde mira (1 derecha, -1 izquierda); tilt > 0 = nariz hacia abajo
+    if lie:
+        m = f if curl < .6 else -f
+        tilt = -.5 + .5 * min(1, curl / .6) if curl < .6 else .35
+    else:
+        m = f; tilt = 1.3 * droop
+    th = m * tilt; ca, sa = math.cos(th), math.sin(th)
+    hx, hy = H
+    R = lambda a, b: (hx + (m * a * s) * ca - (b * s) * sa, hy + (m * a * s) * sa + (b * s) * ca)
+    hd = m
+    for k in (-1, 1):                                              # cuernitos (osiconos)
+        b0 = R(-25, -30 + k * 0); b1 = R(-40, -78)
+        bb = R(-25 + k * 12, -32); bt = R(-40 + k * 12, -80)
+        d.line([bb, bt], fill=BLK, width=W_(14)); d.line([bb, bt], fill=Y, width=W_(8))
+        d.ellipse([bt[0] - 11 * s, bt[1] - 11 * s, bt[0] + 11 * s, bt[1] + 11 * s], fill=DK, outline=BLK, width=W_(3))
+    ear = [R(-45, -20), R(-90, -48), R(-55, -5)]
+    d.polygon(ear, fill=Y, outline=BLK); d.line(ear + [ear[0]], fill=BLK, width=W_(4))
+    head = [R(-50, -38), R(20, -42), R(95, -18), R(108, 10), R(90, 32), R(10, 34), R(-45, 22)]
+    d.polygon(head, fill=Y, outline=BLK); d.line(head + [head[0]], fill=BLK, width=W_(5), joint="curve")
+    mz = [R(60, -10), R(95, -18), R(108, 10), R(90, 32), R(55, 28)]
+    d.polygon(mz, fill=(235, 180, 110))
+    d.ellipse([R(88, -4)[0] - 6 * s, R(88, -4)[1] - 5 * s, R(88, -4)[0] + 6 * s, R(88, -4)[1] + 5 * s], fill=BLK)
+    d.line([R(70, 22), R(100, 20)], fill=BLK, width=W_(4))
+    ex, ey = R(5, -12); er = 15 * s
+    if bags:
+        d.arc([ex - er * 1.3, ey - er * .4, ex + er * 1.3, ey + er * 1.9], 20, 160, fill=(130, 90, 130), width=W_(7))
+        d.arc([ex - er * 1.1, ey + er * .1, ex + er * 1.1, ey + er * 2.3], 20, 160, fill=(150, 110, 150), width=W_(5))
+    if binoculars:
+        for k in (0, 1):
+            bx, byy = R(10 + k * 6, -14 - k * 20)
+            d.rounded_rectangle([bx - 16 * s, byy - 14 * s, bx + 26 * s, byy + 14 * s], int(6 * s), fill=(40, 40, 45), outline=BLK, width=W_(3))
+            d.ellipse([bx + 16 * s, byy - 12 * s, bx + 30 * s, byy + 12 * s], fill=(120, 170, 220), outline=BLK, width=W_(2))
+    elif eyes == "closed":
+        d.arc([ex - er, ey - er * .6, ex + er, ey + er * .9], 20, 160, fill=BLK, width=W_(5))
+    else:
+        d.ellipse([ex - er, ey - er, ex + er, ey + er], fill=WHITE, outline=BLK, width=W_(3))
+        d.ellipse([ex + hd * 4 * s - 7 * s, ey - 5 * s, ex + hd * 4 * s + 7 * s, ey + 9 * s], fill=BLK)
+        if eyes == "sleepy": d.chord([ex - er - 1, ey - er - 1, ex + er + 1, ey + er + 1], 180, 360, fill=Y, outline=BLK, width=W_(3))
+    if tie:
+        nx_, ny_ = pts[4]
+        d.polygon([(nx_ - 14 * s, ny_), (nx_ + 14 * s, ny_), (nx_ + 20 * s, ny_ + 90 * s), (nx_, ny_ + 115 * s), (nx_ - 20 * s, ny_ + 90 * s)], fill=tie, outline=BLK)
+    return H

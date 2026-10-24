@@ -138,6 +138,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `germ(d, x, y, r, kind, t=0.0, phase=0.0, shade=1.0)` · reel2
 - `ghost(img, x, y, s=1.0, t=0.0, alpha=1.0, pixel=0, bob=True, **kw)` · lib.criaturas — Pega un fantasma con transparencia (alpha 0..1) y opcionalmente pixelado (pixel = tamaño de bloque).
 - `ghost_draw(d, x, y, s=1.0, t=0.0, mood='happy', tie=None, headset=False, col=(245, 248, 255), arms='down')` · lib.criaturas — Fantasma de sábana. (x, y) = centro del cuerpo. Alto ~420·s. mood: happy | scared | sad | smug.
+- `giraffe(d, x, y, s=1.0, t=0.0, pose='stand', curl=0.0, eyes='open', bags=False, walk=False, tie=None, binoculars=False, droop=0.0, flip=False)` · lib.animales — Jirafa de caricatura de lado, mira a la derecha; y = piso. A s=1 mide ~760 de alto parada.
 - `guy(d, x, y, s=1.0, mood='neutral', arms='down', look=0.0, t=0.0, hoodie=(240, 120, 40))` · reels_engine.humans
 - `hawk(d, x, y, s=1.0, t=0.0, flip=False, dive=False)` · lib.animales — Halcón de caricatura volando, mirando a la derecha (flip=True: a la izquierda); (x, y) = centro del cuerpo.
 - `heart_face(d, x, y, s=1.0, t=0.0)` · lib.criaturas — Corazón con cara, latiendo rápido (x, y = centro).
@@ -405,7 +406,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `pie(d, cx, cy, r, frac, appear)` · reel12
 - `pie_chart(img, cx, cy, r=160, parts=(0.5, 0.3, 0.2), colors=None, labels=None, seed=1)` · reels_engine.sketch.finance — Pie chart (budget split); parts are fractions or amounts; labels = text on each slice ("50%").
 - `piggy_bank(d, x, y, s=1.0, coin=True, t=0.0)` · reels_engine.furniture — Piggy bank; y = base.
-- `pillow(d, cx, cy, s)` · reel12
+- `pillow(d, x, y, w=140, col=(240, 240, 255), stripe=(150, 170, 230))` · lib.objetos — Almohada (vista de lado, un poco aplastada); (x, y) = centro.
 - `pizza(d, cx, cy, s)` · reel2
 - `pizza_slice(img, cx, cy, h=200, ang=0.0, seed=1)` · reels_engine.sketch.everyday — Pizza slice pointing down, with crust and pepperoni; ang = turn in radians.
 - `place_setting(d, x, y, s=1.0, food=None)` · lib.objetos — Lugar en la mesa visto de frente: plato con cubiertos a los lados y copa. y = superficie de la mesa.
@@ -479,7 +480,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `step_badge(d, n, cx=140, cy=470, sc=1.0)` · reel2
 - `step_pyramid(img, cx, base, w=480, tiers=5, color=MESO, seed=1, shadow=False)` · reels_engine.sketch.history — Mesoamerican stepped pyramid (Chichén Itzá, Teotihuacan) with a central stairway and a temple on top.
 - `stool(img, cx, y, w=120, seed=1)` · reels_engine.sketch.props — Three-legged wooden stool; (cx, y) = center of the seat.
-- `stopwatch(img, cx, cy, r=90, seconds=15, seed=1)` · reels_engine.sketch.sports — Stopwatch; 'seconds' places the hand.
+- `stopwatch(d, x, y, r=110, secs=0.0, total=240, col=(240, 240, 245))` · lib.objetos — Cronómetro con botón y aguja; secs = segundos transcurridos (una vuelta = total). Muestra MM:SS abajo. (x, y) = centro.
 - `store_lights(d, b)` · reel
 - `store_shelf(d, x0, x1, y0, y1, rng)` · reel
 - `street_lamp(d, x, y, s=1.0, on=True)` · reels_engine.exterior — Street lamp; y = floor.
@@ -520,6 +521,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `ufo(d, x, y, big=1, t=0, beam=False, beam_h=120)` · alien
 - `umbrella(img, cx, cy, w=320, color=RED, seed=1)` · reels_engine.sketch.finance — Open umbrella (protection, emergency fund); (cx, cy) = tip of the canopy.
 - `vacuum(d, cx, cy, s, t, ls)` · reel5
+- `vertebrae(d, x, y0, y1, n=7, w=80, col=(245, 240, 225), labels=False)` · lib.objetos — Columna de n vértebras apiladas entre y0 (arriba) y y1 (abajo), centrada en x; para comparar cuellos.
 - `volleyball(img, cx, cy, r=60, ang=0.0, seed=1)` · reels_engine.sketch.sports — Volleyball with yellow and blue panels.
 - `voyager(d, x, y, s=1.0)` · reel23
 - `wall_calendar(img, x, y, w=150, color=BLUE, label=None, seed=1)` · reels_engine.sketch.props — Calendar with rings; (x, y) = top left corner. label = big text instead of the grid of days ("1 YEAR").
@@ -576,6 +578,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `rlyeh_city(d, cx, base, s, t, col=(60, 75, 80))` · reel3
 - `room(mess=0.0, dark=0.0, seed=1)` · reel12
 - `room_ofrenda_pixel(d, t)` · ofrenda
+- `savanna(t=0.0, night=False, w=1080, h=1920, seed=4, ground_y=1290)` · lib.fondos_canal — Sabana africana: cielo (día o noche con luna), acacias de copa plana, pasto seco. Devuelve (img, d).
 - `sky_pixel(d, t)` · pixel
 - `skyline(d, y, s=1.0, col=(50, 40, 80))` · reel24
 - `store_bg(t)` · reel14
