@@ -13,8 +13,8 @@ from lib.props import xmas_tree
 NAME = "2026-12-15_duende-trabajos"
 END = 4.5
 LINES = [
- ("mischievously", "Guía laboral para monstruos, episodio siete: el duende de Santa.", "Guía laboral para monstruos, *episodio 7: el duende de Santa*"),
- ("sarcastic", "Su currículum: trescientos años armando juguetes en el Polo Norte… sin aguinaldo y sin calefacción. Motivo de salida: lo despidieron.", "*300 años* armando juguetes… *sin aguinaldo*. Motivo de salida: *despedido*"),
+ ("sarcastic", "Trescientos años armando juguetes… y lo corrieron sin aguinaldo.", "*300 años* armando juguetes… *y lo corrieron sin aguinaldo*"),
+ ("mischievously", "El duende de Santa busca trabajo. ¿Que por qué lo corrieron?", "*El duende de Santa* busca trabajo. ¿Por qué lo corrieron?"),
  ("dramatically", "¿Por qué? Se quedó dormido dentro de una caja, lo envolvieron… y lo entregaron. Un niño pidió una bicicleta y le llegó un duende con resaca.", "Se durmió en una caja… *y lo entregaron*. Pidió bici… *le llegó un duende con resaca*"),
  ("confident", "Trabajo número uno: repartidor de paquetería. Entrega en todo el mundo en una sola noche… pero el resto del año, tu paquete “va en camino” tres semanas.", "*Trabajo #1:* repartidor. Una noche para el mundo… *tres semanas para tu paquete*"),
  ("serious", "Trabajo número dos: armador de muebles. Arma lo que sea sin instructivo… y siempre le sobran tres tornillos. Igual que a ti.", "*Trabajo #2:* armador de muebles. *Siempre le sobran tres tornillos*"),
@@ -33,13 +33,13 @@ def intro(c):
     d.rectangle([0, 1250, W, 1380], fill=(235, 242, 252)); snow_fall(d, c.t)
     bx, by, s = 540, 1270, 1.2
     open_box(d, bx, by, s, front=False)
-    if lt > .4:
-        pop_y = tw(lt, .4, .7, by - 10, by - 150, back_out)
-        elf(d, bx, pop_y, .9, c.t, mood="happy", arms="up" if lt > 1.0 else "down")
+    if True:
+        pop_y = tw(lt, 0, .3, by - 60, by - 150, back_out)
+        elf(d, bx, pop_y, .9, c.t, mood="happy", arms="up" if lt > .5 else "down")
     open_box(d, bx, by, s)
-    k = tw(lt, .35, .9, 0, 1, cubic_out)
+    k = tw(lt, 0, .5, .3, 1, cubic_out)
     box_lid(d, bx + k * 300, by - 250 * s - k * 320 + k * k * 260, s, ang=-k * 40)
-    if lt > .8: bigtext(d, "EL DUENDE DE SANTA", 540, 520, 76, fill=WHITE)
+    bigtext(d, "300 AÑOS… Y LO CORRIERON", 540, 520, 64, fill=WHITE)
     chip(d, "GUÍA LABORAL · EP. 7", CHIP1, bg=PURPLE, appear=lt / .3)
     return img
 

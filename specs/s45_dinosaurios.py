@@ -13,13 +13,14 @@ from reels_engine.camera import Shot, film, path, pan, zoom_in, impact, handheld
 NAME = "2026-12-18_dinosaurios"
 END = 4.5
 LINES = [
- ("mischievously", "¿Qué pasaría si los dinosaurios siguieran existiendo? La mala noticia: tú probablemente no existirías. La buena: tu ex tampoco.", "¿Y si los dinosaurios siguieran aquí? *Tú no existirías*… *tu ex tampoco*"),
+ ("mischievously", "Los dinosaurios nunca se extinguieron… y uno te acaba de robar la torta.", "Los dinosaurios *nunca se extinguieron*… y uno *te robó la torta*"),
+ ("serious", "¿Y si los grandes siguieran aquí? La mala noticia: tú probablemente no existirías. La buena: tu ex tampoco.", "¿Y si los grandes siguieran aquí? *Tú no existirías*… *tu ex tampoco*"),
  ("serious", "Hace sesenta y seis millones de años, un asteroide acabó con casi el setenta por ciento de las especies. Mientras los dinosaurios mandaban, el mamífero más grande pesaba unos diez kilos. Básicamente, éramos botana.", "Hace 66 millones de años: *adiós al 70% de las especies*. Los mamíferos pesaban *10 kilos*: *éramos botana*"),
  ("sarcastic", "Pero digamos que sí naces. El tiranosaurio muerde con hasta cincuenta y siete mil newtons: como si un elefante se te sentara encima. Y tu seguro de gastos médicos… «eso no lo cubre la póliza».", "Mordida: *57,000 newtons*. Como *un elefante encima*… y el seguro *no lo cubre*"),
  ("mischievously", "La buena noticia: un estudio dice que no podía correr; iba a unos dieciocho kilómetros por hora. Si te alcanza, en tu velorio dirán: «Al menos murió haciendo cardio».", "No podía correr: *18 km/h*. Si te alcanza… *al menos hiciste cardio*"),
  ("dramatically", "¿Y el velocirraptor de las películas? Era del tamaño de un pavo… y tenía plumas. En Navidad no sabrías si cenártelo… o si él te cena a ti.", "El velocirraptor real: *tamaño pavo y con plumas*. ¿Quién cena a quién?"),
- ("whispers", "Pero lo que asusta: los dinosaurios nunca se fueron. Las aves son dinosaurios, del mismo grupo que el tiranosaurio. Hay unas once mil especies… y te están viendo.", "*Las aves SON dinosaurios*: unas *11,000 especies*… y te están viendo"),
- ("sarcastic", "La paloma que te robó la torta es un dinosaurio. Y el pollo de tu caldo también: te estás comiendo a los primos del tiranosaurio. Venganza servida… con limón.", "La paloma de la torta: *dinosaurio*. Tu caldo de pollo: *venganza con limón*"),
+ ("whispers", "¿Lo de la torta? No era broma: las aves son dinosaurios, del mismo grupo que el tiranosaurio. Hay unas once mil especies… y te están viendo.", "*Las aves SON dinosaurios*: unas *11,000 especies*… y te están viendo"),
+ ("sarcastic", "Así que sí: la paloma de la torta es dinosaurio. Y el pollo de tu caldo también: te estás comiendo a los primos del tiranosaurio. Venganza servida… con limón.", "El pollo de tu caldo también es dinosaurio: *venganza con limón*"),
  ("", "¿Qué dinosaurio tendrías de mascota? Si dices tiranosaurio, deja tu testamento en los comentarios.", "¿Qué dinosaurio tendrías de mascota? Si es T. rex… *deja tu testamento*"),
 ]
 JUNGLE = ((0, (190, 225, 170)), (1, (110, 165, 110)))
@@ -190,23 +191,26 @@ def birds(c):
     if f > .78: bigtext(d, "…Y TE ESTÁN VIENDO", 540, 560, 66, fill=WHITE)
     return img
 
+def steal(c):
+    """Gancho: desde el cuadro 0, una paloma (dinosaurio) le roba la torta al chavo."""
+    f = c.lt / c.dur
+    img = radial_bg(((0, (200, 230, 250)), (1, (150, 200, 230))), cy=700); d = ImageDraw.Draw(img)
+    d.rectangle([0, 1200, W, 1380], fill=(110, 170, 90))
+    for x in (120, 960): tree(d, x, 1210, 1.2, kind="round")
+    a = anchors(380, 1290, .95); hx, hy = a["hand_r_down"]
+    guy(d, 380, 1290, .95, mood="scared" if f > .3 else "neutral", t=c.t)
+    k = cl(f / .2); k2 = cl((f - .25) / .3)
+    px, py = (lerp(900, hx + 40, k), lerp(760, hy - 60, k)) if k2 == 0 else (lerp(hx + 40, 1000, k2), lerp(hy - 60, 560, k2))
+    if k2 == 0: torta(d, hx + 30, hy, .7)
+    else: torta(d, px, py + 70, .6)
+    pigeon(d, px, py, 1.0, c.t, flip=k2 == 0, fly=True, mood="sly")
+    if f > .35: rubber_stamp(img, "DINOSAURIO", 700, 820, cl((f - .35) / .08), col=RED, size=80, rot=-10)
+    d = ImageDraw.Draw(img)
+    chip(d, "LADRONA JURÁSICA", CHIP1, bg=PURPLE)
+    return img
+
 def revenge(c):
     f = c.lt / c.dur
-    if f < .45:
-        img = radial_bg(((0, (200, 230, 250)), (1, (150, 200, 230))), cy=700); d = ImageDraw.Draw(img)
-        d.rectangle([0, 1200, W, 1380], fill=(110, 170, 90))
-        for x in (120, 960): tree(d, x, 1210, 1.2, kind="round")
-        a = anchors(380, 1290, .95); hx, hy = a["hand_r_down"]
-        guy(d, 380, 1290, .95, mood="scared" if f > .2 else "neutral", t=c.t)
-        k = cl((f - .12) / .1); k2 = cl((f - .22) / .2)
-        px, py = (lerp(1150, hx + 40, k), lerp(600, hy - 60, k)) if k2 == 0 else (lerp(hx + 40, 1000, k2), lerp(hy - 60, 560, k2))
-        if k2 == 0: torta(d, hx + 30, hy, .7)
-        else: torta(d, px, py + 70, .6)
-        pigeon(d, px, py, 1.0, c.t, flip=k2 == 0, fly=True, mood="sly")
-        if f > .25: rubber_stamp(img, "DINOSAURIO", 700, 820, cl((f - .25) / .05), col=RED, size=80, rot=-10)
-        d = ImageDraw.Draw(img)
-        chip(d, "LADRONA JURÁSICA", CHIP1, bg=PURPLE, appear=c.lt / .3)
-        return img
     img, d = living_room()
     window(d, 620, 560, 1000, 900, kind="day")
     pk = radial_bg(((0, (150, 205, 240)), (1, (120, 180, 230))), cy=700); pd = ImageDraw.Draw(pk)
@@ -238,9 +242,9 @@ def ending(c):
     if f > .45: chip(d, "T. REX = DEJA TESTAMENTO", CHIP2, bg=RED, appear=(f - .45) / .1)
     return img
 
-SCENES = [(0, hook), (1, asteroid_snack), (2, bite), (3, chase), (4, raptors), (5, birds), (6, revenge), (7, ending)]
-SFX = [(0, .2, "sting", {}), (0, 1.2, "rumble", {}), (0, 3.5, "whoosh", {}), (1, .3, "whoosh", {}), (1, 3.4, "thud", {}), (1, 5.0, "pop", {}),
-       (2, .5, "rumble", {}), (2, 4.2, "thud", {}), (2, 8.0, "buzzer", {}), (3, .2, "skid", {}), (3, 6.8, "sadtrom", {}),
-       (4, .2, "sting", {}), (4, 4.0, "boing", {}), (5, .3, "whoosh", {}), (5, 8.5, "sting", {}), (6, 1.5, "whoosh", {}), (6, 2.8, "pop", {}),
-       (6, 5.8, "ding", {}), (7, .2, "boing", {})]
-MUSIC = ("bass", [(5, 6)], 6)
+SCENES = [(0, steal), (1, hook), (2, asteroid_snack), (3, bite), (4, chase), (5, raptors), (6, birds), (7, revenge), (8, ending)]
+SFX = [(0, .1, "whoosh", {}), (0, 1.3, "pop", {}), (0, 1.6, "thud", {}), (1, .2, "sting", {}), (1, 1.2, "rumble", {}), (1, 3.5, "whoosh", {}), (2, .3, "whoosh", {}), (2, 3.4, "thud", {}), (2, 5.0, "pop", {}),
+       (3, .5, "rumble", {}), (3, 4.2, "thud", {}), (3, 8.0, "buzzer", {}), (4, .2, "skid", {}), (4, 6.8, "sadtrom", {}),
+       (5, .2, "sting", {}), (5, 4.0, "boing", {}), (6, .3, "whoosh", {}), (6, 8.5, "sting", {}), (7, 1.5, "whoosh", {}), (7, 2.8, "pop", {}),
+       (7, 5.8, "ding", {}), (8, .2, "boing", {})]
+MUSIC = ("bass", [(6, 7)], 7)

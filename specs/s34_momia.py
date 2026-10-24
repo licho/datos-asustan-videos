@@ -8,8 +8,8 @@ from lib.fondos import office
 NAME = "2026-12_momia-trabajos"
 END = 4.5
 LINES = [
- ("mischievously", "Guía laboral para monstruos, episodio cinco: la momia.", "Guía laboral para monstruos, *episodio 5: la momia*"),
- ("sarcastic", "Su currículum: cinco mil años de experiencia… acostada. Referencias: un faraón. No contesta.", "*5,000 años de experiencia*… acostada. Referencias: un faraón. *No contesta.*"),
+ ("sarcastic", "Cinco mil años de experiencia… acostada. Y ahora quiere trabajo.", "*5,000 años de experiencia*… acostada. *Y ahora quiere trabajo*"),
+ ("mischievously", "Es la momia. Referencias: un faraón. No contesta.", "Es *la momia*. Referencias: un faraón. *No contesta.*"),
  ("confident", "Trabajo número uno: envolvedora de regalos en diciembre. Nadie envuelve más rápido. Practica en ella misma todos los días.", "*Trabajo #1:* envolver regalos. *Practica en ella misma* todos los días"),
  ("serious", "Trabajo número dos: enfermera. Ya llega con las vendas puestas.", "*Trabajo #2:* enfermera. *Ya llega con las vendas puestas*"),
  ("mischievously", "Trabajo número tres: guía de museo. La única que puede decir “yo estuve ahí”… y la única a la que le cobran entrada para ver a sus parientes.", "*Trabajo #3:* guía de museo. “Yo estuve ahí”… y *le cobran por ver a sus parientes*"),
@@ -23,9 +23,9 @@ OFFICE = office()
 
 def intro(c):
     img, d = canvas(OFFICE); lt = c.lt
-    mummy(d, lerp(-150, 560, ease(cl(lt / 2.5))), 1290, .8, c.t, "forward", trail=1.0)
+    mummy(d, lerp(300, 560, ease(cl(lt / 1.2))), 1290, .8, c.t, "forward", trail=1.0)
     chip(d, "GUÍA LABORAL · EP. 5", CHIP1, bg=PURPLE, appear=lt / .3)
-    if lt > .8: bigtext(d, "LA MOMIA", 540, 660, 110, fill=WHITE)
+    bigtext(d, "5,000 AÑOS ACOSTADA", 540, 660, 76, fill=WHITE)
     return img
 
 def cv(c):

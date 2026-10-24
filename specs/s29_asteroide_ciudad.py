@@ -8,8 +8,8 @@ from lib.fondos import make_space
 NAME = "2026-12_asteroide-ciudad"
 END = 5.0
 LINES = [
- ("mischievously", "¿Qué tan grande tendría que ser una roca espacial para borrar tu ciudad del mapa? Vamos subiendo de tamaño.", "¿Qué tan grande tendría que ser para *borrar tu ciudad del mapa*?"),
- ("confident", "Del tamaño de un coche: cae más o menos una vez al año… y se quema en el cielo. Bonito espectáculo, cero daños.", "Tamaño *coche*: cae *una vez al año*… y se quema en el cielo"),
+ ("mischievously", "Cada año cae una roca del tamaño de un coche… y nadie se entera.", "Cada año cae una roca *del tamaño de un coche*… *y nadie se entera*"),
+ ("confident", "Se quema en el cielo: bonito espectáculo, cero daños. Ahora vamos subiendo de tamaño… hasta borrar tu ciudad.", "Se quema en el cielo: *cero daños*. Ahora vamos subiendo… *hasta borrar tu ciudad*"),
  ("serious", "Veinte metros: Cheliábinsk, 2013. Explotó en el aire y rompió ventanas en toda la ciudad.", "*20 metros:* Cheliábinsk, 2013. *Rompió ventanas en toda la ciudad*"),
  ("dramatically", "Unos sesenta metros: Tunguska, Siberia, 1908. Derribó ochenta millones de árboles en más de dos mil kilómetros cuadrados.", "*~60 metros:* Tunguska, 1908. *80 millones de árboles* derribados"),
  ("whispers", "Más que toda la Ciudad de México. Y no dejó cráter: explotó antes de tocar el suelo.", "Más que *toda la Ciudad de México*. Y *sin cráter*: explotó en el aire"),
@@ -180,7 +180,7 @@ def ending(c):
     follow_btn(d, lt, y=1240, delay=c.dur * .6)
     return img
 
-SCENES = [(0, hook), (1, car_lvl), (2, chelyabinsk), (3, tunguska), (4, mapa), (5, poster), (6, yr4), (7, region), (8, chicxulub), (9, summary), (10, ending)]
+SCENES = [(0, car_lvl), (2, chelyabinsk), (3, tunguska), (4, mapa), (5, poster), (6, yr4), (7, region), (8, chicxulub), (9, summary), (10, ending)]
 SFX = [(0, .2, "whoosh", {}), (1, 1.0, "ding", {}), (2, 1.6, "thud", {}), (2, 1.65, "splat", {}), (3, .9, "rumble", {"d": 3.0}),
        (4, .2, "pop", {}), (5, .1, "sting", {}), (6, 2.6, "buzzer", {}), (6, 6.0, "buzzer", {}), (7, 2.0, "ding", {}),
        (8, 2.5, "rumble", {"d": 3.0}), (9, .5, "pop", {}), (9, 2.0, "pop", {}), (9, 3.6, "pop", {}), (10, 2.0, "jingle", {})]

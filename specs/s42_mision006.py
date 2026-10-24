@@ -9,8 +9,8 @@ NAME = "2026-12-17_mision006-santa"
 CAPTIONS = False
 END = 4.5
 LINES = [
- ("dramatically", "Misión 006: veinticuatro de diciembre, once de la noche. Santa tiene gripa… y te eligió a ti para repartir los regalos.", "Misión 006: 24 de diciembre, 11 p.m. Santa tiene gripa… y te eligió a ti."),
- ("excited", "Tienes un costal con seis espacios. ¡Al trineo!", "Tienes un costal con 6 espacios. ¡AL TRINEO!"),
+ ("dramatically", "Santa tiene gripa… y te eligió a ti para repartir los regalos.", "Santa tiene gripa… y te eligió a ti para repartir los regalos."),
+ ("excited", "Misión 006: veinticuatro de diciembre, once de la noche. Tienes un costal con seis espacios. ¡Al trineo!", "Misión 006: 24 de diciembre, 11 p.m. Costal de 6 espacios. ¡AL TRINEO!"),
  ("confident", "Uno: la lista, revisada dos veces. No quieres dejarle carbón al niño equivocado… otra vez.", "1: la lista, revisada dos veces. Carbón al niño equivocado… otra vez no."),
  ("", "Dos: zanahorias para los renos. Es la gasolina del trineo, y no aceptan tarjeta.", "2: zanahorias. Gasolina de reno… y no aceptan tarjeta."),
  ("", "Tres: calcetines térmicos. El trineo no tiene techo, ni calefacción, ni dignidad.", "3: calcetines térmicos. Sin techo, sin calefacción, sin dignidad."),

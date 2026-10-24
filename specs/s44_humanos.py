@@ -13,9 +13,9 @@ from reels_engine.camera import Shot, film, path, pan, zoom_out, ken_burns, impa
 NAME = "2026-12-07_humanos-desaparecen"
 END = 4.5
 LINES = [
- ("mischievously", "¿Qué pasaría si mañana todos los humanos desapareciéramos? Spoiler: el planeta ni nos extrañaría. Bueno… casi nadie.", "¿Y si mañana *desapareciéramos todos*? Spoiler: *el planeta ni nos extrañaría*"),
+ ("mischievously", "Si mañana desapareciéramos todos, los únicos que llorarían serían… los piojos.", "Si desapareciéramos todos, los únicos que llorarían… *los piojos*"),
  ("dramatically", "En dos o tres días, el metro de Nueva York se inunda. Hoy lo salvan bombas que sacan cuarenta y nueve millones de litros de agua al día. Sin nadie que las prenda… glu, glu.", "En 2 o 3 días *el metro de Nueva York se inunda*: 49 millones de litros al día… *glu, glu*"),
- ("sarcastic", "Los primeros en extrañarnos: los piojos. Solo viven en humanos… y sin una cabeza se mueren en uno o dos días. Nadie les va a hacer funeral.", "Los primeros en extrañarnos: *los piojos*. Sin cabeza, mueren en *1 o 2 días*"),
+ ("sarcastic", "¿Por qué los piojos? Solo viven en humanos… y sin una cabeza se mueren en uno o dos días. Nadie les va a hacer funeral.", "¿Por qué? *Solo viven en humanos*. Sin cabeza, mueren en *1 o 2 días*"),
  ("mischievously", "En las ciudades frías, las cucarachas tampoco la libran: sin calefacción, no aguantan el invierno. En las calientes… siguen como si nada. Ellas nunca nos necesitaron.", "Ciudades frías: *cucarachas congeladas*. Calientes: *como si nada*"),
  ("serious", "Las ratas de ciudad pierden su comida favorita: nuestra basura. Y los halcones se dan un banquete.", "Las ratas pierden *nuestra basura*… y los halcones *se dan un banquete*"),
  ("dramatically", "A los veinte años, las calles de Nueva York empiezan a hundirse: las columnas que las sostienen por debajo se oxidan.", "Año 20: *las calles se hunden*. Las columnas de abajo *se oxidan*"),
@@ -34,29 +34,15 @@ def stars(d, n=70, seed=4, box=(0, 0, W, H)):
 
 # ------------------------------------------------------------------ escenas
 def hook(c):
+    """Desde el cuadro 0: ropa vacía en la calle y un piojo llorando encima con su maleta."""
     f = c.lt / c.dur
-    if f < .55:
-        world, d = city_street(c.t)
-        for x, col, cp in ((290, (240, 120, 40), (200, 40, 50)), (800, (90, 160, 220), (60, 60, 70))): empty_clothes(d, x, 1290, 1.0, hoodie=col, cap=cp)
-        img = Image.new("RGB", (W, H)); s_ = film(img, world, path(c.lt, [(0, Shot(330, 1190, 1.7)), (c.dur * .5, Shot(540, 1090, 1.12))]))
-        d = ImageDraw.Draw(img)
-        chip(d, "¿QUÉ PASARÍA SI…?", CHIP1, bg=RED, appear=c.lt / .3)
-        bigtext(d, "TODOS DESAPARECEMOS", 540, 560, 64, fill=WHITE)
-        if f > .3:
-            for wx in (290, 800):
-                sx, sy = s_.to_screen((wx - 60, 1180))
-                d.text((sx, sy - 60), "?", font=F(int(90 * s_.scale)), fill=YEL, anchor="mm", stroke_width=6, stroke_fill=BLK)
-        return img
-    img = radial_bg(SPACE, cy=900); d = ImageDraw.Draw(img); stars(d)
-    lt = c.lt - c.dur * .55
-    cx, cy, r = 540, 1010, 280
-    planet_earth(d, cx, cy, r, "happy")
-    sy = tw(lt, 0, .5, 600, cy - .12 * r)
-    shades(d, cx, sy, w=.95 * r)
-    d.line([(cx - .45 * r, sy - 4), (cx - .9 * r, sy - 25)], fill=BLK, width=6); d.line([(cx + .45 * r, sy - 4), (cx + .9 * r, sy - 25)], fill=BLK, width=6)
-    if lt > .7: tag(img, "NI NOS EXTRAÑA", 540, 590, cl((lt - .7) / .3), rot=-6, bg=GREEN, size=72)
+    world, d = city_street(c.t)
+    for x, col, cp in ((290, (240, 120, 40), (200, 40, 50)), (800, (90, 160, 220), (60, 60, 70))): empty_clothes(d, x, 1290, 1.0, hoodie=col, cap=cp)
+    louse(d, 260, 1262, .55, c.t, mood="sad")
+    img = Image.new("RGB", (W, H)); film(img, world, path(c.lt, [(0, Shot(330, 1170, 1.9)), (c.dur * .7, Shot(540, 1090, 1.12))]))
     d = ImageDraw.Draw(img)
-    chip(d, "¿QUÉ PASARÍA SI…?", CHIP1, bg=RED)
+    chip(d, "¿Y SI DESAPARECEMOS?", CHIP1, bg=RED)
+    if f > .45: tag(img, "LOS ÚNICOS QUE LLORAN", 540, 600, cl((f - .45) / .15), rot=-6, bg=PURPLE, size=56)
     return img
 
 def subway(c):

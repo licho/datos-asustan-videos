@@ -12,8 +12,8 @@ def river_night(c, y=1150, moon=(900, 790)): return _river(c.t, y, moon)
 NAME = "2026-12_llorona-trabajos"
 END = 4.5
 LINES = [
- ("mischievously", "Guía laboral para monstruos, episodio seis: la Llorona.", "Guía laboral para monstruos, *episodio 6: la Llorona*"),
- ("sarcastic", "Su currículum: más de quinientos años de experiencia… en turno nocturno. Habilidades: llorar a todo pulmón y aparecer cerca del agua.", "*+500 años de experiencia*… en turno nocturno. Llora *a todo pulmón*"),
+ ("sarcastic", "Quinientos años de turno nocturno… y todavía no le dan base.", "*500 años de turno nocturno*… *y todavía no le dan base*"),
+ ("mischievously", "La Llorona busca trabajo. Habilidades: llorar a todo pulmón y aparecer cerca del agua.", "*La Llorona busca trabajo*. Llora *a todo pulmón*"),
  ("confident", "Trabajo número uno: despertador humano. Grita “¡Ay, mis hijos!” a las tres de la mañana. Nadie se queda dormido… ni vuelve a dormir nunca.", "*Trabajo #1:* despertador. Nadie se queda dormido… *ni vuelve a dormir*"),
  ("serious", "Trabajo número dos: plañidera profesional. La contratan para llorar en los velorios… y es tan buena que los dolientes le piden que le baje.", "*Trabajo #2:* plañidera. Tan buena que *le piden que le baje*"),
  ("mischievously", "Trabajo número tres: voceadora del súper. “¡Aaay, mis hijos!… Su mamá los espera en la caja tres.”", "*Trabajo #3:* voceadora del súper. *“Su mamá los espera en caja 3”*"),
@@ -29,11 +29,11 @@ OFFICE = office()
 
 def intro(c):
     img, d = river_night(c); lt = c.lt
-    x = tw(lt, 0, 2.2, 1250, 560, cubic_out)
-    llorona(d, x, 1130, .85, c.t, mood="wail", arms="up" if lt > 2.0 else "down")
-    if lt > 2.0: wail_waves(d, 560, 1130 - .85 * 545, c.t)
+    x = tw(lt, 0, 1.0, 760, 560, cubic_out)
+    llorona(d, x, 1130, .85, c.t, mood="wail", arms="up" if lt > 1.0 else "down")
+    if lt > 1.0: wail_waves(d, 560, 1130 - .85 * 545, c.t)
     chip(d, "GUÍA LABORAL · EP. 6", CHIP1, bg=PURPLE, appear=lt / .3)
-    if lt > .8: bigtext(d, "LA LLORONA", 540, 510, 100, fill=WHITE)
+    bigtext(d, "500 AÑOS SIN BASE", 540, 510, 84, fill=WHITE)
     return img
 
 def cv(c):

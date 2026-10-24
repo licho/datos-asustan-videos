@@ -14,8 +14,8 @@ def desk2(d, x0, x1, top=1000): office_desk(d, x0, x1, top)
 NAME = "2026-12-03_robot-companero"
 END = 4.5
 LINES = [
- ("mischievously", "¿Tu compañero de trabajo es un robot? Revisa estas señales… antes de que él te revise a ti.", "¿Tu compañero es *un robot*? Revisa estas señales… *antes de que él te revise a ti*"),
- ("serious", "Señal uno: contesta correos a las tres de la mañana… con ortografía perfecta. Nadie normal pone acentos a esa hora.", "*Señal 1:* correos a las 3 a.m.… *con ortografía perfecta*"),
+ ("mischievously", "Tu compañero contesta correos a las tres de la mañana… con acentos.", "Tu compañero contesta correos *a las 3 a.m.*… *con acentos*"),
+ ("serious", "Nadie normal pone acentos a esa hora. Es la señal uno de que es un robot. Revisa las demás… antes de que él te revise a ti.", "*Señal 1* de que es un robot. Revisa las demás… *antes de que él te revise a ti*"),
  ("sarcastic", "Señal dos: nunca va al baño, nunca come y nunca se queja del aire acondicionado. Eso es un electrodoméstico.", "*Señal 2:* no come, no va al baño, no se queja. *Es un electrodoméstico*"),
  ("mischievously", "Señal tres: su foto de perfil es un círculo gris. Y en cada videollamada… “se le traba la cámara”.", "*Señal 3:* foto de perfil gris… y *“se le traba la cámara”*"),
  ("confident", "Señal cuatro: a todo contesta “¡Con gusto!”. ¿Un reporte? “¡Con gusto!”. ¿Sin aguinaldo este año? “¡Con gusto!”.", "*Señal 4:* a todo dice *“¡Con gusto!”*… hasta sin aguinaldo"),
@@ -159,7 +159,7 @@ def ending(c):
     follow_btn(d, lt, y=1240, delay=c.dur * .55)
     return img
 
-SCENES = [(0, hook), (1, mails), (2, appliance), (3, videocall), (4, con_gusto), (5, volvere), (6, captcha_s), (7, fact), (8, forced), (9, replaced), (10, ending)]
+SCENES = [(0, mails), (1, hook), (2, appliance), (3, videocall), (4, con_gusto), (5, volvere), (6, captcha_s), (7, fact), (8, forced), (9, replaced), (10, ending)]
 SFX = [(0, .2, "pop", {}), (0, 2.2, "boing", {}), (1, .5, "ding", {}), (2, .8, "pop", {}), (2, 3.2, "thud", {}), (3, 2.5, "buzzer", {}),
        (4, 1.0, "pop", {}), (4, 3.0, "pop", {}), (5, 2.0, "whoosh", {}), (5, 3.6, "ding", {}), (6, 1.5, "pop", {}), (6, 3.8, "ding", {}),
        (7, .3, "whoosh", {}), (8, .4, "thud", {}), (9, 2.0, "sadtrom", {}), (10, 2.0, "jingle", {})]

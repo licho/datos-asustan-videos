@@ -13,8 +13,8 @@ from reels_engine.camera import Shot, film, path, pan, zoom_in, ken_burns, whip,
 NAME = "2026-12-05_krampus"
 END = 4.5
 LINES = [
- ("whispers", "Hoy, cinco de diciembre, es la Noche de Krampus. Y si te portaste mal este año… esto te interesa.", "Hoy, 5 de diciembre, es *la Noche de Krampus*. ¿Te portaste mal?"),
- ("serious", "Krampus es el compañero oscuro de San Nicolás en los Alpes: cuernos, lengua larguísima, una pezuña de cabra… y un pie humano. Nadie es perfecto.", "El compañero oscuro de San Nicolás: *una pezuña… y un pie humano*"),
+ ("whispers", "Esta noche, en los Alpes, un demonio con cuernos sale a buscar a los que se portaron mal.", "Esta noche, un demonio con cuernos *busca a los que se portaron mal*"),
+ ("serious", "Hoy, cinco de diciembre, es la Noche de Krampus, el compañero oscuro de San Nicolás: cuernos, lengua larguísima, una pezuña de cabra… y un pie humano. Nadie es perfecto.", "El compañero oscuro de San Nicolás: *una pezuña… y un pie humano*"),
  ("dramatically", "Su nombre viene de “krampen”, garra en alemán. Trae cadenas, cascabeles, un manojo de varas… y un costal para llevarse a los que se portaron mal.", "*“Krampen” = garra*. Cadenas, cascabeles, varas… *y un costal*"),
  ("confident", "Así sobrevives. Paso uno: confiesa tus pecados del año. Sí, el “visto” que le dejaste a tu tía también cuenta.", "*Paso 1:* confiesa tus pecados. *El “visto” a tu tía cuenta*"),
  ("sarcastic", "Paso dos: si a medianoche oyes cascabeles… no es el carrito de los elotes. Escóndete.", "*Paso 2:* si oyes cascabeles a medianoche… *no son los elotes*"),
@@ -30,10 +30,10 @@ NIGHT = ((0, (55, 65, 120)), (.6, (25, 30, 70)), (1, (10, 12, 35)))
 def hook(c):
     world, d = village(c.t)
     d.rectangle([700, 1060, 800, 1150], fill=(255, 220, 120))
-    if c.lt > 1.2: krampus(d, 960, 1250, .32, c.t, mood="grin", rods=False)              # ronda el pueblo
+    krampus(d, 960, 1250, .32, c.t, mood="grin", rods=False)              # ronda el pueblo
     d.rectangle([700, 1060, 800, 1150], outline=BLK, width=6); d.line([(750, 1060), (750, 1150)], fill=BLK, width=5)
     snow_fall(d, c.t, box=(0, 0, W, 1300), size=(10, 20))
-    img = Image.new("RGB", (W, H)); film(img, world, handheld(path(c.lt, [(0, Shot(540, 960, 1.0)), (c.dur, Shot(860, 1050, 1.7))]), c.t, 5))
+    img = Image.new("RGB", (W, H)); film(img, world, handheld(path(c.lt, [(0, Shot(830, 1080, 1.6)), (c.dur, Shot(900, 1100, 2.2))]), c.t, 5))
     d = ImageDraw.Draw(img)
     chip(d, "5 DE DICIEMBRE", CHIP1, bg=RED, appear=c.lt / .3)
     return img

@@ -10,7 +10,7 @@ from lib.props import fish, document, outhouse, white_flag, helmet, tortillas, b
 NAME = "2026-12_ejercitos"
 END = 4.5
 LINES = [
- ("mischievously", "¿Cuál ha sido el ejército más grande? Spoiler: no usa uniforme… ni pide permiso para ir al baño.", "¿El ejército *más grande*? Spoiler: *no usa uniforme*… *ni pide permiso*"),
+ ("mischievously", "El ejército más grande de la historia… no es humano.", "El ejército *más grande de la historia*… *no es humano*"),
  ("serious", "Un historiador griego juró que el persa Jerjes invadió Grecia con más de cinco millones de personas.", "Un historiador griego juró que Jerjes invadió Grecia con *más de 5 millones*"),
  ("sarcastic", "Hoy se calcula que eran trescientos mil, cuando mucho. Redondeó como tu tío cuando cuenta cuánto pescó.", "Hoy se calcula: *unos 300 mil*, cuando mucho. Redondeó como *tu tío pescando*"),
  ("", "Napoleón entró a Rusia con cuatrocientos cincuenta mil soldados. Regresaron unos ciento veinte mil.", "Napoleón entró a Rusia con *450 mil*. Regresaron *unos 120 mil*"),
@@ -40,11 +40,9 @@ def s_hook(c):
     ground(d, (90, 80, 110))
     for i in range(4):
         x = 150 + i * 250 + lt * 25; up = i == 2 and lt > 1.0
-        soldier(d, x, 1285 + yoyo(lt + i * .3, 0, .5, 0, -10), .68, c.t, era="modern", arms="up" if up else "down", mood="neutral")
-    if lt > 1.0:
-        a = anchors(150 + 2 * 250 + lt * 25, 1285, .68); say(d, "¿Puedo ir al baño?", a["mouth"], head=a["head_r"], size=44, maxw=420, avoid=[anchors(150 + i * 250 + lt * 25, 1285, .68)["box"] for i in (0, 1, 3)])
-    if lt > 2.2:
-        army_ant(d, tw(lt, 2.2, 2.5, -200, 520), 1308, 1.0, c.t, helmet=True)
+        soldier(d, x, 1285 + yoyo(lt + i * .3, 0, .5, 0, -10), .68, c.t, era="modern", arms="down", mood="neutral")
+    if lt > .8:
+        army_ant(d, tw(lt, .8, 1.1, -200, 520), 1308, 1.0, c.t, helmet=True)
     chip(d, "¿EL MÁS GRANDE?", CHIP1, bg=RED, appear=lt / .3)
     return img
 
