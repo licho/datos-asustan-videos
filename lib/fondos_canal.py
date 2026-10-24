@@ -135,3 +135,21 @@ def savanna(t=0.0, night=False, w=1080, h=1920, seed=4, ground_y=1290):
         gx = r.uniform(0, w); gy = ground_y + r.uniform(-4, 60)
         d.line([(gx, gy), (gx - 6, gy - 26)], fill=(150, 120, 60) if not night else (60, 55, 45), width=4); d.line([(gx, gy), (gx + 6, gy - 22)], fill=(150, 120, 60) if not night else (60, 55, 45), width=4)
     return img, d
+
+def monte(t=0.0, night=False, seed=6, ground_y=1290):
+    """Monte bajo / patio maya: arbustos, árboles chaparros y tierra roja. night=True con luna y luciérnagas. Devuelve (img, d)."""
+    import random, math
+    from reels_engine.exterior import tree, bush
+    r = random.Random(seed)
+    sky = ((0, (25, 35, 70)), (1, (60, 60, 110))) if night else ((0, (200, 230, 250)), (1, (150, 200, 230)))
+    img = radial_bg(sky, cy=800); d = ImageDraw.Draw(img)
+    if night: d.ellipse([820, 520, 940, 640], fill=(250, 245, 220), outline=BLK, width=4)
+    for k in range(5): tree(d, r.uniform(0, 1080), ground_y - 140, r.uniform(.45, .65), kind="round", col=(45, 70, 70) if night else (120, 170, 120))
+    d.rectangle([0, ground_y - 90, 1080, ground_y + 90], fill=(110, 60, 45) if night else (185, 95, 60))
+    for k in range(4): bush(d, r.uniform(0, 1080), ground_y - 70, r.uniform(.4, .6), col=(45, 70, 70) if night else (120, 170, 120))
+    d.line([(0, ground_y), (1080, ground_y)], fill=BLK, width=4)
+    if night:
+        for k in range(14):
+            x = (r.uniform(0, 1080) + math.sin(t + k) * 30); y = r.uniform(700, 1200) + math.cos(t * 1.3 + k) * 20
+            d.ellipse([x - 5, y - 5, x + 5, y + 5], fill=(240, 255, 150))
+    return img, d

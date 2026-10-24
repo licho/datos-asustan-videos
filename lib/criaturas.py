@@ -401,3 +401,72 @@ def louse(d, x, y, s=1.0, t=0.0, mood="sad", suitcase=True, flip=False):
         d.rounded_rectangle([bx - S(35), y - S(70), bx + S(35), y - S(5)], int(S(8)), fill=(170, 60, 50), outline=BLK, width=W_(3))
         d.arc([bx - S(16), y - S(90), bx + S(16), y - S(60)], 180, 360, fill=BLK, width=W_(5))
         d.line([(x - f * S(55), y - S(90)), (bx, y - S(80))], fill=BLK, width=W_(6))
+
+def _leaf_palmate(d, cx, cy, r, ang, col, lobes=5, outline=BLK, w=3):
+    """Hoja palmeada de lóbulos ANCHOS y redondeados (chaya, papaya); (cx, cy) = base donde nace el pecíolo."""
+    spread = 2.8
+    for k in range(lobes):
+        a = ang - spread / 2 + spread * k / max(1, lobes - 1)
+        L = r * (1.0 - .18 * abs(k - (lobes - 1) / 2) / ((lobes - 1) / 2 or 1))
+        wd = L * .26
+        pts = []
+        for m in range(25):
+            u = m / 24 * math.pi
+            px = math.sin(u) ** 1.4 * wd * (1 + .10 * math.sin(u * 5))     # orilla ondulada, punta ligera
+            py = (1 - math.cos(u)) / 2 * L
+            pts.append((px, py))
+        pts = pts + [(-x_, y_) for x_, y_ in reversed(pts)]
+        ca, sa = math.cos(a - math.pi / 2), math.sin(a - math.pi / 2)
+        q = [(cx + px * ca - py * sa, cy + px * sa + py * ca) for px, py in pts]
+        d.polygon(q, fill=col, outline=outline); d.line(q + [q[0]], fill=outline, width=w, joint="curve")
+        d.line([(cx, cy), (cx + math.cos(a) * L * .85, cy + math.sin(a) * L * .85)], fill=dk(col, .72), width=max(2, w - 1))
+    d.ellipse([cx - r * .12, cy - r * .12, cx + r * .12, cy + r * .12], fill=col, outline=outline, width=w)
+
+def chaya(d, x, y, s=1.0, t=0.0, mood="serious", arms="crossed", glow=False):
+    """Mata de chaya con cara: arbusto de hojas anchas (lóbulos redondeados) que nace del suelo; y = piso.
+    mood: serious | angry | happy | wink. arms: crossed (dos ramitas cruzadas) | none. glow: brillitos de espíritu del monte."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    G, DG, LG = (110, 190, 90), (75, 150, 70), (140, 210, 110)
+    ST = (150, 160, 90)
+    for k, dx in enumerate((-60, -20, 20, 60)):
+        d.line([(x + S(dx * .4), y), (x + S(dx * .9), y - S(300))], fill=BLK, width=W_(22)); d.line([(x + S(dx * .4), y), (x + S(dx * .9), y - S(300))], fill=ST, width=W_(15))
+    sw = math.sin(t * 2) * .06
+    leaves = ((-250, -360, -2.6, 140), (250, -360, -.55, 140), (-170, -520, -2.1, 145), (170, -520, -1.05, 145),
+              (0, -580, -1.57, 155), (-280, -220, -3.0, 115), (280, -220, -.15, 115))
+    for lx, ly, a, r in leaves:                                   # pecíolos: del centro de la mata a cada hoja
+        d.line([(x, y - S(310)), (x + S(lx), y + S(ly))], fill=BLK, width=W_(12)); d.line([(x, y - S(310)), (x + S(lx), y + S(ly))], fill=ST, width=W_(7))
+    for k, (lx, ly, a, r) in enumerate(leaves):
+        _leaf_palmate(d, x + S(lx), y + S(ly), S(r), a + sw * (1 if k % 2 else -1), DG if k % 2 else G, lobes=5, w=W_(4))
+    fx, fy = x, y - S(330)
+    d.ellipse([fx - S(120), fy - S(105), fx + S(120), fy + S(105)], fill=LG, outline=BLK, width=W_(5))
+    for sx in (-1, 1):
+        ex, ey = fx + sx * S(42), fy - S(20)
+        if mood == "wink" and sx > 0: d.arc([ex - S(18), ey - S(10), ex + S(18), ey + S(14)], 200, 340, fill=BLK, width=W_(5)); continue
+        d.ellipse([ex - S(19), ey - S(19), ex + S(19), ey + S(19)], fill=WHITE, outline=BLK, width=W_(3)); d.ellipse([ex - S(8), ey - S(6), ex + S(8), ey + S(10)], fill=BLK)
+        if mood in ("serious", "angry"): d.line([(ex - sx * S(24), ey - S(30 if mood == "angry" else 27)), (ex + sx * S(20), ey - S(20 if mood == "angry" else 27))], fill=BLK, width=W_(7))
+    if mood in ("happy", "wink"): d.arc([fx - S(40), fy + S(10), fx + S(40), fy + S(60)], 20, 160, fill=BLK, width=W_(6))
+    elif mood == "angry": d.arc([fx - S(35), fy + S(35), fx + S(35), fy + S(75)], 200, 340, fill=BLK, width=W_(6))
+    else: d.line([(fx - S(30), fy + S(48)), (fx + S(30), fy + S(48))], fill=BLK, width=W_(6))
+    if arms == "crossed":
+        for sx in (-1, 1):
+            d.line([(fx - sx * S(115), fy + S(55)), (fx + sx * S(70), fy + S(115))], fill=BLK, width=W_(22)); d.line([(fx - sx * S(115), fy + S(55)), (fx + sx * S(70), fy + S(115))], fill=(150, 160, 90), width=W_(14))
+    if glow:
+        for k in range(8):
+            a = t * .8 + k * .785; rr = S(380 + 20 * math.sin(t * 3 + k))
+            gx, gy = x + math.cos(a) * rr, y - S(380) + math.sin(a) * rr * .8
+            r0 = S(10 + 6 * math.sin(t * 5 + k))
+            d.ellipse([gx - r0, gy - r0, gx + r0, gy + r0], fill=(230, 255, 180), outline=BLK, width=2)
+
+def chaya_leaf_zoom(d, x, y, r=330, t=0.0, hairs=True):
+    """Hoja de chaya vista de cerca con pelitos urticantes (como agujitas). (x, y) = base de la hoja."""
+    _leaf_palmate(d, x, y, r, -1.57, (90, 170, 80), lobes=5, w=6)
+    if hairs:
+        import random as _r
+        rr = _r.Random(3)
+        for k in range(60):
+            a = -1.57 + rr.uniform(-1.1, 1.1); dist = rr.uniform(.15, .85) * r
+            hx, hy = x + math.cos(a) * dist, y + math.sin(a) * dist
+            ln = rr.uniform(14, 26); aa = rr.uniform(0, 6.28)
+            d.line([(hx, hy), (hx + math.cos(aa) * ln, hy + math.sin(aa) * ln)], fill=BLK, width=6)
+            d.line([(hx, hy), (hx + math.cos(aa) * ln, hy + math.sin(aa) * ln)], fill=(250, 250, 240), width=3)
+            d.ellipse([hx + math.cos(aa) * ln - 3, hy + math.sin(aa) * ln - 3, hx + math.cos(aa) * ln + 3, hy + math.sin(aa) * ln + 3], fill=(250, 250, 240))

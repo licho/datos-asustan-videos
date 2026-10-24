@@ -1,0 +1,15 @@
+La planta a la que le tienes que pedir permiso: la chaya — jueves 10 de diciembre de 2026 (propuesta)
+Código: specs/s49_chaya.py · Sin voz: sinvoz/2026-12-10_chaya-permiso_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4, una sola toma
+Producir final: python3 -m lib.produce specs/s49_chaya.py final audio/49-chaya.mp3
+Estructura: gancho (contradicción) = línea 1 · tensión = líneas 2–6 · recompensa = línea 7 · remate = suegra
+Nota: Luis autorizó mencionar Yucatán en este video (excepción a la regla de referencias locales).
+
+[mischievously] Esta planta exige que le pidas permiso. Y la ciencia le da la razón. [whispers] Es la chaya. En comunidades mayas de Yucatán se dice que la habitan los espíritus del monte. [sarcastic] Si la cortas sin permiso, se venga: te da comezón… y la comida te sale amarga. [serious] ¿La comezón? Es real: sus hojas tienen pelitos que pican. [dramatically] Y cruda, suelta cianuro. Por eso se hierve unos veinte minutos antes de comerla. [mischievously] Hay quien dice que en olla de aluminio cae mal… pero eso nadie lo ha comprobado. [confident] Bien cocida, es de las verduras más nutritivas: proteína, hierro, calcio y vitamina C. [sarcastic] O sea: pídele permiso, hiérvela… y no le faltes al respeto. Como a la suegra. ¿Tú le pedirías permiso? Te leo.
+
+# words: 122  estimated duration: 52 s
+
+Fuentes:
+- POSTA: creencia maya en Yucatán de pedir permiso a la chaya (espíritus del monte; si no, comida amarga y comezón); hojas con pelos urticantes (CICY); cruda libera cianuro; muy nutritiva
+- ECHO Community (Chaya toxicity): glucósidos que liberan ácido cianhídrico; hervir hojas y tallos ~20 minutos; lo del aluminio son relatos de boca en boca sin comprobar
+- ECHO Community (Chaya): hojas muy altas en proteína, calcio, hierro y vitaminas A y C

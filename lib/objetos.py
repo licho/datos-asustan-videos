@@ -790,3 +790,22 @@ def solar_panel(d, x, y, w=220, tilt=.35):
         v = k / 3
         d.line([(x - w / 2 + w * .12 * v, y - h * v), (x + w / 2 - w * .12 * v, y - h * v)], fill=(150, 180, 230), width=3)
     d.line([(x, y), (x, y + 18)], fill=(90, 90, 95), width=8)
+
+def fried_egg(d, x, y, s=1.0):
+    """Huevo estrellado visto desde arriba; (x, y) = centro."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    pts = [(x + S(80 + 12 * math.sin(k * 1.7)) * math.cos(k / 12 * 2 * math.pi), y + S(55 + 10 * math.sin(k * 2.3)) * math.sin(k / 12 * 2 * math.pi)) for k in range(12)]
+    d.polygon(pts, fill=WHITE, outline=BLK); d.line(pts + [pts[0]], fill=BLK, width=W_(3), joint="curve")
+    d.ellipse([x - S(26), y - S(22), x + S(26), y + S(22)], fill=(250, 190, 40), outline=BLK, width=W_(3))
+    d.ellipse([x - S(14), y - S(14), x - S(4), y - S(6)], fill=(255, 235, 150))
+
+def greens_plate(d, x, y, s=1.0, egg=True, col=(70, 140, 60)):
+    """Plato con verdura picada (chaya, espinaca…) y opcionalmente un huevo; y = base del plato."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    d.ellipse([x - S(200), y - S(60), x + S(200), y + S(10)], fill=WHITE, outline=BLK, width=W_(4))
+    import random as _r
+    r = _r.Random(4)
+    for k in range(26):
+        gx, gy = x + r.uniform(-S(140), S(140)), y - S(25) + r.uniform(-S(18), S(14))
+        d.ellipse([gx - S(16), gy - S(9), gx + S(16), gy + S(9)], fill=col if k % 2 else dk(col, .8), outline=BLK, width=W_(2))
+    if egg: fried_egg(d, x + S(40), y - S(40), .8 * s)

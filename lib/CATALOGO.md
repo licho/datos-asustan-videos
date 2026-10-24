@@ -100,6 +100,8 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `buddy(img, x, y, s=1.0, pose='standing', arms='down', mood='happy', hair='none', look=0.0, t=0.0, skin=WHITE, shirt=WHITE, hair_color=HAIR, dress=None, extras=None, seed=7)` · reels_engine.cartoon.humans — Cartoon buddy with ink outline. pose: standing|sitting; arms: down|up|hips|wave|point|think|behind (or (left, right));
 - `buddy_anchors(x, y, s=1.0, pose='standing', arms='down', t=0.0)` · reels_engine.cartoon.humans — Body points of buddy (head, mouth, hands, chest…) to place bubbles and objects on it.
 - `cat(d, x, y, s)` · reel17
+- `chaya(d, x, y, s=1.0, t=0.0, mood='serious', arms='crossed', glow=False)` · lib.criaturas — Mata de chaya con cara: arbusto de hojas anchas (lóbulos redondeados) que nace del suelo; y = piso.
+- `chaya_leaf_zoom(d, x, y, r=330, t=0.0, hairs=True)` · lib.criaturas — Hoja de chaya vista de cerca con pelitos urticantes (como agujitas). (x, y) = base de la hoja.
 - `cleopatra(d, x, y, s=1.0, t=0.0, mood='neutral', arms='down')` · lib.humanos — Cleopatra (caricatura): fleco negro, diadema dorada, collar ancho y vestido blanco. y = pies. mood: neutral | bored | happy.
 - `coral(d, x, y, s=1.0, t=0.0, kind='branch', col=(240, 120, 150), spawn=0.0)` · lib.animales — Coral; y = fondo marino. kind: branch | brain. spawn 0..1 suelta huevecillos.
 - `cow(d, x, y, s)` · reel25
@@ -314,6 +316,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `freezer(d, x0, y1)` · reel
 - `fridge_alux(d, x, y, s, open_=0.0)` · reel4
 - `fridge_empty(d, x0, y0, w, h, open_=1.0)` · reel8
+- `fried_egg(d, x, y, s=1.0)` · lib.objetos — Huevo estrellado visto desde arriba; (x, y) = centro.
 - `fruit(d, cx, ybot, col, fuzz=0.0, t=0.0, seed=1)` · reel26
 - `fungus(d, x, y, r, t, col, phase=0.0)` · reel12
 - `garlic(d, cx, cy, r)` · reel14
@@ -326,6 +329,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `goal_thermometer(img, cx, base, h=480, fill=0.6, label=None, color=RED, seed=1, shadow=False)` · reels_engine.sketch.finance — Savings goal thermometer with tick marks; fill = 0…1; label = text above (the goal).
 - `gold_bars(img, cx, base, w=110, rows=(3, 2, 1), seed=1, shadow=False)` · reels_engine.sketch.finance — Stack of gold bars (pyramid); w = width of one bar, rows = bars per row, bottom first.
 - `greek_column(img, cx, base, h=420, broken=False, seed=1, shadow=False)` · reels_engine.sketch.history — Greek column (marble, fluted); broken = ruin with a cracked top.
+- `greens_plate(d, x, y, s=1.0, egg=True, col=(70, 140, 60))` · lib.objetos — Plato con verdura picada (chaya, espinaca…) y opcionalmente un huevo; y = base del plato.
 - `ground_current(d, x, y, t, r=300, col=(255, 230, 80))` · reels_engine.exterior — Electric current spreading over the ground from (x, y).
 - `hatched_chart(img, x, base, values, bar_w=70, gap=14, color=GREEN, hatch=GREEN_D, seed=1)` · reels_engine.sketch.props — Bar chart with marker hatching; bars start at x and stand on y=base; values = bar heights in px.
 - `heart(d, x, y, r=40, col=RED)` · reels_engine.screens
@@ -576,6 +580,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `make_space_v1()` · reel13
 - `make_store()` · reel
 - `make_street()` · reel9
+- `monte(t=0.0, night=False, seed=6, ground_y=1290)` · lib.fondos_canal — Monte bajo / patio maya: arbustos, árboles chaparros y tierra roja. night=True con luna y luciérnagas. Devuelve (img, d).
 - `moon(d, x, y, r)` · reel17
 - `night(moon_on=True)` · reel17
 - `night_room(lamp=True)` · reel14

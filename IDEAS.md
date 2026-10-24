@@ -31,6 +31,7 @@ Octubre–noviembre 2026: zombie en el minisúper · teclado sucio · aluxes · 
 - Misión 006: ayudar a Santa a entregar los juguetes — sin voz listo (jue 17 dic)
 - ¿Qué pasaría si los humanos desapareciéramos? — sin voz listo (lun 7 dic)
 - ¿Qué pasaría si los dinosaurios siguieran existiendo? — sin voz listo (vie 18 dic)
+- La planta que pide permiso (chaya, tradición maya; Luis autorizó mencionar Yucatán) — sin voz listo (propuesto jue 10 dic; "¿cuánto frío aguanta tu cuerpo?" queda sin fecha)
 - ¿Cuánta energía genera el Sol? — sin voz listo (propuesto para lun 21 dic, solsticio; "lo que vive en tu árbol de Navidad" queda sin fecha)
 - ¿Cómo duermen las jirafas? — sin voz listo (sáb 19 dic; "grupo familiar poseído" pasa a ideas pendientes)
 
@@ -46,7 +47,7 @@ Octubre–noviembre 2026: zombie en el minisúper · teclado sucio · aluxes · 
 | Lun 7 | ¿Qué pasaría si los humanos desaparecieran? | sin voz listo |
 | Mar 8 | Guía laboral Ep. 6: Llorona | sin voz listo |
 | Mié 9 | Zombies en el minisúper, parte 5 | pendiente |
-| Jue 10 | ¿Cuánto frío aguanta tu cuerpo? | pendiente |
+| Jue 10 | La planta que pide permiso: la chaya | sin voz listo (propuesta) |
 | Vie 11 | Señales: roomie fantasma | pendiente |
 | Sáb 12 | Ranking: el veneno más potente de la naturaleza | pendiente |
 | Lun 14 | Señales: vecino hombre lobo | pendiente |
