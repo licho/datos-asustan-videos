@@ -61,18 +61,36 @@ def hero(d, x, y, scared=False, frame=0, big=2):
     if scared:
         R(-2, 4 - frame, 3, 3, "peach"); R(11, 4 - frame, 3, 3, "peach")
 
-def zombie(d, x, y, frame=0, big=1):
+def zombie(d, x, y, frame=0, big=1, flip=False):
+    """Zombi pixel con contorno negro; mira a la DERECHA (brazos hacia adelante) salvo flip=True.
+    (x, y) = esquina superior izquierda de la cabeza; mide ~19x25 px por 'big'. frame alterna las piernas."""
     s = big
-    R = lambda a, b, w, h, c: rect(d, x + a * s, y + b * s, w * s, h * s, c)
-    R(2, 0, 8, 8, "green"); R(2, 0, 8, 2, "dgreen")
-    R(3, 3, 2, 2, "red"); R(7, 4, 1, 1, "red")
-    R(4, 6, 4, 1, "black")
-    R(1, 8, 10, 9, "lav"); R(4, 13, 3, 4, "purple")
-    R(-6, 9, 7, 3, "green"); R(-6, 12, 7, 2, "green")
-    if frame % 2 == 0:
-        R(2, 17, 3, 7, "brown"); R(7, 17, 3, 6, "brown")
-    else:
-        R(1, 17, 3, 6, "brown"); R(8, 17, 3, 7, "brown")
+    def R(a, b, w, h, c):
+        if flip: a = 12 - a - w
+        rect(d, x + a * s, y + b * s, w * s, h * s, c)
+    def O(a, b, w, h, c):
+        R(a - 1, b - 1, w + 2, h + 2, "black"); R(a, b, w, h, c)
+    step = frame % 2
+    # brazo de atrás (más oscuro)
+    O(9, 9, 8, 2, "dgreen")
+    # piernas y zapatos
+    l1, l2 = (6, 5) if step == 0 else (5, 6)
+    O(2, 17, 3, l1, "brown"); O(7, 17, 3, l2, "brown")
+    O(2, 17 + l1, 4, 1, "dgray"); O(7, 17 + l2, 4, 1, "dgray")
+    # torso con camisa rota
+    O(1, 8, 10, 9, "lav")
+    R(3, 11, 3, 3, "purple")
+    for k in range(1, 11, 2): R(k, 16, 1, 1, "black")
+    R(9, 9, 1, 2, "white")
+    # cabeza
+    O(2, 0, 8, 8, "green")
+    R(2, 0, 8, 1, "dgreen"); R(3, 1, 2, 1, "dgreen"); R(7, 1, 1, 1, "dgreen")
+    R(3, 3, 2, 2, "white"); R(4, 4, 1, 1, "red")
+    R(7, 3, 2, 2, "white"); R(7, 4, 1, 1, "red")
+    R(3, 6, 5, 1, "black"); R(4, 6, 1, 1, "white"); R(6, 6, 1, 1, "white")
+    R(9, 2, 1, 2, "dgreen")
+    # brazo de enfrente, estirado hacia adelante
+    O(9, 12, 9, 2, "green"); R(17, 12, 1, 1, "dgreen")
 
 def typed(s, t0, t, cps=14):
     n = max(0, int((t - t0) * cps))

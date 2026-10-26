@@ -191,7 +191,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `wolf(d, x, y, s=1.0, t=0.0, mood='smug', outfit='shirt', arms='down', hat=None, howl=False)` · reel17
 - `zomb(d, x, y, s=1.0, t=0.0, mood='blank', arms='out', outfit='office', hat=None, arm_off=False)` · reel18
 - `zombie(d, x, y, s=1.0, t=0.0, face=-1, shade=1.0, glow=False)` · reel
-- `zombie_pixel(d, x, y, frame=0, big=1)` · pixel
+- `zombie_pixel(d, x, y, frame=0, big=1, flip=False)` · pixel — Zombi pixel con contorno negro; mira a la DERECHA (brazos hacia adelante) salvo flip=True.
 
 ## lib.props
 
