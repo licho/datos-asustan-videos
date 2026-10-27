@@ -80,8 +80,11 @@ def hero(d, x, y, scared=False, frame=0, big=2, shirt="orange", cap=None, flip=F
     # cabeza
     O(2, 0, 8, 8, "peach")
     R(2, 0, 8, 2, "brown"); R(2, 2, 1, 3, "brown"); R(6, 2, 2, 1, "brown")
-    if cap:
-        R(2, 0, 8, 2, cap); O(8, 1, 4, 1, cap)
+    if cap:                                                    # gorra: copa redonda sobre la cabeza + visera hacia adelante
+        R(2, -3, 8, 1, "black"); R(1, -2, 10, 3, "black"); R(3, -2, 6, 1, cap); R(2, -1, 8, 2, cap)
+        R(5, -2, 2, 1, lc_cap if (lc_cap := {"red": "pink", "blue": "lav", "green": "green"}.get(cap)) else cap)
+        R(10, -1, 4, 3, "black"); R(10, 0, 3, 1, cap)
+        R(9, 0, 1, 1, cap)
     if scared:
         R(3, 3, 2, 2, "white"); R(4, 4, 1, 1, "black"); R(7, 3, 2, 2, "white"); R(8, 4, 1, 1, "black")
         R(5, 6, 2, 1, "black")
