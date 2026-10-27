@@ -144,8 +144,8 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `guy(d, x, y, s=1.0, mood='neutral', arms='down', look=0.0, t=0.0, hoodie=(240, 120, 40))` · reels_engine.humans
 - `hawk(d, x, y, s=1.0, t=0.0, flip=False, dive=False)` · lib.animales — Halcón de caricatura volando, mirando a la derecha (flip=True: a la izquierda); (x, y) = centro del cuerpo.
 - `heart_face(d, x, y, s=1.0, t=0.0)` · lib.criaturas — Corazón con cara, latiendo rápido (x, y = centro).
-- `hero_pixel(d, x, y, scared=False, frame=0, big=2)` · mision002
-- `hero_pixel_v1(d, x, y, scared=False, frame=0, big=2)` · pixel
+- `hero_pixel(d, x, y, scared=False, frame=0, big=2)` · mision002 — Protagonista de las Misiones: el mismo de pixel.hero, con sudadera azul y gorra roja.
+- `hero_pixel_v1(d, x, y, scared=False, frame=0, big=2, shirt='orange', cap=None, flip=False)` · pixel — Protagonista pixel con contorno negro (mismo estilo que el zombi): sudadera con bolsa y cordones, jeans, tenis,
 - `krampus(d, x, y, s=1.0, t=0.0, mood='grin', arms='down', sack=False, rods=True, mask=False, flip=False, torch=False)` · lib.criaturas — Krampus (caricatura, no gore): peludo café oscuro, cuernos curvos, lengua roja larga, un pie humano y una pezuña.
 - `lion(d, x, y, s=1.0, t=0.0, mood='neutral')` · lib.animales — León sentado de frente; y = piso.
 - `listeria(d, x, y, s, t)` · reel26

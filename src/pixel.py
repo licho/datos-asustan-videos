@@ -52,14 +52,43 @@ def store(d, t, light=True):
     for k in range(6):
         rect(d, 18 + k * 14, 168, 11, 16, ["red", "blue", "green", "pink", "orange", "lav"][k])
 
-def hero(d, x, y, scared=False, frame=0, big=2):
-    R = lambda a, b, w, h, c: rect(d, x + a * big, y + b * big, w * big, h * big, c)
-    R(2, 0, 8, 8, "peach"); R(2, 0, 8, 3, "brown")
-    R(4, 4, 1, 1 + scared, "black"); R(7, 4, 1, 1 + scared, "black")
-    R(1, 8, 10, 9, "orange")
-    R(2, 17, 3, 6, "navy"); R(7, 17, 3, 6, "navy")
+def hero(d, x, y, scared=False, frame=0, big=2, shirt="orange", cap=None, flip=False):
+    """Protagonista pixel con contorno negro (mismo estilo que el zombi): sudadera con bolsa y cordones, jeans, tenis,
+    pelo café, brazos a los lados (o arriba si scared, alternando con frame). Mira a la derecha salvo flip=True.
+    shirt = color de la sudadera (paleta P). cap = color de gorra (None = sin gorra). Mide ~12x24 px por 'big'."""
+    s = big
+    def R(a, b, w, h, c):
+        if flip: a = 12 - a - w
+        rect(d, x + a * s, y + b * s, w * s, h * s, c)
+    def O(a, b, w, h, c):
+        R(a - 1, b - 1, w + 2, h + 2, "black"); R(a, b, w, h, c)
+    dark = {"orange": "brown", "blue": "navy", "green": "dgreen", "red": "purple", "pink": "purple", "lav": "purple"}.get(shirt, "dgray")
+    # piernas y tenis
+    O(2, 17, 3, 5, "navy"); O(7, 17, 3, 5, "navy")
+    O(2, 22, 4, 1, "white"); O(7, 22, 4, 1, "white")
+    # brazos
     if scared:
-        R(-2, 4 - frame, 3, 3, "peach"); R(11, 4 - frame, 3, 3, "peach")
+        up = frame % 2
+        O(-2, 3 - up, 2, 7, shirt); O(-2, 1 - up, 2, 2, "peach")
+        O(12, 3 + up - 1, 2, 7, shirt); O(12, 1 + up - 1, 2, 2, "peach")
+    else:
+        O(-1, 9, 2, 6, shirt); O(-1, 15, 2, 2, "peach")
+        O(11, 9, 2, 6, shirt); O(11, 15, 2, 2, "peach")
+    # torso: sudadera con bolsa canguro y cordones
+    O(1, 8, 10, 9, shirt)
+    R(3, 13, 6, 3, dark); R(4, 9, 1, 3, "white"); R(7, 9, 1, 3, "white")
+    # cabeza
+    O(2, 0, 8, 8, "peach")
+    R(2, 0, 8, 2, "brown"); R(2, 2, 1, 3, "brown"); R(6, 2, 2, 1, "brown")
+    if cap:
+        R(2, 0, 8, 2, cap); O(8, 1, 4, 1, cap)
+    if scared:
+        R(3, 3, 2, 2, "white"); R(4, 4, 1, 1, "black"); R(7, 3, 2, 2, "white"); R(8, 4, 1, 1, "black")
+        R(5, 6, 2, 1, "black")
+    else:
+        R(4, 4, 1, 1, "black"); R(8, 4, 1, 1, "black")
+        R(5, 6, 3, 1, "brown")
+    R(9, 5, 1, 1, "pink")
 
 def zombie(d, x, y, frame=0, big=1, flip=False):
     """Zombi pixel con contorno negro; mira a la DERECHA (brazos hacia adelante) salvo flip=True.

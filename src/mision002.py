@@ -5,14 +5,9 @@ from pixel import P, rect, text, FONT, FONTB, hero, LW, LH, SC
 from alien import icon, popup, dialog, backpack, FONTM, GROUND, lerp, cl
 
 def hero(d, x, y, scared=False, frame=0, big=2):
-    parts = [(2, 0, 8, 8, "peach"), (2, 0, 8, 3, "brown"), (1, 8, 10, 9, "blue"), (2, 17, 3, 6, "navy"), (7, 17, 3, 6, "navy")]
-    if scared: parts += [(-2, 4 - frame, 3, 3, "peach"), (11, 4 - frame, 3, 3, "peach")]
-    for a, b, w, h, c in parts:
-        rect(d, x + a * big - 2, y + b * big - 2, w * big + 4, h * big + 4, "black")
-    for a, b, w, h, c in parts:
-        rect(d, x + a * big, y + b * big, w * big, h * big, c)
-    rect(d, x + 2 * big, y + 2 * big, 8 * big, 1 * big, "white")   # cinta del sombrero/gorra
-    rect(d, x + 4 * big, y + 4 * big, 1 * big, (1 + scared) * big, "black"); rect(d, x + 7 * big, y + 4 * big, 1 * big, (1 + scared) * big, "black")
+    """Protagonista de las Misiones: el mismo de pixel.hero, con sudadera azul y gorra roja."""
+    from pixel import hero as _hero
+    _hero(d, x, y, scared=scared, frame=frame, big=big, shirt="blue", cap="red")
 
 FPS = 30
 
