@@ -218,6 +218,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `basketball(img, cx, cy, r=60, ang=0.0, seed=1)` · reels_engine.sketch.sports — Orange basketball with black lines.
 - `basketball_hoop(img, cx, base, h=640, seed=1, shadow=False)` · reels_engine.sketch.sports — Basketball hoop on a pole: backboard, orange rim, net. Returns the rim center.
 - `bathroom_scale(d, x, y, s=1.0, text='', col=(235, 235, 240))` · lib.objetos — Báscula de baño vista de frente; y = piso. text = lo que marca la pantallita. Devuelve la y de la superficie.
+- `battery_radio(d, x, y, s=1.0, t=0.0, on=True)` · lib.objetos — Radio de pilas con antena y bocina; y = base. on: ondas de sonido.
 - `bed(d, x, y, s=1.0, dirty=0.0)` · reel12
 - `bed_v5(d, cx, cy, s, t, sleeping=True)` · reel5
 - `bells(d, x, y, s=1.0, t=0.0, n=3)` · lib.criaturas — Cascabeles colgando de una correa; (x, y) = punto de arriba.
@@ -261,6 +262,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `car_pixel(d, x, y, t)` · mision002
 - `car_pixel_v1(d, x, y, c='red')` · zombi11
 - `card(d, cx, cy, sc, label)` · reel
+- `card_terminal(d, x, y, s=1.0, text='SIN CONEXIÓN')` · lib.objetos — Terminal de pago con tarjeta (sin marca); y = base. text = lo que dice la pantallita.
 - `cardboard_box(d, x, y, s=1.0, label='OBJETOS PERSONALES', items=True)` · lib.objetos — Caja de cartón de 'despedido' con cosas asomando. y = base.
 - `cash_register(img, cx, base, w=300, display='$25.00', open=True, seed=1, shadow=False)` · reels_engine.sketch.finance — Shop cash register with a display; open=True slides the drawer out with money.
 - `casita(d, x, y, s)` · reel4
@@ -308,7 +310,9 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `eye_icon(d, cx, cy, s)` · reel3
 - `fence(d, x0, x1, y, h=160, col=(240, 240, 235))` · reels_engine.exterior
 - `finish_flag(img, cx, base, h=420, wave=0.0, seed=1, shadow=False)` · reels_engine.sketch.sports — Checkered finish flag on a pole; wave = 0…1 phase of the flutter (animate with t).
+- `first_aid_kit(d, x, y, s=1.0, open_=False)` · lib.objetos — Botiquín blanco con cruz roja; y = base.
 - `fish(d, x, y, s=1.0, col=(120, 180, 220))` · lib.objetos — Pescado de caricatura (el de 'así de grande'); (x, y) = centro, mira a la derecha.
+- `flashlight(d, x, y, s=1.0, on=True, ang=0.0)` · lib.objetos — Linterna de mano apuntando a la derecha (ang en grados); (x, y) = centro del mango.
 - `flicker(t)` · reel
 - `floor_lamp(d, x, y, s=1.0, on=True)` · reels_engine.furniture — Floor lamp; y = floor.
 - `flowerpot(d, x, y, s=1.0, water=True)` · lib.objetos — Maceta con plato de agua; y = piso.
@@ -381,6 +385,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `microwave(d, x, y)` · reel26
 - `milk(d, x, ybot)` · reel26
 - `milk_v19(d, x, y, s, label='CADUCA HOY')` · reel19
+- `mold_spots(d, box, seed=2, n=9, col=(120, 170, 90))` · lib.efectos — Manchas de moho dentro de box=(x0, y0, x1, y1) (comida echada a perder).
 - `money_bag(img, cx, base, h=240, label='$', seed=1, shadow=False)` · reels_engine.sketch.finance — Tied money sack with a '$' on it.
 - `money_jar(img, cx, base, w=200, h=280, fill=0.8, label=None, seed=1, shadow=False)` · reels_engine.sketch.props — Glass jar sitting on y=base, filled with bills up to 'fill' (0…1); label = text on a white tag.
 - `money_pile(img, cx, base, w=100, rows=(4, 3, 2, 1), seed=1)` · reels_engine.sketch.props — Pyramid of money stacks centered on cx, sitting on y=base. rows = stacks per row, bottom first.
@@ -495,6 +500,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `stopwatch(d, x, y, r=110, secs=0.0, total=240, col=(240, 240, 245))` · lib.objetos — Cronómetro con botón y aguja; secs = segundos transcurridos (una vuelta = total). Muestra MM:SS abajo. (x, y) = centro.
 - `store_lights(d, b)` · reel
 - `store_shelf(d, x0, x1, y0, y1, rng)` · reel
+- `storm_cloud(d, x, y, s=1.0, t=0.0, mood='sly', rain=True)` · lib.objetos — Nube de tormenta con cara (huracán/tormenta personificada) y rayito; (x, y) = centro.
 - `street_lamp(d, x, y, s=1.0, on=True)` · reels_engine.exterior — Street lamp; y = floor.
 - `street_sign(d, x, y, text)` · reel24
 - `sun(d, cx, cy, r, t, mood='happy')` · reel23
@@ -542,6 +548,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `wallet(img, cx, cy, w=110, seed=1)` · reels_engine.sketch.props — Open brown wallet centered on (cx, cy).
 - `wanted(d, x, y, w, h, title='SE BUSCA', subtitle='', paper=(240, 225, 185))` · reels_engine.screens — WANTED poster. Returns the box to draw the 'suspect' in. (x, y) = top-left corner.
 - `washer(d, cx, cy, s, t)` · reel5
+- `water_jug(d, x, y, s=1.0, level=1.0)` · lib.objetos — Garrafón de agua de 20 L (azul transparente, sin marca); y = base.
 - `wave(d, t, k)` · reel25
 - `waves(d, t, y=SEA_Y, col=(60, 90, 140))` · reel3
 - `whistle(d, x, y, s=1.0, col=(240, 160, 40))` · lib.objetos
@@ -549,6 +556,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `window(d, x0, y0, x1, y1, kind='day', t=0.0, frame=(240, 240, 240))` · reels_engine.furniture — Window in a box. kind: day | night (with moon) | blinds | storm.
 - `window_frame(d, x, y, w, h, broken=0.0)` · reel13
 - `xmas_tree(d, x, y, s=1.0, t=0.0)` · lib.objetos — Arbolito de Navidad (pino con esferas que parpadean). y = base.
+- `zombie_mask(d, x, y, s=1.0)` · lib.objetos — Máscara de zombi (cara verde con liga) — para el chiste de 'quitarse la máscara'; (x, y) = centro.
 
 ## lib.fondos
 

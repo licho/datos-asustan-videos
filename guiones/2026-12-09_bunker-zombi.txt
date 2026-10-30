@@ -1,0 +1,15 @@
+Cómo convertir tu casa en búnker para el apocalipsis zombi — miércoles 9 de diciembre de 2026 (propuesta)
+Código: specs/s50_bunker.py · Sin voz: sinvoz/2026-12-09_bunker-zombi_SINVOZ.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4, una sola toma
+Producir final: python3 -m lib.produce specs/s50_bunker.py final audio/50-bunker.mp3
+Estructura: gancho (contradicción) = línea 1 · tensión = pasos 1–5 · recompensa = "el zombi era el pretexto"
+
+[mischievously] El gobierno de Estados Unidos publicó una guía oficial para el apocalipsis zombi. Y es en serio. [sarcastic] Fue en 2011: la agencia de salud del país la subió a su blog… y entró tanta gente que tumbaron la página. [confident] Paso uno: agua. Casi cuatro litros por persona al día, y para quedarte en casa, dos semanas. Una familia de cuatro: más de doscientos litros. [mischievously] Paso dos: comida que no se eche a perder… y que sí te comas. Latas, frijoles, atún. No el pastel de la tía. [serious] Paso tres: botiquín. La guía misma dice que si te muerde un zombi, ya valiste… pero te sirve para los raspones. [sarcastic] Paso cuatro: radio de pilas y linterna. Sin internet… el grupo familiar por fin se calla. [confident] Paso cinco: copias de tus documentos y efectivo. En el apocalipsis no hay terminal. [dramatically] ¿Y sabes cuál era el truco? Ese mismo kit sirve para huracanes, temblores y apagones. El zombi era el pretexto. ¿Qué no puede faltar en tu búnker? Te leo.
+
+# words: 167  estimated duration: 68 s
+
+Fuentes:
+- Scripps News (WMAR2): los CDC publicaron "Preparedness 101: Zombie Apocalypse" en 2011 para enseñar a prepararse ante desastres; ~1 galón de agua por persona al día, comida no perecedera, botiquín, radio de pilas, documentos; "you're a goner if a zombie bites you"
+- CDC (archivo, emergency.cdc.gov/preparedness/kit/disasters): 1 galón por persona al día; 3 días para evacuar, 2 semanas en casa; comida de 2 semanas; radio, linterna, botiquín, documentos, efectivo
+- Medical Economics: el blog se cayó por el tráfico (~30,000 visitas a la publicación)
+- Cuenta propia: 3.785 L × 4 personas × 14 días ≈ 212 L ("más de doscientos litros")

@@ -809,3 +809,91 @@ def greens_plate(d, x, y, s=1.0, egg=True, col=(70, 140, 60)):
         gx, gy = x + r.uniform(-S(140), S(140)), y - S(25) + r.uniform(-S(18), S(14))
         d.ellipse([gx - S(16), gy - S(9), gx + S(16), gy + S(9)], fill=col if k % 2 else dk(col, .8), outline=BLK, width=W_(2))
     if egg: fried_egg(d, x + S(40), y - S(40), .8 * s)
+
+def water_jug(d, x, y, s=1.0, level=1.0):
+    """Garrafón de agua de 20 L (azul transparente, sin marca); y = base."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    body = [x - S(70), y - S(230), x + S(70), y]
+    d.rounded_rectangle(body, int(S(30)), fill=(190, 225, 250), outline=BLK, width=W_(5))
+    if level > 0:
+        d.rounded_rectangle([x - S(62), y - S(222) * level, x + S(62), y - S(8)], int(S(24)), fill=(110, 180, 240))
+    for k in (1, 2): d.line([(x - S(70), y - S(230) * k / 3), (x + S(70), y - S(230) * k / 3)], fill=(90, 150, 210), width=W_(4))
+    d.polygon([(x - S(40), y - S(230)), (x + S(40), y - S(230)), (x + S(20), y - S(275)), (x - S(20), y - S(275))], fill=(190, 225, 250), outline=BLK)
+    d.rectangle([x - S(24), y - S(300), x + S(24), y - S(272)], fill=(60, 120, 220), outline=BLK, width=W_(4))
+    d.line([(x - S(45), y - S(200)), (x - S(45), y - S(40))], fill=WHITE, width=W_(8))
+
+def first_aid_kit(d, x, y, s=1.0, open_=False):
+    """Botiquín blanco con cruz roja; y = base."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    d.rounded_rectangle([x - S(130), y - S(160), x + S(130), y], int(S(18)), fill=WHITE, outline=BLK, width=W_(5))
+    d.arc([x - S(45), y - S(205), x + S(45), y - S(130)], 180, 360, fill=BLK, width=W_(12))
+    d.rectangle([x - S(20), y - S(130), x + S(20), y - S(30)], fill=RED); d.rectangle([x - S(55), y - S(100), x + S(55), y - S(60)], fill=RED)
+    if open_:
+        for k, col in enumerate(((240, 220, 180), (200, 230, 250), WHITE)):
+            d.rounded_rectangle([x - S(110) + k * S(75), y - S(230) - k * S(10), x - S(50) + k * S(75), y - S(165)], int(S(8)), fill=col, outline=BLK, width=W_(3))
+
+def battery_radio(d, x, y, s=1.0, t=0.0, on=True):
+    """Radio de pilas con antena y bocina; y = base. on: ondas de sonido."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    d.line([(x + S(80), y - S(170)), (x + S(150), y - S(330))], fill=BLK, width=W_(6))
+    d.rounded_rectangle([x - S(150), y - S(180), x + S(150), y], int(S(24)), fill=(200, 80, 60), outline=BLK, width=W_(5))
+    d.ellipse([x - S(130), y - S(150), x - S(10), y - S(30)], fill=(60, 60, 65), outline=BLK, width=W_(4))
+    for k in range(3): d.ellipse([x - S(70) - S(12) * (k + 1), y - S(90) - S(12) * (k + 1), x - S(70) + S(12) * (k + 1), y - S(90) + S(12) * (k + 1)], outline=(110, 110, 115), width=W_(3))
+    d.rectangle([x + S(20), y - S(150), x + S(130), y - S(100)], fill=(250, 230, 150), outline=BLK, width=W_(3))
+    d.line([(x + S(50 + 30 * math.sin(t)), y - S(150)), (x + S(50 + 30 * math.sin(t)), y - S(100))], fill=RED, width=W_(4))
+    for k in range(2): d.ellipse([x + S(40) + k * S(55), y - S(80), x + S(80) + k * S(55), y - S(40)], fill=(60, 60, 65), outline=BLK, width=W_(3))
+    if on:
+        for k in range(3):
+            r = S(95 + ((t * 80 + k * 27) % 80))
+            d.arc([x - S(70) - r, y - S(90) - r, x - S(70) + r, y - S(90) + r], 150, 210, fill=WHITE, width=W_(6))
+
+def flashlight(d, x, y, s=1.0, on=True, ang=0.0):
+    """Linterna de mano apuntando a la derecha (ang en grados); (x, y) = centro del mango."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    ca, sa = math.cos(math.radians(ang)), math.sin(math.radians(ang))
+    P = lambda u, v: (x + u * ca - v * sa, y + u * sa + v * ca)
+    if on:
+        d.polygon([P(S(90), -S(30)), P(S(420), -S(140)), P(S(420), S(140)), P(S(90), S(30))], fill=(255, 245, 170))
+    body = [P(-S(90), -S(22)), P(S(40), -S(22)), P(S(90), -S(40)), P(S(90), S(40)), P(S(40), S(22)), P(-S(90), S(22))]
+    d.polygon(body, fill=(60, 60, 70), outline=BLK); d.line(body + [body[0]], fill=BLK, width=W_(4))
+    d.line([P(S(88), -S(36)), P(S(88), S(36))], fill=(255, 250, 200), width=W_(8))
+
+def card_terminal(d, x, y, s=1.0, text="SIN CONEXIÓN"):
+    """Terminal de pago con tarjeta (sin marca); y = base. text = lo que dice la pantallita."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    d.rounded_rectangle([x - S(90), y - S(260), x + S(90), y], int(S(22)), fill=(60, 60, 70), outline=BLK, width=W_(5))
+    d.rectangle([x - S(70), y - S(240), x + S(70), y - S(160)], fill=(160, 200, 160), outline=BLK, width=W_(3))
+    d.text((x, y - S(200)), text, font=F(int(S(15))), fill=(150, 30, 30) if "SIN" in text else BLK, anchor="mm")
+    for i in range(3):
+        for j in range(3): d.rounded_rectangle([x - S(60) + j * S(43), y - S(140) + i * S(42), x - S(30) + j * S(43), y - S(112) + i * S(42)], int(S(6)), fill=(200, 200, 205), outline=BLK, width=W_(2))
+    d.rectangle([x - S(60), y - S(275), x + S(60), y - S(255)], fill=(40, 40, 45))
+
+def storm_cloud(d, x, y, s=1.0, t=0.0, mood="sly", rain=True):
+    """Nube de tormenta con cara (huracán/tormenta personificada) y rayito; (x, y) = centro."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    G = (110, 115, 135)
+    if rain:
+        for k in range(10):
+            rx = x - S(200) + k * S(44); ry = y + S(120) + ((t * 300 + k * 37) % S(160))
+            d.line([(rx, ry), (rx - S(10), ry + S(30))], fill=(120, 180, 240), width=W_(5))
+    for dx, dy, r in ((-150, 20, 110), (-50, -50, 140), (80, -30, 130), (180, 30, 100), (20, 50, 130)):
+        d.ellipse([x + S(dx) - S(r), y + S(dy) - S(r), x + S(dx) + S(r), y + S(dy) + S(r)], fill=G, outline=BLK, width=W_(5))
+    for dx, dy, r in ((-150, 20, 104), (-50, -50, 134), (80, -30, 124), (180, 30, 94), (20, 50, 124)):
+        d.ellipse([x + S(dx) - S(r), y + S(dy) - S(r), x + S(dx) + S(r), y + S(dy) + S(r)], fill=G)
+    for sx in (-1, 1):
+        ex, ey = x + sx * S(60), y - S(10)
+        d.ellipse([ex - S(24), ey - S(24), ex + S(24), ey + S(24)], fill=WHITE, outline=BLK, width=W_(3)); d.ellipse([ex - S(10), ey - S(8), ex + S(10), ey + S(12)], fill=BLK)
+        if mood == "sly": d.line([(ex - sx * S(30), ey - S(36)), (ex + sx * S(26), ey - S(26))], fill=BLK, width=W_(8))
+    d.arc([x - S(50), y + S(10), x + S(50), y + S(70)], 20, 160, fill=BLK, width=W_(7))
+    bolt = [(x + S(150), y + S(90)), (x + S(120), y + S(170)), (x + S(155), y + S(170)), (x + S(125), y + S(260)), (x + S(200), y + S(150)), (x + S(165), y + S(150)), (x + S(190), y + S(90))]
+    d.polygon(bolt, fill=(255, 220, 60), outline=BLK)
+
+def zombie_mask(d, x, y, s=1.0):
+    """Máscara de zombi (cara verde con liga) — para el chiste de 'quitarse la máscara'; (x, y) = centro."""
+    S = lambda v: v * s; W_ = lambda v: max(2, int(v * s))
+    d.ellipse([x - S(80), y - S(95), x + S(80), y + S(95)], fill=(130, 180, 110), outline=BLK, width=W_(5))
+    for sx in (-1, 1):
+        d.ellipse([x + sx * S(32) - S(20), y - S(30) - S(16), x + sx * S(32) + S(20), y - S(30) + S(16)], fill=BLK)
+    d.rectangle([x - S(40), y + S(30), x + S(40), y + S(50)], fill=(60, 20, 20))
+    for k in range(4): d.polygon([(x - S(40) + k * S(20), y + S(30)), (x - S(30) + k * S(20), y + S(42)), (x - S(20) + k * S(20), y + S(30))], fill=WHITE)
+    d.line([(x - S(80), y), (x - S(130), y + S(20))], fill=BLK, width=W_(4))

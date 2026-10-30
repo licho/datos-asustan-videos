@@ -43,3 +43,12 @@ def tears(d, x, y, s=1.0, t=0.0, col=(110, 180, 255)):
         ex = x + sx * 30 * s; L = 40 * s + (t * 90 * s) % (60 * s)
         d.line([(ex, y), (ex + sx * 4 * s, y + L)], fill=col, width=max(3, int(8 * s)))
         d.ellipse([ex + sx * 4 * s - 8 * s, y + L - 4 * s, ex + sx * 4 * s + 8 * s, y + L + 12 * s], fill=col)
+
+def mold_spots(d, box, seed=2, n=9, col=(120, 170, 90)):
+    """Manchas de moho dentro de box=(x0, y0, x1, y1) (comida echada a perder)."""
+    r = random.Random(seed)
+    x0, y0, x1, y1 = box
+    for k in range(n):
+        x, y = r.uniform(x0, x1), r.uniform(y0, y1); rr = r.uniform(8, 22)
+        d.ellipse([x - rr, y - rr, x + rr, y + rr], fill=col, outline=(70, 110, 60), width=3)
+        for j in range(3): d.ellipse([x - rr * .3 + j * 5, y - rr * .3, x - rr * .1 + j * 5, y - rr * .1], fill=(200, 220, 170))
