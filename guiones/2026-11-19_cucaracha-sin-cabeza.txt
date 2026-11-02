@@ -1,8 +1,16 @@
 Video: La cucaracha que vive sin cabeza
-Fecha: jueves 19 de noviembre 2026, 10:00 (o más tarde si los créditos se renuevan después)
-Código: src/reel27.py · Sin voz: sinvoz/2026-11-19_cucaracha-sin-cabeza_SINVOZ.mp4
+Fecha: jueves 19 de noviembre 2026, 10:00
+Código: specs/s27_cucaracha.py · Sin voz: sinvoz/2026-11-19_cucaracha-sin-cabeza_SINVOZ.mp4
 Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4
 
-[mischievously] ¿Sabías que una cucaracha puede vivir… sin cabeza? [dramatically] Hasta una semana. [serious] No respira por la boca: respira por unos agujeritos en el cuerpo llamados espiráculos. Y no se desangra, porque su sangre circula a baja presión y la herida se sella rápido. [sarcastic] Entonces, ¿de qué muere? De sed. Sin boca, no puede tomar agua. [whispers] Eso sí: la cabeza, por su lado, puede seguir moviendo las antenas durante horas. [sarcastic] Así que la próxima vez que le des un chanclazo… asegúrate de que sea definitivo. [mischievously] ¿A qué le tienes más miedo: a la cucaracha… o a la cucaracha voladora?
+Duración estimada: 73 s (ajustado el 2 nov 2026: gancho de 3 s y mínimo 60 s)
+
+[dramatically] Esta cucaracha no tiene cabeza… y va a vivir una semana más. [serious] ¿Cómo? No respira por la boca: respira por unos agujeritos en el cuerpo llamados espiráculos. Y no se desangra, porque su sangre circula a baja presión y la herida se sella rápido. [sarcastic] Entonces, ¿de qué muere? De sed. Sin boca, no puede tomar agua. [mischievously] Y eso no es todo: aguanta la respiración hasta cuarenta minutos. [sarcastic] Y sin comer aguanta un mes. Tú no aguantas ni del quince al treinta. [dramatically] Su familia ya caminaba por la Tierra hace trescientos millones de años… antes que los dinosaurios. [sarcastic] O sea, no se metió a tu cocina: tú construiste tu cocina en su casa. [whispers] Eso sí: la cabeza, por su lado, puede seguir moviendo las antenas durante horas. [serious] Y corre a metro y medio por segundo. A tu tamaño, serían más de trescientos kilómetros por hora. [sarcastic] Por eso nunca le atinas con la chancla… y si le atinas, asegúrate de que sea definitivo. [mischievously] ¿A qué le tienes más miedo: a la cucaracha… o a la cucaracha voladora?
 
 Fuente: Scientific American, "Fact or Fiction?: A Cockroach Can Live without Its Head" (Joseph Kunkel, UMass Amherst).
+Datos nuevos (2 nov 2026):
+- Aguanta la respiración hasta 40 minutos y vive un mes sin comer: PestWorld / National Pest Management Association, "10 Fascinating Cockroach Facts" (pestworld.org).
+- Corre a 1.5 m/s (50 cuerpos por segundo; escalado a humano ~200 mph ≈ 320 km/h): National Geographic, "Amazing Video Reveals Why Roaches Are So Hard to Squish" (2016).
+- Fósil de cucaracha de 300 millones de años (Carbonífero, ~55 millones de años antes de los primeros dinosaurios): Ohio State University News.
+
+Producir final: python3 -m lib.produce specs/s27_cucaracha.py final audio/27-cucaracha.mp3

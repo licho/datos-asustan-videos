@@ -2,8 +2,8 @@
 import math
 from lib.core import *
 from lib.core import say
-from lib.personajes import guy, ghost
-from lib.props import table, laptop, floor_lamp, house, sign_board, document, phone_chat, camera, rec_frame, monitor, door, clouds, moon_disc
+from lib.personajes import guy, ghost, thief
+from lib.props import flashlight, table, laptop, floor_lamp, house, sign_board, document, phone_chat, camera, rec_frame, monitor, door, clouds, moon_disc
 from lib.fondos import office, night_room
 
 NAME = "2026-11-21_fantasma-trabajos"
@@ -15,6 +15,7 @@ LINES = [
  ("serious", "Trabajo número dos: soporte técnico. Cliente: “Se me prenden y se apagan las luces solas”. Él: “Sí… ese soy yo.”", "*Trabajo #2:* soporte técnico. “Las luces parpadean solas”. *“Ese soy yo.”*"),
  ("mischievously", "Trabajo número tres: Recursos Humanos. Te entrevista, te dice “nosotros te llamamos”… y desaparece. Literal. Es el rey del ghosting.", "*Trabajo #3:* Recursos Humanos. “Nosotros te llamamos”… *y desaparece. Literal.*"),
  ("excited", "Trabajo número cuatro: estrella de programas paranormales. Por fin le pagan por salir en cámara… pero siempre sale borroso.", "*Trabajo #4:* estrella paranormal. Por fin en cámara… *pero sale borroso*"),
+ ("sarcastic", "Trabajo número cinco: velador. Nunca duerme, nunca falta… y los ladrones renuncian solos.", "*Trabajo #5:* velador. Nunca duerme, nunca falta… *y los ladrones renuncian solos*"),
  ("dramatically", "El verdadero problema no es que esté muerto. Atraviesa paredes, puertas y espejos… pero hay algo que no puede atravesar:", "Atraviesa paredes, puertas y espejos… *pero hay algo que no puede atravesar*"),
  ("whispers", "el SAT. Le llegó una auditoría por ciento cincuenta años sin declarar.", "*El SAT.* Auditoría por *150 años sin declarar*"),
  ("", "¿Qué otro monstruo quieres que busque trabajo? Te leo en los comentarios.", "¿Qué otro monstruo quieres que *busque trabajo*?"),
@@ -84,6 +85,23 @@ def tv(c):
     if f > .45: chip(d, "CALIDAD: 144p", CHIP2 + 820, bg=GRAY, size=44, appear=(f - .45) * c.dur / .3)
     return img
 
+def guard(c):
+    """Velador: el fantasma con gorra y linterna; el ladrón sale corriendo."""
+    img, d = canvas(NROOM); lt = c.lt; f = lt / c.dur
+    gx, gy, gs = 720, 900, .8
+    d = ghost(img, gx, gy, gs, c.t, mood="smug" if f > .5 else "happy")
+    top = gy - 210 * gs
+    d.chord([gx - 95, top - 20, gx + 95, top + 120], 180, 360, fill=(40, 60, 110), outline=BLK, width=5)   # gorra
+    d.rounded_rectangle([gx - 120, top + 40, gx + 10, top + 62], 10, fill=(30, 45, 90), outline=BLK, width=4)
+    d.ellipse([gx - 16, top + 4, gx + 16, top + 34], fill=YEL, outline=BLK, width=3)                      # placa
+    flashlight(d, gx - 150, gy + 30, .9, on=True, ang=180)
+    d.ellipse([gx - 140, gy + 8, gx - 96, gy + 52], fill=(245, 248, 255), outline=BLK, width=4)        # mano que la sostiene
+    k = cl((f - .3) / .5)
+    thief(d, lerp(280, -220, k), 1290, .75, c.t * (1 + 2 * k))
+    chip(d, "TRABAJO #5: VELADOR", CHIP1, bg=BLUE, appear=lt / .3)
+    if f > .6: chip(d, "LADRONES: 0", CHIP2, bg=GREEN, appear=(f - .6) * c.dur / .3)
+    return img
+
 def wall(c):
     img, d = canvas(((70, 70, 90), (40, 40, 55))); lt = c.lt; f = lt / c.dur
     d.rectangle([0, 1250, W, 1380], fill=(60, 55, 65))
@@ -116,7 +134,7 @@ def ending(c):
     follow_btn(d, lt, y=1250, delay=c.dur * .5)
     return img
 
-SCENES = [(0, intro), (1, cv), (2, realtor), (3, support), (4, hr), (5, tv), (6, wall), (7, audit), (8, ending)]
+SCENES = [(0, intro), (1, cv), (2, realtor), (3, support), (4, hr), (5, tv), (6, guard), (7, wall), (8, audit), (9, ending)]
 SFX = [(0, .1, "jingle", {}), (1, .3, "pop", {}), (2, .2, "ding", {}), (3, .5, "buzzer", {"g": .15}), (3, 1.4, "buzzer", {"g": .15}), (4, 3.5, "whoosh", {}), (5, .3, "pop", {}),
-       (6, 4.0, "thud", {}), (6, 4.05, "boing", {}), (7, 0, "sting", {}), (8, 2.0, "jingle", {})]
-MUSIC = ("waltz", [(7, 8)], 8)
+       (6, 1.5, "whoosh", {}), (7, 4.0, "thud", {}), (7, 4.05, "boing", {}), (8, 0, "sting", {}), (9, 2.0, "jingle", {})]
+MUSIC = ("waltz", [(8, 9)], 9)
