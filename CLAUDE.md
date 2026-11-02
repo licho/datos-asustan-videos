@@ -84,7 +84,7 @@ Los specs siguen importando de `lib.core`, `lib.motion`, `lib.personajes`, `lib.
 ## Voz (ElevenLabs)
 - Voz **Erick – Cinematic Storyteller** `nFcvfxkh4Fldtkn096yh`, modelo `eleven_v4`. El texto exacto lo da `texto` (con las etiquetas entre corchetes).
 - **Generar con `generations_count=1`** (el conector hace 2 tomas por defecto y cobra el doble). Costo: 1 crédito por carácter (~1,100 por video). Usar `estimate_only` si hay duda.
-- Créditos: plan Starter, se renueva el **día 19** de cada mes. Si no hay créditos, se hacen versiones sin voz y la voz se agrega después.
+- Créditos: el plan se renueva el **día 29** de cada mes y **se comparte con otros canales de Luis** (~113 mil al 1 nov 2026). No gastarlos todos aquí: pregunta cuánto se puede usar antes de grabar en lote. Si no hay créditos, se hacen versiones sin voz y la voz se agrega después.
 - Para bajar el audio al repo: crear `pedidos/NN-nombre.url` con el enlace temporal del mp3 y hacer push; la acción `.github/workflows/bajar-audio.yml` lo descarga a `audio/NN-nombre.mp3`.
 
 ## Publicación (Metricool)
@@ -99,5 +99,5 @@ Los specs siguen importando de `lib.core`, `lib.motion`, `lib.personajes`, `lib.
 - Muestra el video a Luis antes de programarlo.
 
 ## Pendientes conocidos (octubre 2026)
-- Noviembre ya tiene versión sin voz de todos los videos; el **19 de noviembre** (renovación de créditos) se graban las voces, se hace `final` de cada uno y se programan.
+- Noviembre ya tiene versión sin voz de todos los videos; ya hay créditos (renovó el plan): se graban las voces, se hace `final` de cada uno y se programan.
 - Diciembre: asteroide-ciudad, momia, ejércitos y Llorona listos sin voz (ver `IDEAS.md`).
