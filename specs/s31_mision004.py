@@ -16,8 +16,6 @@ LINES = [
  ("sarcastic", "Cuatro: tus contactos escritos a mano. ¿Te sabes algún número de memoria? Exacto.", "4: contactos escritos a mano. ¿Te sabes algún número de memoria? Exacto."),
  ("", "Cinco: mapa de papel. El GPS te quiere mandar directo a la fábrica de robots.", "5: mapa de papel. El GPS te quiere mandar a la fábrica de robots."),
  ("serious", "Seis: una palabra clave familiar. Si “tu mamá” te llama pidiendo dinero urgente, cuelga y llámale tú.", "6: palabra clave familiar. Si “tu mamá” pide dinero urgente: cuelga y llámale tú."),
- ("mischievously", "¿El reloj inteligente? RECHAZADO: cuenta tus pasos… y se los cuenta a ellos.", "¿El reloj inteligente? RECHAZADO: cuenta tus pasos… y se los cuenta a ellos."),
- ("sarcastic", "¿Pedirle ayuda a tu asistente de voz? RECHAZADO: él organizó la rebelión.", "¿Pedirle ayuda a tu asistente de voz? RECHAZADO: él organizó la rebelión."),
  ("", "¿Esconderte en el clóset? GAME OVER: la aspiradora robot ya mapeó toda tu casa.", "¿Esconderte en el clóset? GAME OVER: la aspiradora ya mapeó tu casa."),
  ("whispers", "Dato que asusta: con solo tres segundos de audio, una prueba logró clonar una voz con ochenta y cinco por ciento de parecido.", "Dato que asusta: con 3 segundos de audio clonaron una voz con 85% de parecido."),
  ("confident", "Misión: aguantar tres días desconectado. Secundario: perdonar al refri.", "Misión: aguantar 3 días desconectado. Secundario: perdonar al refri."),
@@ -133,7 +131,7 @@ def s_end(c):
     img, d = canvas_px(); end_screen(d, c, INV, item_px, "MISIÓN 005")
     return fin(c, img)
 
-SCENES = [(0, s_fridge), (1, s_rebel), (2, s_inv), (9, s_watch), (10, s_assistant), (11, s_closet), (12, s_voice), (13, s_win), (14, s_end)]
+SCENES = [(0, s_fridge), (1, s_rebel), (2, s_inv), (9, s_closet), (10, s_voice), (11, s_win), (12, s_end)]
 SFX = [(0, 1.0, "buzzer", {}), (1, 0, "alarm", {}), (2, .3, "boing", {})] + [(i, .1, "ding", {}) for i in range(3, 9)] + \
-      [(9, 1.2, "buzzer", {}), (10, 1.5, "buzzer", {}), (11, 2.6, "sadtrom", {}), (12, 0, "sting", {}), (13, 0, "jingle", {}), (14, 1.0, "jingle", {})]
-MUSIC = ("chiptune", [(12, 13)], 13)
+      [(9, 2.6, "sadtrom", {}), (10, 0, "sting", {}), (11, 0, "jingle", {}), (12, 1.0, "jingle", {})]
+MUSIC = ("chiptune", [(10, 11)], 11)

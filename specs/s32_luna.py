@@ -11,7 +11,6 @@ END = 4.5
 LINES = [
  ("mischievously", "Si la Luna desaparece mañana, no explota nada… y eso es lo peor.", "Si la Luna desaparece mañana, *no explota nada*… *y eso es lo peor*"),
  ("serious", "Primero, las noches: sin luna, serían mucho más oscuras. Solo estrellas.", "Las noches serían *mucho más oscuras*. Solo estrellas"),
- ("sarcastic", "Y tu foto de la luna con el celular… pues ya no.", "Y tu foto de la luna con el celular… *pues ya no*"),
  ("serious", "Las mareas quedarían en más o menos un tercio de lo que son hoy. El Sol también jala el mar, pero mucho menos.", "Las mareas quedarían en *un tercio* de lo que son hoy"),
  ("", "Muchos animales que viven al ritmo de la marea tendrían que adaptarse… o desaparecer.", "Animales que viven al ritmo de la marea: *adaptarse… o desaparecer*"),
  ("whispers", "Y los corales usan la luz de la luna como señal para su desove masivo. Sin ella… se quedan sin reloj.", "Los corales usan la luz de la luna para su *desove masivo*. Sin ella… *sin reloj*"),
@@ -152,7 +151,6 @@ def ending(c):
     follow_btn(d, lt, y=1290, delay=c.dur * .6)
     return img
 
-SCENES = [(0, hook), (1, nights), (2, photo), (3, tides), (4, crabs), (5, corals), (6, tilt), (7, wobble), (8, days), (9, mondays), (10, wolf_s), (11, ending)]
-SFX = [(0, 3.5, "pop", {}), (0, 3.6, "whoosh", {}), (2, 1.5, "sadtrom", {}), (3, 1.0, "whoosh", {}), (4, .5, "boing", {}), (6, .5, "ding", {}),
-       (7, .2, "rumble", {"d": 2.5}), (8, 2.0, "ding", {}), (9, .2, "pop", {}), (9, .8, "pop", {}), (9, 1.4, "pop", {}), (10, 1.0, "sadtrom", {}), (11, 2.5, "jingle", {})]
+SCENES = [(0, hook), (1, nights), (2, tides), (3, crabs), (4, corals), (5, tilt), (6, wobble), (7, days), (8, mondays), (9, wolf_s), (10, ending)]
+SFX = [(0, 3.5, "pop", {}), (0, 3.6, "whoosh", {}), (2, 1.0, "whoosh", {}), (3, .5, "boing", {}), (5, .5, "ding", {}), (6, .2, "rumble", {"d": 2.5}), (7, 2.0, "ding", {}), (8, .2, "pop", {}), (8, .8, "pop", {}), (8, 1.4, "pop", {}), (9, 1.0, "sadtrom", {}), (10, 2.5, "jingle", {})]
 MUSIC = ("pad", [], None)

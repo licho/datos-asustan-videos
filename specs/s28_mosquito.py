@@ -16,7 +16,6 @@ LINES = [
  ("", "Y eso sin contar el dengue, el zika, el chikungunya y la fiebre amarilla.", "Y eso sin contar *dengue, zika, chikungunya y fiebre amarilla*"),
  ("mischievously", "Solo pican las hembras: necesitan tu sangre para producir sus huevos.", "Solo pican *las hembras*: necesitan tu sangre para *sus huevos*"),
  ("sarcastic", "O sea, técnicamente… eres su baby shower.", "O sea, técnicamente… *eres su baby shower*"),
- ("serious", "Te encuentran por el dióxido de carbono que exhalas, desde decenas de metros. Luego te ven… y al final sienten tu calor.", "Te huelen el *CO₂*, luego *te ven*… y al final *sienten tu calor*"),
  ("whispers", "Y no te pica con una aguja: su trompa tiene seis. Unas cortan, otras sujetan, una succiona… y otra te inyecta saliva para que tu sangre no se coagule.", "Su trompa tiene *seis agujas*: cortan, sujetan, succionan… y *te inyectan saliva*"),
  ("sarcastic", "No te pica. Te opera.", "No te pica. *Te opera.*"),
  ("confident", "Para defenderte, vacía el agua estancada: cubetas, llantas, macetas, que ahí ponen sus huevos. Y usa repelente y mosquitero.", "Vacía el *agua estancada*: ahí ponen sus huevos. Y usa *repelente y mosquitero*"),
@@ -220,9 +219,6 @@ def ending(c):
     follow_btn(d, lt, y=1270, delay=c.dur * .85)
     return img
 
-SCENES = [(0, hook), (2, malaria), (3, ranking), (4, diseases), (5, females), (6, shower), (7, sensing), (8, needles), (9, surgeon), (10, tips), (11, night), (12, ending)]
-SFX = [(0, .3, "pop", {}), (1, 0, "buzzer", {}), (1, .1, "whine", {"dur": 2.0}), (2, 2.5, "ding", {}), (3, .4, "boing", {}),
-       (4, .6, "pop", {}), (4, 2.0, "pop", {}), (4, 3.5, "pop", {}), (5, 0, "whine", {"dur": 1.2}), (6, .3, "jingle", {}),
-       (7, 0, "whine", {"dur": 1.0}), (8, .5, "pop", {}), (9, 0, "ding", {}), (10, 2.0, "pop", {}), (11, 0, "whine", {"dur": 4.0, "g": .1}),
-       (11, 3.5, "sting", {}), (12, 4.0, "jingle", {})]
-MUSIC = ("bass", [(11, 12)], 12)
+SCENES = [(0, hook), (2, malaria), (3, ranking), (4, diseases), (5, females), (6, shower), (7, needles), (8, surgeon), (9, tips), (10, night), (11, ending)]
+SFX = [(0, .3, "pop", {}), (1, 0, "buzzer", {}), (1, .1, "whine", {"dur": 2.0}), (2, 2.5, "ding", {}), (3, .4, "boing", {}), (4, .6, "pop", {}), (4, 2.0, "pop", {}), (4, 3.5, "pop", {}), (5, 0, "whine", {"dur": 1.2}), (6, .3, "jingle", {}), (7, .5, "pop", {}), (8, 0, "ding", {}), (9, 2.0, "pop", {}), (10, 0, "whine", {"dur": 4.0, "g": .1}), (10, 3.5, "sting", {}), (11, 4.0, "jingle", {})]
+MUSIC = ("bass", [(10, 11)], 11)

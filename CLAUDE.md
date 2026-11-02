@@ -9,7 +9,7 @@ Antes de empezar lee: `IDEAS.md` (temas hechos y pendientes) y `lib/CATALOGO.md`
 ## Reglas de contenido (no negociables)
 - **Sin marcas** (ni en voz ni en dibujos) y **sin referencias locales** a Yucatán/Mérida.
 - **Datos exactos y con fuente.** Verifica en la web; las fuentes van al final del guion (`guiones/*.txt`) y en la respuesta.
-- **Duración: la necesaria, no la máxima.** Tope duro 90 s, pero no se llena hasta ahí. Guía: un solo dato o curiosidad → 30–45 s; lista, guía o "qué pasaría si" → 60–75 s; más de 75 s solo si cada línea lo justifica. Prueba de cada línea: "si la quito, ¿se pierde algo?" Si no, se quita.
+- **Duración: mínimo 60 s, máximo 90 s** (TikTok solo monetiza videos de más de un minuto). Guía: un solo dato o curiosidad → 60–65 s (se completa con datos extra reales, no con relleno); lista, guía o "qué pasaría si" → 60–75 s; más de 75 s solo si cada línea lo justifica. La duración estimada de `texto` ≈ duración del video final; apunta a ≥ 63 s para tener margen. Prueba de cada línea: "si la quito, ¿se pierde algo?" Si no, se quita (pero sin bajar de 60 s).
 - **Primero el guion, luego el video.** Muestra el guion (con escenas propuestas) y espera aprobación antes de construir. Muestra el video antes de programarlo.
 - Pide más humor si el guion queda plano: Luis prefiere chistes cotidianos mexicanos, sarcasmo y humor negro ligero.
 - Políticas de plataformas (anuncios): **sin armas en pantalla**, sin símbolos nazis ni uniformes reconocibles, sin sangre/gore, sin muertos visibles. Mencionar temas sensibles está bien; mostrarlos, no.

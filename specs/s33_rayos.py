@@ -10,12 +10,10 @@ LINES = [
  ("dramatically", "Un rayo es cinco veces más caliente que la superficie del Sol.", "Un rayo es *5 veces más caliente* que la superficie del Sol"),
  ("mischievously", "Casi veintiocho mil grados… y aun así, mucha gente sigue creyendo estos mitos.", "*Casi 28,000 °C*… y aun así, mucha gente cree *estos mitos*"),
  ("sarcastic", "Mito uno: “un rayo nunca cae dos veces en el mismo lugar”. Falso: a un rascacielos de Nueva York le caen unos veintitrés al año.", "Mito 1: “nunca cae dos veces en el mismo lugar”. *Falso: ~23 al año*"),
- ("", "Y un guardabosques recibió siete rayos en su vida. Récord mundial.", "Un guardabosques recibió *7 rayos*. Récord mundial"),
  ("serious", "Mito dos: “si no está lloviendo, estoy a salvo”. Falso: un rayo puede caer a más de quince kilómetros de la tormenta.", "Mito 2: “si no llueve, estoy a salvo”. *Falso: puede caer a +15 km*"),
  ("", "Mito tres: “me cubro debajo de un árbol”. Es la segunda causa de víctimas por rayo.", "Mito 3: “me cubro bajo un árbol”. *2ª causa de víctimas*"),
  ("", "Mito cuatro: “si me agarra afuera, me acuesto en el suelo”. Error: la corriente corre por el piso. Muévete a un lugar techado.", "Mito 4: “me acuesto en el suelo”. *Error:* muévete a un lugar techado"),
  ("warmly", "Mito cinco: “si tocas a alguien a quien le cayó un rayo, te electrocutas”. Falso: el cuerpo no guarda electricidad. Ayúdalo y llama a emergencias.", "Mito 5: “si lo tocas, te electrocutas”. *Falso:* ayúdalo y llama al *911*"),
- ("confident", "Bonus: el coche sí te protege… pero por el metal, no por las llantas.", "El coche te protege *por el metal*, no por las llantas"),
  ("whispers", "Truco: cuenta los segundos entre el relámpago y el trueno. Cada tres segundos, un kilómetro.", "Cuenta del relámpago al trueno: *cada 3 segundos, 1 km*"),
  ("serious", "Y si escuchas el trueno, ya estás al alcance de un rayo: métete a un lugar cerrado.", "¿Escuchas el trueno? *Métete a un lugar cerrado*"),
  ("", "¿Cuál de estos mitos te creías? Te leo en los comentarios.", "¿Cuál de estos mitos te creías? *Te leo*"),
@@ -146,7 +144,6 @@ def ending(c):
     follow_btn(d, c.lt, y=1240, delay=c.dur * .55)
     return img
 
-SCENES = [(0, hook), (1, myths), (2, skyscraper), (3, ranger), (4, bluesky), (5, tree_s), (6, lie), (7, help_s), (8, car_s), (9, counting), (10, indoors), (11, ending)]
-SFX = [(0, 0, "rumble", {"d": 2.5}), (0, .1, "thud", {}), (1, .2, "pop", {}), (2, .5, "thud", {}), (3, .5, "ding", {}), (4, 2.5, "thud", {}), (5, 2.0, "buzzer", {}),
-       (6, .5, "rumble", {"d": 2.0}), (7, .5, "ding", {}), (8, 1.0, "thud", {}), (9, 0, "thud", {}), (9, 3.0, "rumble", {"d": 2.0}), (10, .5, "rumble", {"d": 2.0}), (11, 2.0, "jingle", {})]
-MUSIC = ("bass", [(9, 10)], 11)
+SCENES = [(0, hook), (1, myths), (2, skyscraper), (3, bluesky), (4, tree_s), (5, lie), (6, help_s), (7, counting), (8, indoors), (9, ending)]
+SFX = [(0, 0, "rumble", {"d": 2.5}), (0, .1, "thud", {}), (1, .2, "pop", {}), (2, .5, "thud", {}), (3, 2.5, "thud", {}), (4, 2.0, "buzzer", {}), (5, .5, "rumble", {"d": 2.0}), (6, .5, "ding", {}), (7, 0, "thud", {}), (7, 3.0, "rumble", {"d": 2.0}), (8, .5, "rumble", {"d": 2.0}), (9, 2.0, "jingle", {})]
+MUSIC = ("bass", [(7, 8)], 9)

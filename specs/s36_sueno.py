@@ -14,7 +14,6 @@ LINES = [
  ("whispers", "Luego llegan los microsueños: tu cerebro se apaga unos segundos sin avisarte. Te deja en visto.", "*Microsueños:* tu cerebro se apaga unos segundos. *Te deja en visto*"),
  ("mischievously", "Día dos: café número ocho. Arriba de cuatrocientos miligramos al día ya te pasaste. Y mil doscientos de golpe pueden darte convulsiones.", "Más de *400 mg al día* ya es mucho. *1,200 de golpe:* convulsiones"),
  ("sarcastic", "Día tres: algunas personas empiezan a alucinar. Si la sombra del rincón te saluda, no es un fantasma: es tu cerebro pidiendo cama.", "*Día 3:* alucinaciones. Si la sombra te saluda… *es tu cerebro pidiendo cama*"),
- ("dramatically", "En los sesenta, un estudiante aguantó once días despierto. Su premio: no poder ni concentrarse.", "Un estudiante aguantó *11 días despierto*. Premio: *no poder ni concentrarse*"),
  ("whispers", "Dato que asusta: a ratas sin nada de sueño por unas dos semanas les resultó mortal. Y no, no les faltaba café.", "Ratas sin dormir *~2 semanas*: *mortal*. Y no, no les faltaba café"),
  ("confident", "Los adultos necesitan al menos siete horas. Y el café de las seis de la tarde: a las once, la mitad sigue en ti.", "Adultos: *7+ horas*. El café de las 6 p.m.: *a las 11, la mitad sigue en ti*"),
  ("sarcastic", "Así que ese “un capítulo más” a las tres de la mañana es básicamente un experimento científico. Y tú eres la rata.", "“Un capítulo más” a las 3 a.m.… *y tú eres la rata*"),
@@ -122,7 +121,6 @@ def ending(c):
     follow_btn(d, c.lt, y=1250, delay=c.dur * .5)
     return img
 
-SCENES = [(0, s_18), (1, s_hook), (2, s_24), (3, s_micro), (4, s_coffee), (5, s_ghost), (6, s_student), (7, s_rats), (8, s_seven), (9, s_tv), (10, ending)]
-SFX = [(0, .2, "sting", {}), (0, .8, "pop", {}), (0, 1.8, "pop", {}), (1, .3, "pop", {}), (2, .3, "skid", {}), (3, 1.0, "buzzer", {}), (4, 1.0, "alarm", {}),
-       (5, 1.0, "sting", {}), (6, 3.0, "ding", {}), (7, .5, "sadtrom", {}), (8, 1.0, "ding", {}), (9, 3.0, "boing", {}), (10, 2.0, "jingle", {})]
+SCENES = [(0, s_18), (1, s_hook), (2, s_24), (3, s_micro), (4, s_coffee), (5, s_ghost), (6, s_rats), (7, s_seven), (8, s_tv), (9, ending)]
+SFX = [(0, .2, "sting", {}), (0, .8, "pop", {}), (0, 1.8, "pop", {}), (1, .3, "pop", {}), (2, .3, "skid", {}), (3, 1.0, "buzzer", {}), (4, 1.0, "alarm", {}), (5, 1.0, "sting", {}), (6, .5, "sadtrom", {}), (7, 1.0, "ding", {}), (8, 3.0, "boing", {}), (9, 2.0, "jingle", {})]
 MUSIC = ("pad", [], None)
