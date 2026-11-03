@@ -98,6 +98,7 @@ Los specs siguen importando de `lib.core`, `lib.motion`, `lib.personajes`, `lib.
   - `media`: el mp4 de `videos/` publicado en el repo (URL raw de GitHub); Metricool lo copia a su almacenamiento.
 - Muestra el video a Luis antes de programarlo.
 
-## Pendientes conocidos (octubre 2026)
-- Noviembre ya tiene versión sin voz de todos los videos; ya hay créditos (renovó el plan): se graban las voces, se hace `final` de cada uno y se programan.
-- Diciembre: asteroide-ciudad, momia, ejércitos y Llorona listos sin voz (ver `IDEAS.md`).
+## Pendientes conocidos (noviembre 2026)
+- Estado detallado y siguientes pasos: ver `PROYECTO.md` (sección "Estado").
+- Nov 2–18 programados sin ajustes (se dejan así para comparar). Nov 19–30 ajustados (gancho 3 s, ≥ 60 s): sin voz listo, falta aprobación de Luis → voces, `final` y programar.
+- Diciembre: revisar que todos los sin voz duren ≥ 60 s con la regla nueva; pendiente aprobar guion "¿tu mamá es un doppelgänger?" (12 dic).
