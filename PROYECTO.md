@@ -39,6 +39,7 @@
 
 ## Métricas
 - **Tablero de octubre:** https://claude.ai/artifact/SrHcNP1D98SqdskQsfWvcz (lee directo de Metricool).
+- **Guía de retención** (buenas prácticas + nuestros datos, lista antes de publicar y pruebas): https://claude.ai/artifact/838vv7t3M1vgHzxpVQijyB
 - **Lo que aprendimos en octubre:** en Facebook la gente ve solo 4–11 s, dure lo que dure el video. Funcionó mejor el humor cotidiano mexicano (Infonavit) y las series con personajes que regresan (zombis, Guía laboral). YouTube es donde crece el canal; el domingo sin video, las vistas se cayeron. Para Facebook las 10:00 es la mejor hora; para YouTube, cerca de las 16:00 (sin probar todavía).
 - **Campos de Metricool:**
   - Reels de Facebook: FBRE02 fecha, FBRE05 texto, FBRE10 vistas, FBRE13 segundos vistos en promedio, FBRE08 me gusta.
