@@ -9,8 +9,8 @@ from lib.props import pyramid, rocket, nopal, building, document, picture, phone
 NAME = "2026-11-30_cleopatra-tiempo"
 END = 4.5
 LINES = [
- ("mischievously", "Cleopatra vivió más cerca de la llegada a la Luna… que de la construcción de la Gran Pirámide.", "Cleopatra vivió *más cerca de la llegada a la Luna*… que de la Gran Pirámide"),
- ("serious", "La pirámide tiene unos cuatro mil quinientos años. Cuando Cleopatra nació, ya tenía más de dos mil.", "Cuando Cleopatra nació, la pirámide *ya tenía más de 2,000 años*"),
+ ("mischievously", "Cleopatra vivió más cerca del viaje a la Luna… que de las pirámides.", "Cleopatra vivió *más cerca del viaje a la Luna*… que de las pirámides"),
+ ("serious", "La Gran Pirámide tiene unos cuatro mil quinientos años. Cuando Cleopatra nació, ya tenía más de dos mil.", "Cuando Cleopatra nació, la pirámide *ya tenía más de 2,000 años*"),
  ("sarcastic", "Para ella, la pirámide era más antigua… que ella para nosotros.", "Para ella, la pirámide era *más antigua que ella para nosotros*"),
  ("", "Y su familia ni siquiera era egipcia: venía de Macedonia, en Grecia. Gobernaron Egipto siglos… sin aprender egipcio. Ella sí.", "Su familia venía de *Macedonia*. Siglos sin aprender egipcio… *ella sí*"),
  ("dramatically", "Más: cuando se construían las pirámides, todavía había mamuts vivos, en una isla del Ártico.", "Cuando se construían las pirámides… *todavía había mamuts*"),

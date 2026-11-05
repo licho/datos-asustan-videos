@@ -10,7 +10,7 @@ NAME = "2026-11-19_cucaracha-sin-cabeza"
 KITCHEN = make_kitchen(); PLAIN = ((250, 240, 225), (230, 215, 195))
 
 LINES = [
- ("dramatically", "Esta cucaracha no tiene cabeza… y va a vivir una semana más.", "Esta cucaracha *no tiene cabeza*… y va a vivir *una semana más*"),
+ ("dramatically", "Esta cucaracha no tiene cabeza… y vivirá una semana más.", "Esta cucaracha *no tiene cabeza*… y vivirá *una semana más*"),
  ("serious", "¿Cómo? No respira por la boca: respira por unos agujeritos en el cuerpo llamados espiráculos.", "¿Cómo? No respira por la boca: usa unos agujeritos llamados *espiráculos*"),
  ("", "Y no se desangra, porque su sangre circula a baja presión y la herida se sella rápido.", "Y no se desangra: su sangre circula *a baja presión* y la herida *se sella rápido*"),
  ("sarcastic", "Entonces, ¿de qué muere? De sed. Sin boca, no puede tomar agua.", "¿De qué muere? *De sed.* Sin boca, no puede tomar agua"),

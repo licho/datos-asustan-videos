@@ -9,7 +9,7 @@ from lib.fondos import office, night_room
 NAME = "2026-11-21_fantasma-trabajos"
 END = 4.5
 LINES = [
- ("sarcastic", "Ciento cincuenta años en la misma casa… y nunca le han pagado.", "*150 años* en la misma casa… *y nunca le han pagado*"),
+ ("sarcastic", "Ciento cincuenta años en la misma casa… y nunca le pagaron.", "*150 años* en la misma casa… *y nunca le pagaron*"),
  ("mischievously", "Hoy el fantasma busca trabajo. Habilidades: atravesar paredes y aparecer a las tres de la mañana.", "Hoy *el fantasma busca trabajo*. Habilidades: *atravesar paredes*"),
  ("confident", "Trabajo número uno: agente inmobiliario. Vende la casa embrujada como “con mucho carácter”… y con inquilino incluido.", "*Trabajo #1:* agente inmobiliario. Casa “con mucho carácter”… *e inquilino incluido*"),
  ("serious", "Trabajo número dos: soporte técnico. Cliente: “Se me prenden y se apagan las luces solas”. Él: “Sí… ese soy yo.”", "*Trabajo #2:* soporte técnico. “Las luces parpadean solas”. *“Ese soy yo.”*"),
