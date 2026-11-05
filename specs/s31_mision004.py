@@ -5,7 +5,7 @@ from lib.core import lerp, cl
 
 NAME = "2026-11-23_mision004-maquinas"
 CAPTIONS = False
-END = 4.5
+END = 3.0
 LINES = [
  ("dramatically", "Tu refri acaba de decirte: “Hoy no hay leche. Ni mañana. Ni nunca.”", "Tu refri acaba de decirte: “Hoy no hay leche. Ni mañana. Ni nunca.”"),
  ("serious", "Misión 004: las máquinas se rebelaron. Tu asistente de voz, tu celular… y hasta la freidora de aire.", "Misión 004: las máquinas se rebelaron. Asistente de voz, celular… y hasta la freidora."),

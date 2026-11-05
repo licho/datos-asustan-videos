@@ -7,7 +7,7 @@ from lib.personajes import guy, cleopatra, mammoth, stego, trex, anchors
 from lib.props import pyramid, rocket, nopal, building, document, picture, phone_small
 
 NAME = "2026-11-30_cleopatra-tiempo"
-END = 4.5
+END = 3.0
 LINES = [
  ("mischievously", "Cleopatra vivió más cerca del viaje a la Luna… que de las pirámides.", "Cleopatra vivió *más cerca del viaje a la Luna*… que de las pirámides"),
  ("serious", "La Gran Pirámide tiene unos cuatro mil quinientos años. Cuando Cleopatra nació, ya tenía más de dos mil.", "Cuando Cleopatra nació, la pirámide *ya tenía más de 2,000 años*"),
@@ -38,11 +38,11 @@ def timeline(d, lt, y=1150, labels=True):
 def s_hook(c):
     img = space_bg(c.t, stops=((0, (60, 40, 110)), (.6, (25, 18, 60)), (1, (8, 6, 25)))); d = ImageDraw.Draw(img); lt = c.lt
     timeline(d, lt)
-    sc = [tw(lt, .2 + i * .5, .5, 0, 1, back_out) for i in range(3)]
+    sc = [1.0, 1.0, 1.0]                                   # todo visible desde el cuadro 0
     d = layer(img, lambda dd, cx, cy: pyramid(dd, cx, cy + 150, .35), 185, 830, 420, sc[0], sc[0])
     d = layer(img, lambda dd, cx, cy: cleopatra(dd, cx, cy + 230, .55, c.t, mood="happy"), 585, 720 + yoyo(lt, 1.5, .8, 0, -8), 520, sc[1], sc[1])
     d = layer(img, lambda dd, cx, cy: rocket(dd, cx, cy + 140, .55, c.t), 950, 790, 420, sc[2], sc[2])
-    chip(d, "DATOS QUE ROMPEN EL TIEMPO", CHIP1, bg=PURPLE, size=48, appear=lt / .3)
+    chip(d, "MÁS CERCA DE LA LUNA", CHIP1, bg=PURPLE)
     return img
 
 def s_age(c):

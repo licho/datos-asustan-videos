@@ -7,7 +7,7 @@ from lib.props import key_on_neck, ice_machine, counter, phone_chat, wall_clock,
 from lib.fondos import store_day, make_store
 
 NAME = "2026-11-27_zombies-parte4"
-END = 5.0
+END = 3.0
 LINES = [
  ("dramatically", "Al celular le queda diez por ciento… y afuera hay zombis.", "*10% de batería*… y afuera hay *zombis*"),
  ("sarcastic", "Día cuatro en el minisúper, sin señal. Y el empleado ya cobra la carga: cincuenta pesos el cinco por ciento.", "*Día 4*, sin señal. El empleado cobra la carga: *$50 el 5%*"),
@@ -37,9 +37,9 @@ def battery(d, x, y, pct, w=220):
 def s_day4(c):
     img = store_day(c.t); img = img if hasattr(img, "size") else img[0]; img = img.copy(); d = ImageDraw.Draw(img)
     guy(d, 330, FEET, .7, mood="scared", t=c.t)
-    battery(d, 700, 640, 10 if int(c.t * 2) % 2 else 9)
+    battery(d, 700, 640, 10)
     d.text((700, 740), "SIN SEÑAL", font=F(44), fill=RED, anchor="mm", stroke_width=4, stroke_fill=WHITE)
-    chip(d, "DÍA 4", CHIP1, bg=RED)
+    chip(d, "10% Y ZOMBIS AFUERA", CHIP1, bg=RED)
     return img
 
 def s_charge(c):

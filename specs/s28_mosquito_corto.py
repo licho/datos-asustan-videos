@@ -7,7 +7,7 @@ from lib.props import bed, podium, radar, bucket, tire, flowerpot, cake, balloon
 from lib.fondos import night_room
 
 NAME = "2026-11-20_mosquito-corto"
-END = 5.0
+END = 3.0
 LINES = [
  ("mischievously", "Si crees que el animal más peligroso es el tiburón… estás muy lejos.", "¿El animal *más peligroso* es el tiburón? *Estás muy lejos*"),
  ("dramatically", "El más peligroso… es este.", "El más peligroso… *es este.*"),

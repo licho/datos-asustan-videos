@@ -7,7 +7,7 @@ from lib.props import flashlight, table, laptop, floor_lamp, house, sign_board, 
 from lib.fondos import office, night_room
 
 NAME = "2026-11-21_fantasma-trabajos"
-END = 4.5
+END = 3.0
 LINES = [
  ("sarcastic", "Ciento cincuenta años en la misma casa… y nunca le pagaron.", "*150 años* en la misma casa… *y nunca le pagaron*"),
  ("mischievously", "Hoy el fantasma busca trabajo. Habilidades: atravesar paredes y aparecer a las tres de la mañana.", "Hoy *el fantasma busca trabajo*. Habilidades: *atravesar paredes*"),

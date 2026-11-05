@@ -5,7 +5,7 @@ from lib.personajes import guy, stamp_guy
 from lib.props import sun, thermo, building, bolt, ground_current, ranger_hat, tree, house, car, clouds, sign_board
 
 NAME = "2026-11-25_rayos"
-END = 4.5
+END = 3.0
 LINES = [
  ("dramatically", "Un rayo es cinco veces más caliente que la superficie del Sol.", "Un rayo es *5 veces más caliente* que la superficie del Sol"),
  ("mischievously", "Casi veintiocho mil grados… y aun así, mucha gente sigue creyendo estos mitos.", "*Casi 28,000 °C*… y aun así, mucha gente cree *estos mitos*"),

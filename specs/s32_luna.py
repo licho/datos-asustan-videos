@@ -7,7 +7,7 @@ from lib.props import planet_earth, moon_disc, sun_simple, snowflake, phone_smal
 from lib.fondos import make_space
 
 NAME = "2026-11-24_luna-desaparece"
-END = 4.5
+END = 3.0
 LINES = [
  ("mischievously", "Si la Luna desaparece mañana, no explota nada… y eso es lo peor.", "Si la Luna desaparece mañana, *no explota nada*… *y eso es lo peor*"),
  ("serious", "Primero, las noches: sin luna, serían mucho más oscuras. Solo estrellas.", "Las noches serían *mucho más oscuras*. Solo estrellas"),
@@ -24,17 +24,17 @@ LINES = [
 SPACE = make_space(); NIGHT = ((15, 20, 50), (45, 45, 90))
 
 def hook(c):
-    img, d = canvas(SPACE); f = c.lt / c.dur
-    gone = f > .3
-    planet_earth(d, 330, 1060, 230, mood="scared" if gone else "happy")
-    if not gone: moon_disc(d, 800, 600, 110)
-    elif f < .5:
-        k = (f - .3) / .2
+    """Cuadro 0: la Luna ya está desapareciendo (¡PUF!) y la Tierra se asusta."""
+    img, d = canvas(SPACE); lt = c.lt
+    k = cl(lt / .7)
+    planet_earth(d, 330, 1060, 230, mood="scared")
+    if k < 1:
         for i in range(10):
             a = i / 10 * 6.28; r = 60 + 200 * k
             d.ellipse([800 + math.cos(a) * r - 40 * (1 - k), 600 + math.sin(a) * r - 40 * (1 - k), 800 + math.cos(a) * r + 40 * (1 - k), 600 + math.sin(a) * r + 40 * (1 - k)], fill=(240, 240, 230))
-        bigtext(d, "¡PUF!", 800, 600, 110, fill=YEL)
-    chip(d, "¿QUÉ PASARÍA SI…?", CHIP1, bg=PURPLE, appear=c.lt / .3)
+    if lt < 1.4: bigtext(d, "¡PUF!", 800, 600, 110, fill=YEL)
+    else: d.ellipse([690, 490, 910, 710], outline=(200, 200, 220), width=4)       # hueco donde estaba
+    chip(d, "SI LA LUNA DESAPARECE", CHIP1, bg=PURPLE)
     return img
 
 def nights(c):

@@ -23,7 +23,7 @@ LINES = [
  ("sarcastic", "Por eso nunca le atinas con la chancla… y si le atinas, asegúrate de que sea definitivo.", "Por eso nunca le atinas con la chancla… y si le atinas, *que sea definitivo*"),
  ("mischievously", "¿A qué le tienes más miedo: a la cucaracha… o a la cucaracha voladora?", "¿A qué le tienes más miedo: a la cucaracha… *o a la cucaracha voladora*?"),
 ]
-END = 5.0
+END = 3.0
 
 def hook(c):
     """Desde el cuadro 0: la cucaracha ya va caminando sin cabeza y la cabeza mueve las antenas aparte."""

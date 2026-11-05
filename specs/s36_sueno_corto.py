@@ -6,7 +6,7 @@ from lib.props import mug, hourglass, car, road, phone_chat, wall_clock, monitor
 from lib.fondos import night_room
 
 NAME = "2026-11-28_dejar-de-dormir-corto"
-END = 4.5
+END = 3.0
 LINES = [
  ("sarcastic", "Con dieciocho horas sin dormir, tus reflejos andan como si llevaras unas copas.", "*18 horas sin dormir:* reflejos como con *unas copas*"),
  ("mischievously", "“No pasa nada, otro café.” Spoiler: el café no te va a salvar.", "“Otro café.” Spoiler: *el café no te va a salvar*"),
