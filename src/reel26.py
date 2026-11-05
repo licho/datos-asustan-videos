@@ -149,7 +149,7 @@ def sick_guy(d, x, y, s, t):
     d.ellipse([hx + S(140), hy + S(10), hx + S(160), hy + S(30)], fill=RED)
 
 CAPS = [
-    (0.0, 4.0, "¿Crees que el refri *mata las bacterias*? Algunas *crecen ahí, felices*"),
+    (0.0, 4.0, "Si crees que el refri *mata las bacterias*… algunas *crecen ahí, felices*"),
     (4.0, 7.0, "Día 1: guardas el guisado. Todo bien."),
     (7.0, 11.0, "Regla de oro: las sobras se comen en *3 o 4 días*"),
     (11.0, 14.3, "Pero lo olvidaste *detrás del frasco de mostaza*…"),
