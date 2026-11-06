@@ -102,5 +102,5 @@ Los specs siguen importando de `lib.core`, `lib.motion`, `lib.personajes`, `lib.
 
 ## Pendientes conocidos (noviembre 2026)
 - Estado detallado y siguientes pasos: ver `PROYECTO.md` (sección "Estado").
-- Nov 2–18 programados sin ajustes (se dejan así para comparar). Nov 19–30 ajustados (gancho 3 s, ≥ 60 s): sin voz listo, falta aprobación de Luis → voces, `final` y programar.
+- Nov 2–18 programados sin ajustes (se dejan así para comparar). Nov 19–30 ajustados y ya programados.
 - Diciembre: revisar que todos los sin voz duren ≥ 60 s con la regla nueva; pendiente aprobar guion "¿tu mamá es un doppelgänger?" (12 dic).

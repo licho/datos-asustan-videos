@@ -50,10 +50,9 @@
 
 ## Estado al 2 de noviembre de 2026
 - **Del 2 al 18 de noviembre:** ya programados en Metricool con voz y **sin ajustes** (ganchos viejos, 62–100 s). Luis pidió dejarlos así para compararlos.
-- **Del 19 al 30 de noviembre** (10 videos, **ajustados**: gancho de 3 s y 60 s o más):
-  - **Sin voz listo, y Luis aún no los aprueba:** cucaracha (19, con 5 líneas nuevas), mosquito (20), fantasma (21, con trabajo #5 "velador"), Misión 004 (23), Luna (24), rayos (25) y dejar de dormir (28). Están en `sinvoz/`.
-  - **Sin cambios:** zombis 4 (27), Cleopatra (30) y refri (26, 84 s, código antiguo en `src/reel26.py`).
-  - **Siguiente paso:** cuando Luis apruebe, grabar las 10 voces (~8,500 créditos), hacer los finales, enseñárselos y programarlos a las 10:00.
+- **Del 19 al 30 de noviembre:** los 10 están **programados en Metricool** (10:00, Facebook + YouTube) con gancho de 3 s, 60 s o más, cierre de 3 s y hashtags nuevos. El 20 (mosquito) y el 28 (dejar de dormir) van en **versión corta de 45 s** como prueba; las versiones largas están en `videos/` para TikTok.
+- **6 de noviembre (doble):** recortado a 85 s porque Facebook rechaza reels de más de 90 s. El del **9 (cuarto sucio) dura 100 s** y también hay que recortarlo.
+- **Domingos:** propuesta de clip de 20–30 s solo en YouTube a las 16:00. El del 8 está listo en `clips/` (falta que Luis lo confirme).
 - **Diciembre:** varios videos listos sin voz (ver el calendario en `IDEAS.md`). Hay que revisar que todos duren 60 s o más con la regla nueva. Está pendiente que Luis apruebe el guion de "¿tu mamá es un doppelgänger?" (propuesto para el 12 de diciembre).
 - **Análisis de fin de mes (miércoles 2 de diciembre):** comparar tres grupos: octubre, noviembre 2–18 (sin ajustes) y noviembre 19–30 (ajustados). Hay que decir si octubre se parece al inicio de noviembre y si los ajustes mejoraron segundos vistos, vistas y suscriptores. Con pocos videos por grupo, las diferencias pueden ser casualidad, y hay que decírselo. Se entrega como página nueva.
 - **Recordatorios ya creados fuera de este proyecto:** 19 de noviembre (revisar que del 19 al 30 esté programado) y 2 de diciembre (el análisis). Llegan a la sesión vieja. Si Luis quiere que lleguen aquí, vuelve a crearlos dentro del proyecto y avísale para que borre los viejos.
