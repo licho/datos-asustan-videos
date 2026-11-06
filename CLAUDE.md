@@ -92,9 +92,11 @@ Los specs siguen importando de `lib.core`, `lib.motion`, `lib.personajes`, `lib.
 - **Una sola publicación con los dos proveedores** (facebook + youtube), no dos separadas.
 - Horario: **lunes a sábado a las 10:00** (America/Merida), un video al día; domingo no se publica.
 - Formato que se usa (ver publicaciones existentes con `getScheduledPosts`):
-  - `text`: gancho + emoji + pregunta para comentarios 👇, línea de fuentes si aplica, hashtags `#DatosQueAsustan` + 2–3 del tema + `#Shorts`.
+  - `text`: **primera línea = gancho con la palabra clave del tema** (lo que alguien buscaría: "cucaracha sin cabeza") + emoji; luego 1–2 líneas de contenido, pregunta para comentarios 👇, línea de fuentes si aplica y hashtags.
+  - **Hashtags: 4–5 en total, nunca más.** `#DatosQueAsustan` + 1–2 del tema exacto en español (`#Cucarachas`, no `#Animales`) + 1 de categoría (`#DatosCuriosos`, `#Terror` o `#Supervivencia`) + el de la serie si aplica (`#GuiaLaboralDeLosMonstruos`, `#MisionesDQA`, `#ApocalipsisZombi`) + `#Shorts`. **Prohibidos:** `#fyp`, `#parati`, `#viral`, `#foryou` (no suben el alcance) y hashtags de lugar (`#Sonora`, `#Yucatán`).
+  - **La palabra clave va en 4 lugares:** título, primera línea del texto, letrero del video (primeros 3 s) y la voz. Pesa más que cualquier hashtag. Ver la guía de retención.
   - `facebookData`: `{type: "REEL", title: "<título>"}`.
-  - `youtubeData`: `{title: "<título> <emoji> #Shorts", type: "short", privacy: "public", tags: [...], category: "ENTERTAINMENT" o "EDUCATION", madeForKids: false}`.
+  - `youtubeData`: `{title: "<título con la palabra clave> <emoji> #Shorts", type: "short", privacy: "public", tags: [...], category: "ENTERTAINMENT" o "EDUCATION", madeForKids: false}`.
   - `media`: el mp4 de `videos/` publicado en el repo (URL raw de GitHub); Metricool lo copia a su almacenamiento.
 - Muestra el video a Luis antes de programarlo.
 

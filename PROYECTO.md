@@ -35,6 +35,8 @@
 - Marca **"Datos que asustan"**, brandId `7531941`, zona horaria `America/Merida`.
 - **Lunes a sábado a las 10:00**, un video al día. El domingo no se publica.
 - **Una sola publicación** con Facebook (REEL) y YouTube (short) juntos. Copia el formato de texto, títulos, tags y categoría de las publicaciones existentes (`getScheduledPosts`).
+- **Hashtags y palabras clave:** 4–5 hashtags específicos (marca + tema + categoría + serie + `#Shorts`), nunca `#fyp`/`#parati`/`#viral` ni de lugar. La palabra clave del tema va en título, primera línea, letrero y voz (detalle en `CLAUDE.md`).
+- **Duración máxima en Facebook Reels: 90 s.** Metricool rechaza el reel si pasa de 90 s.
 - El media es la URL raw de GitHub del mp4 en `videos/` (`https://raw.githubusercontent.com/licho/datos-asustan-videos/main/videos/...`).
 
 ## Métricas
