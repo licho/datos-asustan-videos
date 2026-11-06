@@ -9,7 +9,7 @@ Antes de empezar lee: `IDEAS.md` (temas hechos y pendientes) y `lib/CATALOGO.md`
 ## Reglas de contenido (no negociables)
 - **Sin marcas** (ni en voz ni en dibujos) y **sin referencias locales** a Yucatán/Mérida.
 - **Datos exactos y con fuente.** Verifica en la web; las fuentes van al final del guion (`guiones/*.txt`) y en la respuesta.
-- **Duración: mínimo 60 s, máximo 90 s** (TikTok solo monetiza videos de más de un minuto). Guía: un solo dato o curiosidad → 60–65 s (se completa con datos extra reales, no con relleno); lista, guía o "qué pasaría si" → 60–75 s; más de 75 s solo si cada línea lo justifica. La duración estimada de `texto` ≈ duración del video final; apunta a ≥ 63 s para tener margen. Prueba de cada línea: "si la quito, ¿se pierde algo?" Si no, se quita (pero sin bajar de 60 s).
+- **Duración: mínimo 60 s, máximo 90 s** (Facebook Reels rechaza más de 90 s; TikTok solo monetiza videos de más de un minuto). Guía: un solo dato o curiosidad → 60–65 s (se completa con datos extra reales, no con relleno); lista, guía o "qué pasaría si" → 60–75 s; más de 75 s solo si cada línea lo justifica. La duración estimada de `texto` ≈ duración del video final; apunta a ≥ 63 s para tener margen. Prueba de cada línea: "si la quito, ¿se pierde algo?" Si no, se quita (pero sin bajar de 60 s).
 - **Primero el guion, luego el video.** Muestra el guion (con escenas propuestas) y espera aprobación antes de construir. Muestra el video antes de programarlo.
 - Pide más humor si el guion queda plano: Luis prefiere chistes cotidianos mexicanos, sarcasmo y humor negro ligero.
 - Políticas de plataformas (anuncios): **sin armas en pantalla**, sin símbolos nazis ni uniformes reconocibles, sin sangre/gore, sin muertos visibles. Mencionar temas sensibles está bien; mostrarlos, no.
@@ -93,6 +93,7 @@ Los specs siguen importando de `lib.core`, `lib.motion`, `lib.personajes`, `lib.
 - Horario: **lunes a sábado a las 10:00** (America/Merida), un video al día; domingo no se publica.
 - Formato que se usa (ver publicaciones existentes con `getScheduledPosts`):
   - `text`: **primera línea = gancho con la palabra clave del tema** (lo que alguien buscaría: "cucaracha sin cabeza") + emoji; luego 1–2 líneas de contenido, pregunta para comentarios 👇, línea de fuentes si aplica y hashtags.
+  - **Texto completo (con hashtags) de 10 a 400 caracteres.** Facebook lo revisa en su lista de calidad y baja el alcance si pasa de 400. Fuentes en forma corta ("Fuente: OMS").
   - **Hashtags: 4–5 en total, nunca más.** `#DatosQueAsustan` + 1–2 del tema exacto en español (`#Cucarachas`, no `#Animales`) + 1 de categoría (`#DatosCuriosos`, `#Terror` o `#Supervivencia`) + el de la serie si aplica (`#GuiaLaboralDeLosMonstruos`, `#MisionesDQA`, `#ApocalipsisZombi`) + `#Shorts`. **Prohibidos:** `#fyp`, `#parati`, `#viral`, `#foryou` (no suben el alcance) y hashtags de lugar (`#Sonora`, `#Yucatán`).
   - **La palabra clave va en 4 lugares:** título, primera línea del texto, letrero del video (primeros 3 s) y la voz. Pesa más que cualquier hashtag. Ver la guía de retención.
   - `facebookData`: `{type: "REEL", title: "<título>"}`.
