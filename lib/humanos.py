@@ -182,7 +182,7 @@ def stamp_point(x, y, s, ang, p, cx=None, cy=None):
     a = _m.radians(ang); dx, dy = p[0] - x, p[1] - y
     return (x + dx * _m.cos(a) + dy * _m.sin(a), y - dx * _m.sin(a) + dy * _m.cos(a))
 
-def spy_date(d, x, y, s=1.0, mood="neutral", arms="down", t=0.0, hat=True, glasses=True):
+def spy_date(d, x, y, s=1.0, mood="neutral", arms="down", t=0.0, hat=True, glasses=True, lips=True):
     """Cita sospechosa: gabardina beige, sombrero de ala y lentes oscuros (personaje genérico, sin rasgos de nadie real). y = pies."""
     from .objetos import shades
     guy(d, x, y, s, mood=mood, arms=arms, t=t, hoodie=(196, 170, 120))
@@ -191,9 +191,13 @@ def spy_date(d, x, y, s=1.0, mood="neutral", arms="down", t=0.0, hat=True, glass
     d.polygon([(cx - S(70), cy - S(5)), (cx, cy + S(80)), (cx - S(20), cy + S(110)), (cx - S(110), cy + S(30))], fill=(170, 145, 100), outline=BLK)
     d.polygon([(cx + S(70), cy - S(5)), (cx, cy + S(80)), (cx + S(20), cy + S(110)), (cx + S(110), cy + S(30))], fill=(170, 145, 100), outline=BLK)
     d.line([(cx - S(115), a["belly"][1]), (cx + S(115), a["belly"][1])], fill=(120, 95, 60), width=max(3, int(S(16))))
-    if glasses: shades(d, hx, a["eyes"][1] + S(6), w=S(205), arms=S(10))
+    if glasses: shades(d, hx, a["eyes"][1] + S(30), w=S(210), arms=S(10))
+    if lips:                                                  # labios rojos sobre la sonrisa
+        mx, my = a["mouth"][0], a["mouth"][1] + S(18)
+        d.ellipse([mx - S(30), my - S(13), mx + S(30), my + S(13)], fill=(200, 20, 40), outline=BLK, width=3)
+        d.line([(mx - S(26), my), (mx + S(26), my)], fill=(120, 10, 25), width=max(2, int(S(4))))
     if hat:
-        top = hy - r
+        top = hy - r * .62
         d.ellipse([hx - r * 1.45, top + r * .05, hx + r * 1.45, top + r * .38], fill=(60, 55, 50), outline=BLK, width=4)
         d.rounded_rectangle([hx - r * .85, top - r * .55, hx + r * .85, top + r * .22], int(r * .3), fill=(70, 64, 58), outline=BLK, width=4)
         d.rectangle([hx - r * .85, top + r * .02, hx + r * .85, top + r * .16], fill=(30, 28, 26))

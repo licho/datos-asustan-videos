@@ -180,7 +180,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `songbird(d, x, y, s=1.0, t=0.0, col=(150, 110, 70), belly=(230, 210, 180), flip=False, shades_on=False, fly=True)` · lib.animales — Pajarito de caricatura (gorrión café o cuervo negro con col=(35, 35, 45)); (x, y) = centro del cuerpo. fly=True aletea.
 - `soul(d, x, y, t, s=1.0)` · ofrenda
 - `sponge(d, cx, cy, s, t=0.0, mood='smug', dirt=0.0, wet=0.0, sparkle=False)` · reel16
-- `spy_date(d, x, y, s=1.0, mood='neutral', arms='down', t=0.0, hat=True, glasses=True)` · lib.humanos — Cita sospechosa: gabardina beige, sombrero de ala y lentes oscuros (personaje genérico, sin rasgos de nadie real). y = pies.
+- `spy_date(d, x, y, s=1.0, mood='neutral', arms='down', t=0.0, hat=True, glasses=True, lips=True)` · lib.humanos — Cita sospechosa: gabardina beige, sombrero de ala y lentes oscuros (personaje genérico, sin rasgos de nadie real). y = pies.
 - `st_nicholas(d, x, y, s=1.0, t=0.0, mood='calm', arms='down')` · lib.humanos — San Nicolás (caricatura): obispo con mitra blanca y dorada, barba blanca, capa roja y báculo dorado. y = pies.
 - `stamp_guy(img, x, y, s, ang, mood='scared', arms='up', t=0.0, hoodie=(240, 120, 40))` · reel25
 - `stamp_point(x, y, s, ang, p, cx=None, cy=None)` · lib.humanos — Dónde queda un punto p=(px, py) de un personaje dibujado con stamp_guy(img, x, y, s, ang) después de girarlo.
