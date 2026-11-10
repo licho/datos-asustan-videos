@@ -1,0 +1,15 @@
+Cómo saber si tu crush es un espía — 10 nov 2026 (reemplaza la mochila alienígena)
+Código: specs/s51_crush_espia.py
+Gancho (resultado impactante): "Hay espías entrenados para enamorarte… y dejan cinco señales."
+Tensión: trampa de miel → señales 1 a 5 con contador · Recompensa: giro "es más probable que sea un estafador".
+Guiños sutiles a la noticia del 8–9 nov (director de la empresa de chips más valiosa del mundo investigado por posible operación de inteligencia), sin nombres, sin marcas, sin decir que alguien es espía.
+
+[dramatically] Hay espías entrenados para enamorarte… y dejan cinco señales. [serious] Se llama trampa de miel. En la Guerra Fría, a ellas les decían “gorriones”… y a ellos, “cuervos”. [sarcastic] Señal uno: le interesa más tu empresa de chips que tu signo. Y no, no habla de las papitas. [mischievously] Señal dos: es demasiado perfecto. Le gusta todo lo que te gusta… como si hubiera estudiado tu perfil. [serious] Porque lo estudió: una agencia de inteligencia detectó más de diez mil acercamientos de espías disfrazados en redes de trabajo. [sarcastic] Señal tres: paga la cena, el taxi y te invita un viaje con todo pagado. En México eso no es amor… es sospechoso. [mischievously] Señal cuatro: primero te pide la clave del wifi… luego la de tu correo… luego la de tu trabajo. [dramatically] Y la última es la peor. Señal cinco: no quiere conocer a tu mamá. O es espía… o es casado. [sarcastic] La buena noticia: si no eres dueño de la empresa más valiosa del mundo, ningún gobierno va a gastar un espía en ti. [whispers] La mala: es más probable que sea un estafador. ¿Cuál de estas señales te ha tocado? Te leo.
+
+Fuentes:
+- JSTOR Daily, "The Long History of Sexpionage": "sparrows" y "ravens" en la Guerra Fría.
+- ITV News (16 may 2022), Ken McCallum (MI5): más de 10,000 acercamientos encubiertos en redes profesionales.
+- NCSC/ODNI, "Intelligence Threats & Social Media Deception": preguntas sobre tu trabajo, viajes pagados, presión para dar más información.
+- Contexto de la noticia: Al Jazeera, Washington Post, Bloomberg (8–9 nov 2026).
+
+Producir final: python3 -m lib.produce specs/s51_crush_espia.py final audio/51-crush-espia.mp3

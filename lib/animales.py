@@ -664,3 +664,21 @@ def giraffe(d, x, y, s=1.0, t=0.0, pose="stand", curl=0.0, eyes="open", bags=Fal
         nx_, ny_ = pts[4]
         d.polygon([(nx_ - 14 * s, ny_), (nx_ + 14 * s, ny_), (nx_ + 20 * s, ny_ + 90 * s), (nx_, ny_ + 115 * s), (nx_ - 20 * s, ny_ + 90 * s)], fill=tie, outline=BLK)
     return H
+
+def songbird(d, x, y, s=1.0, t=0.0, col=(150, 110, 70), belly=(230, 210, 180), flip=False, shades_on=False, fly=True):
+    """Pajarito de caricatura (gorrión café o cuervo negro con col=(35, 35, 45)); (x, y) = centro del cuerpo. fly=True aletea."""
+    S = lambda v: v * s; fx = -1 if flip else 1
+    d.ellipse([x - S(80), y - S(55), x + S(80), y + S(55)], fill=col, outline=BLK, width=4)
+    d.ellipse([x - S(40) * fx - S(30), y - S(10), x - S(40) * fx + S(45), y + S(45)], fill=belly)
+    d.polygon([(x - fx * S(70), y - S(10)), (x - fx * S(140), y - S(40)), (x - fx * S(135), y + S(15))], fill=dk(col, .8), outline=BLK)
+    hx, hy = x + fx * S(70), y - S(45)
+    d.ellipse([hx - S(45), hy - S(45), hx + S(45), hy + S(45)], fill=col, outline=BLK, width=4)
+    d.polygon([(hx + fx * S(40), hy - S(5)), (hx + fx * S(85), hy + S(8)), (hx + fx * S(40), hy + S(20))], fill=(240, 180, 50), outline=BLK)
+    if shades_on:
+        from .objetos import shades
+        shades(d, hx + fx * S(12), hy - S(8), w=S(80))
+    else:
+        d.ellipse([hx + fx * S(10) - S(9), hy - S(17), hx + fx * S(10) + S(9), hy + S(1)], fill=BLK)
+    k = math.sin(t * 14) if fly else -.3
+    wy = y - S(10) - k * S(60)
+    d.polygon([(x - S(20), y - S(15)), (x + S(25), y - S(20)), (x - fx * S(30), wy - S(50))], fill=dk(col, .75), outline=BLK)

@@ -181,3 +181,46 @@ def stamp_point(x, y, s, ang, p, cx=None, cy=None):
     import math as _m
     a = _m.radians(ang); dx, dy = p[0] - x, p[1] - y
     return (x + dx * _m.cos(a) + dy * _m.sin(a), y - dx * _m.sin(a) + dy * _m.cos(a))
+
+def spy_date(d, x, y, s=1.0, mood="neutral", arms="down", t=0.0, hat=True, glasses=True):
+    """Cita sospechosa: gabardina beige, sombrero de ala y lentes oscuros (personaje genérico, sin rasgos de nadie real). y = pies."""
+    from .objetos import shades
+    guy(d, x, y, s, mood=mood, arms=arms, t=t, hoodie=(196, 170, 120))
+    a = anchors(x, y, s); S = lambda v: v * s; hx, hy = a["head"]; r = a["head_r"]
+    cx, cy = a["neck"]
+    d.polygon([(cx - S(70), cy - S(5)), (cx, cy + S(80)), (cx - S(20), cy + S(110)), (cx - S(110), cy + S(30))], fill=(170, 145, 100), outline=BLK)
+    d.polygon([(cx + S(70), cy - S(5)), (cx, cy + S(80)), (cx + S(20), cy + S(110)), (cx + S(110), cy + S(30))], fill=(170, 145, 100), outline=BLK)
+    d.line([(cx - S(115), a["belly"][1]), (cx + S(115), a["belly"][1])], fill=(120, 95, 60), width=max(3, int(S(16))))
+    if glasses: shades(d, hx, a["eyes"][1] + S(6), w=S(205), arms=S(10))
+    if hat:
+        top = hy - r
+        d.ellipse([hx - r * 1.45, top + r * .05, hx + r * 1.45, top + r * .38], fill=(60, 55, 50), outline=BLK, width=4)
+        d.rounded_rectangle([hx - r * .85, top - r * .55, hx + r * .85, top + r * .22], int(r * .3), fill=(70, 64, 58), outline=BLK, width=4)
+        d.rectangle([hx - r * .85, top + r * .02, hx + r * .85, top + r * .16], fill=(30, 28, 26))
+
+def mom_chancla(d, x, y, s=1.0, mood="neutral", arms="down", t=0.0, chancla=True):
+    """Mamá mexicana de caricatura: chongo, mandil y chancla en la mano (arms="up" para amenazar). y = pies."""
+    guy(d, x, y, s, mood=mood, arms=arms, t=t, hoodie=(200, 90, 120))
+    a = anchors(x, y, s); S = lambda v: v * s; hx, hy = a["head"]; r = a["head_r"]
+    HAIR = (60, 40, 35)
+    d.ellipse([hx - S(48), hy - r - S(70), hx + S(48), hy - r + S(18)], fill=HAIR, outline=BLK, width=4)
+    d.chord([hx - r * 1.04, hy - r * 1.06, hx + r * 1.04, hy + r * .2], 180, 360, fill=HAIR, outline=BLK, width=4)
+    bx, by = a["chest"][0] + S(30), a["chest"][1] + S(10)
+    d.rounded_rectangle([bx - S(85), by, bx + S(85), by + S(190)], int(S(20)), fill=(245, 240, 230), outline=BLK, width=4)
+    for k in range(3): d.ellipse([bx - S(55) + k * S(45), by + S(60), bx - S(35) + k * S(45), by + S(80)], fill=(230, 90, 90))
+    if chancla:
+        from reels_engine.core import BLK as _B
+        hx2, hy2 = a["hand_r_up"] if arms == "up" else a["hand_r_down"]
+        d.rounded_rectangle([hx2 - S(28), hy2 - S(95), hx2 + S(28), hy2 + S(20)], int(S(24)), fill=(60, 140, 220), outline=BLK, width=4)
+        d.line([(hx2 - S(22), hy2 - S(55)), (hx2 + S(22), hy2 - S(70))], fill=(30, 90, 170), width=max(3, int(S(10))))
+        d.ellipse([hx2 - S(22), hy2 - S(22), hx2 + S(22), hy2 + S(22)], fill=(240, 200, 160), outline=BLK, width=3)
+
+def scammer(d, x, y, s=1.0, mood="neutral", arms="down", t=0.0):
+    """Estafador genérico: gorra al revés, sudadera gris y celular en la mano. y = pies."""
+    guy(d, x, y, s, mood=mood, arms=arms, t=t, hoodie=(110, 110, 120))
+    a = anchors(x, y, s); S = lambda v: v * s; hx, hy = a["head"]; r = a["head_r"]
+    d.chord([hx - r * 1.02, hy - r * 1.05, hx + r * 1.02, hy + r * .25], 180, 360, fill=(40, 40, 45), outline=BLK, width=4)
+    d.rounded_rectangle([hx - r * 1.5, hy - r * .55, hx - r * .6, hy - r * .35], int(S(8)), fill=(30, 30, 35), outline=BLK, width=3)
+    px, py = a["hand_r_down"]
+    d.rounded_rectangle([px - S(30), py - S(70), px + S(30), py + S(30)], int(S(8)), fill=(20, 20, 25), outline=BLK, width=3)
+    d.rectangle([px - S(22), py - S(60), px + S(22), py + S(18)], fill=(90, 200, 120))

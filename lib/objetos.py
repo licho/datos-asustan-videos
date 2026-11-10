@@ -897,3 +897,57 @@ def zombie_mask(d, x, y, s=1.0):
     d.rectangle([x - S(40), y + S(30), x + S(40), y + S(50)], fill=(60, 20, 20))
     for k in range(4): d.polygon([(x - S(40) + k * S(20), y + S(30)), (x - S(30) + k * S(20), y + S(42)), (x - S(20) + k * S(20), y + S(30))], fill=WHITE)
     d.line([(x - S(80), y), (x - S(130), y + S(20))], fill=BLK, width=W_(4))
+
+def honey_jar(d, x, y, s=1.0, heart=True, lock=True):
+    """Frasco de miel ("trampa de miel") con corazón y candadito; y = base."""
+    S = lambda v: v * s; W = lambda v: max(2, int(v * s))
+    d.rounded_rectangle([x - S(150), y - S(330), x + S(150), y], int(S(50)), fill=(240, 170, 40), outline=BLK, width=W(6))
+    d.rounded_rectangle([x - S(120), y - S(300), x - S(70), y - S(60)], int(S(20)), fill=(250, 210, 110))
+    d.rounded_rectangle([x - S(125), y - S(400), x + S(125), y - S(325)], int(S(14)), fill=(190, 120, 70), outline=BLK, width=W(5))
+    for k in range(5): d.line([(x - S(125) + k * S(55), y - S(400)), (x - S(110) + k * S(55), y - S(325))], fill=(150, 90, 50), width=W(4))
+    if heart:
+        hx, hy = x + S(10), y - S(170); r = S(45)
+        d.ellipse([hx - r * 2, hy - r * 1.4, hx, hy + r * .5], fill=RED, outline=BLK, width=W(4)); d.ellipse([hx, hy - r * 1.4, hx + r * 2, hy + r * .5], fill=RED, outline=BLK, width=W(4))
+        d.polygon([(hx - r * 1.95, hy - r * .2), (hx + r * 1.95, hy - r * .2), (hx, hy + r * 2)], fill=RED)
+        d.line([(hx - r * 1.95, hy - r * .2), (hx, hy + r * 2), (hx + r * 1.95, hy - r * .2)], fill=BLK, width=W(4))
+    if lock:
+        lx, ly = x + S(95), y - S(60)
+        d.arc([lx - S(28), ly - S(70), lx + S(28), ly - S(10)], 180, 360, fill=BLK, width=W(8))
+        d.rounded_rectangle([lx - S(38), ly - S(40), lx + S(38), ly + S(25)], int(S(8)), fill=(200, 200, 210), outline=BLK, width=W(4))
+        d.ellipse([lx - S(7), ly - S(15), lx + S(7), ly - S(1)], fill=BLK)
+
+def chips_bag(d, x, y, s=1.0, col=(230, 60, 50)):
+    """Bolsa de papitas sin marca (dice "PAPAS"); y = base."""
+    S = lambda v: v * s; W = lambda v: max(2, int(v * s))
+    d.polygon([(x - S(110), y - S(300)), (x + S(110), y - S(300)), (x + S(125), y), (x - S(125), y)], fill=col, outline=BLK)
+    for yy in (y - S(300), y - S(10)):
+        for k in range(9): d.polygon([(x - S(112) + k * S(28), yy), (x - S(98) + k * S(28), yy - S(16)), (x - S(84) + k * S(28), yy)], fill=dk(col, .8), outline=BLK)
+    d.ellipse([x - S(70), y - S(220), x + S(70), y - S(110)], fill=(250, 210, 90), outline=BLK, width=W(4))
+    d.text((x, y - S(70)), "PAPAS", font=F(int(S(44))), fill=WHITE, anchor="mm", stroke_width=W(4), stroke_fill=BLK)
+
+def gpu_card(d, x, y, s=1.0):
+    """Tarjeta/chip de computadora (sin marca) con dos ventiladores; (x, y) = centro."""
+    S = lambda v: v * s; W = lambda v: max(2, int(v * s))
+    d.rounded_rectangle([x - S(230), y - S(90), x + S(230), y + S(90)], int(S(18)), fill=(60, 65, 75), outline=BLK, width=W(5))
+    for fx in (-1, 1):
+        cx = x + fx * S(110); d.ellipse([cx - S(70), y - S(70), cx + S(70), y + S(70)], fill=(30, 30, 35), outline=BLK, width=W(4))
+        for k in range(6):
+            a = k * math.pi / 3; d.line([(cx, y), (cx + math.cos(a) * S(58), y + math.sin(a) * S(58))], fill=(120, 125, 135), width=W(10))
+        d.ellipse([cx - S(14), y - S(14), cx + S(14), y + S(14)], fill=(90, 220, 120))
+    d.rectangle([x - S(200), y + S(90), x + S(150), y + S(115)], fill=(220, 180, 60), outline=BLK, width=W(3))
+
+def detective_board(d, x, y, w=620, h=460, t=0.0, photos=4, label="OBJETIVO"):
+    """Tablero de corcho con fotos clavadas y estambre rojo (x, y = centro)."""
+    x0, y0, x1, y1 = x - w / 2, y - h / 2, x + w / 2, y + h / 2
+    d.rectangle([x0 - 16, y0 - 16, x1 + 16, y1 + 16], fill=(120, 80, 45), outline=BLK, width=5)
+    d.rectangle([x0, y0, x1, y1], fill=(200, 160, 110))
+    rnd = random.Random(7); pts = []
+    for i in range(photos):
+        px = x0 + w * (.22 + .56 * (i % 2)) + rnd.uniform(-20, 20); py = y0 + h * (.28 + .44 * (i // 2)) + rnd.uniform(-15, 15)
+        d.rectangle([px - 70, py - 60, px + 70, py + 60], fill=WHITE, outline=BLK, width=3)
+        d.ellipse([px - 22, py - 45, px + 22, py - 5], fill=(240, 200, 160), outline=BLK, width=2)
+        d.chord([px - 40, py - 2, px + 40, py + 70], 180, 360, fill=(240, 120, 40), outline=BLK, width=2)
+        d.ellipse([px - 8, py - 68, px + 8, py - 52], fill=RED, outline=BLK); pts.append((px, py - 60))
+    for a, b in zip(pts, pts[1:] + pts[:1]): d.line([a, b], fill=(210, 30, 40), width=5)
+    d.rounded_rectangle([x - 120, y1 - 50, x + 120, y1 - 6], 8, fill=(250, 240, 200), outline=BLK, width=3)
+    d.text((x, y1 - 28), label, font=F(32), fill=RED, anchor="mm")

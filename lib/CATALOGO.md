@@ -155,6 +155,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `medal(d, x, y, s=1.0, text='1º', ribbon=(40, 120, 220), neck=None)` · reels_engine.humans — Hanging medal; (x, y) = center of the medal. neck=(x, y) draws the ribbon from the neck.
 - `mite(d, x, y, s=1.0, t=0.0, phase=0.0, mood='grin', shade=1.0, dizzy=False)` · reel5
 - `mold(d, cx, cy, r, k, t, seed=1)` · reel26
+- `mom_chancla(d, x, y, s=1.0, mood='neutral', arms='down', t=0.0, chancla=True)` · lib.humanos — Mamá mexicana de caricatura: chongo, mandil y chancla en la mano (arms="up" para amenazar). y = pies.
 - `mosquito(d, x, y, s=1.0, t=0.0, flip=False, female=False, mask=False, hat=False, mood='normal', fly=True)` · lib.animales — Mosquito (patrón rayado tipo Aedes). mood: normal | angry | happy. Centro en el tórax.
 - `mummy(d, x, y, s=1.0, t=0.0, arms='forward', mood='neutral', trail=0.0, hat=None)` · lib.criaturas — Momia de pie; y = pies. arms: forward | down | wave | up. mood: neutral | happy | scared. trail = venda suelta (0..1).
 - `napoleon(d, x, y, s=1.0, t=0.0, mood='neutral', arms='down', sweat=False)` · lib.humanos — Napoleón de caricatura (sin armas): saco azul con solapas rojas y sombrero bicornio. y = pies. sweat=True: gotas de sudor.
@@ -168,6 +169,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `roach_head(d, x, y, s, t, blink=True)` · reel27
 - `roach_v12(d, x, y, s, t, ang=0.0, phase=0, eyes=True)` · reel12
 - `robo_cw(d, x, y, s=1.0, t=0.0, mood='smile', arms='down', shades=False, oil=False)` · lib.humanos — Compañero sospechoso de ser robot: peinado de raya perfecta, camisa, corbata y sonrisa cuadrada que no parpadea. y = pies.
+- `scammer(d, x, y, s=1.0, mood='neutral', arms='down', t=0.0)` · lib.humanos — Estafador genérico: gorra al revés, sudadera gris y celular en la mano. y = pies.
 - `scientist(d, x, y, s, t, mood='neutral')` · reel24
 - `scribe(d, x, y, s=1.0, t=0.0, mood='neutral', arms='down')` · lib.humanos — Escriba/historiador griego: toga blanca con banda y corona de laurel. y = pies.
 - `shark(d, x, y, s=1.0, t=0.0, flip=False, mood='neutral')` · lib.animales — Tiburón de lado. mood: neutral | cry | grin. Centro del cuerpo.
@@ -175,8 +177,10 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `sick_guy(d, x, y, s, t)` · reel26
 - `snake(d, x, y, s=1.0, t=0.0, flip=False, mood='neutral')` · lib.animales — Serpiente enroscada; y = piso.
 - `soldier(d, x, y, s=1.0, t=0.0, mood='neutral', arms='down', era='modern', binoculars=False, col=None)` · lib.humanos — Soldadito de caricatura SIN armas (sirve para desfiles, filas, ejércitos). y = pies.
+- `songbird(d, x, y, s=1.0, t=0.0, col=(150, 110, 70), belly=(230, 210, 180), flip=False, shades_on=False, fly=True)` · lib.animales — Pajarito de caricatura (gorrión café o cuervo negro con col=(35, 35, 45)); (x, y) = centro del cuerpo. fly=True aletea.
 - `soul(d, x, y, t, s=1.0)` · ofrenda
 - `sponge(d, cx, cy, s, t=0.0, mood='smug', dirt=0.0, wet=0.0, sparkle=False)` · reel16
+- `spy_date(d, x, y, s=1.0, mood='neutral', arms='down', t=0.0, hat=True, glasses=True)` · lib.humanos — Cita sospechosa: gabardina beige, sombrero de ala y lentes oscuros (personaje genérico, sin rasgos de nadie real). y = pies.
 - `st_nicholas(d, x, y, s=1.0, t=0.0, mood='calm', arms='down')` · lib.humanos — San Nicolás (caricatura): obispo con mitra blanca y dorada, barba blanca, capa roja y báculo dorado. y = pies.
 - `stamp_guy(img, x, y, s, ang, mood='scared', arms='up', t=0.0, hoodie=(240, 120, 40))` · reel25
 - `stamp_point(x, y, s, ang, p, cx=None, cy=None)` · lib.humanos — Dónde queda un punto p=(px, py) de un personaje dibujado con stamp_guy(img, x, y, s, ang) después de girarlo.
@@ -270,6 +274,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `chair(d, x, y, s=1.0, col=WOOD, facing=1, kind='chair')` · reels_engine.furniture — Chair seen from the side. facing=1 backrest on the left. kind: chair | office (old names: silla | oficina).
 - `checklist(d, x, y, w, title, items, done=None, size=36, appear=1.0)` · reels_engine.screens — Card with a list. (x, y) = top-left corner. done = how many are already checked (None = all).
 - `chimalli(img, cx, cy, r=100, color=TURQ, seed=1)` · reels_engine.sketch.history — Aztec round shield with a step-fret band and a fringe of feathers.
+- `chips_bag(d, x, y, s=1.0, col=(230, 60, 50))` · lib.objetos — Bolsa de papitas sin marca (dice "PAPAS"); y = base.
 - `clock(d, cx, cy, r, t, ring=True)` · reel25
 - `cloud(d, cx, cy, t)` · reel26
 - `cloud_rain(d, x, y, s, t)` · reel4
@@ -295,6 +300,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `dehumidifier(d, cx, cy, s, t, ls)` · reel5
 - `delivery_bag(d, x, y, s=1.0, col=(240, 140, 40))` · lib.objetos — Mochila térmica de repartidor (cubo sin marca); (x, y) = centro.
 - `desk(d, x0, x1, y=None)` · reel15
+- `detective_board(d, x, y, w=620, h=460, t=0.0, photos=4, label='OBJETIVO')` · lib.objetos — Tablero de corcho con fotos clavadas y estambre rojo (x, y = centro).
 - `dialog_pixel(d, s, t0, t, cps=26)` · oso
 - `dirty_hand(d, cx, cy, s)` · reel2
 - `dna(d, x, y, h, t, col1=(90, 160, 240), col2=(240, 120, 160))` · reel9
@@ -332,6 +338,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `glass_overlay(d, box)` · reel
 - `goal_thermometer(img, cx, base, h=480, fill=0.6, label=None, color=RED, seed=1, shadow=False)` · reels_engine.sketch.finance — Savings goal thermometer with tick marks; fill = 0…1; label = text above (the goal).
 - `gold_bars(img, cx, base, w=110, rows=(3, 2, 1), seed=1, shadow=False)` · reels_engine.sketch.finance — Stack of gold bars (pyramid); w = width of one bar, rows = bars per row, bottom first.
+- `gpu_card(d, x, y, s=1.0)` · lib.objetos — Tarjeta/chip de computadora (sin marca) con dos ventiladores; (x, y) = centro.
 - `greek_column(img, cx, base, h=420, broken=False, seed=1, shadow=False)` · reels_engine.sketch.history — Greek column (marble, fluted); broken = ruin with a cracked top.
 - `greens_plate(d, x, y, s=1.0, egg=True, col=(70, 140, 60))` · lib.objetos — Plato con verdura picada (chaya, espinaca…) y opcionalmente un huevo; y = base del plato.
 - `ground_current(d, x, y, t, r=300, col=(255, 230, 80))` · reels_engine.exterior — Electric current spreading over the ground from (x, y).
@@ -344,6 +351,7 @@ Zonas seguras (1080x1920): letreros y=300/420 · acción 480–1320 · piso 1300
 - `helicopter(d, x, y, s=1.0, t=0.0, flip=False, light=False, col=(200, 60, 50), beam_to=1300)` · lib.objetos — Helicóptero de rescate (cartoon). facing derecha salvo flip. (x, y) = centro de la cabina. beam_to = y donde termina el reflector.
 - `helmet(d, x, y, s=1.0, col=(80, 100, 60))` · lib.objetos — Casco militar grande suelto. (x, y) = centro de la orilla de abajo.
 - `hive(d, x, y, t, shake=0.0)` · mision003
+- `honey_jar(d, x, y, s=1.0, heart=True, lock=True)` · lib.objetos — Frasco de miel ("trampa de miel") con corazón y candadito; y = base.
 - `hourglass(d, x, y, s=1.0, frac=0.5, t=0.0)` · lib.objetos — Reloj de arena (x, y = centro). frac = arena que ya cayó.
 - `house(d, x, y, s=1.0, wall=(240, 220, 180), roof=(190, 70, 50), lights=False, door_col=(140, 90, 50))` · reels_engine.exterior — One-story house with a gabled roof.
 - `house_pixel(d)` · mision003
