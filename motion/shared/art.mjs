@@ -216,3 +216,74 @@ export const HOOK = {
   ],
   clic: 1.35,
 };
+
+// ---------- Personaje recurrente: piezas sueltas para otras poses ----------
+export const GUY = { skin: "#f0c396", skinSh: "#d9a274", hair: "#37261e", hoodie: "#f07828", hoodieSh: "#c0601f", jeans: "#2c3d78" };
+
+// Cabeza del personaje centrada en (0,0), radio 72. mood: phone | cold | warm | hot | scared | wink
+export function guyHead(mood = "warm") {
+  const k = C.ink, g = GUY;
+  let eyes = "", mouth = "", extra = "";
+  if (mood === "cold") {
+    eyes = `<path d="M-42,14 L-18,22 L-42,30 M42,14 L18,22 L42,30" stroke="${k}" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+    mouth = `<rect x="-24" y="42" width="48" height="22" rx="6" fill="#fff" stroke="${k}" stroke-width="5"/>
+      <path d="M-12,42 v22 M0,42 v22 M12,42 v22 M-24,53 h48" stroke="${k}" stroke-width="3"/>`;
+    extra = `<path d="M-60,-6 Q-66,10 -60,24" stroke="#9fd8ff" stroke-width="6" fill="none"/>`;
+  } else if (mood === "warm") {
+    eyes = `<path d="M-42,26 Q-27,10 -12,26 M12,26 Q27,10 42,26" stroke="${k}" stroke-width="7" fill="none" stroke-linecap="round"/>`;
+    mouth = `<path d="M-20,46 Q0,72 20,46 Z" fill="#6b1f20" stroke="${k}" stroke-width="5" stroke-linejoin="round"/>`;
+  } else if (mood === "hot") {
+    eyes = `<circle cx="-27" cy="20" r="21" fill="#fff" stroke="${k}" stroke-width="5"/><circle cx="27" cy="20" r="21" fill="#fff" stroke="${k}" stroke-width="5"/>
+      <circle cx="-25" cy="22" r="9" fill="${k}"/><circle cx="29" cy="22" r="9" fill="${k}"/>
+      <path d="M-46,-4 L-10,2 M46,-4 L10,2" stroke="${k}" stroke-width="7" stroke-linecap="round"/>`;
+    mouth = `<path d="M-18,50 Q0,40 18,50" stroke="${k}" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M-6,50 q6,20 12,0" fill="#e2626b" stroke="${k}" stroke-width="4"/>`;
+    extra = `<path d="M62,-10 q14,22 0,34 q-14,-12 0,-34z M-70,10 q10,16 0,24 q-10,-8 0,-24z" fill="#8fd3ff" stroke="${k}" stroke-width="4"/>`;
+  } else if (mood === "scared") {
+    eyes = `<circle cx="-27" cy="18" r="24" fill="#fff" stroke="${k}" stroke-width="5"/><circle cx="27" cy="18" r="24" fill="#fff" stroke="${k}" stroke-width="5"/>
+      <circle cx="-27" cy="18" r="7" fill="${k}"/><circle cx="27" cy="18" r="7" fill="${k}"/>`;
+    mouth = `<ellipse cx="0" cy="56" rx="14" ry="16" fill="#6b1f20" stroke="${k}" stroke-width="5"/>`;
+  } else { // phone / neutral
+    eyes = `<circle cx="-27" cy="20" r="21" fill="#fff" stroke="${k}" stroke-width="5"/><circle cx="27" cy="20" r="21" fill="#fff" stroke="${k}" stroke-width="5"/>
+      <circle cx="-30" cy="28" r="10" fill="${k}"/><circle cx="24" cy="28" r="10" fill="${k}"/>`;
+    mouth = `<path d="M-14,50 Q0,60 14,50" stroke="#6b2a20" stroke-width="6" fill="none" stroke-linecap="round"/>`;
+  }
+  return `<g>
+    ${ell(-70, 12, 12, 17, g.skin)}${ell(70, 12, 12, 17, g.skin)}
+    <circle r="72" fill="${g.skin}" stroke="${k}" stroke-width="${S}"/>
+    <path d="M30,58 Q58,40 66,10 Q70,40 50,58 Q40,66 30,58Z" fill="${g.skinSh}" opacity=".6"/>
+    <path d="M-78,-2 Q-82,-82 0,-84 Q82,-82 78,-2 Z" fill="${g.hair}" stroke="${k}" stroke-width="${S}" stroke-linejoin="round"/>
+    <path d="M-78,-6 L-92,-30 L-74,-26 Z" fill="${g.hair}" stroke="${k}" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M-40,-62 Q-10,-74 26,-64" stroke="#5a4033" stroke-width="7" fill="none" stroke-linecap="round"/>
+    ${eyes}
+    ${ell(-46, 46, 11, 6, "#ef9a7a", 'stroke="none" opacity=".7"')}${ell(46, 46, 11, 6, "#ef9a7a", 'stroke="none" opacity=".7"')}
+    ${mouth}${extra}
+  </g>`;
+}
+
+// Torso con sudadera (sin brazos), hombros en y≈-330, cadera en y=-164 (mismo marco que guy()).
+export function guyTorso() {
+  const k = C.ink, g = GUY;
+  return `<g>
+    <path d="M-52,-338 Q0,-368 52,-338 Q34,-320 0,-318 Q-34,-320 -52,-338 Z" fill="${g.hoodieSh}" stroke="${k}" stroke-width="5"/>
+    <path d="M-66,-330 Q-84,-318 -82,-276 L-78,-206 Q-76,-166 -52,-164 L52,-164 Q76,-166 78,-206 L82,-276 Q84,-318 66,-330 Q34,-338 0,-334 Q-34,-338 -66,-330 Z"
+      fill="${g.hoodie}" stroke="${k}" stroke-width="${S}" stroke-linejoin="round"/>
+    <path d="M50,-320 Q74,-300 72,-210 Q70,-176 52,-172 Q66,-200 64,-260 Q62,-300 50,-320 Z" fill="${g.hoodieSh}" opacity=".55"/>
+    <rect x="-44" y="-246" width="88" height="50" rx="18" fill="${g.hoodieSh}" stroke="${k}" stroke-width="4"/>
+  </g>`;
+}
+export function guyStrings() {
+  return `<path d="M-16,-316 L-19,-276 M16,-316 L19,-276" stroke="${C.ink}" stroke-width="11" stroke-linecap="round"/>
+    <path d="M-16,-316 L-19,-276 M16,-316 L19,-276" stroke="#fff" stroke-width="5" stroke-linecap="round"/>`;
+}
+export function guyArm(d, w = 26) {
+  return `<path d="${d}" stroke="${C.ink}" stroke-width="${w + 12}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="${d}" stroke="${GUY.hoodieSh}" stroke-width="${w}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+}
+export function hand(x, y, r = 16) { return ell(x, y, r, r - 1, GUY.skin); }
+export function legsSitting() {
+  const k = C.ink, g = GUY;
+  return `<path d="M-64,-178 L64,-178 L62,-118 L-62,-118 Z" fill="${g.jeans}" stroke="${k}" stroke-width="${S}" stroke-linejoin="round"/>
+    <rect x="-60" y="-140" width="40" height="124" rx="14" fill="${g.jeans}" stroke="${k}" stroke-width="${S}"/>
+    <rect x="20" y="-140" width="40" height="124" rx="14" fill="${g.jeans}" stroke="${k}" stroke-width="${S}"/>
+    ${ell(-42, -12, 32, 15, "#1e1e1e")}${ell(42, -12, 32, 15, "#1e1e1e")}`;
+}

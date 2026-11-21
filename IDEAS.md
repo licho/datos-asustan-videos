@@ -30,6 +30,7 @@ Octubre–noviembre 2026: zombie en el minisúper · teclado sucio · aluxes · 
 - Guía laboral Ep. 7: el duende de Santa (despedido) — sin voz listo (mar 15 dic)
 - Misión 006: ayudar a Santa a entregar los juguetes — sin voz listo (jue 17 dic)
 - ¿Qué pasaría si los humanos desapareciéramos? — sin voz listo (lun 7 dic)
+- ¿Qué pasaría si el Sol se apagara? — sin voz listo, **primer video con la animación nueva en Remotion** (`motion/rm-sol`), fecha por definir
 - ¿Qué pasaría si los dinosaurios siguieran existiendo? — sin voz listo (vie 18 dic)
 - Búnker para el apocalipsis zombi (guía real de los CDC, 2011) — sin voz listo (propuesto mié 9 dic; "zombies parte 5" queda sin fecha)
 - La planta que pide permiso (chaya, tradición maya; Luis autorizó mencionar Yucatán) — sin voz listo (propuesto jue 10 dic; "¿cuánto frío aguanta tu cuerpo?" queda sin fecha)

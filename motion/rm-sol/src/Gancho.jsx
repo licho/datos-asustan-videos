@@ -30,7 +30,7 @@ function Chip({ text, y, bg, fg, size = 56, k }) {
   );
 }
 
-export const Gancho = () => {
+export const Gancho = ({ bare = false }) => {
   const f = useCurrentFrame(); const { fps } = useVideoConfig(); const t = f / fps;
   const H = A.HOOK; const clic = H.clic;
 
@@ -124,7 +124,7 @@ export const Gancho = () => {
       </svg>
       <Chip text={H.chip1} y={300} bg={A.C.red} fg="#fff" k={chip1K} />
       {t > clic + 0.5 && <Chip text={timer} y={420} bg="#111" fg={A.C.yel} size={48} k={chip2K} />}
-      <Captions t={t} words={H.words} />
+      {!bare && <Captions t={t} words={H.words} />}
     </AbsoluteFill>
   );
 };

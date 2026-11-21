@@ -1,0 +1,14 @@
+Video: ¿Qué pasaría si el Sol se apagara?
+Fecha: diciembre 2026 (por definir)
+Código: motion/rm-sol (Remotion, estilo de animación nuevo) · Sin voz: sinvoz/sol-se-apaga_sinvoz.mp4
+Voz: Erick – Cinematic Storyteller (nFcvfxkh4Fldtkn096yh), eleven_v4
+Producir final: con la voz en motion/rm-sol/public/, crear src/timing.json con los tiempos por línea y
+  npx remotion render src/index.jsx Sol out/sol_final.mp4 --props='{"voice":"NN-sol.mp3"}' --browser-executable=/usr/bin/google-chrome
+
+[mischievously] Si el Sol se apaga ahorita… tardarías ocho minutos en enterarte. [confident] Hice la cuenta de qué pasaría, minuto a minuto. [serious] Durante ocho minutos y veinte segundos, nada: la luz que ya venía en camino sigue llegando. [dramatically] Luego, apagón total. Y la Tierra sale disparada en línea recta, como canica en piso encerado. [sarcastic] La Luna también se apaga: solo brillaba de prestado. [serious] Día tres: todo el planeta bajo cero. Se enfría unos veinte grados por día. [sarcastic] Semana uno: menos dieciocho grados. Ni la cobija de tigre de tu abuela te salva. [mischievously] Las plantas mueren en semanas. Los árboles grandes aguantan décadas… de puro coraje. [serious] Año uno: setenta y tres bajo cero. El mar se congela por arriba, pero ese hielo protege el agua de abajo por cientos de miles de años. [confident] ¿Y los humanos? Bajo tierra, junto a los volcanes. Islandia ya calienta casi nueve de cada diez casas con el calor de la Tierra. [dramatically] Al final, el planeta llegaría a doscientos cuarenta bajo cero. Más frío que Plutón. [mischievously] Así que la próxima vez que te quejes del calor… acuérdate: el Sol es el único que nunca te ha dejado en visto. [excited] ¿Tú dónde te esconderías? Te leo abajo.
+
+# palabras: 198  caracteres: 1257  duración estimada: 75 s (con 3 s de cierre)
+
+Fuentes:
+- Live Science, "What would happen to Earth if the sun suddenly vanished?": la luz tarda 8 min 20 s; la Tierra se enfría ~20 °C por día al principio y queda bajo cero en 2–3 días; a la larga más fría que Plutón (~−240 °C); bacterias de los volcanes del fondo del mar sobreviven.
+- Popular Science, "What would happen if the sun went out?" (2013): menos de −18 °C (0 °F) en una semana; ~−73 °C (−100 °F) al año; plantas mueren en semanas, árboles grandes aguantan décadas; el hielo de arriba protege el mar por cientos de miles de años; Islandia calienta el 87% de sus casas con energía geotérmica.
