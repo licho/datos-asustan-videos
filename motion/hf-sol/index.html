@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="es" data-resolution="portrait">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="assets/gsap.min.js"></script>
+<style>
+  @font-face { font-family: DQA; src: url(assets/DejaVuSans-Bold.ttf); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+  #root { position: relative; width: 1080px; height: 1920px; font-family: DQA; }
+  .layer { position: absolute; inset: 0; }
+  .chip { position: absolute; left: 0; right: 0; display: flex; justify-content: center; }
+  .chip span { font-size: 56px; line-height: 1; padding: 17px 36px; border-radius: 34px; border: 6px solid #111; white-space: nowrap; }
+  .chip1 { top: 300px; transform: translateY(-50%); } .chip1 span { background: #e1232d; color: #fff; }
+  .chip2 { top: 420px; transform: translateY(-50%); opacity: 0; } .chip2 span { background: #111; color: #ffd400; font-size: 48px; padding: 14px 31px; }
+  #caps { position: absolute; left: 60px; right: 60px; top: 1500px; transform: translateY(-50%);
+          display: flex; flex-wrap: wrap; justify-content: center; column-gap: 22px; row-gap: 4px; }
+  .w { font-size: 70px; line-height: 1.15; color: #fff; -webkit-text-stroke: 12px #111; paint-order: stroke fill;
+       display: inline-block; transform: scale(0); }
+  .w.hl { color: #ffd400; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="5" data-width="1080" data-height="1920">
+  <svg id="scene" class="clip layer" data-start="0" data-duration="5" data-track-index="0"
+       width="1080" height="1920" viewBox="0 0 1080 1920">
+    <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4f9be0"/><stop offset="1" stop-color="#ffd9a0"/>
+    </linearGradient>
+    <radialGradient id="sunGlow"><stop offset="0" stop-color="#fff3b0" stop-opacity=".95"/>
+      <stop offset=".45" stop-color="#ffd23f" stop-opacity=".45"/><stop offset="1" stop-color="#ffd23f" stop-opacity="0"/></radialGradient>
+    <radialGradient id="phoneGlow"><stop offset="0" stop-color="#bfe6ff" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#bfe6ff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="photon"><stop offset="0" stop-color="#fffbe0"/><stop offset=".5" stop-color="#ffd23f" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#ffd23f" stop-opacity="0"/></radialGradient>
+    <radialGradient id="vig" cx=".5" cy=".5" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity=".55"/></radialGradient>
+  </defs>
+    <g id="world">
+      <rect id="sky" x="-300" y="-300" width="1680" height="2520" fill="url(#sky)"/>
+      <g transform="translate(540 700)"><g id="sunBody"><g id="sun">
+    <circle id="sunGlow" r="429" fill="url(#sunGlow)"/>
+    <g id="sunRays"><path transform="rotate(0)" d="M-30,-183 L0,-257 L30,-183 Z" fill="#ffd23f" stroke="#111111" stroke-width="6" stroke-linejoin="round"/><path transform="rotate(30)" d="M-30,-183 L0,-257 L30,-183 Z" fill="#ffd23f" stroke="#111111" stroke-width="6" stroke-linejoin="round"/><path transform="rotate(60)" d="M-30,-183 L0,-257 L30,-183 Z" fill="#ffd23f" stroke="#111111" stroke-width="6" stroke-linejoin="round"/><path transform="rotate(90)" d="M-30,-183 L0,-257 L30,-183 Z" fill="#ffd23f" stroke="#111111" stroke-width="6" stroke-linejoin="round"/><path transform="rotate(120)" d="M-30,-183 L0,-257 L30,-183 Z" fill="#ffd23f" stroke="#111111" stroke-width="6" stroke-linejoin="round"/><path transform="rotate(150)" d="M-30,-183 L0,-257 L30,-183 Z" fill="#ffd23f" stroke="#111111" stroke-width="6" stroke-linejoin="round"/><path transform="rotate(180)" d="M-30,-183 L0,-257 L30,-183 Z" fill="#ffd23f" stroke="#111111" stroke-width="6" stroke-linejoin="round"/><path transform="rotate(210)" d="M-30,-183 L0,-257 L30,-183 Z" fill="#ffd23f" stroke="#111111" stroke-width="6" stroke-linejoin="round"/><path transform="rotate(240)" d="M-30,-183 L0,-257 L30,-183 Z" fill="#ffd23f" stroke="#111111" stroke-width="6" stroke-linejoin="round"/><path transform="rotate(270)" d="M-30,-183 L0,-257 L30,-183 Z" fill="#ffd23f" stroke="#111111" stroke-width="6" stroke-linejoin="round"/><path transform="rotate(300)" d="M-30,-183 L0,-257 L30,-183 Z" fill="#ffd23f" stroke="#111111" stroke-width="6" stroke-linejoin="round"/><path transform="rotate(330)" d="M-30,-183 L0,-257 L30,-183 Z" fill="#ffd23f" stroke="#111111" stroke-width="6" stroke-linejoin="round"/></g>
+    <g id="sunOn">
+      <circle r="165" fill="#ffd23f" stroke="#111111" stroke-width="6"/>
+      <path d="M-118.8,57.74999999999999 A165,165 0 0 0 118.8,57.74999999999999 A173.25,156.75 0 0 1 -118.8,57.74999999999999Z" fill="#f4a623" opacity=".55"/>
+      <ellipse cx="-100" cy="40" rx="26" ry="14" fill="#ff8a5c" stroke="#111111" stroke-width="6" stroke="none"/><ellipse cx="100" cy="40" rx="26" ry="14" fill="#ff8a5c" stroke="#111111" stroke-width="6" stroke="none"/>
+      
+    <g id="sunEyes">
+      <ellipse cx="-62" cy="-28" rx="30" ry="38" fill="#ffffff" stroke="#111111" stroke-width="6" /><ellipse cx="62" cy="-28" rx="30" ry="38" fill="#ffffff" stroke="#111111" stroke-width="6" />
+      <circle cx="-56" cy="-20" r="15" fill="#111111"/><circle cx="68" cy="-20" r="15" fill="#111111"/>
+      <circle cx="-51" cy="-27" r="5" fill="#fff"/><circle cx="73" cy="-27" r="5" fill="#fff"/>
+    </g>
+      <path id="sunSmile" d="M-58,45 Q0,105 58,45" fill="none" stroke="#111111" stroke-width="10" stroke-linecap="round"/>
+    </g>
+    <g id="sunOff" opacity="0">
+      <circle r="165" fill="#4b4763" stroke="#111111" stroke-width="6"/>
+      <path d="M-118.8,57.74999999999999 A165,165 0 0 0 118.8,57.74999999999999 A173.25,156.75 0 0 1 -118.8,57.74999999999999Z" fill="#36324a" opacity=".7"/>
+      <ellipse cx="-62" cy="-28" rx="36" ry="44" fill="#ffffff" stroke="#111111" stroke-width="6" /><ellipse cx="62" cy="-28" rx="36" ry="44" fill="#ffffff" stroke="#111111" stroke-width="6" />
+      <circle cx="-62" cy="-28" r="11" fill="#111111"/><circle cx="62" cy="-28" r="11" fill="#111111"/>
+      <path d="M-100,-92 L-30,-78 M100,-92 L30,-78" stroke="#111111" stroke-width="10" stroke-linecap="round"/>
+      <ellipse cx="0" cy="70" rx="26" ry="34" fill="#2a2638" stroke="#111111" stroke-width="6" />
+      <path d="M128,-60 q14,22 0,34 q-14,-12 0,-34z" fill="#8fd3ff" stroke="#111111" stroke-width="4"/>
+    </g>
+  </g></g></g>
+      <circle id="flash" cx="540" cy="700" r="165" fill="#fffbe6" opacity="0"/>
+      <g id="farL"><g id="far"><rect x="-260.0" y="1070.3" width="143.9" height="629.7" fill="#8fa9c9" stroke="#111111" stroke-width="4"/><rect x="-110.1" y="1121.0" width="102.7" height="579.0" fill="#8fa9c9" stroke="#111111" stroke-width="4"/><rect x="-1.4" y="1079.0" width="138.8" height="621.0" fill="#8fa9c9" stroke="#111111" stroke-width="4"/><rect x="143.4" y="1019.4" width="98.6" height="680.6" fill="#8fa9c9" stroke="#111111" stroke-width="4"/><rect x="248.0" y="1094.3" width="154.8" height="605.7" fill="#8fa9c9" stroke="#111111" stroke-width="4"/><rect x="408.9" y="1035.0" width="121.3" height="665.0" fill="#8fa9c9" stroke="#111111" stroke-width="4"/><rect x="536.2" y="1147.7" width="162.3" height="552.3" fill="#8fa9c9" stroke="#111111" stroke-width="4"/><rect x="704.5" y="1122.4" width="144.8" height="577.6" fill="#8fa9c9" stroke="#111111" stroke-width="4"/><rect x="855.3" y="1134.7" width="163.9" height="565.3" fill="#8fa9c9" stroke="#111111" stroke-width="4"/><rect x="1025.2" y="1082.0" width="151.6" height="618.0" fill="#8fa9c9" stroke="#111111" stroke-width="4"/><rect x="1182.9" y="1152.0" width="109.4" height="548.0" fill="#8fa9c9" stroke="#111111" stroke-width="4"/><rect x="1298.3" y="1004.8" width="193.3" height="695.2" fill="#8fa9c9" stroke="#111111" stroke-width="4"/></g></g>
+      <g id="nearL"><g id="near"><rect x="-260.0" y="1198.4" width="95.3" height="501.6" fill="#6c7fa3" stroke="#111111" stroke-width="4"/><rect x="-244.0" y="1258.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="-214.0" y="1258.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="-158.7" y="1116.1" width="143.4" height="583.9" fill="#6c7fa3" stroke="#111111" stroke-width="4"/><rect x="-142.7" y="1138.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="-82.7" y="1138.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="-52.7" y="1138.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="-142.7" y="1176.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="-112.7" y="1176.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="-52.7" y="1176.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="-142.7" y="1214.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="-82.7" y="1214.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="-52.7" y="1214.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="-142.7" y="1252.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="-112.7" y="1252.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="-9.2" y="1196.1" width="171.5" height="503.9" fill="#6c7fa3" stroke="#111111" stroke-width="4"/><rect x="36.8" y="1218.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="96.8" y="1218.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="6.8" y="1256.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="66.8" y="1256.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="96.8" y="1256.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="168.2" y="1121.6" width="185.1" height="578.4" fill="#6c7fa3" stroke="#111111" stroke-width="4"/><rect x="184.2" y="1143.6" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="214.2" y="1143.6" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="244.2" y="1143.6" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="274.2" y="1143.6" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="304.2" y="1143.6" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="184.2" y="1181.6" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="214.2" y="1181.6" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="244.2" y="1181.6" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="274.2" y="1181.6" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="304.2" y="1181.6" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="184.2" y="1219.6" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="304.2" y="1219.6" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="214.2" y="1257.6" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="359.3" y="1169.4" width="115.7" height="530.6" fill="#6c7fa3" stroke="#111111" stroke-width="4"/><rect x="405.3" y="1191.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="435.3" y="1191.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="375.3" y="1229.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="405.3" y="1229.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="481.1" y="1199.7" width="105.3" height="500.3" fill="#6c7fa3" stroke="#111111" stroke-width="4"/><rect x="497.1" y="1259.7" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="557.1" y="1259.7" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="592.4" y="1229.3" width="94.7" height="470.7" fill="#6c7fa3" stroke="#111111" stroke-width="4"/><rect x="608.4" y="1251.3" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="638.4" y="1251.3" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="693.0" y="1201.8" width="122.0" height="498.2" fill="#6c7fa3" stroke="#111111" stroke-width="4"/><rect x="739.0" y="1223.8" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="709.0" y="1261.8" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="739.0" y="1261.8" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="769.0" y="1261.8" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="821.0" y="1114.4" width="190.1" height="585.6" fill="#6c7fa3" stroke="#111111" stroke-width="4"/><rect x="927.0" y="1136.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="957.0" y="1136.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="987.0" y="1136.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="837.0" y="1174.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="867.0" y="1174.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="897.0" y="1174.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="927.0" y="1174.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="987.0" y="1174.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="867.0" y="1212.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="897.0" y="1212.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="927.0" y="1212.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="957.0" y="1212.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="987.0" y="1212.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="957.0" y="1250.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="987.0" y="1250.4" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1017.1" y="1142.8" width="167.2" height="557.2" fill="#6c7fa3" stroke="#111111" stroke-width="4"/><rect x="1033.1" y="1164.8" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1063.1" y="1164.8" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1123.1" y="1164.8" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1093.1" y="1202.8" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1153.1" y="1202.8" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1063.1" y="1240.8" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1093.1" y="1240.8" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1033.1" y="1278.8" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1063.1" y="1278.8" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1093.1" y="1278.8" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1153.1" y="1278.8" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1190.4" y="1126.1" width="115.6" height="573.9" fill="#6c7fa3" stroke="#111111" stroke-width="4"/><rect x="1236.4" y="1148.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1266.4" y="1148.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1206.4" y="1186.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1236.4" y="1186.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1206.4" y="1224.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1236.4" y="1224.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1266.4" y="1224.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1236.4" y="1262.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1311.9" y="1187.1" width="121.5" height="512.9" fill="#6c7fa3" stroke="#111111" stroke-width="4"/><rect x="1357.9" y="1209.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1327.9" y="1247.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1357.9" y="1247.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/><rect x="1387.9" y="1247.1" width="12" height="18" fill="#ffe9a8" opacity=".85"/></g></g>
+      <g id="roof">
+    <rect x="-300" y="1290" width="1680" height="900" fill="#5b4f4a" stroke="#111111" stroke-width="6"/>
+    <rect x="-300" y="1290" width="1680" height="34" fill="#b9a493" stroke="#111111" stroke-width="6"/>
+    <rect x="-300" y="1324" width="1680" height="14" fill="#9c8878"/>
+    <rect x="-200" y="1420" width="60" height="70" rx="6" fill="#4a403b" opacity=".7"/><rect x="-30" y="1420" width="60" height="70" rx="6" fill="#4a403b" opacity=".7"/><rect x="140" y="1420" width="60" height="70" rx="6" fill="#4a403b" opacity=".7"/><rect x="310" y="1420" width="60" height="70" rx="6" fill="#4a403b" opacity=".7"/><rect x="480" y="1420" width="60" height="70" rx="6" fill="#4a403b" opacity=".7"/><rect x="650" y="1420" width="60" height="70" rx="6" fill="#4a403b" opacity=".7"/><rect x="820" y="1420" width="60" height="70" rx="6" fill="#4a403b" opacity=".7"/><rect x="990" y="1420" width="60" height="70" rx="6" fill="#4a403b" opacity=".7"/><rect x="1160" y="1420" width="60" height="70" rx="6" fill="#4a403b" opacity=".7"/>
+  </g><g id="tinaco" transform="translate(170 1290)">
+    <rect x="-70" y="-60" width="140" height="60" fill="#8c8c8c" stroke="#111111" stroke-width="6"/>
+    <path d="M-80,-60 L-80,-250 Q0,-290 80,-250 L80,-60 Z" fill="#2b2b2b" stroke="#111111" stroke-width="6"/>
+    <path d="M-80,-200 Q0,-232 80,-200 M-80,-140 Q0,-172 80,-140" fill="none" stroke="#444" stroke-width="8"/>
+    <ellipse cx="0" cy="-268" rx="40" ry="14" fill="#3a3a3a" stroke="#111111" stroke-width="6" />
+    <path d="M-56,-235 Q-50,-120 -58,-80" stroke="#666" stroke-width="10" fill="none" stroke-linecap="round"/>
+  </g><g id="line">
+    <rect x="296" y="930" width="14" height="362" fill="#7a5c3e" stroke="#111111" stroke-width="4"/>
+    <rect x="652" y="930" width="14" height="362" fill="#7a5c3e" stroke="#111111" stroke-width="4"/>
+    <path d="M303,960 Q480,1000 659,960" stroke="#111111" stroke-width="4" fill="none"/>
+    <g id="cloth1" transform="translate(385 960)"><g class="sway"><path d="M-50,0 L-80,30 L-62,52 L-45,40 L-45,120 L45,120 L45,40 L62,52 L80,30 L50,0 Q0,22 -50,0Z" fill="#e85d75" stroke="#111111" stroke-width="5"/></g></g><g id="cloth2" transform="translate(488 960)"><g class="sway"><path d="M-18,0 L18,0 L18,76 Q20,98 48,98 Q60,104 56,118 L-6,118 Q-18,112 -18,96 Z" fill="#ffcf3a" stroke="#111111" stroke-width="5"/></g></g><g id="cloth3" transform="translate(585 960)"><g class="sway"><rect x="-55" y="0" width="110" height="150" fill="#5ec2d9" stroke="#111111" stroke-width="5"/><path d="M-55,120 H55" stroke="#fff" stroke-width="8" opacity=".7"/></g></g>
+  </g>
+      <g transform="translate(810 1290) scale(1.12)"><g id="guy">
+    <g id="chair">
+      <path d="M-95,-150 L-110,0 M95,-150 L110,0 M-80,-150 L-70,-10 M80,-150 L70,-10" stroke="#111111" stroke-width="16" stroke-linecap="round"/>
+      <path d="M-95,-150 L-110,0 M95,-150 L110,0" stroke="#f4f4f0" stroke-width="8" stroke-linecap="round"/>
+      <rect x="-105" y="-172" width="210" height="34" rx="10" fill="#f4f4f0" stroke="#111111" stroke-width="6"/>
+      <path d="M60,-172 L80,-360 Q20,-390 -40,-365 L-60,-172" fill="#f4f4f0" stroke="#111111" stroke-width="6"/>
+      <path d="M-20,-330 H40 M-25,-290 H50 M-30,-250 H55" stroke="#d7d7d0" stroke-width="10" stroke-linecap="round"/>
+    </g>
+    <g id="guyBody">
+      <rect x="-62" y="-128" width="40" height="112" rx="16" fill="#f1c27d" stroke="#111111" stroke-width="6"/>
+      <rect x="22" y="-128" width="40" height="112" rx="16" fill="#f1c27d" stroke="#111111" stroke-width="6"/>
+      <path d="M-80,-186 L80,-186 L78,-112 L8,-112 L0,-140 L-8,-112 L-78,-112 Z" fill="#2f4f8f" stroke="#111111" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M-82,-2 h66 M16,-2 h66" stroke="#111111" stroke-width="18" stroke-linecap="round"/>
+      <path d="M-82,-2 h66 M16,-2 h66" stroke="#2a7fd0" stroke-width="9" stroke-linecap="round"/>
+      <path d="M-80,-170 Q-90,-330 0,-340 Q90,-330 80,-170 Z" fill="#3aa35b" stroke="#111111" stroke-width="6" stroke-linejoin="round"/>
+      <ellipse cx="0" cy="-185" rx="74" ry="26" fill="#2e8a4b" opacity=".6"/>
+      <g id="guyHead" transform="translate(0 -395)">
+        <ellipse cx="0" cy="0" rx="62" ry="66" fill="#f1c27d" stroke="#111111" stroke-width="6" />
+        <path d="M-60,-14 Q-62,-78 0,-74 Q58,-80 62,-12 Q40,-46 0,-44 Q-34,-48 -60,-14Z" fill="#2b1d14" stroke="#111111" stroke-width="5"/>
+        <ellipse cx="-64" cy="8" rx="12" ry="18" fill="#f1c27d" stroke="#111111" stroke-width="6" /><ellipse cx="64" cy="8" rx="12" ry="18" fill="#f1c27d" stroke="#111111" stroke-width="6" />
+        <g id="guyEyes"><path d="M-34,10 q12,8 24,0 M10,10 q12,8 24,0" stroke="#111111" stroke-width="7" fill="none" stroke-linecap="round"/></g>
+        <path d="M-4,18 q8,14 0,22" stroke="#d9a560" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M-40,40 Q0,30 40,40 Q36,50 0,46 Q-36,50 -40,40Z" fill="#2b1d14"/>
+        <path id="guySmile" d="M-20,52 Q0,64 20,52" stroke="#111111" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path id="guyLaugh" opacity="0" d="M-24,50 Q0,82 24,50 Z" fill="#7a1f24" stroke="#111111" stroke-width="5"/>
+      </g>
+      <g id="guyArms">
+        <path d="M-70,-300 Q-110,-200 -40,-210" stroke="#111111" stroke-width="40" fill="none" stroke-linecap="round"/>
+        <path d="M-70,-300 Q-110,-200 -40,-210" stroke="#3aa35b" stroke-width="28" fill="none" stroke-linecap="round"/>
+        <path d="M70,-300 Q110,-200 40,-210" stroke="#111111" stroke-width="40" fill="none" stroke-linecap="round"/>
+        <path d="M70,-300 Q110,-200 40,-210" stroke="#3aa35b" stroke-width="28" fill="none" stroke-linecap="round"/>
+        <circle id="phoneGlow" cx="0" cy="-240" r="110" fill="url(#phoneGlow)"/>
+        <rect x="-30" y="-295" width="60" height="100" rx="10" fill="#1d1d24" stroke="#111111" stroke-width="5"/>
+        <rect x="-22" y="-285" width="44" height="78" rx="4" fill="#9fd8ff"/>
+        <ellipse cx="-36" cy="-213" rx="17" ry="15" fill="#f1c27d" stroke="#111111" stroke-width="6" /><ellipse cx="36" cy="-213" rx="17" ry="15" fill="#f1c27d" stroke="#111111" stroke-width="6" />
+      </g>
+    </g>
+  </g></g>
+      <g id="photons"><circle class="ph" id="ph0" r="26" fill="url(#photon)" opacity="0"/><circle class="ph" id="ph1" r="26" fill="url(#photon)" opacity="0"/><circle class="ph" id="ph2" r="26" fill="url(#photon)" opacity="0"/><circle class="ph" id="ph3" r="26" fill="url(#photon)" opacity="0"/><circle class="ph" id="ph4" r="26" fill="url(#photon)" opacity="0"/><circle class="ph" id="ph5" r="26" fill="url(#photon)" opacity="0"/><circle class="ph" id="ph6" r="26" fill="url(#photon)" opacity="0"/></g>
+      <g transform="translate(255 600) rotate(-12)"><g id="clic" opacity="0">
+        <text text-anchor="middle" dominant-baseline="middle" font-family="DQA" font-size="110" fill="#ffd400"
+          stroke="#111" stroke-width="16" paint-order="stroke" stroke-linejoin="round">¡CLIC!</text></g></g>
+    </g>
+    <rect x="0" y="0" width="1080" height="1920" fill="url(#vig)" pointer-events="none"/>
+  </svg>
+  <div class="clip layer" data-start="0" data-duration="5" data-track-index="1">
+    <div class="chip chip1" id="chip1"><span>¿Y SI EL SOL SE APAGA?</span></div>
+    <div class="chip chip2" id="tm0"><span>TE ENTERAS EN 8:20</span></div><div class="chip chip2" id="tm1"><span>TE ENTERAS EN 8:19</span></div><div class="chip chip2" id="tm2"><span>TE ENTERAS EN 8:18</span></div><div class="chip chip2" id="tm3"><span>TE ENTERAS EN 8:17</span></div>
+    <div id="caps"><span class="w" id="w0">Si</span><span class="w" id="w1">el</span><span class="w" id="w2">Sol</span><span class="w hl" id="w3">se</span><span class="w hl" id="w4">apaga</span><span class="w" id="w5">ahorita…</span><span class="w" id="w6">tardarías</span><span class="w hl" id="w7">ocho</span><span class="w hl" id="w8">minutos</span><span class="w" id="w9">en</span><span class="w" id="w10">enterarte.</span></div>
+  </div>
+</div>
+<script>
+  const clic = 1.35, D = 5;
+  const tl = gsap.timeline({ paused: true });
+  const BEAM = {"x0":540,"y0":700,"x1":800,"y1":880};
+  const beamAt = p => ({ x: BEAM.x0 + (BEAM.x1 - BEAM.x0) * p, y: BEAM.y0 + (BEAM.y1 - BEAM.y0) * p - Math.sin(p * Math.PI) * 60 });
+
+  // Cámara: empuje, sacudida en el clic y viaje hacia el señor (objeto proxy -> atributo transform)
+  const cam = { s: 1, travel: 0, shake: 0 };
+  const world = document.getElementById("world");
+  const applyCam = () => {
+    const sc = cam.s + cam.travel * 0.14, fx = 540 + cam.travel * 170, fy = 960 + cam.travel * 40;
+    const t = tl.time(), shx = Math.sin(t * 90) * 14 * cam.shake, shy = Math.cos(t * 77) * 10 * cam.shake;
+    world.setAttribute("transform", `translate(${540 + shx} ${960 + shy}) scale(${sc}) translate(${-fx} ${-fy})`);
+  };
+  tl.to(cam, { s: 1.06, duration: clic, ease: "power2.inOut", onUpdate: applyCam }, 0);
+  tl.fromTo(cam, { shake: 1 }, { shake: 0, duration: 0.35, ease: "none", onUpdate: applyCam }, clic);
+  tl.to(cam, { travel: 1, duration: D - 2.3, ease: "power2.inOut", onUpdate: applyCam }, 2.3);
+
+  // Paralaje de la ciudad
+  tl.to("#farL", { x: -12 * D, duration: D, ease: "none" }, 0);
+  tl.to("#nearL", { x: -26 * D, duration: D, ease: "none" }, 0);
+
+  // Sol: rayos giran, brillo late, parpadeo, aplastón antes del clic, se apaga con destello
+  tl.to("#sunRays", { rotation: 14 * D, svgOrigin: "0 0", duration: D, ease: "none" }, 0);
+  tl.to("#sunGlow", { scale: 1.04, svgOrigin: "0 0", duration: 0.6, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0);
+  tl.to("#sunEyes", { scaleY: 0.12, svgOrigin: "0 -24", duration: 0.07, yoyo: true, repeat: 1 }, 0.8);
+  tl.to("#sunBody", { scaleX: 1.07, scaleY: 0.93, svgOrigin: "0 0", duration: 0.18, ease: "power2.in" }, clic - 0.18);
+  tl.to("#sunBody", { scaleX: 1, scaleY: 1, svgOrigin: "0 0", duration: 0.5, ease: "elastic.out(1.2, 0.4)" }, clic);
+  tl.to("#sunOn", { opacity: 0, duration: 0.12 }, clic);
+  tl.to("#sunOff", { opacity: 1, duration: 0.12 }, clic);
+  tl.to("#sunRays", { scale: 0.25, opacity: 0, svgOrigin: "0 0", duration: 0.12 }, clic);
+  tl.to("#sunGlow", { opacity: 0, duration: 0.2 }, clic);
+  tl.fromTo("#flash", { opacity: 0, scale: 1, svgOrigin: "540 700" }, { opacity: 0.7, duration: 0.04 }, clic);
+  tl.to("#flash", { opacity: 0, scale: 1.85, svgOrigin: "540 700", duration: 0.31, ease: "power2.out" }, clic + 0.04);
+  tl.to("#sunOff", { x: 3, duration: 0.05, yoyo: true, repeat: 30, ease: "none" }, clic + 0.2);
+  tl.fromTo("#clic", { scale: 0, opacity: 1, svgOrigin: "0 0" }, { scale: 1, duration: 0.45, ease: "back.out(3)" }, clic);
+  tl.to("#clic", { opacity: 0, duration: 0.25 }, clic + 0.9);
+
+  // Luz que sigue viajando hacia el señor
+  const ph = [...document.querySelectorAll(".ph")];
+  const light = { k: 0, p: 0 };
+  const applyLight = () => ph.forEach((c, i) => {
+    const p = (light.p + i / ph.length) % 1, q = beamAt(p);
+    c.setAttribute("cx", q.x); c.setAttribute("cy", q.y);
+    c.setAttribute("r", 24 + 6 * Math.sin(tl.time() * 9 + i));
+    c.setAttribute("opacity", light.k * Math.min(1, p * 6, (1 - p) * 6));
+  });
+  tl.to(light, { p: (D - clic) * 0.75, duration: D - clic, ease: "none", onUpdate: applyLight }, clic);
+  tl.to(light, { k: 1, duration: 0.35, ease: "none", onUpdate: applyLight }, clic + 0.25);
+
+  // Tendedero
+  ["#cloth1 .sway", "#cloth2 .sway", "#cloth3 .sway"].forEach((s, i) =>
+    tl.fromTo(s, { rotation: -5, svgOrigin: "0 0" }, { rotation: 5, duration: 1.3, yoyo: true, repeat: 3, ease: "sine.inOut" }, i * 0.2));
+
+  // Señor: respira y se ríe del celular
+  tl.to("#guyArms", { y: 3, duration: 0.7, yoyo: true, repeat: 4, ease: "sine.inOut" }, 0);
+  tl.set("#guySmile", { opacity: 0 }, 3.55); tl.set("#guyLaugh", { opacity: 1 }, 3.55);
+  tl.to("#guyHead", { y: -401, rotation: 4, duration: 0.11, yoyo: true, repeat: 9, ease: "sine.inOut" }, 3.55);
+  tl.set("#guySmile", { opacity: 1 }, 4.6); tl.set("#guyLaugh", { opacity: 0 }, 4.6);
+  tl.to("#phoneGlow", { opacity: 0.55, duration: 0.45, yoyo: true, repeat: 10, ease: "sine.inOut" }, 0);
+
+  // Letreros
+  tl.fromTo("#chip1", { scale: 0.85 }, { scale: 1, duration: 0.25, ease: "back.out(2)" }, 0);
+  [0, 1, 2, 3].forEach(i => {
+    const t0 = clic + 0.55 + i;
+    if (i === 0) tl.fromTo("#tm0", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.5)" }, t0);
+    else { tl.set("#tm" + (i - 1), { opacity: 0 }, t0); tl.set("#tm" + i, { opacity: 1 }, t0); }
+  });
+
+  // Subtítulos palabra por palabra
+  const W = [["Si",0.15],["el",0.3],["Sol",0.45],["se",0.7,1],["apaga",0.85,1],["ahorita…",1.15],["tardarías",1.95],["ocho",2.5,1],["minutos",2.8,1],["en",3.2],["enterarte.",3.35]];
+  W.forEach(([w, t0], i) => {
+    tl.to("#w" + i, { scale: 1.1, duration: 0.12, ease: "power2.out" }, t0);
+    tl.to("#w" + i, { scale: 1, duration: 0.14, ease: "power2.in" }, t0 + 0.12);
+    const t1 = i < W.length - 1 ? W[i + 1][1] : D;
+    tl.to("#w" + i, { y: -6, duration: 0.08 }, t0);
+    tl.to("#w" + i, { y: 0, duration: 0.08 }, t1);
+  });
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["main"] = tl;
+  tl.seek(0); applyCam(); applyLight();
+</script>
+</body>
+</html>

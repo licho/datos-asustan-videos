@@ -1,0 +1,14 @@
+{
+  "name": "rm-sol",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "render": "remotion render src/index.jsx Gancho out/gancho.mp4 --browser-executable=/usr/bin/google-chrome"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.380",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.380"
+  }
+}
