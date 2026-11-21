@@ -283,12 +283,10 @@ export function WarmGuy({ t }) {
   const bob = Math.sin(t * 2) * 3;
   return (
     <g>
-      <path d="M-120,0 Q-130,-110 -20,-140 Q110,-150 130,-60 Q140,0 120,0 Z" fill="#6b5446" stroke={K} strokeWidth={6} />
-      <g transform="translate(0 -120)">
-        <Raw html={A.legsSitting()} transform="scale(.95) translate(0 140)" />
-      </g>
-      <g transform={`translate(0 ${-120 + bob})`}>
-        <Raw html={A.guyTorso()} transform="translate(0 164) scale(1) translate(0 -164)" />
+      <path d="M-130,0 Q-140,-150 -20,-185 Q120,-195 140,-80 Q150,0 130,0 Z" fill="#6b5446" stroke={K} strokeWidth={6} />
+      <Raw html={A.legsSitting()} />
+      <g transform={`translate(0 ${bob})`}>
+        <Raw html={A.guyTorso()} />
         <Raw html={A.guyArm("M-70,-318 Q-120,-280 -170,-250") + A.hand(-176, -248) + A.guyArm("M70,-318 Q30,-270 -100,-262") + A.hand(-106, -262)} />
         <Raw html={A.guyStrings()} />
         <Raw html={A.guyHead("warm")} transform="translate(0 -395)" />

@@ -16,12 +16,27 @@ export function Chip({ text, y, bg = "#e1232d", fg = "#fff", size = 56, k = 1 })
   );
 }
 
-// Subtítulos palabra por palabra (posición estándar del canal: y=1500)
+// Subtítulos palabra por palabra (posición estándar del canal: y=1500), en bloques de máximo 2 renglones
+const MAXC = 38;
+function chunks(words) {
+  const out = []; let cur = [], len = 0;
+  words.forEach((w, i) => {
+    const l = w[0].length + 1;
+    if (cur.length && len + l > MAXC) { out.push(cur); cur = []; len = 0; }
+    cur.push(i); len += l;
+  });
+  if (cur.length) out.push(cur);
+  return out;
+}
 export function Captions({ t, words }) {
+  const cs = chunks(words);
+  let ci = 0;
+  cs.forEach((c, k) => { if (t >= words[c[0]][1] - 0.05) ci = k; });
   return (
     <div style={{ position: "absolute", left: 60, right: 60, top: 1500, transform: "translateY(-50%)",
       display: "flex", flexWrap: "wrap", justifyContent: "center", columnGap: 22, rowGap: 4 }}>
-      {words.map(([w, t0, hl], i) => {
+      {cs[ci].filter(i => t >= words[i][1]).map(i => {
+        const [w, t0, hl] = words[i];
         const k = interpolate(t, [t0, t0 + 0.12, t0 + 0.26], [0, 1.1, 1], clamp);
         const active = t >= t0 && (i === words.length - 1 || t < words[i + 1][1]);
         return (
