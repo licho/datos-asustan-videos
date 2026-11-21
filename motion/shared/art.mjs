@@ -139,18 +139,18 @@ export function guy() {
     </g>
     <g id="guyBody">
       <!-- jeans y tenis -->
-      <path d="M-90,-178 L90,-178 L86,-118 L-86,-118 Z" fill="${jeans}" stroke="${k}" stroke-width="${S}" stroke-linejoin="round"/>
-      <rect x="-84" y="-140" width="52" height="124" rx="14" fill="${jeans}" stroke="${k}" stroke-width="${S}"/>
-      <rect x="32" y="-140" width="52" height="124" rx="14" fill="${jeans}" stroke="${k}" stroke-width="${S}"/>
-      <path d="M-44,-126 v100 M72,-126 v100" stroke="${jeansSh}" stroke-width="10" stroke-linecap="round"/>
-      ${ell(-62, -12, 40, 18, "#1e1e1e")}${ell(62, -12, 40, 18, "#1e1e1e")}
-      <path d="M-84,-16 h40 M40,-16 h40" stroke="#555" stroke-width="5" stroke-linecap="round"/>
+      <path d="M-64,-178 L64,-178 L62,-118 L-62,-118 Z" fill="${jeans}" stroke="${k}" stroke-width="${S}" stroke-linejoin="round"/>
+      <rect x="-60" y="-140" width="40" height="124" rx="14" fill="${jeans}" stroke="${k}" stroke-width="${S}"/>
+      <rect x="20" y="-140" width="40" height="124" rx="14" fill="${jeans}" stroke="${k}" stroke-width="${S}"/>
+      <path d="M-30,-126 v100 M50,-126 v100" stroke="${jeansSh}" stroke-width="10" stroke-linecap="round"/>
+      ${ell(-42, -12, 32, 15, "#1e1e1e")}${ell(42, -12, 32, 15, "#1e1e1e")}
+      <path d="M-62,-14 h34 M28,-14 h34" stroke="#555" stroke-width="5" stroke-linecap="round"/>
       <!-- sudadera con capucha -->
-      <path d="M-62,-338 Q0,-372 62,-338 Q40,-318 0,-316 Q-40,-318 -62,-338 Z" fill="${hoodieSh}" stroke="${k}" stroke-width="5"/>
-      <path d="M-90,-330 Q-116,-318 -114,-276 L-112,-206 Q-110,-166 -72,-164 L72,-164 Q110,-166 112,-206 L114,-276 Q116,-318 90,-330 Q46,-340 0,-334 Q-46,-340 -90,-330 Z"
+      <path d="M-52,-338 Q0,-368 52,-338 Q34,-320 0,-318 Q-34,-320 -52,-338 Z" fill="${hoodieSh}" stroke="${k}" stroke-width="5"/>
+      <path d="M-66,-330 Q-84,-318 -82,-276 L-78,-206 Q-76,-166 -52,-164 L52,-164 Q76,-166 78,-206 L82,-276 Q84,-318 66,-330 Q34,-338 0,-334 Q-34,-338 -66,-330 Z"
         fill="${hoodie}" stroke="${k}" stroke-width="${S}" stroke-linejoin="round"/>
-      <path d="M70,-320 Q104,-300 104,-210 Q102,-176 72,-172 Q96,-200 94,-260 Q92,-300 70,-320 Z" fill="${hoodieSh}" opacity=".55"/>
-      <rect x="-58" y="-246" width="116" height="56" rx="20" fill="${hoodieSh}" stroke="${k}" stroke-width="4"/>
+      <path d="M50,-320 Q74,-300 72,-210 Q70,-176 52,-172 Q66,-200 64,-260 Q62,-300 50,-320 Z" fill="${hoodieSh}" opacity=".55"/>
+      <rect x="-44" y="-246" width="88" height="50" rx="18" fill="${hoodieSh}" stroke="${k}" stroke-width="4"/>
       <g id="guyHead" transform="translate(0 -395)">
         ${ell(-70, 12, 12, 17, sk)}${ell(70, 12, 12, 17, sk)}
         <circle r="72" fill="${sk}" stroke="${k}" stroke-width="${S}"/>
@@ -178,15 +178,15 @@ export function guy() {
       <path d="M-16,-316 L-19,-276 M16,-316 L19,-276" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
       <g id="guyArms">
         <circle id="phoneGlow" cx="0" cy="-262" r="80" fill="url(#phoneGlow)"/>
-        ${limb("M-92,-318 Q-130,-262 -114,-236 Q-88,-220 -40,-232", hoodieSh)}
-        ${limb("M92,-318 Q130,-262 114,-236 Q88,-220 40,-232", hoodieSh)}
+        ${limb("M-70,-318 Q-100,-262 -88,-238 Q-68,-222 -36,-232", hoodieSh, 26)}
+        ${limb("M70,-318 Q100,-262 88,-238 Q68,-222 36,-232", hoodieSh, 26)}
         <g transform="rotate(-6 0 -262)">
           <rect x="-28" y="-306" width="56" height="90" rx="10" fill="#1d1d24" stroke="${k}" stroke-width="5"/>
           <rect x="-20" y="-297" width="40" height="70" rx="4" fill="#9fd8ff"/>
           <rect x="-13" y="-288" width="26" height="7" rx="3" fill="#fff" opacity=".8"/>
           <rect x="-13" y="-274" width="18" height="7" rx="3" fill="#fff" opacity=".6"/>
         </g>
-        ${ell(-36, -232, 19, 17, sk)}${ell(36, -232, 19, 17, sk)}
+        ${ell(-32, -232, 16, 15, sk)}${ell(32, -232, 16, 15, sk)}
         ${ell(-20, -256, 8, 12, sk, 'transform="rotate(-25 -20 -256)"')}
       </g>
     </g>
