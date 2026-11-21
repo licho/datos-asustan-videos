@@ -119,10 +119,12 @@ export function sun(r = 170) {
 
 // ---------- Señor en silla de plástico viendo el celular ----------
 export function guy() {
-  // Señor de azotea: camiseta de tirantes, panza, bigote, chanclas. Origen = pies en el piso; cabeza en y=-395.
-  const k = C.ink, sk = C.skin, sh = C.skinSh, hair = "#2b1d14", tank = "#f4f1ea", tankSh = "#d9d3c4", shorts = "#4f6fa3";
-  const limb = (d, w = 34) => `<path d="${d}" stroke="${k}" stroke-width="${w + 12}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="${d}" stroke="${sk}" stroke-width="${w}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+  // Personaje recurrente del canal (sudadera naranja, corte de hongo, ojos redondos, jeans), sentado en silla de plástico.
+  // Origen = pies en el piso; cabeza en y=-395.
+  const k = C.ink, sk = "#f0c396", skSh = "#d9a274", hair = "#37261e", hoodie = "#f07828", hoodieSh = "#c0601f",
+        jeans = "#2c3d78", jeansSh = "#223062";
+  const limb = (d, col, w = 36) => `<path d="${d}" stroke="${k}" stroke-width="${w + 12}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="${d}" stroke="${col}" stroke-width="${w}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
   return `<g id="guy">
     <g id="chair">
       <path d="M-104,-178 L-128,0 M104,-178 L128,0 M-86,-178 L-96,-6 M86,-178 L96,-6" stroke="${k}" stroke-width="18" stroke-linecap="round"/>
@@ -136,64 +138,56 @@ export function guy() {
       <rect x="-122" y="-196" width="244" height="30" rx="12" fill="${C.chair}" stroke="${k}" stroke-width="${S}"/>
     </g>
     <g id="guyBody">
-      <!-- piernas y chanclas -->
-      <rect x="-82" y="-130" width="46" height="118" rx="20" fill="${sk}" stroke="${k}" stroke-width="${S}"/>
-      <rect x="36" y="-130" width="46" height="118" rx="20" fill="${sk}" stroke="${k}" stroke-width="${S}"/>
-      <path d="M-50,-120 v92 M68,-120 v92" stroke="${sh}" stroke-width="8" stroke-linecap="round" opacity=".7"/>
-      ${ell(-62, -4, 40, 11, "#2a7fd0")}${ell(62, -4, 40, 11, "#2a7fd0")}
-      <path d="M-82,-8 Q-62,-30 -42,-8 M42,-8 Q62,-30 82,-8" stroke="${k}" stroke-width="12" fill="none" stroke-linecap="round"/>
-      <path d="M-82,-8 Q-62,-30 -42,-8 M42,-8 Q62,-30 82,-8" stroke="#2a7fd0" stroke-width="6" fill="none" stroke-linecap="round"/>
-      <!-- short -->
-      <path d="M-98,-190 L98,-190 L104,-118 L16,-114 L0,-140 L-16,-114 L-104,-118 Z" fill="${shorts}" stroke="${k}" stroke-width="${S}" stroke-linejoin="round"/>
-      <path d="M-60,-150 l10,30 M60,-150 l-10,30" stroke="#3d5888" stroke-width="7" stroke-linecap="round"/>
-      <!-- cuello y camiseta de tirantes con panza -->
-      <rect x="-28" y="-352" width="56" height="40" fill="${sk}" stroke="${k}" stroke-width="${S}"/>
-      <path d="M-84,-334 Q-100,-300 -104,-262 Q-122,-208 -96,-180 L96,-180 Q122,-208 104,-262 Q100,-300 84,-334 Q44,-322 0,-318 Q-44,-322 -84,-334 Z"
-        fill="${tank}" stroke="${k}" stroke-width="${S}" stroke-linejoin="round"/>
-      <path d="M-84,-334 Q-62,-292 -40,-330 Q0,-262 40,-330 Q62,-292 84,-334" fill="${sk}" stroke="${k}" stroke-width="5" stroke-linejoin="round"/>
-      <path d="M-98,-238 Q0,-170 98,-238 L96,-182 L-96,-182 Z" fill="${tankSh}" opacity=".8"/>
-      <path d="M-8,-214 q8,6 16,0" stroke="${k}" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <!-- jeans y tenis -->
+      <path d="M-90,-178 L90,-178 L86,-118 L-86,-118 Z" fill="${jeans}" stroke="${k}" stroke-width="${S}" stroke-linejoin="round"/>
+      <rect x="-84" y="-140" width="52" height="124" rx="14" fill="${jeans}" stroke="${k}" stroke-width="${S}"/>
+      <rect x="32" y="-140" width="52" height="124" rx="14" fill="${jeans}" stroke="${k}" stroke-width="${S}"/>
+      <path d="M-44,-126 v100 M72,-126 v100" stroke="${jeansSh}" stroke-width="10" stroke-linecap="round"/>
+      ${ell(-62, -12, 40, 18, "#1e1e1e")}${ell(62, -12, 40, 18, "#1e1e1e")}
+      <path d="M-84,-16 h40 M40,-16 h40" stroke="#555" stroke-width="5" stroke-linecap="round"/>
+      <!-- sudadera con capucha -->
+      <path d="M-62,-338 Q0,-372 62,-338 Q40,-318 0,-316 Q-40,-318 -62,-338 Z" fill="${hoodieSh}" stroke="${k}" stroke-width="5"/>
+      <path d="M-90,-330 Q-116,-318 -114,-276 L-112,-206 Q-110,-166 -72,-164 L72,-164 Q110,-166 112,-206 L114,-276 Q116,-318 90,-330 Q46,-340 0,-334 Q-46,-340 -90,-330 Z"
+        fill="${hoodie}" stroke="${k}" stroke-width="${S}" stroke-linejoin="round"/>
+      <path d="M70,-320 Q104,-300 104,-210 Q102,-176 72,-172 Q96,-200 94,-260 Q92,-300 70,-320 Z" fill="${hoodieSh}" opacity=".55"/>
+      <rect x="-58" y="-246" width="116" height="56" rx="20" fill="${hoodieSh}" stroke="${k}" stroke-width="4"/>
       <g id="guyHead" transform="translate(0 -395)">
-        <!-- cabeza: papada, orejas, entradas -->
-        ${ell(-66, 6, 13, 19, sk)}${ell(66, 6, 13, 19, sk)}
-        <path d="M-66,0 Q-70,-74 0,-76 Q70,-74 66,0 Q68,58 34,70 Q0,84 -34,70 Q-68,58 -66,0 Z" fill="${sk}" stroke="${k}" stroke-width="${S}"/>
-        <path d="M-34,66 Q0,80 34,66" stroke="${sh}" stroke-width="6" fill="none" stroke-linecap="round"/>
-        <path d="M-68,-4 Q-74,-44 -48,-60 Q-58,-34 -56,-10 Z M68,-4 Q74,-44 48,-60 Q58,-34 56,-10 Z" fill="${hair}" stroke="${k}" stroke-width="4" stroke-linejoin="round"/>
-        <path d="M-34,-70 Q-6,-86 30,-68 M-26,-62 Q0,-74 22,-60" stroke="${hair}" stroke-width="6" fill="none" stroke-linecap="round"/>
-        <ellipse cx="-30" cy="-52" rx="12" ry="6" fill="#fff" opacity=".35"/>
-        <!-- cejas, ojos viendo el celular (abajo a la izquierda), párpados caídos -->
-        <path d="M-46,-26 Q-28,-38 -8,-28 M8,-28 Q28,-38 46,-26" stroke="${hair}" stroke-width="11" fill="none" stroke-linecap="round"/>
+        ${ell(-70, 12, 12, 17, sk)}${ell(70, 12, 12, 17, sk)}
+        <circle r="72" fill="${sk}" stroke="${k}" stroke-width="${S}"/>
+        <path d="M30,58 Q58,40 66,10 Q70,40 50,58 Q40,66 30,58Z" fill="${skSh}" opacity=".6"/>
+        <!-- corte de hongo -->
+        <path d="M-78,-2 Q-82,-82 0,-84 Q82,-82 78,-2 Z" fill="${hair}" stroke="${k}" stroke-width="${S}" stroke-linejoin="round"/>
+        <path d="M-78,-6 L-92,-30 L-74,-26 Z" fill="${hair}" stroke="${k}" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M-40,-62 Q-10,-74 26,-64" stroke="#5a4033" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <!-- ojos redondos viendo el celular -->
         <g id="guyEyes">
-          ${ell(-26, -4, 15, 13, C.white)}${ell(26, -4, 15, 13, C.white)}
-          <circle cx="-31" cy="2" r="7" fill="${k}"/><circle cx="21" cy="2" r="7" fill="${k}"/>
-          <path d="M-42,-6 Q-26,-20 -10,-6 Z M10,-6 Q26,-20 42,-6 Z" fill="${sk}" stroke="${k}" stroke-width="4" stroke-linejoin="round"/>
+          <circle cx="-27" cy="20" r="21" fill="${C.white}" stroke="${k}" stroke-width="5"/>
+          <circle cx="27" cy="20" r="21" fill="${C.white}" stroke="${k}" stroke-width="5"/>
+          <circle cx="-30" cy="28" r="10" fill="${k}"/><circle cx="24" cy="28" r="10" fill="${k}"/>
+          <circle cx="-27" cy="24" r="3.5" fill="#fff"/><circle cx="27" cy="24" r="3.5" fill="#fff"/>
         </g>
-        <!-- nariz y bigote -->
-        <path d="M-4,4 Q-20,22 -4,30 Q8,34 16,26 Q22,14 6,4" fill="${sh}" stroke="${k}" stroke-width="5" stroke-linejoin="round"/>
-        <path d="M-44,46 Q-40,28 -16,30 Q0,34 16,30 Q40,28 44,46 Q30,40 16,44 Q0,48 -16,44 Q-30,40 -44,46 Z" fill="${hair}" stroke="${k}" stroke-width="4" stroke-linejoin="round"/>
-        <path id="guySmile" d="M-14,54 Q0,62 14,54" stroke="${k}" stroke-width="5" fill="none" stroke-linecap="round"/>
+        ${ell(-46, 46, 11, 6, "#ef9a7a", 'stroke="none" opacity=".7"')}${ell(46, 46, 11, 6, "#ef9a7a", 'stroke="none" opacity=".7"')}
+        <path id="guySmile" d="M-14,50 Q0,60 14,50" stroke="#6b2a20" stroke-width="6" fill="none" stroke-linecap="round"/>
         <g id="guyLaugh" opacity="0">
-          <path d="M-22,48 Q0,86 22,48 Z" fill="#7a1f24" stroke="${k}" stroke-width="5" stroke-linejoin="round"/>
-          <path d="M-10,66 Q0,60 10,66 Q4,76 -4,74 Z" fill="#e2626b"/>
+          <path d="M-20,46 Q0,80 20,46 Z" fill="#6b1f20" stroke="${k}" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M-9,62 Q0,57 9,62 Q4,71 -4,70 Z" fill="#e2626b"/>
         </g>
-        ${ell(-46, 26, 12, 7, "#ef9a7a", 'stroke="none" opacity=".7"')}${ell(46, 26, 12, 7, "#ef9a7a", 'stroke="none" opacity=".7"')}
       </g>
+      <!-- cordones de la capucha (encima del cuello) -->
+      <path d="M-16,-316 L-19,-276 M16,-316 L19,-276" stroke="${k}" stroke-width="11" stroke-linecap="round"/>
+      <path d="M-16,-316 L-19,-276 M16,-316 L19,-276" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
       <g id="guyArms">
-        <circle id="phoneGlow" cx="-38" cy="-300" r="78" fill="url(#phoneGlow)"/>
-        <!-- brazo derecho rascándose la panza -->
-        ${limb("M84,-316 Q128,-268 118,-232 Q96,-214 64,-214")}
-        ${ell(60, -214, 21, 17, sk)}
-        <path d="M46,-222 h-10 M46,-212 h-12 M48,-202 h-10" stroke="${k}" stroke-width="4" stroke-linecap="round"/>
-        <!-- brazo izquierdo con el celular -->
-        ${limb("M-84,-316 Q-128,-262 -112,-238 Q-82,-222 -44,-262")}
-        <g transform="rotate(-12 -38 -300)">
-          <rect x="-64" y="-346" width="52" height="88" rx="10" fill="#1d1d24" stroke="${k}" stroke-width="5"/>
-          <rect x="-57" y="-337" width="38" height="68" rx="4" fill="#9fd8ff"/>
-          <rect x="-50" y="-328" width="24" height="7" rx="3" fill="#fff" opacity=".8"/>
-          <rect x="-50" y="-314" width="18" height="7" rx="3" fill="#fff" opacity=".6"/>
+        <circle id="phoneGlow" cx="0" cy="-262" r="80" fill="url(#phoneGlow)"/>
+        ${limb("M-92,-318 Q-130,-262 -114,-236 Q-88,-220 -40,-232", hoodieSh)}
+        ${limb("M92,-318 Q130,-262 114,-236 Q88,-220 40,-232", hoodieSh)}
+        <g transform="rotate(-6 0 -262)">
+          <rect x="-28" y="-306" width="56" height="90" rx="10" fill="#1d1d24" stroke="${k}" stroke-width="5"/>
+          <rect x="-20" y="-297" width="40" height="70" rx="4" fill="#9fd8ff"/>
+          <rect x="-13" y="-288" width="26" height="7" rx="3" fill="#fff" opacity=".8"/>
+          <rect x="-13" y="-274" width="18" height="7" rx="3" fill="#fff" opacity=".6"/>
         </g>
-        ${ell(-44, -262, 20, 17, sk)}
-        ${ell(-24, -292, 9, 13, sk, 'transform="rotate(-20 -24 -292)"')}
+        ${ell(-36, -232, 19, 17, sk)}${ell(36, -232, 19, 17, sk)}
+        ${ell(-20, -256, 8, 12, sk, 'transform="rotate(-25 -20 -256)"')}
       </g>
     </g>
   </g>`;
