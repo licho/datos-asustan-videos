@@ -53,6 +53,12 @@ Los specs siguen importando de `lib.core`, `lib.motion`, `lib.personajes`, `lib.
 - `draft` hace un video de revisión rápido (15 cuadros/s, mitad de tamaño). Los comandos en español (`hoja`, `sinvoz`, `texto`) siguen funcionando.
 - Para cambiar el motor mismo, trabaja en `licho/reels-engine` (ver su `README.md`) y publica una etiqueta nueva; nunca apuntes a `main` del motor.
 
+## Animación nueva (Remotion, desde nov 2026)
+- Luis aprobó el estilo nuevo (21 nov 2026): mismo canal (caricatura, contorno negro, letreros y subtítulos en su lugar) pero con personajes que se mueven, cámara, sonidos y **toques 3D** (volumen en esferas, sombras proyectadas, reflejos en cilindros, fondo con desenfoque, letreros con relieve, ligera inclinación de cámara).
+- Vive en `motion/`: dibujos compartidos en `motion/shared/art.mjs` (incluye al **personaje recurrente** de sudadera naranja, delgado, en SVG: `guy()`, `guyHead(mood)`, `guyTorso()`, `guyArm()`, `legsSitting()`), proyecto Remotion en `motion/rm-sol/` (`src/scenes.jsx`, `src/pieces.jsx`, `src/ui.jsx`, `audio.py` para efectos y música).
+- Render: `npx remotion render src/index.jsx Sol out/x.mp4 --browser-executable=/usr/bin/google-chrome --concurrency=2` (~4–5 min por 75 s). Sonido: `python3 audio.py out/x.wav [voz.mp3]` y se pega con ffmpeg.
+- Subtítulos en bloques de máximo 2 renglones, solo las palabras ya dichas, centrados en y=1500.
+
 ## Flujo para un video nuevo
 1. **Tema** de `IDEAS.md` (o el que pida Luis). Investiga datos y fuentes.
 2. **Guion** en la respuesta: líneas con escena propuesta, chip (letrero) y fuentes. Espera "me late".
