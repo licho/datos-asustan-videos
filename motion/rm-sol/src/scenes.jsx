@@ -222,7 +222,7 @@ export function S9({ t, dur }) {
           {[...Array(10)].map((_, i) => {
             const col = i % 5, row = Math.floor(i / 5);
             const k = lerp(t, cut + 0.2 + i * 0.08, cut + 0.5 + i * 0.08, 0, 1, Easing.out(Easing.back(2)));
-            return <g key={i} transform={`translate(${150 + col * 195} ${1000 + row * 260}) scale(${k})`}><House lit={i !== 7} t={t} i={i} /></g>;
+            return <g key={i} transform={`translate(${215 + col * 178} ${1000 + row * 260}) scale(${k})`}><House lit={i !== 7} t={t} i={i} /></g>;
           })}
         </g>
       </g>
