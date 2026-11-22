@@ -11,7 +11,9 @@ export function Chip({ text, y, bg = "#e1232d", fg = "#fff", size = 56, k = 1 })
     <div style={{ position: "absolute", left: 0, right: 0, top: y, display: "flex", justifyContent: "center",
       transform: `translateY(-50%) scale(${s})`, opacity: Math.min(1, k * 3) }}>
       <div style={{ background: bg, color: fg, fontFamily: "DQA", fontSize: size, lineHeight: 1,
-        padding: `${size * 0.3}px ${size * 0.65}px`, borderRadius: size * 0.6, border: "6px solid #111", whiteSpace: "nowrap" }}>{text}</div>
+        padding: `${size * 0.3}px ${size * 0.65}px`, borderRadius: size * 0.6, border: "6px solid #111", whiteSpace: "nowrap",
+        backgroundImage: "linear-gradient(180deg, rgba(255,255,255,.28) 0%, rgba(255,255,255,0) 48%, rgba(0,0,0,.18) 100%)",
+        boxShadow: "0 9px 0 #111, 0 18px 22px rgba(0,0,0,.35)", textShadow: "0 4px 0 rgba(0,0,0,.35)" }}>{text}</div>
     </div>
   );
 }
@@ -42,6 +44,7 @@ export function Captions({ t, words }) {
         return (
           <span key={i} style={{ fontFamily: "DQA", fontSize: 66, lineHeight: 1.15, color: hl ? "#ffd400" : "#fff",
             WebkitTextStroke: "12px #111", paintOrder: "stroke fill", display: "inline-block",
+            textShadow: "0 7px 0 #111, 0 12px 14px rgba(0,0,0,.45)",
             transform: `scale(${k}) translateY(${active ? -6 : 0}px)`, opacity: k > 0 ? 1 : 0 }}>{w}</span>
         );
       })}

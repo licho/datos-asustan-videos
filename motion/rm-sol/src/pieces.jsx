@@ -37,13 +37,23 @@ export function Earth({ r = 150, mood = "happy", ice = 0, t = 0, blink = false }
   const eyesOpen = mood === "scared" ? 30 : 22;
   return (
     <g transform={`scale(${s})`}>
-      <circle r={150} fill="#3b8fe0" stroke={K} strokeWidth={6 / s} />
-      <path d="M-120,-40 Q-90,-110 -30,-100 Q0,-70 -30,-40 Q-60,-10 -100,10 Q-130,0 -120,-40Z M40,-120 Q100,-110 120,-60 Q100,-30 70,-50 Q40,-70 40,-120Z M20,60 Q70,40 110,70 Q90,120 40,125 Q10,100 20,60Z M-110,60 Q-80,50 -70,80 Q-90,110 -115,95Z"
-        fill="#4cb860" stroke={K} strokeWidth={4} />
-      <path d="M-150,0 A150,150 0 0 0 150,0 A150,135 0 0 1 -150,0Z" fill="#1d5fa8" opacity={0.35} />
+      <circle r={168} fill="none" stroke="#8fd0ff" strokeWidth={22} opacity={0.35} filter="url(#dof2)" />
+      <defs><clipPath id="earthClip"><circle r={147} /></clipPath></defs>
+      <circle r={150} fill="#3b8fe0" />
+      <g clipPath="url(#earthClip)">
+        {[-1, 0, 1].map(k => (
+          <path key={k} transform={`translate(${((t * 28) % 340) + k * 340 - 170} 0)`}
+            d="M-120,-40 Q-90,-110 -30,-100 Q0,-70 -30,-40 Q-60,-10 -100,10 Q-130,0 -120,-40Z M40,-120 Q100,-110 120,-60 Q100,-30 70,-50 Q40,-70 40,-120Z M20,60 Q70,40 110,70 Q90,120 40,125 Q10,100 20,60Z M-110,60 Q-80,50 -70,80 Q-90,110 -115,95Z"
+            fill="#4cb860" stroke={K} strokeWidth={4} />
+        ))}
+        {[-1, 0, 1].map(k => <ellipse key={k} cx={((t * 40) % 340) + k * 340 - 120} cy={-60} rx={60} ry={14} fill="#fff" opacity={0.75} />)}
+      </g>
+      <circle r={147} fill="url(#sph)" />
+      <circle r={150} fill="none" stroke={K} strokeWidth={6 / s} />
       {/* hielo */}
       <g opacity={ice}>
         <circle r={150} fill="#dff3ff" stroke={K} strokeWidth={6} />
+        <circle r={147} fill="url(#sph)" />
         <path d="M-110,-60 L-60,-20 L-80,30 M60,-100 L30,-40 L80,10 M-20,60 L30,110" stroke="#9fd3f0" strokeWidth={6} fill="none" />
         {[...Array(7)].map((_, i) => <path key={i} d={`M${-90 + i * 30},${128 - Math.abs(i - 3) * 14} l8,${28 + (i % 3) * 10} l8,${-28 - (i % 3) * 10}Z`} fill="#bfe8ff" stroke={K} strokeWidth={3} />)}
       </g>
@@ -72,6 +82,7 @@ export function Moon({ r = 110, off = 0, t = 0 }) {
     <g transform={`scale(${s})`}>
       <circle r={110} fill="#e6e6ee" stroke={K} strokeWidth={6} />
       <circle r={110} fill="#4b4763" opacity={off} />
+      <circle r={107} fill="url(#sph)" />
       {[[-50, -50, 18], [40, -60, 12], [55, 30, 20], [-30, 55, 10]].map(([x, y, cr], i) =>
         <circle key={i} cx={x} cy={y} r={cr} fill={col} stroke={K} strokeWidth={3} opacity={0.8} />)}
       <ellipse cx={-34} cy={-4} rx={14} ry={off > 0.5 ? 6 : 16} fill="#fff" stroke={K} strokeWidth={4} />
@@ -115,7 +126,9 @@ export function Thermo({ value, k = 1, shake = 0 }) {
       <rect x={x - 30} y={top} width={60} height={h} rx={30} fill="#fff" stroke={K} strokeWidth={6} />
       <rect x={x - 14} y={top + 16 + (h - 32) * (1 - lv)} width={28} height={(h - 32) * lv + 20} rx={14} fill={fill} />
       <circle cx={x} cy={top + h + 34} r={52} fill={fill} stroke={K} strokeWidth={6} />
-      <circle cx={x - 16} cy={top + h + 18} r={12} fill="#fff" opacity={0.6} />
+      <circle cx={x} cy={top + h + 34} r={49} fill="url(#sph)" />
+      <rect x={x - 27} y={top + 3} width={54} height={h - 6} rx={27} fill="url(#cyl)" opacity={0.8} />
+      <rect x={x - 20} y={top + 20} width={8} height={h - 60} rx={4} fill="#fff" opacity={0.7} />
       {[...Array(9)].map((_, i) => <path key={i} d={`M${x + 8},${top + 40 + i * 58} h20`} stroke={K} strokeWidth={4} />)}
       <g transform={`translate(${x} ${top - 46})`}>
         <rect x={-78} y={-30} width={156} height={60} rx={14} fill={hot ? "#e1232d" : "#1b6fb8"} stroke={K} strokeWidth={5} />
@@ -195,7 +208,9 @@ export function Pot({ wilt, x }) {
         <ellipse cx={26} cy={0} rx={30} ry={14} fill={leaf} stroke={K} strokeWidth={5} />
         <circle r={16} fill={wilt > 0.5 ? "#a07a50" : "#ff6f91"} stroke={K} strokeWidth={5} />
       </g>
+      <ellipse cx={0} cy={2} rx={70} ry={12} fill="#000" opacity={0.3} />
       <path d="M-62,-130 L62,-130 L48,0 L-48,0 Z" fill="#c0643a" stroke={K} strokeWidth={6} strokeLinejoin="round" />
+      <path d="M-59,-127 L59,-127 L46,-3 L-46,-3 Z" fill="url(#cyl)" />
       <rect x={-70} y={-150} width={140} height={28} rx={8} fill="#d77a4a" stroke={K} strokeWidth={6} />
       {col > 0.6 && <path d="M-30,-80 l8,-8 l8,8 M10,-80 l8,-8 l8,8" stroke={K} strokeWidth={4} fill="none" />}
     </g>
@@ -205,9 +220,12 @@ export function AngryTree({ t, snow = 1 }) {
   const strain = Math.sin(t * 20) * 2;
   return (
     <g transform={`translate(${strain} 0)`}>
+      <ellipse cx={0} cy={4} rx={150} ry={20} fill="#000" opacity={0.28} />
       <path d="M-50,0 L-40,-260 Q0,-280 40,-260 L50,0 Z" fill="#7a5235" stroke={K} strokeWidth={6} strokeLinejoin="round" />
+      <path d="M-47,-3 L-37,-257 Q0,-276 37,-257 L47,-3 Z" fill="url(#cyl)" />
       <path d="M-20,-60 q10,-40 0,-80 M18,-120 q-8,-30 4,-60" stroke="#5b3b24" strokeWidth={6} fill="none" />
       <path d="M-200,-300 Q-230,-470 -90,-520 Q0,-600 100,-520 Q240,-480 200,-300 Q160,-220 0,-230 Q-160,-220 -200,-300Z" fill="#3d9a52" stroke={K} strokeWidth={6} strokeLinejoin="round" />
+      <ellipse cx={0} cy={-370} rx={200} ry={170} fill="url(#sph)" />
       <path d="M-180,-420 Q-120,-540 0,-560 Q120,-545 180,-420 Q100,-470 0,-470 Q-100,-470 -180,-420Z" fill="#f2faff" stroke={K} strokeWidth={5} opacity={snow} />
       <path d="M-110,-385 L-40,-350 M110,-385 L40,-350" stroke={K} strokeWidth={14} strokeLinecap="round" />
       <ellipse cx={-62} cy={-330} rx={22} ry={18} fill="#fff" stroke={K} strokeWidth={5} />
@@ -298,9 +316,13 @@ export function House({ lit, t, i }) {
   const fl = lit ? 0.8 + 0.2 * Math.sin(t * 5 + i * 1.7) : 0;
   return (
     <g>
+      <ellipse cx={30} cy={4} rx={110} ry={14} fill="#000" opacity={0.25} />
+      <path d="M60,-100 L104,-124 L104,-24 L60,0 Z" fill={lit ? "#c9b08a" : "#7d8996"} stroke={K} strokeWidth={5} strokeLinejoin="round" />
+      <path d="M0,-170 L44,-194 L122,-120 L78,-96 Z" fill={lit ? "#8e2f28" : "#56616d"} stroke={K} strokeWidth={5} strokeLinejoin="round" />
       <rect x={-60} y={-100} width={120} height={100} fill={lit ? "#e7d2b0" : "#9aa7b5"} stroke={K} strokeWidth={5} />
       <path d="M-78,-96 L0,-170 L78,-96 Z" fill={lit ? "#b8433a" : "#6d7a88"} stroke={K} strokeWidth={5} strokeLinejoin="round" />
       <path d="M-70,-104 L0,-168 L70,-104" stroke="#fff" strokeWidth={10} fill="none" strokeLinecap="round" />
+      {lit && <circle cx={-23} cy={-59} r={40} fill="#ffd166" opacity={0.35 * fl} filter="url(#dof2)" />}
       <rect x={-40} y={-74} width={34} height={30} fill={lit ? "#ffd166" : "#3a4552"} stroke={K} strokeWidth={4} opacity={lit ? fl : 1} />
       <rect x={10} y={-50} width={30} height={50} fill={lit ? "#8a5a3a" : "#55606c"} stroke={K} strokeWidth={4} />
       {lit && <path d={`M40,-150 q${8 + Math.sin(t * 2 + i) * 6},-20 0,-40 q${-8},-20 4,-40`} stroke="#ddd" strokeWidth={8} fill="none" opacity={0.7} strokeLinecap="round" />}
@@ -314,6 +336,7 @@ export function Pluto({ t }) {
   return (
     <g>
       <circle r={110} fill="#d8b99a" stroke={K} strokeWidth={6} />
+      <circle r={107} fill="url(#sph)" />
       <path d="M-10,20 Q-60,-20 -40,40 Q-20,90 30,100 Q70,60 60,20 Q40,-10 -10,20Z" fill="#f3e3cf" stroke={K} strokeWidth={4} />
       <rect x={-78} y={-42} width={64} height={34} rx={10} fill={K} /><rect x={14} y={-42} width={64} height={34} rx={10} fill={K} />
       <path d="M-14,-30 h28" stroke={K} strokeWidth={8} />

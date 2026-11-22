@@ -113,7 +113,7 @@ export const Gancho = ({ bare = false }) => {
           <g dangerouslySetInnerHTML={svgPart(statics.roof)} />
           <g dangerouslySetInnerHTML={svgPart(statics.tinaco)} />
           <g dangerouslySetInnerHTML={svgPart(lineAnim)} />
-          <g transform="translate(810 1290) scale(1.12)" dangerouslySetInnerHTML={svgPart(guy)} />
+          <g filter="url(#dropS)" transform="translate(810 1290) scale(1.12)" dangerouslySetInnerHTML={svgPart(guy)} />
           <g>{photons}</g>
           <g transform={`translate(255 600) rotate(-12) scale(${clicK})`} opacity={clicOp}>
             <text textAnchor="middle" dominantBaseline="middle" fontFamily="DQA" fontSize="110" fill={A.C.yel}

@@ -78,6 +78,15 @@ Octubre–noviembre 2026: zombie en el minisúper · teclado sucio · aluxes · 
 - [ ] **¿Tu jefe es un vampiro?** Juntas a las 7 p.m., nunca ve el sol, te deja sin energía. Remate: no te chupa la sangre, te chupa las horas extra.
 - [ ] **¿El grupo familiar está poseído?** "Buenos días" con brillitos a las 5 a.m., cadenas que maldicen si no reenvías, audios de 7 minutos. Remate: no es posesión, es tu tía.
 
+### Ovnis oficiales *(idea de Luis, 21 nov 2026)*
+- [ ] **Avistamientos de ovnis que los gobiernos SÍ reconocen.** Formato lista (3–4 casos) o "¿qué pasaría si…?" con el personaje recurrente. Gancho posible (contradicción): "El Pentágono tiene casos de ovnis que todavía no puede explicar."
+  - **Pentágono (AARO, oficina oficial de EE. UU.):** informe de nov 2024 → 757 reportes nuevos en un año; 21 seguían mereciendo análisis. Informe FY2025 (julio 2026) → 319 reportes nuevos, 370 casos resueltos (todos con causas comunes: globos, drones, aves, satélites), 9 todavía sin explicar. 50 avisos de drones cerca de instalaciones nucleares. Dicen que no hay evidencia de tecnología extraterrestre.
+  - **Pilotos de la Marina (2004, "Tic Tac"):** pilotos del portaaviones Nimitz siguieron un objeto blanco sin alas; el Pentágono publicó oficialmente los 3 videos el 27 de abril de 2020.
+  - **Francia (GEIPAN, dentro de la agencia espacial CNES, desde 1977):** ~8,000 testimonios en 40 años (~3,000 casos); ~7% sigue sin explicación (2% en la última década).
+  - Remate cómico posible: el 98% resulta ser globo, dron o la Estación Espacial… y el 2% es el vecino con su dron nuevo.
+  - Fuentes: AARO/ODNI (informe nov 2024), The Black Vault (informe FY2025, jul 2026), History.com / Military Times (Nimitz y videos de 2020), GEIPAN (geipan.fr).
+  - **Cuidado:** no presentar como prueba de extraterrestres; los datos oficiales dicen lo contrario. Sin marcas ni logos de agencias en pantalla.
+
 ### Guía laboral para monstruos (siguientes episodios)
 - [ ] Hombre lobo, bruja, chupacabras, Frankenstein, alux, Cthulhu (sugeridos en el cierre "¿qué otro monstruo?"; revisar comentarios)
 

@@ -28,6 +28,20 @@ export function defs() {
       <stop offset="1" stop-color="#ffd23f" stop-opacity="0"/></radialGradient>
     <radialGradient id="vig" cx=".5" cy=".5" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/>
       <stop offset="1" stop-color="#000" stop-opacity=".55"/></radialGradient>
+    <radialGradient id="sph" cx=".36" cy=".3" r=".78">
+      <stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".32" stop-color="#fff" stop-opacity="0"/>
+      <stop offset=".72" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".38"/></radialGradient>
+    <linearGradient id="cyl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000" stop-opacity=".32"/><stop offset=".22" stop-color="#fff" stop-opacity=".32"/>
+      <stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".42"/></linearGradient>
+    <linearGradient id="haze" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="${C.skyBot}" stop-opacity="0"/><stop offset="1" stop-color="${C.skyBot}" stop-opacity=".55"/></linearGradient>
+    <filter id="dropS" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="10" dy="16" stdDeviation="9" flood-color="#000" flood-opacity=".38"/></filter>
+    <filter id="dof" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="1.4"/></filter>
+    <filter id="dof2" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur stdDeviation="3.2"/></filter>
+    <filter id="bloom" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>`;
 }
 
@@ -48,8 +62,8 @@ function buildings(y0, color, seed, minH, maxH, winColor) {
   }
   return out;
 }
-export function skylineFar() { return `<g id="far">${buildings(1300, C.far, 7, 140, 300, null)}</g>`; }
-export function skylineNear() { return `<g id="near">${buildings(1300, C.near, 21, 70, 190, "#ffe9a8")}</g>`; }
+export function skylineFar() { return `<g id="far" filter="url(#dof2)">${buildings(1300, C.far, 7, 140, 300, null)}<rect x="-300" y="900" width="1680" height="400" fill="url(#haze)"/></g>`; }
+export function skylineNear() { return `<g id="near" filter="url(#dof)">${buildings(1300, C.near, 21, 70, 190, "#ffe9a8")}</g>`; }
 
 // ---------- Azotea mexicana: pretil, tinaco, tendedero ----------
 export function rooftop() {
@@ -62,8 +76,9 @@ export function rooftop() {
 }
 export function tinaco(x = 170, y = 1290) {
   return `<g id="tinaco" transform="translate(${x} ${y})">
-    <rect x="-70" y="-60" width="140" height="60" fill="#8c8c8c" stroke="${C.ink}" stroke-width="${S}"/>
+    <rect x="-70" y="-60" width="140" height="60" fill="#8c8c8c" stroke="${C.ink}" stroke-width="${S}"/><rect x="-67" y="-57" width="134" height="54" fill="url(#cyl)"/>
     <path d="M-80,-60 L-80,-250 Q0,-290 80,-250 L80,-60 Z" fill="#2b2b2b" stroke="${C.ink}" stroke-width="${S}"/>
+    <path d="M-77,-62 L-77,-249 Q0,-287 77,-249 L77,-62 Z" fill="url(#cyl)"/>
     <path d="M-80,-200 Q0,-232 80,-200 M-80,-140 Q0,-172 80,-140" fill="none" stroke="#444" stroke-width="8"/>
     ${ell(0, -268, 40, 14, "#3a3a3a")}
     <path d="M-56,-235 Q-50,-120 -58,-80" stroke="#666" stroke-width="10" fill="none" stroke-linecap="round"/>
@@ -100,6 +115,7 @@ export function sun(r = 170) {
     <g id="sunRays">${rays}</g>
     <g id="sunOn">
       <circle r="${r}" fill="${C.sun}" stroke="${C.ink}" stroke-width="${S}"/>
+      <circle r="${r - 3}" fill="url(#sph)"/>
       <path d="M${-r * .72},${r * .35} A${r},${r} 0 0 0 ${r * .72},${r * .35} A${r * 1.05},${r * .95} 0 0 1 ${-r * .72},${r * .35}Z" fill="${C.sunSh}" opacity=".55"/>
       ${ell(-100, 40, 26, 14, "#ff8a5c", 'stroke="none"')}${ell(100, 40, 26, 14, "#ff8a5c", 'stroke="none"')}
       ${eyes(true)}
@@ -107,6 +123,7 @@ export function sun(r = 170) {
     </g>
     <g id="sunOff" opacity="0">
       <circle r="${r}" fill="${C.sunOff}" stroke="${C.ink}" stroke-width="${S}"/>
+      <circle r="${r - 3}" fill="url(#sph)"/>
       <path d="M${-r * .72},${r * .35} A${r},${r} 0 0 0 ${r * .72},${r * .35} A${r * 1.05},${r * .95} 0 0 1 ${-r * .72},${r * .35}Z" fill="${C.sunOffSh}" opacity=".7"/>
       ${ell(-62, -28, 36, 44, C.white)}${ell(62, -28, 36, 44, C.white)}
       <circle cx="-62" cy="-28" r="11" fill="${C.ink}"/><circle cx="62" cy="-28" r="11" fill="${C.ink}"/>
@@ -126,6 +143,7 @@ export function guy() {
   const limb = (d, col, w = 36) => `<path d="${d}" stroke="${k}" stroke-width="${w + 12}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="${d}" stroke="${col}" stroke-width="${w}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
   return `<g id="guy">
+    <ellipse cx="0" cy="2" rx="170" ry="20" fill="#000" opacity=".28"/>
     <g id="chair">
       <path d="M-104,-178 L-128,0 M104,-178 L128,0 M-86,-178 L-96,-6 M86,-178 L96,-6" stroke="${k}" stroke-width="18" stroke-linecap="round"/>
       <path d="M-104,-178 L-128,0 M104,-178 L128,0 M-86,-178 L-96,-6 M86,-178 L96,-6" stroke="${C.chair}" stroke-width="8" stroke-linecap="round"/>
@@ -151,9 +169,11 @@ export function guy() {
         fill="${hoodie}" stroke="${k}" stroke-width="${S}" stroke-linejoin="round"/>
       <path d="M50,-320 Q74,-300 72,-210 Q70,-176 52,-172 Q66,-200 64,-260 Q62,-300 50,-320 Z" fill="${hoodieSh}" opacity=".55"/>
       <rect x="-44" y="-246" width="88" height="50" rx="18" fill="${hoodieSh}" stroke="${k}" stroke-width="4"/>
+      <path d="M-63,-327 Q-81,-316 -79,-276 L-75,-206 Q-73,-169 -52,-167 L52,-167 Q73,-169 75,-206 L79,-276 Q81,-316 63,-327 Q34,-335 0,-331 Q-34,-335 -63,-327 Z" fill="url(#cyl)" opacity=".7"/>
       <g id="guyHead" transform="translate(0 -395)">
         ${ell(-70, 12, 12, 17, sk)}${ell(70, 12, 12, 17, sk)}
         <circle r="72" fill="${sk}" stroke="${k}" stroke-width="${S}"/>
+        <circle r="69" fill="url(#sph)" opacity=".8"/>
         <path d="M30,58 Q58,40 66,10 Q70,40 50,58 Q40,66 30,58Z" fill="${skSh}" opacity=".6"/>
         <!-- corte de hongo -->
         <path d="M-78,-2 Q-82,-82 0,-84 Q82,-82 78,-2 Z" fill="${hair}" stroke="${k}" stroke-width="${S}" stroke-linejoin="round"/>
@@ -250,6 +270,7 @@ export function guyHead(mood = "warm") {
   return `<g>
     ${ell(-70, 12, 12, 17, g.skin)}${ell(70, 12, 12, 17, g.skin)}
     <circle r="72" fill="${g.skin}" stroke="${k}" stroke-width="${S}"/>
+    <circle r="69" fill="url(#sph)" opacity=".8"/>
     <path d="M30,58 Q58,40 66,10 Q70,40 50,58 Q40,66 30,58Z" fill="${g.skinSh}" opacity=".6"/>
     <path d="M-78,-2 Q-82,-82 0,-84 Q82,-82 78,-2 Z" fill="${g.hair}" stroke="${k}" stroke-width="${S}" stroke-linejoin="round"/>
     <path d="M-78,-6 L-92,-30 L-74,-26 Z" fill="${g.hair}" stroke="${k}" stroke-width="4" stroke-linejoin="round"/>
@@ -269,6 +290,7 @@ export function guyTorso() {
       fill="${g.hoodie}" stroke="${k}" stroke-width="${S}" stroke-linejoin="round"/>
     <path d="M50,-320 Q74,-300 72,-210 Q70,-176 52,-172 Q66,-200 64,-260 Q62,-300 50,-320 Z" fill="${g.hoodieSh}" opacity=".55"/>
     <rect x="-44" y="-246" width="88" height="50" rx="18" fill="${g.hoodieSh}" stroke="${k}" stroke-width="4"/>
+    <path d="M-63,-327 Q-81,-316 -79,-276 L-75,-206 Q-73,-169 -52,-167 L52,-167 Q73,-169 75,-206 L79,-276 Q81,-316 63,-327 Q34,-335 0,-331 Q-34,-335 -63,-327 Z" fill="url(#cyl)" opacity=".7"/>
   </g>`;
 }
 export function guyStrings() {

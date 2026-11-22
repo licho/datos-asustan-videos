@@ -63,7 +63,7 @@ export function S1({ t, dur }) {
         <SpaceBg t={t} />
         <ellipse cx={540} cy={980} rx={330} ry={160} fill="none" stroke="#6c7bb8" strokeWidth={5} strokeDasharray="18 16" />
         <g transform="translate(540 980) scale(.62)"><SunSvg t={t} /></g>
-        <g transform={`translate(${ex} ${ey})`}><Earth r={88} mood="happy" t={t} blink={t % 2.2 < 0.12} /></g>
+        <g filter="url(#dropS)" transform={`translate(${ex} ${ey})`}><Earth r={88} mood="happy" t={t} blink={t % 2.2 < 0.12} /></g>
       </g>
     </Frame>
   );
@@ -83,7 +83,7 @@ export function S2({ t, dur }) {
       <Chip text={clock} y={420} bg="#111" fg="#ffd400" size={52} k={1} /></>}>
       <SpaceBg t={t} />
       <g transform={`translate(${sx} ${sy}) scale(.55)`}><SunSvg on={0} t={t} /></g>
-      <g transform={`translate(${exx} ${eyy})`}><Earth r={100} mood="happy" blink={t % 2.4 < 0.12} /></g>
+      <g filter="url(#dropS)" transform={`translate(${exx} ${eyy})`}><Earth r={100} mood="happy" t={t} blink={t % 2.4 < 0.12} /></g>
       {/* vías */}
       <g transform={`translate(${sx} ${sy}) rotate(${ang})`}>
         <path d={`M110,0 H${len + 90}`} stroke="#4a5590" strokeWidth={6} strokeDasharray="14 14" />
@@ -120,7 +120,7 @@ export function S3({ t, dur }) {
         <g transform="translate(540 900) scale(.5)"><SunSvg on={0} t={t} /></g>
         <path d={`M760,900 L${760 + 1200},${900 - 693}`} stroke="#ffd400" strokeWidth={6} strokeDasharray="20 18" opacity={lerp(t, 0.8, 1.3, 0, 0.8)} />
         {go > 0.02 && [0, 1, 2, 3].map(i => <path key={i} d={`M${ex - 180 - i * 30},${ey + 40 + i * 30} l-${120 + i * 40},${70 + i * 22}`} stroke="#fff" strokeWidth={8} strokeLinecap="round" opacity={0.6} />)}
-        <g transform={`translate(${ex} ${ey}) rotate(${go * 300})`}><Earth r={95} mood={go > 0.01 ? "scared" : "happy"} /></g>
+        <g filter="url(#dropS)" transform={`translate(${ex} ${ey}) rotate(${go * 300})`}><Earth r={95} t={t} mood={go > 0.01 ? "scared" : "happy"} /></g>
       </g>
       <rect x={0} y={0} width={1080} height={1920} fill="#000" opacity={0.35 * dark} />
     </Frame>
@@ -134,7 +134,7 @@ export function S4({ t, dur }) {
     <Frame overlay={<Chip text="LA LUNA TAMBIÉN" y={300} k={pop(t, 0)} />}>
       <SpaceBg t={t} />
       <g transform="translate(820 600) scale(.4)"><Earth r={95} mood="scared" /></g>
-      <g transform={`translate(520 ${900 + Math.sin(t * 2) * 10})`}><Moon r={230} off={off} /></g>
+      <g filter="url(#dropS)" transform={`translate(520 ${900 + Math.sin(t * 2) * 10})`}><Moon r={230} off={off} /></g>
       <g transform="translate(540 1230)"><Stamp text="PRESTADO" k={lerp(t, dur * 0.55, dur * 0.55 + 0.25, 0, 1, Easing.out(Easing.back(2)))} /></g>
     </Frame>
   );
@@ -148,7 +148,7 @@ export function S5({ t, dur }) {
       <Chip text="−20 °C POR DÍA" y={420} bg="#1b6fb8" size={46} k={pop(t, dur * 0.5)} /></>}>
       <g transform={cam(lerp(t, 0, dur, 1, 1.12))}>
         <SpaceBg t={t} />
-        <g transform="translate(560 920)"><Earth r={280} mood={ice > 0.3 ? "cold" : "scared"} ice={ice} /></g>
+        <g filter="url(#dropS)" transform="translate(560 920)"><Earth r={280} t={t} mood={ice > 0.3 ? "cold" : "scared"} ice={ice} /></g>
       </g>
       <Frost k={lerp(t, 0.3, dur, 0, 0.75)} />
     </Frame>
@@ -162,7 +162,7 @@ export function S6({ t, dur }) {
       <Rooftop t={t} night={1} camT={cam(lerp(t, 0, dur, 1.0, 1.1), 560, 1000)}>
         <Raw html={STATIC.tinaco} />
         <rect x={-300} y={1278} width={1680} height={20} fill="#f2faff" stroke={K} strokeWidth={4} />
-        <g transform="translate(580 1290)"><BlanketGuy t={t} /></g>
+        <ellipse cx={580} cy={1292} rx={170} ry={20} fill="#000" opacity={0.3} /><g filter="url(#dropS)" transform="translate(580 1290)"><BlanketGuy t={t} /></g>
       </Rooftop>
       <Snow t={t} />
       <Frost k={0.7} />
@@ -180,7 +180,7 @@ export function S7({ t, dur }) {
       <Rooftop t={t} night={0.9}>
         <rect x={-300} y={1278} width={1680} height={20} fill="#f2faff" stroke={K} strokeWidth={4} />
         <g transform={`translate(0 1290)`}><Pot x={290} wilt={wilt} /><Pot x={450} wilt={Math.max(0, wilt - 0.15) / 0.85} /></g>
-        <g transform={`translate(790 1290) scale(${0.9 * treeK})`}><AngryTree t={t} /></g>
+        <g filter="url(#dropS)" transform={`translate(790 1290) scale(${0.9 * treeK})`}><AngryTree t={t} /></g>
       </Rooftop>
       <Snow t={t} n={45} />
       <Frost k={0.6} />
@@ -212,7 +212,7 @@ export function S9({ t, dur }) {
     <Frame overlay={t < cut ? <Chip text="BAJO TIERRA" y={300} k={pop(t, 0)} /> :
       <><Chip text="ISLANDIA" y={300} k={pop(t, cut)} /><Chip text="9 DE CADA 10 CASAS" y={420} bg="#111" fg="#ffd400" size={48} k={pop(t, cut + 0.5)} /></>}>
       <g transform={`translate(0 ${-pan * 1920})`}>
-        <g><Cave t={t} /><g transform="translate(700 1290)"><WarmGuy t={t} /></g></g>
+        <g><Cave t={t} /><g filter="url(#dropS)" transform="translate(700 1290)"><WarmGuy t={t} /></g></g>
         <g transform="translate(0 1920)">
           <rect x={0} y={0} width={1080} height={1920} fill="#141b3d" />
           {[...Array(50)].map((_, i) => <circle key={i} cx={rnd(i) * 1080} cy={rnd(i, 2) * 700} r={2 + rnd(i, 3) * 2} fill="#fff" opacity={0.6} />)}
@@ -235,8 +235,8 @@ export function S10({ t, dur }) {
   return (
     <Frame overlay={<Chip text="AL FINAL" y={300} k={pop(t, 0)} />}>
       <SpaceBg t={t} />
-      <g transform={`translate(${360 + Math.sin(t * 40) * (t < 0.6 ? 3 : 0)} 960)`}><Earth r={200} mood="frozen" ice={1} /></g>
-      <g transform={`translate(840 ${760 + Math.sin(t * 2) * 12}) scale(${pop(t, dur * 0.4) * 1.15})`}><Pluto t={t} /></g>
+      <g transform={`translate(${360 + Math.sin(t * 40) * (t < 0.6 ? 3 : 0)} 960)`}><g filter="url(#dropS)"><Earth r={200} mood="frozen" ice={1} t={t} /></g></g>
+      <g transform={`translate(840 ${760 + Math.sin(t * 2) * 12}) scale(${pop(t, dur * 0.4) * 1.15})`} filter="url(#dropS)"><Pluto t={t} /></g>
       <Bubble x={720} y={520} w={420} text={"¿Y ahora quién\nes el frío?"} size={40} k={pop(t, dur * 0.5)} tail="right" />
       <Frost k={0.9} />
     </Frame>
@@ -252,11 +252,11 @@ export function S11({ t, dur }) {
       <Rooftop t={t} night={0} camT={cam(1 + zoom * 0.4, 540 + zoom * 230, 960 + zoom * 30)}>
         <g transform="translate(540 700)"><SunSvg t={t} /></g>
         <Raw html={STATIC.tinaco} />
-        <g transform="translate(810 1290) scale(1.12)"><Raw html={hot} /></g>
+        <g filter="url(#dropS)" transform="translate(810 1290) scale(1.12)"><Raw html={hot} /></g>
         <path d="M880,800 q12,20 0,30 q-12,-10 0,-30z M720,820 q10,16 0,24 q-10,-8 0,-24z" fill="#8fd3ff" stroke={K} strokeWidth={4} opacity={1 - zoom} />
       </Rooftop>
       <g transform={`translate(540 ${lerp(t, dur * 0.4, dur * 0.4 + 0.5, 2500, 900, Easing.out(Easing.back(1.4)))})`}>
-        <ChatPhone t={t - dur * 0.45} k={0.95} />
+        <g filter="url(#dropS)"><ChatPhone t={t - dur * 0.45} k={0.95} /></g>
       </g>
     </Frame>
   );

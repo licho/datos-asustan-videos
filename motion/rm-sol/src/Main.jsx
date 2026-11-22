@@ -13,8 +13,10 @@ function Line({ L }) {
   // pequeño "whip" de entrada en cada corte (excepto el gancho)
   const inK = L.i === 0 ? 1 : interpolate(t, [0, 0.18], [0, 1], { ...clamp, easing: Easing.out(Easing.cubic) });
   return (
-    <AbsoluteFill style={{ transform: `scale(${1.06 - 0.06 * inK})`, opacity: 0.3 + 0.7 * inK }}>
+    <AbsoluteFill style={{ perspective: 1600, opacity: 0.3 + 0.7 * inK }}>
+      <AbsoluteFill style={{ transform: `scale(${1.1 - 0.06 * inK}) rotateY(${Math.sin(t * 0.55 + L.i) * 2.2}deg) rotateX(${Math.cos(t * 0.4 + L.i) * 1.4}deg)` }}>
       <Scene t={t} dur={L.dur} />
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 }
