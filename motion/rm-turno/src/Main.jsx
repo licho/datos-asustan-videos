@@ -10,7 +10,7 @@ const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" };
 function Line({ L }) {
   const f = useCurrentFrame(); const t = f / FPS;
   const Shot = SHOTS[L.i];
-  const fadeIn = L.i === 0 ? 1 : interpolate(t, [0, 0.15], [0.2, 1], clamp);
+  const fadeIn = 1; // corte directo (el oscurecimiento en cada corte se veía como parpadeo)
   return <AbsoluteFill style={{ opacity: fadeIn }}><Shot t={t} dur={L.dur} /></AbsoluteFill>;
 }
 

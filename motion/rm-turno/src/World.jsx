@@ -33,51 +33,89 @@ export function useCanvasTexture(w, h, draw, deps) {
   return tex;
 }
 
-// ---------- Guardia (uniforme azul marino, gorra) ----------
+// ---------- Guardia de seguridad (proporciones humanas, camisa clara, pantalón y gorra azul marino) ----------
+const Limb = ({ from, to, r0, r1 = r0, color }) => {
+  // segmento cónico entre dos puntos (pierna, brazo)
+  const a = new THREE.Vector3(...from), b = new THREE.Vector3(...to);
+  const mid = a.clone().add(b).multiplyScalar(0.5); const len = a.distanceTo(b);
+  const q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), b.clone().sub(a).normalize());
+  return (
+    <group position={mid.toArray()} quaternion={q}>
+      <mesh castShadow><cylinderGeometry args={[r1, r0, len, 16]} />{M(color)}</mesh>
+      <mesh position={[0, len / 2, 0]}><sphereGeometry args={[r1, 14, 10]} />{M(color)}</mesh>
+      <mesh position={[0, -len / 2, 0]}><sphereGeometry args={[r0, 14, 10]} />{M(color)}</mesh>
+    </group>
+  );
+};
 export function Guard({ position = [0, 0, 0], rotation = 0, pale = false, double = false, headUp = 1, sit = 0, walk = 0, t = 0, eyesGlow = 0 }) {
-  const skin = pale ? "#d9d4cc" : "#e8b98f";
-  const navy = "#1d2a4a";
+  const skin = pale ? "#d8d2c8" : "#d9a57c";
+  const shirt = "#8ea2bd", pants = "#1e2433", cap = "#1a2236", shoe = "#0d0d10";
   const sw = Math.sin(t * 8) * walk;
-  const headTilt = (1 - headUp) * 0.75;
-  const legY = sit ? 0.55 : 0.48;
+  const bow = (1 - headUp) * 0.62;                 // agachar la cabeza (gira desde el cuello)
+  const hipY = sit ? 0.52 : 0.92;
+  // piernas: [cadera, rodilla, tobillo] por lado
+  const leg = (side) => {
+    const x = side * 0.1;
+    if (sit) return [[x, hipY, 0.02], [x, hipY + 0.02, 0.44], [x, 0.08, 0.5]];
+    const s = side * sw * 0.35;
+    return [[x, hipY, 0], [x, 0.5, Math.sin(s) * 0.22], [x, 0.08, Math.sin(s) * 0.3 - (s > 0 ? 0.05 : 0)]];
+  };
+  const arm = (side) => {
+    const sx = side * 0.22, sy = hipY + 0.55;
+    if (sit) return [[sx, sy, 0], [side * 0.26, sy - 0.27, 0.12], [side * 0.16, sy - 0.33, 0.38]];
+    const s = -side * sw * 0.4;
+    return [[sx, sy, 0], [side * 0.25, sy - 0.29, Math.sin(s) * 0.12], [side * 0.24, sy - 0.55, Math.sin(s) * 0.22 + 0.04]];
+  };
   return (
     <group position={position} rotation={[0, rotation, 0]}>
-      {/* piernas */}
-      {sit ? (
-        <>
-          <mesh position={[-0.13, 0.55, 0.22]} rotation={[Math.PI / 2, 0, 0]} castShadow><capsuleGeometry args={[0.09, 0.38, 4, 10]} />{M("#121a30")}</mesh>
-          <mesh position={[0.13, 0.55, 0.22]} rotation={[Math.PI / 2, 0, 0]} castShadow><capsuleGeometry args={[0.09, 0.38, 4, 10]} />{M("#121a30")}</mesh>
-          <mesh position={[-0.13, 0.27, 0.45]} castShadow><capsuleGeometry args={[0.08, 0.38, 4, 10]} />{M("#121a30")}</mesh>
-          <mesh position={[0.13, 0.27, 0.45]} castShadow><capsuleGeometry args={[0.08, 0.38, 4, 10]} />{M("#121a30")}</mesh>
-        </>
-      ) : (
-        <>
-          <mesh position={[-0.13, legY, 0]} rotation={[sw * 0.5, 0, 0]} castShadow><capsuleGeometry args={[0.09, 0.62, 4, 10]} />{M("#121a30")}</mesh>
-          <mesh position={[0.13, legY, 0]} rotation={[-sw * 0.5, 0, 0]} castShadow><capsuleGeometry args={[0.09, 0.62, 4, 10]} />{M("#121a30")}</mesh>
-        </>
-      )}
-      <group position={[0, sit ? 0.62 : 0.95, 0]}>
-        {/* torso */}
-        <mesh position={[0, 0.38, 0]} castShadow><capsuleGeometry args={[0.24, 0.42, 6, 14]} />{M(navy)}</mesh>
-        <mesh position={[0, 0.14, 0]}><cylinderGeometry args={[0.25, 0.25, 0.07, 18]} />{M("#0b0b0e")}</mesh>
-        <mesh position={[0.11, 0.55, 0.22]}><boxGeometry args={[0.08, 0.1, 0.02]} />{M("#d4af37", { metalness: 0.8, roughness: 0.3 })}</mesh>
-        <mesh position={[-0.1, 0.55, 0.225]}><boxGeometry args={[0.12, 0.03, 0.02]} />{M("#ffffff")}</mesh>
-        {/* brazos */}
-        <mesh position={[-0.32, 0.32, 0]} rotation={[sit ? -0.9 : -sw * 0.4, 0, 0.12]} castShadow><capsuleGeometry args={[0.075, 0.45, 4, 10]} />{M(navy)}</mesh>
-        <mesh position={[0.32, 0.32, 0]} rotation={[sit ? -0.9 : sw * 0.4, 0, -0.12]} castShadow><capsuleGeometry args={[0.075, 0.45, 4, 10]} />{M(navy)}</mesh>
-        {/* cabeza */}
-        <group position={[0, 0.78, 0]} rotation={[headTilt, 0, 0]}>
-          <mesh castShadow><sphereGeometry args={[0.2, 24, 18]} />{M(skin)}</mesh>
-          <mesh position={[0, 0.12, 0]}><cylinderGeometry args={[0.205, 0.21, 0.12, 22]} />{M(navy)}</mesh>
-          <mesh position={[0, 0.07, 0.17]} rotation={[0.25, 0, 0]}><boxGeometry args={[0.3, 0.02, 0.16]} />{M("#0d1428")}</mesh>
-          <mesh position={[-0.07, 0.0, 0.18]}><sphereGeometry args={[0.025, 10, 8]} />{eyesGlow > 0 ? Emit("#d9fff2", 2 * eyesGlow) : M("#111")}</mesh>
-          <mesh position={[0.07, 0.0, 0.18]}><sphereGeometry args={[0.025, 10, 8]} />{eyesGlow > 0 ? Emit("#d9fff2", 2 * eyesGlow) : M("#111")}</mesh>
-          <mesh position={[0, -0.03, 0.195]}><sphereGeometry args={[0.03, 10, 8]} />{M(pale ? "#cfc6bc" : "#d9a27a")}</mesh>
-          <mesh position={[-0.07, 0.05, 0.175]} rotation={[0, 0, pale ? 0.35 : 0.1]}><boxGeometry args={[0.07, 0.014, 0.01]} />{M("#2a1d16")}</mesh>
-          <mesh position={[0.07, 0.05, 0.175]} rotation={[0, 0, pale ? -0.35 : -0.1]}><boxGeometry args={[0.07, 0.014, 0.01]} />{M("#2a1d16")}</mesh>
-          <mesh position={[0, -0.1, 0.17]}>{pale ? <sphereGeometry args={[0.022, 10, 8]} /> : <boxGeometry args={[0.07, 0.012, 0.01]} />}{M("#4a2a2a")}</mesh>
-          {pale && <><mesh position={[-0.07, -0.025, 0.175]}><boxGeometry args={[0.05, 0.012, 0.005]} />{M("#8a7a90")}</mesh>
-            <mesh position={[0.07, -0.025, 0.175]}><boxGeometry args={[0.05, 0.012, 0.005]} />{M("#8a7a90")}</mesh></>}
+      {[-1, 1].map(side => { const [h, k, a] = leg(side); return (
+        <group key={side}>
+          <Limb from={h} to={k} r0={0.075} r1={0.068} color={pants} />
+          <Limb from={k} to={a} r0={0.062} r1={0.05} color={pants} />
+          <mesh position={[a[0], 0.045, a[2] + 0.06]} castShadow><boxGeometry args={[0.11, 0.09, 0.27]} />{M(shoe, { roughness: 0.4 })}</mesh>
+        </group>); })}
+      {/* cadera, cinturón y torso */}
+      <mesh position={[0, hipY + 0.02, 0]} scale={[1.25, 0.7, 0.85]} castShadow><sphereGeometry args={[0.14, 18, 12]} />{M(pants)}</mesh>
+      <mesh position={[0, hipY + 0.1, 0]}><cylinderGeometry args={[0.165, 0.17, 0.06, 20]} />{M("#111", { roughness: 0.5 })}</mesh>
+      <mesh position={[0, hipY + 0.1, 0.165]}><boxGeometry args={[0.06, 0.045, 0.015]} />{M("#c9b37a", { metalness: 0.8, roughness: 0.3 })}</mesh>
+      <mesh position={[0, hipY + 0.36, 0]} scale={[1.18, 1, 0.72]} castShadow><capsuleGeometry args={[0.16, 0.3, 8, 18]} />{M(shirt)}</mesh>
+      <mesh position={[0, hipY + 0.33, 0.115]} scale={[1, 1, 0.3]}><boxGeometry args={[0.035, 0.36, 0.05]} />{M("#1a2236")}</mesh>
+      <mesh position={[0.1, hipY + 0.45, 0.12]} rotation={[-0.15, 0, 0]}><cylinderGeometry args={[0.03, 0.03, 0.01, 6]} />{M("#d4af37", { metalness: 0.85, roughness: 0.25 })}</mesh>
+      <mesh position={[-0.1, hipY + 0.45, 0.118]}><boxGeometry args={[0.08, 0.02, 0.01]} />{M("#e8e8e8")}</mesh>
+
+      {/* brazos y manos */}
+      {[-1, 1].map(side => { const [s, e, h] = arm(side); return (
+        <group key={side}>
+          <Limb from={s} to={e} r0={0.058} r1={0.06} color={shirt} />
+          <Limb from={e} to={h} r0={0.045} r1={0.05} color={shirt} />
+          <mesh position={h} scale={[0.8, 1.1, 0.6]} castShadow><sphereGeometry args={[0.05, 14, 10]} />{M(skin)}</mesh>
+        </group>); })}
+      {/* cuello y cabeza (gira desde el cuello) */}
+      <group position={[0, hipY + 0.6, 0]} rotation={[bow, 0, 0]}>
+        <mesh position={[0, 0.04, 0]}><cylinderGeometry args={[0.055, 0.06, 0.1, 14]} />{M(skin)}</mesh>
+        {[-1, 1].map(s => <mesh key={s} position={[s * 0.045, -0.01, 0.05]} rotation={[0.5, 0, s * 0.6]}><boxGeometry args={[0.06, 0.012, 0.05]} />{M(shirt)}</mesh>)}
+        <group position={[0, 0.2, 0.01]}>
+          <mesh scale={[0.9, 1.08, 0.95]} castShadow><sphereGeometry args={[0.12, 28, 22]} />{M(skin)}</mesh>
+          {[-1, 1].map(s => <mesh key={s} position={[s * 0.108, 0, 0]} scale={[0.4, 0.8, 0.6]}><sphereGeometry args={[0.04, 10, 8]} />{M(skin)}</mesh>)}
+          <mesh position={[0, -0.01, 0.112]} rotation={[0.25, 0, 0]}><coneGeometry args={[0.022, 0.05, 10]} />{M(skin)}</mesh>
+          {[-1, 1].map(s => (
+            <group key={s} position={[s * 0.042, 0.025, 0.098]}>
+              <mesh scale={[1, 0.7, 0.5]}><sphereGeometry args={[0.02, 12, 8]} />{eyesGlow > 0 ? Emit("#e6fff5", 2.5 * eyesGlow) : M("#f2f0ea")}</mesh>
+              {eyesGlow <= 0 && <mesh position={[0, 0, 0.009]}><sphereGeometry args={[0.009, 10, 8]} />{M("#1a1410")}</mesh>}
+              <mesh position={[0, 0.03, 0.004]} rotation={[0, 0, s * (pale ? -0.3 : 0.08)]}><boxGeometry args={[0.045, 0.009, 0.01]} />{M("#2a1d16")}</mesh>
+              {pale && <mesh position={[0, -0.018, 0.004]} scale={[1, 0.35, 0.3]}><sphereGeometry args={[0.02, 10, 6]} />{M("#9c8c9c")}</mesh>}
+            </group>))}
+          <mesh position={[0, -0.06, 0.1]} rotation={[0.2, 0, 0]} scale={[1, pale ? 1.4 : 0.35, 0.4]}><sphereGeometry args={[0.022, 12, 8]} />{M("#6a3a36")}</mesh>
+          {/* pelo bajo la gorra */}
+          <mesh position={[0, 0.02, -0.03]} scale={[0.95, 0.75, 0.95]}><sphereGeometry args={[0.122, 20, 14, 0, Math.PI * 2, 0, Math.PI * 0.55]} />{M("#2a1d16")}</mesh>
+          {/* gorra: corona, banda, visera curva y placa */}
+          <group position={[0, 0.075, 0]} rotation={[-0.06, 0, 0]}>
+            <mesh position={[0, 0.03, 0]}><cylinderGeometry args={[0.122, 0.118, 0.06, 26]} />{M(cap, { roughness: 0.6 })}</mesh>
+            <mesh position={[0, 0.075, -0.004]} scale={[1, 0.35, 1.05]}><sphereGeometry args={[0.13, 26, 12, 0, Math.PI * 2, 0, Math.PI / 2]} />{M(cap, { roughness: 0.6 })}</mesh>
+            <mesh position={[0, 0.07, 0]}><cylinderGeometry args={[0.135, 0.124, 0.03, 26]} />{M("#151b2b", { roughness: 0.5 })}</mesh>
+            <mesh position={[0, 0.005, 0.07]} rotation={[0.18, 0, 0]} scale={[1, 0.12, 1]}><sphereGeometry args={[0.13, 24, 8, Math.PI * 0.12, Math.PI * 0.76, Math.PI * 0.5, Math.PI * 0.5]} />{M("#0d1220", { roughness: 0.3, side: THREE.DoubleSide })}</mesh>
+            <mesh position={[0, 0.055, 0.12]} rotation={[-0.1, 0, 0]}><cylinderGeometry args={[0.022, 0.022, 0.008, 6]} />{M("#d4af37", { metalness: 0.85, roughness: 0.25 })}</mesh>
+          </group>
         </group>
       </group>
     </group>
@@ -117,7 +155,7 @@ export function Building({ t }) {
 
 // ---------- Recepción con escritorio, monitores, silla ----------
 export function Reception({ t, screens, chairGuard = null, mugSteam = 1, keyboardLift = 0, intercom = 0, lightsFlicker = 0 }) {
-  const fl = lightsFlicker ? (Math.sin(t * 37) > 0.75 ? 0.3 : 1) : 1;
+  const fl = lightsFlicker ? 0.82 + 0.18 * Math.sin(t * 3.1) * Math.sin(t * 1.7) : 1;
   return (
     <group>
       <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow><planeGeometry args={[30, 30]} />{M("#2c3038")}</mesh>
@@ -210,7 +248,7 @@ export function Corridor({ t, doorsOpen = 0, button8 = 0, figure = null, flicker
   const lights = [];
   for (let k = 0; k < 6; k++) {
     const z = -k * 4;
-    const on = k === 3 ? (Math.sin(t * 23 + 1) > 0.2 ? 1 : 0.15) * flicker : 1;
+    const on = k === 3 ? (0.78 + 0.22 * Math.sin(t * 2.3) * Math.sin(t * 1.1 + 1)) * flicker : 1;
     lights.push(<group key={k}><mesh position={[0, 3.18, z]}><boxGeometry args={[0.5, 0.04, 1.6]} />{Emit("#e6f4ff", 1.3 * on)}</mesh>
       <pointLight position={[0, 2.9, z]} intensity={22 * on} distance={8} decay={1.5} color="#cfe6ff" /></group>);
   }
@@ -230,14 +268,14 @@ export function Corridor({ t, doorsOpen = 0, button8 = 0, figure = null, flicker
       {lights}{doors}
       {/* elevador al fondo */}
       <group position={[0, 0, -22]}>
-        <mesh position={[-1.25, 1.6, -0.05]}><boxGeometry args={[1.1, 3.2, 0.1]} />{M("#4b5059")}</mesh>
-        <mesh position={[1.25, 1.6, -0.05]}><boxGeometry args={[1.1, 3.2, 0.1]} />{M("#4b5059")}</mesh>
+        <mesh position={[-1.22, 1.6, -0.05]}><boxGeometry args={[1.06, 3.18, 0.1]} />{M("#4b5059")}</mesh>
+        <mesh position={[1.22, 1.6, -0.05]}><boxGeometry args={[1.06, 3.18, 0.1]} />{M("#4b5059")}</mesh>
         <mesh position={[0, 2.75, -0.05]}><boxGeometry args={[1.4, 0.9, 0.1]} />{M("#4b5059")}</mesh>
-        <mesh position={[0, 1.15, -0.9]}><boxGeometry args={[1.4, 2.3, 1.6]} /><meshStandardMaterial color="#c8c0a8" emissive="#fff1c8" emissiveIntensity={0.08 * doorsOpen} side={THREE.BackSide} /></mesh>
+        <mesh position={[0, 1.15, -0.92]}><boxGeometry args={[1.4, 2.28, 1.5]} /><meshStandardMaterial color="#c8c0a8" emissive="#fff1c8" emissiveIntensity={0.08 * doorsOpen} side={THREE.BackSide} /></mesh>
         {doorsOpen > 0 && <pointLight position={[0, 2.0, -0.8]} intensity={7 * doorsOpen} distance={5} decay={1.5} color="#fff0c8" />}
-        <mesh position={[-0.35 - d, 1.15, 0.03]}><boxGeometry args={[0.7, 2.3, 0.05]} />{M("#9aa0a8", { metalness: 0.7, roughness: 0.3 })}</mesh>
-        <mesh position={[0.35 + d, 1.15, 0.03]}><boxGeometry args={[0.7, 2.3, 0.05]} />{M("#9aa0a8", { metalness: 0.7, roughness: 0.3 })}</mesh>
-        <mesh position={[0, 2.5, 0.04]}><planeGeometry args={[0.5, 0.18]} />{Emit("#ff5a2a", 1)}</mesh>
+        <mesh position={[-0.35 - d, 1.15, 0.06]}><boxGeometry args={[0.7, 2.3, 0.05]} />{M("#9aa0a8", { metalness: 0.7, roughness: 0.3 })}</mesh>
+        <mesh position={[0.35 + d, 1.15, 0.07]}><boxGeometry args={[0.7, 2.3, 0.05]} />{M("#9aa0a8", { metalness: 0.7, roughness: 0.3 })}</mesh>
+        <mesh position={[0, 2.5, 0.02]}><planeGeometry args={[0.5, 0.18]} />{Emit("#ff5a2a", 1)}</mesh>
         {/* botonera dentro del elevador */}
         <group position={[0.55, 1.2, -0.6]} rotation={[0, -Math.PI / 2, 0]}>
           <mesh><boxGeometry args={[0.3, 0.6, 0.03]} />{M("#777", { metalness: 0.7 })}</mesh>
